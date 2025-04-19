@@ -1,0 +1,74 @@
+package com.pintoss.auth.module.user.process.domain;
+
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.BadRequestException;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String email;
+
+    private String password;
+
+    private String name;
+
+    @Embedded
+    private Phone phone;
+
+    private LoginType loginType;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Set<UserRole> roles = new HashSet<>();
+
+    private String refreshToken;
+
+    private User(String email, String password, String name, Phone phone, LoginType loginType, Set<UserRole> roles) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.loginType = loginType;
+        this.roles = roles;
+    }
+
+    public static User register(String email, String password, String name, Phone phone, LoginType loginType, Set<UserRole> roles) {
+        return new User(email, password, name, phone, loginType, roles);
+    }
+
+    public void storeRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    /*
+    * validate 하고 verify의 사용 의도 정리
+    * validate는 유효성 검사와 같이 필수인지 ? 값이 형식에 맞는지 용도
+    * verify는 두 값이 일치하는지 ?  상태가 사실인지 확인 용도
+    */
+    public void verifyRefreshToken(String refreshToken) {
+        if(!this.refreshToken.equals(refreshToken)) {
+            throw new BadRequestException(ErrorCode.AUTH_TOKEN_EXPIRED);
+        }
+    }
+}
