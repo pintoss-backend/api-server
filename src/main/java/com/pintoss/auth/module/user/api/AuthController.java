@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,16 +52,16 @@ public class AuthController {
         return ApiResponse.ok(new LoginResponse(result.getAccessToken()));
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/reissue")
     public ApiResponse<ReissueResponse> reissue(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        String accessToken = servletUtils.getAccessToken(servletRequest)
-            .orElseThrow(() -> new BadRequestException(ErrorCode.AUTH_MISSING_ACCESS_TOKEN));
-
+//        String accessToken = servletUtils.getAccessToken(servletRequest)
+//            .orElseThrow(() -> new BadRequestException(ErrorCode.AUTH_MISSING_ACCESS_TOKEN));
         String refreshToken = servletUtils.getCookie(servletRequest, "RefreshToken")
             .map(Cookie::getValue)
             .orElseThrow(() -> new BadRequestException(ErrorCode.AUTH_MISSING_REFRESH_TOKEN));
 
-        ReissueCommand command = new ReissueCommand(accessToken, refreshToken);
+        ReissueCommand command = new ReissueCommand(refreshToken);
         ReissueResult result = reissueUseCase.reissue(command);
 
         servletUtils.addCookie(servletResponse, "RefreshToken", result.getRefreshToken(), (int) 1000000000L);

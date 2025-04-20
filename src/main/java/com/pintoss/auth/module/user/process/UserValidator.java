@@ -3,7 +3,7 @@ package com.pintoss.auth.module.user.process;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.exception.client.DuplicateEmailException;
-import com.pintoss.auth.module.user.infra.jwt.JwtProvider;
+import com.pintoss.auth.common.security.SecurityContextUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,6 @@ public class UserValidator {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtProvider jwtProvider;
 
     public void duplicateEmail(String email) {
         if (userRepository.existsByEmail(email)) {
@@ -28,9 +27,10 @@ public class UserValidator {
         }
     }
 
-    public void verifyRefreshToken(String refreshToken) {
-        if(!jwtProvider.validateToken(refreshToken)) {
-            throw new BadRequestException(ErrorCode.AUTH_INVALID_REFRESH_TOKEN);
+    public void validateRefreshTokenOwner(String subject) {
+        Long loginUserId = SecurityContextUtils.getUserId();
+        if(!subject.equals(String.valueOf(loginUserId))) {
+            throw new BadRequestException(ErrorCode.INVALID_REFRESH_TOKEN_SUBJECT);
         }
     }
 }

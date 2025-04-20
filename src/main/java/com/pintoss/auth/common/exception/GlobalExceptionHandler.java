@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,6 +28,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    // 전역 예외 처리기 - 시스템 예외 대응
+    // 이 핸들러는 예상하지 못한 모든 예외(Exception)를 포괄적으로 처리합니다.
+    // 컨트롤러/서비스 계층에서 발생한 런타임 예외 중 별도로 처리되지 않은 것은 모두 해당 핸들러가 처리합니다.
     @ExceptionHandler(value = Exception.class)
     public final ResponseEntity<ApiErrorResponse> handleException(Exception e) {
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
@@ -34,10 +39,34 @@ public class GlobalExceptionHandler {
             e.getMessage(),
             LocalDateTime.now()
         );
-
-        log.error(e.getMessage());
-        e.printStackTrace();
+        log.error("[서버에러] 처리되지 않은 예외 발생 : ", e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // @PreAuthorize에서 권한 거부 시 발생하는 예외
+    @ExceptionHandler(value = {AuthorizationDeniedException.class})
+    public final ResponseEntity<ApiErrorResponse> handleAccessDenied(AuthorizationDeniedException e) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+            HttpStatus.FORBIDDEN,
+            ErrorCode.AUTH_ACCESS_DENIED,
+            e.getMessage(),
+            LocalDateTime.now()
+        );
+        log.error("권한 거부 오류 발생 : ",e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+    }
+
+    // @PreAuthorize에서 인증 실패 예외 처리
+    @ExceptionHandler(value = {AuthenticationException.class})
+    public ResponseEntity<ApiErrorResponse> handleAuthenticationException(AuthenticationException e) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.of(
+            HttpStatus.UNAUTHORIZED,
+            ErrorCode.UNAUTHORIZED,
+            e.getMessage(),
+            LocalDateTime.now()
+        );
+        log.error("인증 실패 오류 발생 : ", e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(value = {BaseException.class})

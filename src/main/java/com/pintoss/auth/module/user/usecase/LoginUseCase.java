@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.user.usecase;
 
-import com.pintoss.auth.module.user.process.AuthTokenProvider;
+import com.pintoss.auth.module.user.process.AuthTokenService;
 import com.pintoss.auth.module.user.process.UserReader;
 import com.pintoss.auth.module.user.process.UserValidator;
 import com.pintoss.auth.module.user.process.domain.User;
@@ -16,7 +16,7 @@ public class LoginUseCase {
 
     private final UserReader userReader;
     private final UserValidator userValidator;
-    private final AuthTokenProvider authTokenProvider;
+    private final AuthTokenService authTokenService;
 
     @Transactional
     public LoginResult login(LoginCommand command) {
@@ -27,8 +27,8 @@ public class LoginUseCase {
         userValidator.matchPassword(command.getPassword(), user.getPassword());
 
         // 3. ACCESS, REFRESH 토큰 발급 및 저장
-        String accessToken = authTokenProvider.generateToken(String.valueOf(user.getId()),false);
-        String refreshToken = authTokenProvider.generateToken(String.valueOf(user.getId()),true);
+        String accessToken = authTokenService.generateToken(user,false);
+        String refreshToken = authTokenService.generateToken(user,true);
         user.storeRefreshToken(refreshToken);
 
         return new LoginResult(accessToken, refreshToken);

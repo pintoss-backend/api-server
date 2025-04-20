@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.user.usecase;
 
-import com.pintoss.auth.module.user.process.AuthTokenProvider;
+import com.pintoss.auth.module.user.process.AuthTokenService;
 import com.pintoss.auth.module.user.process.UserReader;
 import com.pintoss.auth.module.user.process.UserValidator;
 import com.pintoss.auth.module.user.process.domain.User;
@@ -15,22 +15,21 @@ public class ReissueUseCase {
 
     private final UserReader userReader;
     private final UserValidator userValidator;
-    private final AuthTokenProvider authTokenProvider;
+    private final AuthTokenService authTokenService;
 
     public ReissueResult reissue(ReissueCommand command) {
+        // 1. 리프레쉬 토큰에서 subject (userId)추출
+        String subject = authTokenService.extractSubject(command.getRefreshToken());
 
-        userValidator.verifyRefreshToken(command.getRefreshToken());
+        // 2. 요청 리프레쉬 토큰의 subject와 액세스 토큰의 인증정보의 userId와 동일한지 검증
+        userValidator.validateRefreshTokenOwner(subject);
 
-        String subject = authTokenProvider.extractSubject(command.getRefreshToken());
-
+        // 3. 유저 조회
         User user = userReader.readById(Long.parseLong(subject));
 
-        user.verifyRefreshToken(command.getRefreshToken());
-
-        userValidator.verifyRefreshToken(user.getRefreshToken());
-
-        String accessToken = authTokenProvider.generateToken(subject, false);
-        String refreshToken = authTokenProvider.generateToken(subject, true);
+        // 4. 새로운 리프레쉬 토큰 발급
+        String accessToken = authTokenService.generateToken(user, false);
+        String refreshToken = authTokenService.generateToken(user, true);
 
         user.storeRefreshToken(refreshToken);
 

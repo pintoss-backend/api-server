@@ -3,6 +3,7 @@ package com.pintoss.auth.module.user.process.domain;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -42,6 +43,7 @@ public class User {
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Set<UserRole> roles = new HashSet<>();
 
+    @Column(columnDefinition = "TEXT")
     private String refreshToken;
 
     private User(String email, String password, String name, Phone phone, LoginType loginType, Set<UserRole> roles) {
@@ -59,16 +61,5 @@ public class User {
 
     public void storeRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
-    }
-
-    /*
-    * validate 하고 verify의 사용 의도 정리
-    * validate는 유효성 검사와 같이 필수인지 ? 값이 형식에 맞는지 용도
-    * verify는 두 값이 일치하는지 ?  상태가 사실인지 확인 용도
-    */
-    public void verifyRefreshToken(String refreshToken) {
-        if(!this.refreshToken.equals(refreshToken)) {
-            throw new BadRequestException(ErrorCode.AUTH_TOKEN_EXPIRED);
-        }
     }
 }

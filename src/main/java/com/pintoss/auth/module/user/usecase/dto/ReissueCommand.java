@@ -7,7 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class ReissueCommand {
 
-    private String accessToken;
     private String refreshToken;
 
 }
