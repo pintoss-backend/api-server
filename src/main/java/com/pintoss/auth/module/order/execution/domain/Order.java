@@ -87,7 +87,7 @@ public class Order {
     private String generateOrderNo() {
         String datePart = LocalDate.now().format(DATE_FORMAT); // "YYYYMMdd"
         int randomPart = 10000000 + RANDOM.nextInt(90000000); // 8자리 랜덤 숫자
-        return datePart + "-" + randomPart;
+        return datePart + randomPart;
     }
 
     // 개별 OrderItem 추가 메서드 (연관관계 설정)
