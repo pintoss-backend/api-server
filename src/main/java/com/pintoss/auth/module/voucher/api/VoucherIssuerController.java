@@ -9,6 +9,7 @@ import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResponse;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class VoucherIssuerController {
     private final RegisterVoucherIssuerUseCase registerUseCase;
     private final FetchVoucherIssuerUseCase fetchIssuerUseCase;
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping
     public ApiResponse<Void> registerVoucherIssuer(@RequestBody @Valid RegisterVoucherIssuerRequest request) {
         registerUseCase.register(request);
