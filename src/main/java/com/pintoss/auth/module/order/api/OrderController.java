@@ -5,7 +5,7 @@ import com.pintoss.auth.module.order.api.dto.CreateOrderRequest;
 import com.pintoss.auth.module.order.execution.domain.Order;
 import com.pintoss.auth.module.order.usecase.CancelOrderService;
 import com.pintoss.auth.module.order.usecase.CreateOrderService;
-import com.pintoss.auth.module.order.usecase.dto.CreateOrderResponse;
+import com.pintoss.auth.module.order.api.dto.CreateOrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;

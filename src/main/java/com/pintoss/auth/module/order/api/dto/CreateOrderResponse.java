@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.usecase.dto;
+package com.pintoss.auth.module.order.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
