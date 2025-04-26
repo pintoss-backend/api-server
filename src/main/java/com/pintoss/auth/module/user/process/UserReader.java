@@ -2,6 +2,7 @@ package com.pintoss.auth.module.user.process;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.module.user.process.domain.Phone;
 import com.pintoss.auth.module.user.process.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,11 @@ public class UserReader {
 
     public User readById(Long id) {
         return userRepository.findById(id)
+            .orElseThrow(() -> new BadRequestException(ErrorCode.USER_NOT_FOUND));
+    }
+
+    public User readByNameAndPhone(String name, Phone phone) {
+        return userRepository.findByNameAndPhone(name, phone)
             .orElseThrow(() -> new BadRequestException(ErrorCode.USER_NOT_FOUND));
     }
 }

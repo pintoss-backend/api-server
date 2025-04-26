@@ -22,7 +22,7 @@ public interface UserRepository {
 
     Optional<User> findByIdWithRoles(long id);
 
-    boolean existsByPhone_Phone(String phone);
+    boolean existsByPhone(Phone phone);
 
     Page<User> getUsers(Pageable pageable);
 }
