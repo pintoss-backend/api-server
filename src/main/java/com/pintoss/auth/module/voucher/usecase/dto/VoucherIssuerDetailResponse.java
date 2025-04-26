@@ -1,16 +1,14 @@
 package com.pintoss.auth.module.voucher.usecase.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pintoss.auth.module.voucher.execution.domain.ContactInfo;
 import com.pintoss.auth.module.voucher.execution.domain.Discount;
-import java.time.LocalDateTime;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerDetailResult.VoucherInfo;
 import java.util.List;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-@Builder
+@AllArgsConstructor
 public class VoucherIssuerDetailResponse {
 
     private Long id;
@@ -22,16 +20,5 @@ public class VoucherIssuerDetailResponse {
     private String note;
     private String imageUrl;
     private List<VoucherInfo> vouchers;
-
-    @Getter
-    @Builder
-    public static class VoucherInfo {
-        private Long id;
-        private String name;
-        private String issuerName;
-        private Long price;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime createdAt;
-    }
 
 }

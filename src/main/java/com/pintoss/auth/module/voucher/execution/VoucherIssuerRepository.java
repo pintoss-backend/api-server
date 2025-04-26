@@ -1,8 +1,8 @@
 package com.pintoss.auth.module.voucher.execution;
 
 import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuer;
-import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResponse;
-import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResponse;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerDetailResult;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerResult;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ public interface VoucherIssuerRepository {
 
     Optional<VoucherIssuer> findById(Long voucherIssuerId);
 
-    List<VoucherIssuerResponse> fetchSummaryList();
+    List<VoucherIssuerResult> fetchSummaryList();
 
-    VoucherIssuerDetailResponse fetchDetail(Long voucherIssuerId);
+    VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId);
 }

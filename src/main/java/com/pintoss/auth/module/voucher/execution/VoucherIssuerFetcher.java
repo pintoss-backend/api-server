@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.voucher.execution;
 
-import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResponse;
-import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResponse;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerDetailResult;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerResult;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,11 +17,11 @@ public class VoucherIssuerFetcher {
 
     private final VoucherIssuerRepository voucherIssuerRepository;
 
-    public List<VoucherIssuerResponse> fetchSummaryList() {
+    public List<VoucherIssuerResult> fetchSummaryList() {
         return voucherIssuerRepository.fetchSummaryList();
     }
 
-    public VoucherIssuerDetailResponse fetchDetail(Long voucherIssuerId) {
+    public VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId) {
         return voucherIssuerRepository.fetchDetail(voucherIssuerId);
     }
 }

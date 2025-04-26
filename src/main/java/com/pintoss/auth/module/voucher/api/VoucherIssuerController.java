@@ -35,16 +35,14 @@ public class VoucherIssuerController {
 
     @GetMapping
     public ApiResponse<List<VoucherIssuerResponse>> getVoucherIssuers() {
-        List<VoucherIssuerResponse> voucherIssuers = fetchIssuerUseCase.getVoucherIssuers();
-
-        return ApiResponse.ok(voucherIssuers);
+        List<VoucherIssuerResponse> result = fetchIssuerUseCase.getVoucherIssuers();
+        return ApiResponse.ok(result);
     }
 
     @GetMapping("/{voucherIssuerId}")
     public ApiResponse<VoucherIssuerDetailResponse> getVoucherIssuerDetail(@PathVariable(name = "voucherIssuerId") Long voucherIssuerId) {
-        VoucherIssuerDetailResponse voucherIssuerDetail = fetchIssuerUseCase.getVoucherIssuerDetail(voucherIssuerId);
-
-        return ApiResponse.ok(voucherIssuerDetail);
+        VoucherIssuerDetailResponse response = fetchIssuerUseCase.getVoucherIssuerDetail(voucherIssuerId);
+        return ApiResponse.ok(response);
     }
 
 }

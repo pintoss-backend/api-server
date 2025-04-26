@@ -2,8 +2,8 @@ package com.pintoss.auth.module.voucher.external.persistence;
 
 import com.pintoss.auth.module.voucher.execution.VoucherIssuerRepository;
 import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuer;
-import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResponse;
-import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResponse;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerDetailResult;
+import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerResult;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +35,12 @@ public class VoucherIssuerRepositoryImpl implements VoucherIssuerRepository {
     }
 
     @Override
-    public List<VoucherIssuerResponse> fetchSummaryList() {
+    public List<VoucherIssuerResult> fetchSummaryList() {
         return queryDslRepository.fetchSummaryList();
     }
 
     @Override
-    public VoucherIssuerDetailResponse fetchDetail(Long voucherIssuerId) {
+    public VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId) {
         return queryDslRepository.fetchDetail(voucherIssuerId);
     }
 }
