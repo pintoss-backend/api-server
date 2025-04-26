@@ -55,8 +55,6 @@ public class AuthController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/reissue")
     public ApiResponse<ReissueResponse> reissue(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-//        String accessToken = servletUtils.getAccessToken(servletRequest)
-//            .orElseThrow(() -> new BadRequestException(ErrorCode.AUTH_MISSING_ACCESS_TOKEN));
         String refreshToken = servletUtils.getCookie(servletRequest, "RefreshToken")
             .map(Cookie::getValue)
             .orElseThrow(() -> new BadRequestException(ErrorCode.AUTH_MISSING_REFRESH_TOKEN));
