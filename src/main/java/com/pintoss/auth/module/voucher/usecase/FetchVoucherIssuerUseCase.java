@@ -20,8 +20,7 @@ public class FetchVoucherIssuerUseCase {
 
     // 2. 상품권 상세 정보 조회
     public VoucherIssuerDetailResult getVoucherIssuerDetail(Long voucherIssuerId) {
-        return voucherIssuerFetcher.fetchDetail(
-            voucherIssuerId);
+        return voucherIssuerFetcher.fetchDetail(voucherIssuerId);
     }
 
 }

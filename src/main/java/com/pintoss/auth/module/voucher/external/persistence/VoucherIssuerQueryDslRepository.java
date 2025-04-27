@@ -61,6 +61,7 @@ public class VoucherIssuerQueryDslRepository {
             .publisher(issuer.getPublisher())
             .note(issuer.getNote())
             .imageUrl(issuer.getImageUrl())
+            .fee(issuer.getFee())
             .vouchers(vouchers.stream().map(v ->
                 VoucherIssuerDetailResult.VoucherInfo.builder()
                     .id(v.getId())
