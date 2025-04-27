@@ -1,8 +1,8 @@
-package com.pintoss.auth.module.voucher.execution.domain;
+package com.pintoss.auth.module.voucher.usecase.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.pintoss.auth.module.voucher.execution.domain.ContactInfo;
-import com.pintoss.auth.module.voucher.execution.domain.Discount;
+import com.pintoss.auth.module.voucher.model.ContactInfo;
+import com.pintoss.auth.module.voucher.model.Discount;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;

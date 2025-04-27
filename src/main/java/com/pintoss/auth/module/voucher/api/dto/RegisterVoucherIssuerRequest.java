@@ -1,5 +1,7 @@
 package com.pintoss.auth.module.voucher.api.dto;
 
+import com.pintoss.auth.module.voucher.usecase.dto.RegisterVoucherIssuerCommand;
+import com.pintoss.auth.module.voucher.usecase.dto.RegisterVoucherIssuerCommand.RegisterVoucherCommand;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -49,4 +51,41 @@ public class RegisterVoucherIssuerRequest {
     @NotEmpty(message = "상품권 종류는 1개 이상이어야 합니다.")
     private List<RegisterVoucherRequest> vouchers = new ArrayList<>();
 
+    @Data
+    @NoArgsConstructor
+    public static class RegisterVoucherRequest {
+
+        @NotNull(message = "상품권 명은 필수 항목입니다.")
+        private String name;
+
+        @NotNull(message = "상품권 가격은 필수 항목입니다.")
+        @Min(value = 0, message = "상품권 가격은 0 이상이어야 합니다.")
+        private Long price;
+
+        public RegisterVoucherCommand toCommand() {
+            return RegisterVoucherCommand.builder()
+                .name(name)
+                .price(price)
+                .build();
+        }
+    }
+
+    public RegisterVoucherIssuerCommand to() {
+        return RegisterVoucherIssuerCommand.builder()
+            .name(this.name)
+            .code(this.code)
+            .cardDiscount(this.cardDiscount)
+            .phoneDiscount(this.phoneDiscount)
+            .homePage(this.homePage)
+            .csCenter(this.csCenter)
+            .description(this.description)
+            .publisher(this.publisher)
+            .imageUrl(this.imageUrl)
+            .note(this.note)
+            .vouchers(this.vouchers.stream()
+                .map(RegisterVoucherRequest::toCommand)
+                .toList()
+            )
+            .build();
+    }
 }

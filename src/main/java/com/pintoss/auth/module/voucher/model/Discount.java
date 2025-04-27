@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.voucher.execution.domain;
+package com.pintoss.auth.module.voucher.model;
 
 import jakarta.persistence.Embeddable;
 import java.math.BigDecimal;

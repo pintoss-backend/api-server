@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.voucher.execution.domain;
+package com.pintoss.auth.module.voucher.usecase.dto;
 
-import com.pintoss.auth.module.voucher.execution.domain.ContactInfo;
-import com.pintoss.auth.module.voucher.execution.domain.Discount;
+import com.pintoss.auth.module.voucher.model.ContactInfo;
+import com.pintoss.auth.module.voucher.model.Discount;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,15 +1,15 @@
 package com.pintoss.auth.module.voucher.usecase;
 
-import com.pintoss.auth.module.voucher.api.dto.RegisterVoucherIssuerRequest;
-import com.pintoss.auth.module.voucher.execution.VoucherAdder;
-import com.pintoss.auth.module.voucher.execution.VoucherIssuerAdder;
-import com.pintoss.auth.module.voucher.execution.VoucherIssuerValidator;
-import com.pintoss.auth.module.voucher.execution.domain.ContactInfo;
-import com.pintoss.auth.module.voucher.execution.domain.CsCenter;
-import com.pintoss.auth.module.voucher.execution.domain.Discount;
-import com.pintoss.auth.module.voucher.execution.domain.HomePage;
-import com.pintoss.auth.module.voucher.execution.domain.Voucher;
-import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuer;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherAdder;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherIssuerAdder;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherIssuerValidator;
+import com.pintoss.auth.module.voucher.model.ContactInfo;
+import com.pintoss.auth.module.voucher.model.CsCenter;
+import com.pintoss.auth.module.voucher.model.Discount;
+import com.pintoss.auth.module.voucher.model.HomePage;
+import com.pintoss.auth.module.voucher.model.Voucher;
+import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.usecase.dto.RegisterVoucherIssuerCommand;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -23,25 +23,25 @@ public class RegisterVoucherIssuerUseCase {
     private final VoucherIssuerAdder voucherIssuerAdder;
     private final VoucherAdder voucherAdder;
 
-    public void register(RegisterVoucherIssuerRequest request) {
-        voucherIssuerValidator.isIssuerNameDuplicated(request.getName());
+    public void register(RegisterVoucherIssuerCommand command) {
+        voucherIssuerValidator.isIssuerNameDuplicated(command.getName());
 
         VoucherIssuer voucherIssuer = VoucherIssuer.create(
-            request.getName(),
-            request.getCode(),
-            new Discount(request.getCardDiscount(), request.getPhoneDiscount()),
+            command.getName(),
+            command.getCode(),
+            new Discount(command.getCardDiscount(), command.getPhoneDiscount()),
             new ContactInfo(
-                new HomePage(request.getHomePage()),
-                new CsCenter(request.getCsCenter())
+                new HomePage(command.getHomePage()),
+                new CsCenter(command.getCsCenter())
             ),
-            request.getDescription(),
-            request.getPublisher(),
-            request.getNote(),
-            request.getImageUrl()
+            command.getDescription(),
+            command.getPublisher(),
+            command.getNote(),
+            command.getImageUrl()
         );
         voucherIssuerAdder.add(voucherIssuer);
 
-        List<Voucher> vouchers = request.getVouchers().stream().map(v -> {
+        List<Voucher> vouchers = command.getVouchers().stream().map(v -> {
             return Voucher.create(
                 voucherIssuer.getId(),
                 v.getName(),

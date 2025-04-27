@@ -1,13 +1,13 @@
 package com.pintoss.auth.module.voucher.external.persistence;
 
-import static com.pintoss.auth.module.voucher.execution.domain.QVoucher.voucher;
-import static com.pintoss.auth.module.voucher.execution.domain.QVoucherIssuer.voucherIssuer;
+import static com.pintoss.auth.module.voucher.service.model.QVoucher.voucher;
+import static com.pintoss.auth.module.voucher.service.model.QVoucherIssuer.voucherIssuer;
 
-import com.pintoss.auth.module.voucher.execution.domain.QVoucherIssuerResult;
-import com.pintoss.auth.module.voucher.execution.domain.Voucher;
-import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuer;
-import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerDetailResult;
-import com.pintoss.auth.module.voucher.execution.domain.VoucherIssuerResult;
+import com.pintoss.auth.module.voucher.service.model.QVoucherIssuerResult;
+import com.pintoss.auth.module.voucher.model.Voucher;
+import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResult;
+import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResult;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

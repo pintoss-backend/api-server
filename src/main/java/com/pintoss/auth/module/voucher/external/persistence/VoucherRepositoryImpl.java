@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.voucher.external.persistence;
 
-import com.pintoss.auth.module.voucher.execution.VoucherRepository;
-import com.pintoss.auth.module.voucher.execution.domain.Voucher;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherRepository;
+import com.pintoss.auth.module.voucher.model.Voucher;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
