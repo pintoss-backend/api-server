@@ -2,7 +2,7 @@ package com.pintoss.auth.module.order.api;
 
 import com.pintoss.auth.common.dto.ApiResponse;
 import com.pintoss.auth.module.order.api.dto.CreateOrderRequest;
-import com.pintoss.auth.module.order.execution.domain.Order;
+import com.pintoss.auth.module.order.model.Order;
 import com.pintoss.auth.module.order.usecase.CancelOrderService;
 import com.pintoss.auth.module.order.usecase.CreateOrderService;
 import com.pintoss.auth.module.order.api.dto.CreateOrderResponse;
