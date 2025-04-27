@@ -40,7 +40,7 @@ public class VoucherIssuerRepositoryImpl implements VoucherIssuerRepository {
     }
 
     @Override
-    public VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId) {
+    public Optional<VoucherIssuerDetailResult> fetchDetail(Long voucherIssuerId) {
         return queryDslRepository.fetchDetail(voucherIssuerId);
     }
 }

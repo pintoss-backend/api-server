@@ -1,5 +1,7 @@
 package com.pintoss.auth.module.voucher.usecase.service;
 
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.NotFoundException;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResult;
 import java.util.List;
@@ -22,6 +24,7 @@ public class VoucherIssuerFetcher {
     }
 
     public VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId) {
-        return voucherIssuerRepository.fetchDetail(voucherIssuerId);
+        return voucherIssuerRepository.fetchDetail(voucherIssuerId)
+            .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_FOUND, "상품권 발급처를 찾을 수 없습니다."));
     }
 }

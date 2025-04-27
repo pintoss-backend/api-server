@@ -1,15 +1,16 @@
 package com.pintoss.auth.module.voucher.external.persistence;
 
-import static com.pintoss.auth.module.voucher.service.model.QVoucher.voucher;
-import static com.pintoss.auth.module.voucher.service.model.QVoucherIssuer.voucherIssuer;
+import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
+import static com.pintoss.auth.module.voucher.model.QVoucherIssuer.voucherIssuer;
 
-import com.pintoss.auth.module.voucher.service.model.QVoucherIssuerResult;
 import com.pintoss.auth.module.voucher.model.Voucher;
 import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.usecase.dto.QVoucherIssuerResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResult;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -37,17 +38,21 @@ public class VoucherIssuerQueryDslRepository {
             .fetch();
     }
 
-    public VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId) {
+    public Optional<VoucherIssuerDetailResult> fetchDetail(Long voucherIssuerId) {
         VoucherIssuer issuer = queryFactory.select(voucherIssuer)
             .from(voucherIssuer)
             .where(voucherIssuer.id.eq(voucherIssuerId))
             .fetchOne();
 
+        if(issuer == null) {
+            return Optional.empty();
+        }
+
         List<Voucher> vouchers = queryFactory.selectFrom(voucher)
             .where(voucher.voucherIssuerId.eq(voucherIssuerId))
             .fetch();
 
-        return VoucherIssuerDetailResult.builder()
+        VoucherIssuerDetailResult result = VoucherIssuerDetailResult.builder()
             .id(issuer.getId())
             .name(issuer.getName())
             .description(issuer.getDescription())
@@ -66,5 +71,6 @@ public class VoucherIssuerQueryDslRepository {
                     .build()
             ).toList())
             .build();
+        return Optional.of(result);
     }
 }

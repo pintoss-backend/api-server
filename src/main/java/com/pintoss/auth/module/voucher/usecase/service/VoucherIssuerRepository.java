@@ -15,5 +15,5 @@ public interface VoucherIssuerRepository {
 
     List<VoucherIssuerResult> fetchSummaryList();
 
-    VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId);
+    Optional<VoucherIssuerDetailResult> fetchDetail(Long voucherIssuerId);
 }
