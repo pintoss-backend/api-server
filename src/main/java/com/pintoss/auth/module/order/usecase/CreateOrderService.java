@@ -8,9 +8,8 @@ import com.pintoss.auth.module.order.execution.domain.Order;
 import com.pintoss.auth.module.order.execution.domain.OrderItem;
 import com.pintoss.auth.module.order.execution.domain.PaymentMethodType;
 import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
-import com.pintoss.auth.module.voucher.usecase.service.VoucherIssuerReader;
-import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import com.pintoss.auth.module.voucher.model.Voucher;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 public class CreateOrderService {
 
     private final VoucherReader voucherReader;
-    private final VoucherIssuerReader voucherIssuerReader;
     private final OrderAdder orderAdder;
     private final OrderValidator orderValidator;
 
