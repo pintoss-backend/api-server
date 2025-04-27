@@ -17,6 +17,7 @@ public enum ErrorCode {
     FILE_TYPE_NOT_SUPPORTED("4006", "지원하지 않는 파일 형식입니다."),
     UNSUPPORTED_OAUTH2_PROVIDER("4007", "지원하지 않는 OAuth2 제공자입니다."),
     INVALID_REFRESH_TOKEN_SUBJECT("4008", "요청한 리프레쉬 토큰의 사용자 정보가 올바르지 않습니다."),
+    INVALID_CART_ITEM_QUANTITY("4009", "장바구니 아이템의 수량이 1개 이상이어야합니다."),
 
     // 401 Unauthorized
     // AUTH 관련
