@@ -1,9 +1,9 @@
 package com.pintoss.auth.module.user.usecase;
 
-import com.pintoss.auth.module.user.process.AuthTokenService;
-import com.pintoss.auth.module.user.process.UserReader;
-import com.pintoss.auth.module.user.process.UserValidator;
-import com.pintoss.auth.module.user.process.domain.User;
+import com.pintoss.auth.module.user.usecase.service.AuthTokenService;
+import com.pintoss.auth.module.user.usecase.service.UserReader;
+import com.pintoss.auth.module.user.usecase.service.UserValidator;
+import com.pintoss.auth.module.user.model.User;
 import com.pintoss.auth.module.user.usecase.dto.ReissueCommand;
 import com.pintoss.auth.module.user.usecase.dto.ReissueResult;
 import lombok.RequiredArgsConstructor;

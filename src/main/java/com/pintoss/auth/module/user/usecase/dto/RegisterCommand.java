@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.user.usecase.dto;
 
-import com.pintoss.auth.module.user.process.domain.LoginType;
+import com.pintoss.auth.module.user.model.LoginType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

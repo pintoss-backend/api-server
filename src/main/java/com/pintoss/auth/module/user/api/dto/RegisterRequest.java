@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.user.api.dto;
 
-import com.pintoss.auth.module.user.process.domain.LoginType;
+import com.pintoss.auth.module.user.model.LoginType;
 import com.pintoss.auth.module.user.usecase.dto.RegisterCommand;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

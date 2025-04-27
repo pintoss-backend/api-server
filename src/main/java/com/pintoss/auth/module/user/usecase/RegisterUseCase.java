@@ -1,11 +1,11 @@
 package com.pintoss.auth.module.user.usecase;
 
 import com.pintoss.auth.common.security.UserRoleEnum;
-import com.pintoss.auth.module.user.process.UserAdder;
-import com.pintoss.auth.module.user.process.UserCreator;
-import com.pintoss.auth.module.user.process.UserValidator;
-import com.pintoss.auth.module.user.process.domain.User;
-import com.pintoss.auth.module.user.process.domain.UserRole;
+import com.pintoss.auth.module.user.usecase.service.UserAdder;
+import com.pintoss.auth.module.user.usecase.service.UserCreator;
+import com.pintoss.auth.module.user.usecase.service.UserValidator;
+import com.pintoss.auth.module.user.model.User;
+import com.pintoss.auth.module.user.model.UserRole;
 import com.pintoss.auth.module.user.usecase.dto.RegisterCommand;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;

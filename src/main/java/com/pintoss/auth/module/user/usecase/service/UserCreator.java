@@ -1,9 +1,9 @@
-package com.pintoss.auth.module.user.process;
+package com.pintoss.auth.module.user.usecase.service;
 
-import com.pintoss.auth.module.user.process.domain.LoginType;
-import com.pintoss.auth.module.user.process.domain.Phone;
-import com.pintoss.auth.module.user.process.domain.User;
-import com.pintoss.auth.module.user.process.domain.UserRole;
+import com.pintoss.auth.module.user.model.LoginType;
+import com.pintoss.auth.module.user.model.Phone;
+import com.pintoss.auth.module.user.model.User;
+import com.pintoss.auth.module.user.model.UserRole;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

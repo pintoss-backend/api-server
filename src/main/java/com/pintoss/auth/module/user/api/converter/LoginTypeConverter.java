@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.user.api.converter;
 
-import com.pintoss.auth.module.user.process.domain.LoginType;
+import com.pintoss.auth.module.user.model.LoginType;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

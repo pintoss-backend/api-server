@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.user.process;
+package com.pintoss.auth.module.user.usecase.service;
 
-import com.pintoss.auth.module.user.process.domain.Phone;
-import com.pintoss.auth.module.user.process.domain.User;
+import com.pintoss.auth.module.user.model.Phone;
+import com.pintoss.auth.module.user.model.User;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
