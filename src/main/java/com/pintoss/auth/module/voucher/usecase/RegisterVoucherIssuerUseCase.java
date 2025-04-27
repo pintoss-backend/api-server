@@ -37,7 +37,8 @@ public class RegisterVoucherIssuerUseCase {
             command.getDescription(),
             command.getPublisher(),
             command.getNote(),
-            command.getImageUrl()
+            command.getImageUrl(),
+            command.getFee()
         );
         voucherIssuerAdder.add(voucherIssuer);
 

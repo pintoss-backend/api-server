@@ -51,6 +51,9 @@ public class RegisterVoucherIssuerRequest {
     @NotEmpty(message = "상품권 종류는 1개 이상이어야 합니다.")
     private List<RegisterVoucherRequest> vouchers = new ArrayList<>();
 
+    @Min(value = 0, message = "수수료는 0 이상이어야 합니다.")
+    private BigDecimal fee = BigDecimal.ZERO;
+
     @Data
     @NoArgsConstructor
     public static class RegisterVoucherRequest {
@@ -86,6 +89,7 @@ public class RegisterVoucherIssuerRequest {
                 .map(RegisterVoucherRequest::toCommand)
                 .toList()
             )
+            .fee(this.fee)
             .build();
     }
 }

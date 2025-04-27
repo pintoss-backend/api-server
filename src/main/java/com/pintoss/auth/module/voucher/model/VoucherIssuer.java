@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -57,7 +58,10 @@ public class VoucherIssuer {
 
     private String imageUrl;
 
-    private VoucherIssuer(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, String imageUrl) {
+    @Column(nullable = false, precision = 5, scale = 2) // ex) 999.99 까지 가능
+    private BigDecimal fee; // 수수료
+
+    private VoucherIssuer(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, String imageUrl, BigDecimal fee) {
         this.name = name;
         this.code = code;
         this.discount = discount;
@@ -66,12 +70,13 @@ public class VoucherIssuer {
         this.publisher = publisher;
         this.note = note;
         this.imageUrl = imageUrl;
+        this.fee = fee;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
     public static VoucherIssuer create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
-        String note, String imageUrl){
+        String note, String imageUrl, BigDecimal fee) {
         return new VoucherIssuer(
             name,
             code,
@@ -80,7 +85,8 @@ public class VoucherIssuer {
             description,
             publisher,
             note,
-            imageUrl
+            imageUrl,
+            fee
         );
     }
 

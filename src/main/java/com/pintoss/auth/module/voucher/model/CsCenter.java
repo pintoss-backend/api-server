@@ -25,8 +25,13 @@ public class CsCenter {
         if (tel == null || tel.isBlank()) {
             throw new IllegalArgumentException("고객센터 전화번호는 필수 입력 값 입니다.");
         }
-        if (!tel.matches("^\\d{4}-\\d{4}$") && !tel.matches("^\\d{3}-\\d{4}-\\d{4}$")) {
-            throw new IllegalArgumentException("유효한 전화번호 형식이 아닙니다. (xxxx-xxxx 또는 xxx-xxxx-xxxx 형식이어야 합니다.)");
+
+        boolean isValidFormat = tel.matches("^\\d{4}-\\d{4}$")
+            || tel.matches("^\\d{3}-\\d{4}-\\d{4}$")
+            || tel.matches("^\\d{3}-\\d{3}-\\d{4}$");
+
+        if (!isValidFormat) {
+            throw new IllegalArgumentException("유효한 전화번호 형식이 아닙니다. (xxxx-xxxx, xxx-xxxx-xxxx 또는 xxx-xxx-xxxx 형식이어야 합니다.)");
         }
     }
 }

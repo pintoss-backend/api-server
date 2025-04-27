@@ -19,6 +19,7 @@ public class RegisterVoucherIssuerCommand {
     private String publisher;
     private String imageUrl;
     private String note;
+    private BigDecimal fee;
     private List<RegisterVoucherCommand> vouchers;
 
     @Data
