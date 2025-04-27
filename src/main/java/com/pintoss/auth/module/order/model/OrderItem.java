@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.execution.domain;
+package com.pintoss.auth.module.order.model;
 
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.Column;

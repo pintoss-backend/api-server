@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.execution.domain;
+package com.pintoss.auth.module.order.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

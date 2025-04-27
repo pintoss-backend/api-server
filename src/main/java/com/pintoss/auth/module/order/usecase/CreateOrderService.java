@@ -1,16 +1,16 @@
 package com.pintoss.auth.module.order.usecase;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
-import com.pintoss.auth.module.order.execution.OrderAdder;
-import com.pintoss.auth.module.order.execution.OrderItemFactory;
-import com.pintoss.auth.module.order.execution.OrderValidator;
-import com.pintoss.auth.module.order.execution.domain.Order;
-import com.pintoss.auth.module.order.execution.domain.OrderItem;
-import com.pintoss.auth.module.order.execution.domain.PaymentMethodType;
+import com.pintoss.auth.module.order.api.dto.CreateOrderResponse;
+import com.pintoss.auth.module.order.usecase.service.OrderAdder;
+import com.pintoss.auth.module.order.usecase.service.OrderItemFactory;
+import com.pintoss.auth.module.order.usecase.service.OrderValidator;
+import com.pintoss.auth.module.order.model.Order;
+import com.pintoss.auth.module.order.model.OrderItem;
+import com.pintoss.auth.module.order.model.PaymentMethodType;
 import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
-import com.pintoss.auth.module.voucher.usecase.service.VoucherIssuerReader;
-import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import com.pintoss.auth.module.voucher.model.Voucher;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +21,10 @@ import org.springframework.stereotype.Service;
 public class CreateOrderService {
 
     private final VoucherReader voucherReader;
-    private final VoucherIssuerReader voucherIssuerReader;
     private final OrderAdder orderAdder;
     private final OrderValidator orderValidator;
 
-    public Order create(PaymentMethodType paymentMethod, List<OrderItemRequest> orderItemRequest) {
+    public CreateOrderResponse create(PaymentMethodType paymentMethod, List<OrderItemRequest> orderItemRequest) {
 
         // 1. 상품권 조회
         List<Voucher> vouchers = voucherReader.readAll(orderItemRequest.stream()
@@ -52,10 +51,21 @@ public class CreateOrderService {
         // 5. 주문 저장
         Order saveOrder = orderAdder.add(order);
 
-        return saveOrder;
+        return CreateOrderResponse.builder()
+            .serviceId("glx_api")
+            .productName(saveOrder.getOrderName())
+            .orderNo(saveOrder.getOrderNo())
+            .ordererId(saveOrder.getOrdererId())
+            .ordererName(saveOrder.getOrdererName())
+            .ordererEmail(saveOrder.getOrdererEmail())
+            .ordererPhone(saveOrder.getOrdererPhone())
+            .serviceCode(saveOrder.getPaymentMethodType().getServiceCode())
+            .price(saveOrder.getTotalPrice())
+            .orderDate(saveOrder.getCreatedAt())
+            .build();
     }
 
-    public String generateProductName(List<OrderItem> orderItems) {
+    private String generateProductName(List<OrderItem> orderItems) {
         int size = orderItems.stream().map(orderItem -> orderItem.getVoucherIssuerName()).collect(
             Collectors.toSet()).size();
         if (size == 1) {

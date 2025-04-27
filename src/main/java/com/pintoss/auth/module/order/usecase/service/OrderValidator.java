@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.execution;
+package com.pintoss.auth.module.order.usecase.service;
 
 import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
 import com.pintoss.auth.module.voucher.model.Voucher;
