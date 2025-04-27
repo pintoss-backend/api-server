@@ -1,8 +1,8 @@
 package com.pintoss.auth.module.user.usecase;
 
-import com.pintoss.auth.module.user.process.UserReader;
-import com.pintoss.auth.module.user.process.domain.Phone;
-import com.pintoss.auth.module.user.process.domain.User;
+import com.pintoss.auth.module.user.usecase.service.UserReader;
+import com.pintoss.auth.module.user.model.Phone;
+import com.pintoss.auth.module.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

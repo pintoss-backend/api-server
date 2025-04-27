@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.user.process.domain;
+package com.pintoss.auth.module.user.model;
 
 import com.pintoss.auth.common.exception.client.EmptyPhoneException;
 import com.pintoss.auth.common.exception.client.InvalidPhoneFormatException;

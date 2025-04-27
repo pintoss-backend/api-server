@@ -1,8 +1,8 @@
 package com.pintoss.auth.module.user.infra.persistence;
 
 
-import com.pintoss.auth.module.user.process.domain.Phone;
-import com.pintoss.auth.module.user.process.domain.User;
+import com.pintoss.auth.module.user.model.Phone;
+import com.pintoss.auth.module.user.model.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

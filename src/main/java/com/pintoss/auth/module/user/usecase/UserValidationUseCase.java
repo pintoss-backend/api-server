@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.user.usecase;
 
-import com.pintoss.auth.module.user.process.UserValidator;
-import com.pintoss.auth.module.user.process.domain.Phone;
+import com.pintoss.auth.module.user.usecase.service.UserValidator;
+import com.pintoss.auth.module.user.model.Phone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

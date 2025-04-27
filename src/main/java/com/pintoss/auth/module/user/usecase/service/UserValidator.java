@@ -1,10 +1,10 @@
-package com.pintoss.auth.module.user.process;
+package com.pintoss.auth.module.user.usecase.service;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.exception.client.DuplicateEmailException;
 import com.pintoss.auth.common.security.SecurityContextUtils;
-import com.pintoss.auth.module.user.process.domain.Phone;
+import com.pintoss.auth.module.user.model.Phone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

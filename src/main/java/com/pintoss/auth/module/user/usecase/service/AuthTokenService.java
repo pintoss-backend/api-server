@@ -1,11 +1,11 @@
-package com.pintoss.auth.module.user.process;
+package com.pintoss.auth.module.user.usecase.service;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.security.jwt.JwtParser;
 import com.pintoss.auth.common.security.jwt.JwtProvider;
 import com.pintoss.auth.common.security.jwt.JwtValidator;
-import com.pintoss.auth.module.user.process.domain.User;
+import com.pintoss.auth.module.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
