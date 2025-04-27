@@ -1,6 +1,7 @@
 package com.pintoss.auth.module.order.usecase;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
+import com.pintoss.auth.module.order.api.dto.CreateOrderResponse;
 import com.pintoss.auth.module.order.usecase.service.OrderAdder;
 import com.pintoss.auth.module.order.usecase.service.OrderItemFactory;
 import com.pintoss.auth.module.order.usecase.service.OrderValidator;
@@ -23,7 +24,7 @@ public class CreateOrderService {
     private final OrderAdder orderAdder;
     private final OrderValidator orderValidator;
 
-    public Order create(PaymentMethodType paymentMethod, List<OrderItemRequest> orderItemRequest) {
+    public CreateOrderResponse create(PaymentMethodType paymentMethod, List<OrderItemRequest> orderItemRequest) {
 
         // 1. 상품권 조회
         List<Voucher> vouchers = voucherReader.readAll(orderItemRequest.stream()
@@ -50,10 +51,21 @@ public class CreateOrderService {
         // 5. 주문 저장
         Order saveOrder = orderAdder.add(order);
 
-        return saveOrder;
+        return CreateOrderResponse.builder()
+            .serviceId("glx_api")
+            .productName(saveOrder.getOrderName())
+            .orderNo(saveOrder.getOrderNo())
+            .ordererId(saveOrder.getOrdererId())
+            .ordererName(saveOrder.getOrdererName())
+            .ordererEmail(saveOrder.getOrdererEmail())
+            .ordererPhone(saveOrder.getOrdererPhone())
+            .serviceCode(saveOrder.getPaymentMethodType().getServiceCode())
+            .price(saveOrder.getTotalPrice())
+            .orderDate(saveOrder.getCreatedAt())
+            .build();
     }
 
-    public String generateProductName(List<OrderItem> orderItems) {
+    private String generateProductName(List<OrderItem> orderItems) {
         int size = orderItems.stream().map(orderItem -> orderItem.getVoucherIssuerName()).collect(
             Collectors.toSet()).size();
         if (size == 1) {
