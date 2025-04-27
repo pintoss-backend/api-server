@@ -39,6 +39,7 @@ public class GlobalExceptionHandler {
             e.getMessage(),
             LocalDateTime.now()
         );
+        e.printStackTrace();
         log.error("[서버에러] 처리되지 않은 예외 발생 : ", e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }

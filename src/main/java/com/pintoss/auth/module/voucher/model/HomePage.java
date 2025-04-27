@@ -1,6 +1,5 @@
-package com.pintoss.auth.module.voucher.execution.domain;
+package com.pintoss.auth.module.voucher.model;
 
-import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;

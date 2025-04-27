@@ -1,8 +1,9 @@
 package com.pintoss.auth.module.voucher.external.persistence;
 
-import static com.pintoss.auth.module.voucher.execution.domain.QVoucher.voucher;
 
-import com.pintoss.auth.module.voucher.execution.domain.Voucher;
+import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
+
+import com.pintoss.auth.module.voucher.model.Voucher;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

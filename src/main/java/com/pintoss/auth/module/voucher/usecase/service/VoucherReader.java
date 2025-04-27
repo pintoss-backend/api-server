@@ -1,6 +1,6 @@
-package com.pintoss.auth.module.voucher.execution;
+package com.pintoss.auth.module.voucher.usecase.service;
 
-import com.pintoss.auth.module.voucher.execution.domain.Voucher;
+import com.pintoss.auth.module.voucher.model.Voucher;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

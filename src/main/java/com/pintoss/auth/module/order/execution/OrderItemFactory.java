@@ -2,7 +2,7 @@ package com.pintoss.auth.module.order.execution;
 
 import com.pintoss.auth.module.order.execution.domain.OrderItem;
 import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
-import com.pintoss.auth.module.voucher.execution.domain.Voucher;
+import com.pintoss.auth.module.voucher.model.Voucher;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;

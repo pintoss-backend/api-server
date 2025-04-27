@@ -1,14 +1,14 @@
 package com.pintoss.auth.module.voucher.usecase.dto;
 
-import com.pintoss.auth.module.voucher.execution.domain.ContactInfo;
-import com.pintoss.auth.module.voucher.execution.domain.Discount;
+import com.pintoss.auth.module.voucher.model.ContactInfo;
+import com.pintoss.auth.module.voucher.model.Discount;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class VoucherIssuerResponse {
+public class VoucherIssuerResult {
 
     private Long id;
     private String name;
@@ -20,7 +20,7 @@ public class VoucherIssuerResponse {
     private String note;
 
     @QueryProjection
-    public VoucherIssuerResponse(Long id, String name, Discount discount,
+    public VoucherIssuerResult(Long id, String name, Discount discount,
         ContactInfo contactInfo, String description, String publisher, String imageUrl, String note) {
         this.id = id;
         this.name = name;

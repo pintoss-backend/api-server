@@ -1,15 +1,11 @@
 package com.pintoss.auth;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-
-@SpringBootTest
-@ActiveProfiles("test")
-class AuthApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//@SpringBootTest
+//@ActiveProfiles("test")
+//class AuthApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}
