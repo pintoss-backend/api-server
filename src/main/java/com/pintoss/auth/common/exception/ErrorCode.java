@@ -43,6 +43,7 @@ public enum ErrorCode {
     // 409 Conflict
     DUPLICATE_RESOURCE("4091", "이미 등록된 리소스입니다."),
     CONFLICT_REQUEST("4092", "요청이 충돌하였습니다."),
+    DUPLICATE_USER("4093", "이미 등록된 사용자입니다."),
 
     // 415 Unsupported Media Type
     UNSUPPORTED_MEDIA_TYPE("4151", "지원하지 않는 콘텐츠 타입입니다."),

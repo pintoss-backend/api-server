@@ -1,5 +1,7 @@
 package com.pintoss.auth.module.user.model;
 
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -59,5 +61,11 @@ public class User {
 
     public void storeRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public void validateSameLoginType(LoginType loginType) {
+        if(!this.loginType.equals(loginType)){
+            throw new BadRequestException(ErrorCode.DUPLICATE_RESOURCE);
+        };
     }
 }

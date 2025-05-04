@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.pintoss.auth.common.dto.ApiErrorResponse;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.exception.client.UnauthorizedException;
+import com.pintoss.auth.common.util.DateTimeUtils;
 import io.swagger.v3.oas.annotations.Hidden;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -32,51 +34,81 @@ public class GlobalExceptionHandler {
     // 이 핸들러는 예상하지 못한 모든 예외(Exception)를 포괄적으로 처리합니다.
     // 컨트롤러/서비스 계층에서 발생한 런타임 예외 중 별도로 처리되지 않은 것은 모두 해당 핸들러가 처리합니다.
     @ExceptionHandler(value = Exception.class)
-    public final ResponseEntity<ApiErrorResponse> handleException(Exception e) {
+    public final ResponseEntity<ApiErrorResponse> handleException(Exception e, HttpServletRequest request) {
+        LocalDateTime timestamp = LocalDateTime.now();
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
             HttpStatus.INTERNAL_SERVER_ERROR,
             ErrorCode.INTERNAL_SERVER_ERROR,
             e.getMessage(),
-            LocalDateTime.now()
+            timestamp
         );
         e.printStackTrace();
-        log.error("[서버에러] 처리되지 않은 예외 발생 : ", e.getMessage());
+        log.error(
+            "[INTERNAL_SERVER_ERROR] errorCode={}, exception={}, message={}, path={}, method={}, time={}",
+            ErrorCode.INTERNAL_SERVER_ERROR,
+            e.getClass().getSimpleName(),
+            e.getMessage(),
+            request.getRequestURI(),
+            request.getMethod(),
+            DateTimeUtils.formatKorean(timestamp),
+            e // 스택트레이스 포함
+        );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // @PreAuthorize에서 권한 거부 시 발생하는 예외
     @ExceptionHandler(value = {AuthorizationDeniedException.class})
-    public final ResponseEntity<ApiErrorResponse> handleAccessDenied(AuthorizationDeniedException e) {
+    public final ResponseEntity<ApiErrorResponse> handleAccessDenied(AuthorizationDeniedException e, HttpServletRequest request) {
+        LocalDateTime timestamp = LocalDateTime.now();
+
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
             HttpStatus.FORBIDDEN,
             ErrorCode.AUTH_ACCESS_DENIED,
             e.getMessage(),
-            LocalDateTime.now()
+            timestamp
         );
-        log.error("권한 거부 오류 발생 : ",e.getMessage());
+        log.error(
+            "[AuthorizationDeniedException] errorCode={}, message={}, path={}, method={}, time={}",
+            ErrorCode.AUTH_ACCESS_DENIED,
+            e.getMessage(),
+            request.getRequestURI(),
+            request.getMethod(),
+            DateTimeUtils.formatKorean(timestamp)
+        );
         return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
     }
 
     // @PreAuthorize에서 인증 실패 예외 처리
     @ExceptionHandler(value = {AuthenticationException.class})
-    public ResponseEntity<ApiErrorResponse> handleAuthenticationException(AuthenticationException e) {
+    public ResponseEntity<ApiErrorResponse> handleAuthenticationException(AuthenticationException e, HttpServletRequest request) {
+        LocalDateTime timestamp = LocalDateTime.now();
+
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
             HttpStatus.UNAUTHORIZED,
             ErrorCode.UNAUTHORIZED,
             e.getMessage(),
-            LocalDateTime.now()
+            timestamp
         );
-        log.error("인증 실패 오류 발생 : ", e.getMessage());
+
+        log.error(
+            "[AuthenticationException] errorCode={}, message={}, path={}, method= {}, time={}",
+            ErrorCode.UNAUTHORIZED,
+            e.getMessage(),
+            request.getRequestURI(),
+            request.getMethod(),
+            DateTimeUtils.formatKorean(timestamp)
+        );
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(value = {BaseException.class})
     public final ResponseEntity<ApiErrorResponse> handleCustomException(BaseException e) {
+        LocalDateTime timestamp = LocalDateTime.now();
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
             e.getHttpStatus(),
             e.getErrorCode(),
             e.getMessage(),
-            LocalDateTime.now()
+            timestamp
         );
         log.error(e.getMessage());
         e.printStackTrace();
@@ -84,15 +116,20 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value ={BadRequestException.class})
-    public final ResponseEntity<ApiErrorResponse> handleBadRequestException(BadRequestException e){
+    public final ResponseEntity<ApiErrorResponse> handleBadRequestException(BadRequestException e, HttpServletRequest request){
+        LocalDateTime timestamp = LocalDateTime.now();
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
             e.getHttpStatus(),
             e.getErrorCode(),
             e.getMessage(),
-            LocalDateTime.now()
+            timestamp
         );
-        log.error(e.getMessage());
-        e.printStackTrace();
+        log.error("[BadRequestException] errorCode={}, message={}, path={}, time={}",
+            e.getErrorCode(),
+            e.getMessage(),
+            request.getRequestURI(),
+            DateTimeUtils.formatKorean(timestamp)
+        );
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }
 
@@ -108,6 +145,7 @@ public class GlobalExceptionHandler {
         e.printStackTrace();
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<ApiErrorResponse> handleValidationExceptions(MethodArgumentNotValidException e) {
         log.error("ExceptionHandler catch HandlerMethodValidationException : {}", e.getMessage());
