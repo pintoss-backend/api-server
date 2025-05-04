@@ -22,6 +22,7 @@ public class OrderValidator {
         orderItems.stream()
             .forEach(orderItem -> {
                 Voucher voucher = voucherMap.get(orderItem.getVoucherId());
+                voucher.validatePrice(orderItem.getPrice());
             });
     }
 

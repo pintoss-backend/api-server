@@ -18,6 +18,7 @@ public enum ErrorCode {
     UNSUPPORTED_OAUTH2_PROVIDER("4007", "지원하지 않는 OAuth2 제공자입니다."),
     INVALID_REFRESH_TOKEN_SUBJECT("4008", "요청한 리프레쉬 토큰의 사용자 정보가 올바르지 않습니다."),
     INVALID_CART_ITEM_QUANTITY("4009", "장바구니 아이템의 수량이 1개 이상이어야합니다."),
+    VOUCHER_PRICE_MISMATCH("40010", "주문 상품의 가격과 바우처의 가격이 일치하지 않습니다."),
 
     // 401 Unauthorized
     // AUTH 관련

@@ -79,7 +79,7 @@ public class Order {
         orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
         this.orderItems = orderItems;
         this.status = OrderStatus.PENDING;
-        this.totalPrice = orderItems.stream().mapToLong(item -> item.calculateTotalPrice()).sum();
+        this.totalPrice = orderItems.stream().mapToLong(item -> item.getPrice()).sum();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }

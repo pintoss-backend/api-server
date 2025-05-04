@@ -34,23 +34,16 @@ public class OrderItem {
     @Column(nullable = false, name = "voucher_name")
     private String voucherName;
 
-    private Integer quantity;
-
     private Long price;
 
-    public Long calculateTotalPrice() {
-        return quantity * price;
-    }
-
-    private OrderItem(String voucherIssuerName, String voucherName, Integer quantity, Long price) {
+    private OrderItem(String voucherIssuerName, String voucherName, Long price) {
         this.voucherIssuerName = voucherIssuerName;
         this.voucherName = voucherName;
-        this.quantity = quantity;
         this.price = price;
     }
 
-    public static OrderItem create(String voucherIssuerName, String voucherName, Integer quantity, Long price) {
-        return new OrderItem(voucherIssuerName, voucherName, quantity, price);
+    public static OrderItem create(String voucherIssuerName, String voucherName, Long price) {
+        return new OrderItem(voucherIssuerName, voucherName, price);
     }
 
     public void assignOrder(Order order) {

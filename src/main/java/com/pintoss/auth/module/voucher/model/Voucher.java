@@ -1,5 +1,7 @@
 package com.pintoss.auth.module.voucher.model;
 
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,5 +44,11 @@ public class Voucher {
 
     public static Voucher create(Long voucherIssuerId, String name, String issuerName, Long price) {
         return new Voucher(voucherIssuerId, name, issuerName, price);
+    }
+
+    public void validatePrice(Long price) {
+        if (!this.price.equals(price)) {
+            throw new BadRequestException(ErrorCode.VOUCHER_PRICE_MISMATCH);
+        }
     }
 }

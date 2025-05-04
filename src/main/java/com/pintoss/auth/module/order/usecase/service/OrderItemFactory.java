@@ -3,6 +3,7 @@ package com.pintoss.auth.module.order.usecase.service;
 import com.pintoss.auth.module.order.model.OrderItem;
 import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
 import com.pintoss.auth.module.voucher.model.Voucher;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -13,15 +14,19 @@ public class OrderItemFactory {
         Map<Long, Voucher> voucherMap = vouchers.stream()
             .collect(Collectors.toMap(Voucher::getId, Function.identity()));
 
-        List<OrderItem> orderItems = orderItemRequests.stream().map(orderItemRequest -> {
-            Voucher voucher = voucherMap.get(orderItemRequest.getVoucherId());
-            return OrderItem.create(
-                voucher.getIssuerName(),
-                voucher.getName(),
-                orderItemRequest.getQuantity(),
-                orderItemRequest.getPrice()
-            );
-        }).collect(Collectors.toList());
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        for(OrderItemRequest request: orderItemRequests) {
+            Voucher voucher = voucherMap.get(request.getVoucherId());
+
+            for (int i = 0; i < request.getQuantity(); i++) {
+                orderItems.add(OrderItem.create(
+                    voucher.getIssuerName(),
+                    voucher.getName(),
+                    request.getPrice()
+                ));
+            }
+        }
 
         return orderItems;
     }

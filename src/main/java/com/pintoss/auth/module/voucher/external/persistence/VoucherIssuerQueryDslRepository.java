@@ -1,7 +1,8 @@
 package com.pintoss.auth.module.voucher.external.persistence;
 
-import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
+
 import static com.pintoss.auth.module.voucher.model.QVoucherIssuer.voucherIssuer;
+import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
 
 import com.pintoss.auth.module.voucher.model.Voucher;
 import com.pintoss.auth.module.voucher.model.VoucherIssuer;

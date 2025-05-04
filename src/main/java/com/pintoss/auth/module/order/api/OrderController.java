@@ -28,8 +28,6 @@ public class OrderController {
     public ApiResponse<CreateOrderResponse> createOrder(@RequestBody @Valid CreateOrderRequest request) {
         CreateOrderResponse response = createOrderService.create(request.getPaymentMethod(), request.getOrderItems());
 
-
-
         return ApiResponse.ok(response);
     }
 
