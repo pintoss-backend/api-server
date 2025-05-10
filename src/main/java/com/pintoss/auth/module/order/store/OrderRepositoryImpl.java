@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.order.external;
+package com.pintoss.auth.module.order.store;
 
-import com.pintoss.auth.module.order.usecase.service.OrderRepository;
-import com.pintoss.auth.module.order.model.Order;
+import com.pintoss.auth.module.order.application.flow.OrderRepository;
+import com.pintoss.auth.module.order.application.model.Order;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.order.usecase.service;
+package com.pintoss.auth.module.order.application.flow;
 
-import com.pintoss.auth.module.order.model.OrderItem;
-import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
+import com.pintoss.auth.module.order.application.model.OrderItem;
+import com.pintoss.auth.module.order.application.model.OrderItemRequest;
 import com.pintoss.auth.module.voucher.model.Voucher;
 import java.util.ArrayList;
 import java.util.List;

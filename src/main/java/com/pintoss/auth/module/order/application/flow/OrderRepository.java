@@ -1,6 +1,6 @@
-package com.pintoss.auth.module.order.usecase.service;
+package com.pintoss.auth.module.order.application.flow;
 
-import com.pintoss.auth.module.order.model.Order;
+import com.pintoss.auth.module.order.application.model.Order;
 import java.util.Optional;
 
 public interface OrderRepository {

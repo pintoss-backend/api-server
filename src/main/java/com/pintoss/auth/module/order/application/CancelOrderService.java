@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.order.usecase;
+package com.pintoss.auth.module.order.application;
 
-import com.pintoss.auth.module.order.usecase.service.OrderReader;
-import com.pintoss.auth.module.order.model.Order;
+import com.pintoss.auth.module.order.application.flow.OrderReader;
+import com.pintoss.auth.module.order.application.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

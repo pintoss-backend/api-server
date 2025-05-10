@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.model;
+package com.pintoss.auth.module.order.application.model;
 
 public enum OrderStatus {
     PENDING("주문 접수"),      // 주문 접수 (결제 전)

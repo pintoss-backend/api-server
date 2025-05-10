@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.model;
+package com.pintoss.auth.module.order.application.model;
 
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import lombok.Getter;
