@@ -1,14 +1,14 @@
-package com.pintoss.auth.module.order.usecase;
+package com.pintoss.auth.module.order.application;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
 import com.pintoss.auth.module.order.api.dto.CreateOrderResponse;
-import com.pintoss.auth.module.order.usecase.service.OrderAdder;
-import com.pintoss.auth.module.order.usecase.service.OrderItemFactory;
-import com.pintoss.auth.module.order.usecase.service.OrderValidator;
-import com.pintoss.auth.module.order.model.Order;
-import com.pintoss.auth.module.order.model.OrderItem;
-import com.pintoss.auth.module.order.model.PaymentMethodType;
-import com.pintoss.auth.module.order.usecase.dto.OrderItemRequest;
+import com.pintoss.auth.module.order.application.flow.OrderAdder;
+import com.pintoss.auth.module.order.application.flow.OrderItemFactory;
+import com.pintoss.auth.module.order.application.flow.OrderValidator;
+import com.pintoss.auth.module.order.application.model.Order;
+import com.pintoss.auth.module.order.application.model.OrderItem;
+import com.pintoss.auth.module.order.application.model.PaymentMethodType;
+import com.pintoss.auth.module.order.application.dto.OrderItemRequest;
 import com.pintoss.auth.module.voucher.model.Voucher;
 import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import java.util.List;

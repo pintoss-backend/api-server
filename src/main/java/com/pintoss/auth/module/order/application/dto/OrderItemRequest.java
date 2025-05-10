@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.usecase.dto;
+package com.pintoss.auth.module.order.application.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

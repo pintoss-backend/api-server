@@ -1,6 +1,6 @@
-package com.pintoss.auth.module.order.external;
+package com.pintoss.auth.module.order.store;
 
-import com.pintoss.auth.module.order.model.Order;
+import com.pintoss.auth.module.order.application.model.Order;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
