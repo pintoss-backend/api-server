@@ -4,6 +4,8 @@ import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -36,10 +38,16 @@ public class OrderItem {
 
     private Long price;
 
+    private String pinNum;
+
+    @Enumerated(EnumType.STRING)
+    private OrderItemStatus status;
+
     private OrderItem(String voucherIssuerName, String voucherName, Long price) {
         this.voucherIssuerName = voucherIssuerName;
         this.voucherName = voucherName;
         this.price = price;
+        this.status = OrderItemStatus.PENDING;
     }
 
     public static OrderItem create(String voucherIssuerName, String voucherName, Long price) {
@@ -54,5 +62,13 @@ public class OrderItem {
         if(!this.price.equals(price)) {
             throw new BadRequestException("가격 불일치");
         }
+    }
+
+    public void assignPinNum(String pinNum) {
+        this.pinNum = pinNum;
+    }
+
+    public void issued() {
+        this.status = OrderItemStatus.ISSUED;
     }
 }

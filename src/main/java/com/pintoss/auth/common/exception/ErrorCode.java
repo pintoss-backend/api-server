@@ -19,6 +19,9 @@ public enum ErrorCode {
     INVALID_REFRESH_TOKEN_SUBJECT("4008", "요청한 리프레쉬 토큰의 사용자 정보가 올바르지 않습니다."),
     INVALID_CART_ITEM_QUANTITY("4009", "장바구니 아이템의 수량이 1개 이상이어야합니다."),
     VOUCHER_PRICE_MISMATCH("40010", "주문 상품의 가격과 바우처의 가격이 일치하지 않습니다."),
+    PAYMENT_APPROVAL_FAILED("40011", "결제 승인이 거절되었습니다."),
+    PAYMENT_APPROVED_AMOUNT_MISMATCH("40012", "결제 승인 금액이 주문 금액과 일치하지 않습니다."),
+    ORDER_ALREADY_CANCELED("40013", "이미 취소된 주문입니다."),
 
     // 401 Unauthorized
     // AUTH 관련
@@ -67,7 +70,11 @@ public enum ErrorCode {
     INVALID_ALGORITHM_PARAMETER("50010", "초기화 벡터(IV)가 잘못되었거나 형식이 맞지 않습니다."),
     JSON_SERIALIZATION("50011", "요청 데이터를 JSON 형식으로 변환할 수 없습니다."),
     ILLEGAL_BLOCK_SIZE("50012", "암호화 시 블록 크기가 부적합합니다."),
-    BAD_PADDING("50013", "패딩이 잘못되었거나 데이터 손상이 의심됩니다.");
+    BAD_PADDING("50013", "패딩이 잘못되었거나 데이터 손상이 의심됩니다."),
+
+    // 502 Bad Gateway
+    PAYMENT_MESSAGE_NOT_GENERATED("5021", "결제 메시지 생성에 실패했습니다."),
+    PAYMENT_ALREADY_CANCELED("5022", "취소된 결제 내역입니다.");
 
     private final String code;
     private final String message;

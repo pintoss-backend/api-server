@@ -22,5 +22,14 @@ public enum PaymentMethodType {
         }
         throw new BadRequestException("잘못된 결제 설명: " + description);
     }
+
+    public static PaymentMethodType fromServiceCode(String serviceCode) {
+        for (PaymentMethodType type : values()) {
+            if (type.getServiceCode().equals(serviceCode)) {
+                return type;
+            }
+        }
+        throw new BadRequestException("잘못된 결제 서비스 코드: " + serviceCode);
+    }
 }
 

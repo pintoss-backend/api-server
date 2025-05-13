@@ -1,5 +1,7 @@
 package com.pintoss.auth.module.order.application.model;
 
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -62,7 +64,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    private Long totalPrice;
+    private long totalPrice;
 
     private LocalDateTime createdAt;
 
@@ -100,11 +102,28 @@ public class Order {
         return new Order(ordererId, ordererName, ordererEmail, ordererPhone, orderName, orderItems, paymentMethodType);
     }
 
+    public void verifyTotalPrice(long taxAmount) {
+        if(totalPrice != taxAmount) {
+            throw new BadRequestException(ErrorCode.PAYMENT_APPROVED_AMOUNT_MISMATCH);
+        }
+    }
+
     public void cancel() {
         if (this.status == OrderStatus.CANCELED) {
-            throw new IllegalStateException("이미 취소된 주문 입니다.");
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_CANCELED);
         }
         this.status = OrderStatus.CANCELED;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void paymentSuccess() {
+        if(this.status == OrderStatus.CANCELED) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_CANCELED);
+        }
+        this.status = OrderStatus.COMPLETED;
+    }
+
+    public void issued() {
+        this.status = OrderStatus.ISSUED;
     }
 }
