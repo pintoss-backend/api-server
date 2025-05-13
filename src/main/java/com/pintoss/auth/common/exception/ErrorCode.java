@@ -40,6 +40,7 @@ public enum ErrorCode {
     // 404 Not Found
     RESOURCE_NOT_FOUND("4041", "해당 리소스를 찾을 수 없습니다."),
     USER_NOT_FOUND("4042", "해당 사용자를 찾을 수 없습니다."),
+    NOT_FOUND_CART_ITEM("4042","존재하지 않는 장바구니 목록입니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED("4051", "허용되지 않은 메서드입니다."),

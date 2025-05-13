@@ -4,6 +4,7 @@ import com.pintoss.auth.module.cart.model.CartItem;
 import com.pintoss.auth.module.cart.usecase.dto.CartItemResult;
 import com.pintoss.auth.module.cart.usecase.service.CartItemRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -28,5 +29,10 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     @Override
     public List<CartItem> findByUserIdAndProductIdIn(Long userId, Set<Long> productIds) {
         return queryDslRepository.findByUserIdAndProductIdIn(userId, productIds);
+    }
+
+    @Override
+    public Optional<CartItem> findByUserIdAndId(Long userId, Long cartItemId) {
+        return queryDslRepository.findByUserIdAndId(userId, cartItemId);
     }
 }

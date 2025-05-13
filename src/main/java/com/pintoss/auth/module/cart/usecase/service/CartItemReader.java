@@ -1,5 +1,7 @@
 package com.pintoss.auth.module.cart.usecase.service;
 
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.NotFoundException;
 import com.pintoss.auth.module.cart.model.CartItem;
 import java.util.List;
 import java.util.Set;
@@ -16,4 +18,8 @@ public class CartItemReader {
         return cartItemRepository.findByUserIdAndProductIdIn(userId, productIds);
     }
 
+    public CartItem readByUserIdAndId(Long userId, Long cartItemId) {
+        return cartItemRepository.findByUserIdAndId(userId, cartItemId)
+            .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_CART_ITEM));
+    }
 }

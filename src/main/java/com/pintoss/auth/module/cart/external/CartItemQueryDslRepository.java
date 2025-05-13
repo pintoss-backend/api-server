@@ -9,6 +9,7 @@ import com.pintoss.auth.module.cart.usecase.dto.CartItemResult;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -49,5 +50,18 @@ public class CartItemQueryDslRepository {
                 cartItem.isDeleted.isFalse()
             )
             .fetch();
+    }
+
+    public Optional<CartItem> findByUserIdAndId(Long userId, Long cartItemId) {
+        return Optional.ofNullable(
+            queryFactory
+                .selectFrom(cartItem)
+                .where(
+                    cartItem.userId.eq(userId),
+                    cartItem.id.eq(cartItemId),
+                    cartItem.isDeleted.isFalse()
+                )
+                .fetchOne()
+        );
     }
 }
