@@ -1,8 +1,8 @@
-package com.pintoss.auth.module.cart.usecase;
+package com.pintoss.auth.module.cart.application;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
-import com.pintoss.auth.module.cart.model.CartItem;
-import com.pintoss.auth.module.cart.usecase.service.CartItemReader;
+import com.pintoss.auth.module.cart.application.model.CartItem;
+import com.pintoss.auth.module.cart.application.flow.CartItemReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

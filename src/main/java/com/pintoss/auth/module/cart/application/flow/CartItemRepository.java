@@ -1,14 +1,14 @@
-package com.pintoss.auth.module.cart.usecase.service;
+package com.pintoss.auth.module.cart.application.flow;
 
-import com.pintoss.auth.module.cart.model.CartItem;
-import com.pintoss.auth.module.cart.usecase.dto.CartItemResult;
+import com.pintoss.auth.module.cart.application.model.CartItem;
+import com.pintoss.auth.module.cart.application.model.CartItemResult;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 public interface CartItemRepository {
 
-    List<CartItemResult> fetchCartItems(Long userId);
+    List<CartItemResult> getMyCartItems(Long userId);
 
     List<CartItem> findByUserIdAndProductIdIn(Long userId, Set<Long> productIds);
 

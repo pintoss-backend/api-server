@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.cart.model;
+package com.pintoss.auth.module.cart.application.model;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;

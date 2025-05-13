@@ -1,6 +1,6 @@
-package com.pintoss.auth.module.cart.usecase.service;
+package com.pintoss.auth.module.cart.application.flow;
 
-import com.pintoss.auth.module.cart.model.CartItem;
+import com.pintoss.auth.module.cart.application.model.CartItem;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

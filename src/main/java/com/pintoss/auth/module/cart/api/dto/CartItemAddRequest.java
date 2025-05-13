@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.cart.api.dto;
 
-import com.pintoss.auth.module.cart.usecase.dto.AddCartItemCommand;
+import com.pintoss.auth.module.cart.application.dto.AddCartItemCommand;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddCartItemRequest {
+public class CartItemAddRequest {
     private Long productId;
 
     private int quantity;

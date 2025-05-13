@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.cart.usecase.dto;
+package com.pintoss.auth.module.cart.application.dto;
 
 import lombok.Builder;
 import lombok.Data;

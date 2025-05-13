@@ -1,8 +1,8 @@
-package com.pintoss.auth.module.cart.usecase.service;
+package com.pintoss.auth.module.cart.application.flow;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.NotFoundException;
-import com.pintoss.auth.module.cart.model.CartItem;
+import com.pintoss.auth.module.cart.application.model.CartItem;
 import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;

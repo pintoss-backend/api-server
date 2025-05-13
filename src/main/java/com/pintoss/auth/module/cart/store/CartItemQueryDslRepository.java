@@ -1,11 +1,11 @@
-package com.pintoss.auth.module.cart.external;
+package com.pintoss.auth.module.cart.store;
 
-import static com.pintoss.auth.module.cart.model.QCartItem.cartItem;
+import static com.pintoss.auth.module.cart.application.model.QCartItem.cartItem;
 import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
 import static com.pintoss.auth.module.voucher.model.QVoucherIssuer.voucherIssuer;
 
-import com.pintoss.auth.module.cart.model.CartItem;
-import com.pintoss.auth.module.cart.usecase.dto.CartItemResult;
+import com.pintoss.auth.module.cart.application.model.CartItem;
+import com.pintoss.auth.module.cart.application.model.CartItemResult;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
@@ -20,7 +20,7 @@ public class CartItemQueryDslRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<CartItemResult> fetchCartItems(Long userId) {
+    public List<CartItemResult> getMyCartItems(Long userId) {
 
         return queryFactory
             .select(Projections.constructor(CartItemResult.class,

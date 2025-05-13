@@ -1,14 +1,15 @@
 package com.pintoss.auth.module.cart.api;
 
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.cart.api.dto.AddCartItemRequest;
+import com.pintoss.auth.module.cart.api.dto.CartItemAddRequest;
+import com.pintoss.auth.module.cart.api.dto.CartItemListResponse;
 import com.pintoss.auth.module.cart.api.dto.CartItemUpdateRequest;
-import com.pintoss.auth.module.cart.usecase.AddCartItemUseCase;
-import com.pintoss.auth.module.cart.usecase.CartItemDeleteUseCase;
-import com.pintoss.auth.module.cart.usecase.CartItemUpdateUseCase;
-import com.pintoss.auth.module.cart.usecase.FetchCartItemUseCase;
-import com.pintoss.auth.module.cart.usecase.dto.AddCartItemCommand;
-import com.pintoss.auth.module.cart.usecase.dto.CartItemResult;
+import com.pintoss.auth.module.cart.application.CartItemAddUseCase;
+import com.pintoss.auth.module.cart.application.CartItemDeleteUseCase;
+import com.pintoss.auth.module.cart.application.CartItemUpdateUseCase;
+import com.pintoss.auth.module.cart.application.CartItemQueryUseCase;
+import com.pintoss.auth.module.cart.application.dto.AddCartItemCommand;
+import com.pintoss.auth.module.cart.application.model.CartItemResult;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,25 +27,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/carts")
 public class CartItemController {
 
-    private final FetchCartItemUseCase fetchCartItemUseCase;
-    private final AddCartItemUseCase addCartItemUseCase;
+    private final CartItemQueryUseCase cartItemQueryUseCase;
+    private final CartItemAddUseCase cartItemAddUseCase;
     private final CartItemUpdateUseCase cartItemUpdateUseCase;
     private final CartItemDeleteUseCase cartItemDeleteUseCase;
 
     @GetMapping("/items")
     @PreAuthorize("hasAuthority('USER')")
-    public ApiResponse<List<CartItemResult>> getCartItems() {
-        List<CartItemResult> response = fetchCartItemUseCase.getCartItems();
+    public ApiResponse<List<CartItemListResponse>> getCartItems() {
+        List<CartItemResult> result = cartItemQueryUseCase.getCartItems();
+
+        List<CartItemListResponse> response = result.stream()
+            .map(item -> CartItemListResponse.of(item))
+            .toList();
+
         return ApiResponse.ok(response);
     }
 
     @PostMapping("/items")
     @PreAuthorize("hasAuthority('USER')")
-    public ApiResponse<Void> addCartItem(@RequestBody List<AddCartItemRequest> request) {
+    public ApiResponse<Void> addCartItem(@RequestBody List<CartItemAddRequest> request) {
         List<AddCartItemCommand> command = request.stream().map(
             item -> item.to()
         ).toList();
-        addCartItemUseCase.addCartItem(command);
+        cartItemAddUseCase.addCartItem(command);
         return ApiResponse.ok(null);
     }
 
