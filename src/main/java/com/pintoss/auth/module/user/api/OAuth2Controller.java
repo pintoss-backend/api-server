@@ -1,7 +1,9 @@
 package com.pintoss.auth.module.user.api;
 
 import com.pintoss.auth.common.dto.ApiResponse;
+import com.pintoss.auth.module.user.api.dto.OAuth2LoginSuccess;
 import com.pintoss.auth.module.user.api.dto.OAuth2Response;
+import com.pintoss.auth.module.user.api.dto.OAuth2SignupRequired;
 import com.pintoss.auth.module.user.model.LoginType;
 import com.pintoss.auth.module.user.usecase.OAuth2UseCase;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,15 +36,15 @@ public class OAuth2Controller {
     public ApiResponse<OAuth2Response> oauthCallback(@PathVariable(value = "loginType") LoginType loginType, @RequestParam("code") String code, HttpServletResponse servletResponse) throws IOException {
         OAuth2Response response = oAuth2UseCase.oauthLogin(loginType, code);
 
-        return ApiResponse.ok(response);
+//        return ApiResponse.ok(response);
 
-//        if(response instanceof OAuth2SignupRequired) {
-//            OAuth2SignupRequired signupRequired = (OAuth2SignupRequired) response;
-//            servletResponse.sendRedirect("https://pin-toss.com/register?email="+ signupRequired.getEmail()+"&loginType="+loginType.toString());
-//        } else if (response instanceof OAuth2LoginSuccess) {
-//            OAuth2LoginSuccess loginSuccess = (OAuth2LoginSuccess) response;
-//            servletResponse.sendRedirect("https://pin-toss.com/login/social?accessToken="+ loginSuccess.getAccessToken());
-//        }
-//        return null;
+        if(response instanceof OAuth2SignupRequired) {
+            OAuth2SignupRequired signupRequired = (OAuth2SignupRequired) response;
+            servletResponse.sendRedirect("https://pin-toss.com/login/social?email="+ signupRequired.getEmail()+"&loginType="+loginType.toString());
+        } else if (response instanceof OAuth2LoginSuccess) {
+            OAuth2LoginSuccess loginSuccess = (OAuth2LoginSuccess) response;
+            servletResponse.sendRedirect("https://pin-toss.com/login/social?accessToken="+ loginSuccess.getAccessToken());
+        }
+        return null;
     }
 }
