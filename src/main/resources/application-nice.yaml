@@ -3,6 +3,6 @@ nice-auth:
   client-secret: edf7656c1e821103f4a407204bfcf39f
   access-token-uri: /digital/niceid/oauth/oauth/token
   encrypted-token-uri: /digital/niceid/api/v1.0/common/crypto/token
-#  redirect-uri: https://pin-toss.com/api/nice/callback
-  redirect-uri: http://localhost:8080/api/nice/callback
+  redirect-uri: https://pin-toss.com/api/nice/callback
+#  redirect-uri: http://localhost:8080/api/nice/callback
   product-id: 2101979031
