@@ -19,13 +19,14 @@ public class NiceAuthCommandFactory {
     }
 
     public EncryptedRequestDataCommand createEncryptedRequestDataCommand(SymmetricKeyResult
-        symmetricKey, NiceApiCryptoToken cryptoToken, String redirectUri) {
+        symmetricKey, NiceApiCryptoToken cryptoToken, String redirectUri, String purpose) {
         return EncryptedRequestDataCommand.create(
                 symmetricKey.getKey(),
                 symmetricKey.getIv(),
                 cryptoToken.getReqNo(),
                 redirectUri,
-                cryptoToken.getSiteCode()
+                cryptoToken.getSiteCode(),
+                purpose
         );
     }
 

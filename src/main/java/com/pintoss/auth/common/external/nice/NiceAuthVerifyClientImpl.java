@@ -33,8 +33,8 @@ public class NiceAuthVerifyClientImpl implements NiceAuthVerifyClient {
 
         AuthenticationDataDecipherResult decipher = niceAuthAuthenticationResponseDecipher.decipher(authenticationDataEncryptor);
         if( niceAuthAuthenticationHandler.handler(decipher) ) {
-            return new NiceVerificationResult(false, null, null);
+            return new NiceVerificationResult(false, null, null, decipher.getReceivedata());
         }
-        return new NiceVerificationResult(true, URLDecoder.decode(decipher.getUtf8_name(), StandardCharsets.UTF_8), decipher.getMobileno());
+        return new NiceVerificationResult(true, URLDecoder.decode(decipher.getUtf8_name(), StandardCharsets.UTF_8), decipher.getMobileno(), decipher.getReceivedata());
     }
 }

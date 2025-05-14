@@ -11,6 +11,7 @@ import com.pintoss.auth.common.external.nice.encryption.NiceAuthSymmetricKeyGene
 import com.pintoss.auth.common.external.nice.store.NiceApiCryptoToken;
 import com.pintoss.auth.common.external.nice.provider.NiceApiTokenProvider;
 import com.pintoss.auth.common.external.nice.util.NiceAuthCommandFactory;
+import com.pintoss.auth.module.user.api.IdentityVerifyPurpose;
 import com.pintoss.auth.module.user.usecase.dto.NiceEncryptedDataResult;
 import com.pintoss.auth.module.user.usecase.service.NiceAuthRequestClient;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class NiceAuthRequestClientImpl implements NiceAuthRequestClient {
     private final NiceAuthHmacGenerator niceAuthHmacGenerator;
 
     @Override
-    public NiceEncryptedDataResult requestAuthData() {
+    public NiceEncryptedDataResult requestAuthData(IdentityVerifyPurpose purpose) {
         niceApiTokenProvider.getAccessToken();
         NiceApiCryptoToken cryptoToken = niceApiTokenProvider.getCryptoToken();
 
@@ -37,7 +38,7 @@ public class NiceAuthRequestClientImpl implements NiceAuthRequestClient {
         SymmetricKeyResult symmetricKey = niceAuthSymmetricKeyGenerator.generate(symmetricKeyCommand);
 
         EncryptedRequestDataCommand encryptedRequestDataCommand = niceAuthCommandFactory.createEncryptedRequestDataCommand(
-            symmetricKey, cryptoToken, niceApiProperties.getRedirectUri());
+            symmetricKey, cryptoToken, niceApiProperties.getRedirectUri(), purpose.getCode());
 
         String encData = niceAuthStandardAuthRequestEncryptor.encryption(
             encryptedRequestDataCommand);

@@ -12,16 +12,18 @@ public class EncryptedRequestDataCommand {
     private String reqNo;
     private String redirectUrl;
     private String siteCode;
+    private String purpose;
 
-    private EncryptedRequestDataCommand(String key, String iv, String reqNo, String redirectUrl, String siteCode) {
+    private EncryptedRequestDataCommand(String key, String iv, String reqNo, String redirectUrl, String siteCode, String purpose) {
         this.key = key;
         this.iv = iv;
         this.reqNo = reqNo;
         this.redirectUrl = redirectUrl;
         this.siteCode = siteCode;
+        this.purpose = purpose;
     }
 
-    public static EncryptedRequestDataCommand create(String key, String iv, String reqNo, String redirectUrl, String siteCode) {
-        return new EncryptedRequestDataCommand(key, iv, reqNo, redirectUrl, siteCode);
+    public static EncryptedRequestDataCommand create(String key, String iv, String reqNo, String redirectUrl, String siteCode, String purpose) {
+        return new EncryptedRequestDataCommand(key, iv, reqNo, redirectUrl, siteCode, purpose);
     }
 }

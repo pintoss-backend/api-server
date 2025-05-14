@@ -13,13 +13,14 @@ public class NiceAuthStandardAuthRequest {
     private String businessno;
     private String methodtype;
     private String popupyn;
-    private String receiverdata;
+    private String receivedata;
 
-    public NiceAuthStandardAuthRequest(String requestno, String returnurl, String sitecode) {
+    public NiceAuthStandardAuthRequest(String requestno, String returnurl, String sitecode, String purpose) {
         this.requestno = requestno;
         this.returnurl = returnurl;
         this.sitecode = sitecode;
         this.methodtype = "get";
         this.popupyn = "Y";
+        this.receivedata = purpose;
     }
 }

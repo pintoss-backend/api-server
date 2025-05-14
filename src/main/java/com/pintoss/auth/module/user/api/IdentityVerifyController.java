@@ -23,8 +23,8 @@ public class IdentityVerifyController {
 
     private final IdentityVerificationUseCase identityVerificationUseCase;
     @GetMapping("/encrypted-data")
-    public ApiResponse<NiceEncryptedDataResult> getEncryptedData() {
-        NiceEncryptedDataResult encryptedData = identityVerificationUseCase.getEncryptedData();
+    public ApiResponse<NiceEncryptedDataResult> getEncryptedData(@RequestParam(name="purpose") IdentityVerifyPurpose purpose) {
+        NiceEncryptedDataResult encryptedData = identityVerificationUseCase.getEncryptedData(purpose);
         return ApiResponse.ok(encryptedData);
     }
 
@@ -49,7 +49,14 @@ public class IdentityVerifyController {
     ) throws IOException {
         NiceVerificationResult result = identityVerificationUseCase.verify(tokenVersionId, encData, integrityValue);
         log.info("Verification Result - Name: {}, Tel: {}, Success: {}", result.getName(), result.getTel(), result.getIsSuccess());
-        String redirectUrl = String.format("https://pin-toss.com/register/nice?name=%s&tel=%s&success=%s", URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
+
+        String redirectUrl = "";
+        if(IdentityVerifyPurpose.SIGNUP.getCode().equals(result.getPurpose())){
+            redirectUrl = String.format("https://pin-toss.com/register/nice?name=%s&tel=%s&success=%s", URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
+        } else if (IdentityVerifyPurpose.PASSWORD_RESET.getCode().equals(result.getPurpose())) {
+            redirectUrl = String.format("https://pin-toss.com/password-reset/nice?name=%s&tel=%s&success=%s", URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
+        }
+
         response.sendRedirect(redirectUrl);
     }
 }

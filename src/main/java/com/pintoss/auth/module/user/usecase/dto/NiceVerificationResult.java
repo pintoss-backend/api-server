@@ -9,4 +9,5 @@ public class NiceVerificationResult {
     private Boolean isSuccess;
     private String name;
     private String tel;
+    private String purpose;
 }

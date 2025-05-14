@@ -46,7 +46,8 @@ public class NiceAuthStandardAuthRequestEncryptor {
         NiceAuthStandardAuthRequest reqData = new NiceAuthStandardAuthRequest(
                 command.getReqNo().trim(),
                 command.getRedirectUrl(),
-                command.getSiteCode()
+                command.getSiteCode(),
+                command.getPurpose()
         );
         String jsonString = null;
         try {
