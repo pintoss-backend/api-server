@@ -3,6 +3,7 @@ package com.pintoss.auth.module.user.usecase;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.security.jwt.JwtProvider;
+import com.pintoss.auth.module.user.api.dto.OAuth2FailResponse;
 import com.pintoss.auth.module.user.api.dto.OAuth2LoginSuccess;
 import com.pintoss.auth.module.user.api.dto.OAuth2Response;
 import com.pintoss.auth.module.user.api.dto.OAuth2SignupRequired;
@@ -45,7 +46,7 @@ public class OAuth2UseCase {
             if(e.getErrorCode() == ErrorCode.USER_NOT_FOUND) {
                 return new OAuth2SignupRequired(userInfo.getEmail());
             }
-            throw new BadRequestException(ErrorCode.DUPLICATE_USER);
+            return new OAuth2FailResponse();
         }
     }
 

@@ -33,18 +33,16 @@ public class OAuth2Controller {
     }
 
     @GetMapping("/callback/{loginType}")
-    public ApiResponse<OAuth2Response> oauthCallback(@PathVariable(value = "loginType") LoginType loginType, @RequestParam("code") String code, HttpServletResponse servletResponse) throws IOException {
+    public ApiResponse<Void> oauthCallback(@PathVariable(value = "loginType") LoginType loginType, @RequestParam("code") String code, HttpServletResponse servletResponse) throws IOException {
         OAuth2Response response = oAuth2UseCase.oauthLogin(loginType, code);
-
-//        return ApiResponse.ok(response);
-
         if(response instanceof OAuth2SignupRequired) {
             OAuth2SignupRequired signupRequired = (OAuth2SignupRequired) response;
-            servletResponse.sendRedirect("https://pin-toss.com/login/social?email="+ signupRequired.getEmail()+"&loginType="+loginType.toString());
+            servletResponse.sendRedirect("https://pin-toss.com/login/social?isSuccess=true&email="+ signupRequired.getEmail()+"&loginType="+loginType.toString());
         } else if (response instanceof OAuth2LoginSuccess) {
             OAuth2LoginSuccess loginSuccess = (OAuth2LoginSuccess) response;
-            servletResponse.sendRedirect("https://pin-toss.com/login/social?accessToken="+ loginSuccess.getAccessToken());
+            servletResponse.sendRedirect("https://pin-toss.com/login/social?isSuccess=true&accessToken="+ loginSuccess.getAccessToken());
         }
-        return null;
+        servletResponse.sendRedirect("https://pin-toss.com/login/social?isSuccess=false");
+        return ApiResponse.ok(null);
     }
 }
