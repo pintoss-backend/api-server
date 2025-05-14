@@ -1,8 +1,8 @@
 package com.pintoss.auth.module.user.infra.persistence;
 
-import com.pintoss.auth.module.user.usecase.service.UserRepository;
 import com.pintoss.auth.module.user.model.Phone;
 import com.pintoss.auth.module.user.model.User;
+import com.pintoss.auth.module.user.usecase.service.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -55,4 +55,5 @@ public class UserRepositoryImpl implements UserRepository {
     public Page<User> getUsers(Pageable pageable) {
         return null;
     }
+
 }
