@@ -26,7 +26,7 @@ public class PaymentSuccessEventHandler {
 
         for(OrderItem orderItem: order.getOrderItems()) {
             PurchaseResponse purchase = voucherPurchaseService.purchase(order.getOrderNo(),
-                event.getTransactionId(), event.getMId(), event.getAmount());
+                event.getTransactionId(), event.getMId(), event.getAmount(), event.getPaymentMethodType());
             orderItem.assignPinNum(purchase.getCardNo());
             orderItem.issued();
         }

@@ -1,8 +1,9 @@
 package com.pintoss.auth.module.order.integration;
 
-import com.pintoss.auth.module.payment.application.PurchaseCommand;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Slf4j
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PurchaseResponse {
     private String responseCode;
     private String authNo;

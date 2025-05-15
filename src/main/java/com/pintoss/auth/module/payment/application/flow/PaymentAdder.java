@@ -27,7 +27,8 @@ public class PaymentAdder {
                 payment.getTransactionId(),
                 payment.getMid(),
                 payment.getAuthAmount(),
-                payment.getAuthDate()
+                payment.getAuthDate(),
+                payment.getPaymentMethodType()
             ));
         } else if (payment.getStatus() == PaymentStatus.FAILED) {
             eventPublisher.publishEvent(new PaymentFailedEvent(

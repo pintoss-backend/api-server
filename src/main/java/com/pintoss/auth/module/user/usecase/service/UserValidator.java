@@ -5,6 +5,7 @@ import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.exception.client.DuplicateEmailException;
 import com.pintoss.auth.common.security.SecurityContextUtils;
 import com.pintoss.auth.module.user.model.Phone;
+import com.pintoss.auth.module.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -41,5 +42,10 @@ public class UserValidator {
         if(!subject.equals(String.valueOf(loginUserId))) {
             throw new BadRequestException(ErrorCode.INVALID_REFRESH_TOKEN_SUBJECT);
         }
+    }
+
+    public User validateExistsBy(String email, String name, Phone phone) {
+        return userRepository.findByEmailAndNameAndPhone(email, name, phone)
+            .orElseThrow(() -> new BadRequestException(ErrorCode.USER_NOT_FOUND));
     }
 }

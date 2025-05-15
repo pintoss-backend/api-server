@@ -26,4 +26,6 @@ public interface UserRepository {
     boolean existsByPhone(Phone phone);
 
     Page<User> getUsers(Pageable pageable);
+
+    Optional<User> findByEmailAndNameAndPhone(String email, String name, Phone phone);
 }

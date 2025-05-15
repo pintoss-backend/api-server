@@ -22,6 +22,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByEmailAndNameAndPhone(String email, String name, Phone phone) {
+        return jpaRepository.findByEmailAndNameAndPhone(email, name, phone);
+    }
+
+    @Override
     public boolean existsByEmail(String email) {
         return jpaRepository.existsByEmail(email);
     }

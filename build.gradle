@@ -33,6 +33,20 @@ dependencies {
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     runtimeOnly 'com.h2database:h2'
 
+    implementation 'commons-codec:commons-codec:1.15' // Base64
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70' // SEED 암호화
+
+
+    // email
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    // Apache POI
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+
+    // Google API 클라이언트
+    implementation 'com.google.api-client:google-api-client:1.31.2' // 1.25.0과 호환 가능
+    implementation 'com.google.apis:google-api-services-gmail:v1-rev110-1.25.0'
+
     // 빌게이트 연동 라이브러리
     implementation files('libs/billgateAPI.jar')
 

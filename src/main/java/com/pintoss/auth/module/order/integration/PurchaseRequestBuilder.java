@@ -1,5 +1,6 @@
 package com.pintoss.auth.module.order.integration;
 
+import com.pintoss.auth.module.order.application.model.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,9 +20,9 @@ public class PurchaseRequestBuilder {
         return sb.toString(); // 98 bytes
     }
 
-    public static String buildBody(String orderId, String transId, String mid, String amount) {
+    public static String buildBody(String orderId, String transId, String mid, String amount, PaymentMethodType paymentMethodType) {
         StringBuilder sb = new StringBuilder();
-        sb.append(fixed("1107100710080006", 48));            // ITEM_CODE
+        sb.append(fixed("1104501710200000", 48));            // ITEM_CODE
         sb.append(fixed(amount, 8));                   // SALE_PRICE
         sb.append(fixed("", 8));                        // SETTLE_DAY
         sb.append(fixed("01020517426", 12));            // BUY_HPNO
@@ -29,10 +30,10 @@ public class PurchaseRequestBuilder {
         sb.append(fixed("", 6));                        // OTP_NO
         sb.append(fixed("", 20));                       // PIN_NO
         sb.append(fixed(mid, 20));            // BILLGATE_MID
-        sb.append(fixed("02", 2));                      // PG_METHOD
+        sb.append(fixed(paymentMethodType == PaymentMethodType.CARD ? "02" : "03", 2));                      // PG_METHOD
         sb.append(fixed(orderId, 64));           // PG_ORDER_ID
         sb.append(fixed(transId, 20));          // PG_TRID
-        sb.append(fixed("3000", 8));                   // PG_PAY_PRICE
+        sb.append(fixed(amount, 8));                   // PG_PAY_PRICE
         sb.append(fixed("", 186));                      // RESERVED
 
         return sb.toString();

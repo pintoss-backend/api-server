@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AddCartItemCommand {
+public class CartItemAddRequest {
 
     private Long productId;
     private int quantity;

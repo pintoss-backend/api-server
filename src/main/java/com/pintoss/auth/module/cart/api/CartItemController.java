@@ -1,14 +1,13 @@
 package com.pintoss.auth.module.cart.api;
 
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.cart.api.dto.CartItemAddRequest;
 import com.pintoss.auth.module.cart.api.dto.CartItemListResponse;
 import com.pintoss.auth.module.cart.api.dto.CartItemUpdateRequest;
 import com.pintoss.auth.module.cart.application.CartItemAddUseCase;
 import com.pintoss.auth.module.cart.application.CartItemDeleteUseCase;
 import com.pintoss.auth.module.cart.application.CartItemUpdateUseCase;
 import com.pintoss.auth.module.cart.application.CartItemQueryUseCase;
-import com.pintoss.auth.module.cart.application.dto.AddCartItemCommand;
+import com.pintoss.auth.module.cart.application.dto.CartItemAddRequest;
 import com.pintoss.auth.module.cart.application.model.CartItemResult;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -47,10 +46,7 @@ public class CartItemController {
     @PostMapping("/items")
     @PreAuthorize("hasAuthority('USER')")
     public ApiResponse<Void> addCartItem(@RequestBody List<CartItemAddRequest> request) {
-        List<AddCartItemCommand> command = request.stream().map(
-            item -> item.to()
-        ).toList();
-        cartItemAddUseCase.addCartItem(command);
+        cartItemAddUseCase.addCartItem(request);
         return ApiResponse.ok(null);
     }
 

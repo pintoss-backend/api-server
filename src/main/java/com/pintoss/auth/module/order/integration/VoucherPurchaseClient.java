@@ -1,5 +1,6 @@
 package com.pintoss.auth.module.order.integration;
 
+import com.pintoss.auth.module.order.application.model.PaymentMethodType;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,11 +13,11 @@ public class VoucherPurchaseClient implements VoucherPurchaseService {
 
     private final TcpClient client;
     @Override
-    public PurchaseResponse purchase(String orderId, String transactionId, String mid, Long taxAmount) {
+    public PurchaseResponse purchase(String orderId, String transactionId, String mid, Long taxAmount, PaymentMethodType paymentMethodType) {
         return PurchaseResponse.builder().cardNo(generateRandomString()).build();
 //        try {
 //            String requestHeader = PurchaseRequestBuilder.buildHeader(orderId);
-//            String bodyPlain = PurchaseRequestBuilder.buildBody(orderId,transactionId, mid,taxAmount.toString());
+//            String bodyPlain = PurchaseRequestBuilder.buildBody(orderId,transactionId, mid,taxAmount.toString(), paymentMethodType);
 //
 //            GalaxiaCipher cipher = new Seed();
 //            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
@@ -60,30 +61,30 @@ public class VoucherPurchaseClient implements VoucherPurchaseService {
         int part2 = 10000 + random.nextInt(90000);
         return part1 + "-" + part2;
     }
-//
-//    private PurchaseResponse parsePurchaseResponse(String plain) {
-//        PurchaseResponse res = new PurchaseResponse();
-//        int idx = 0;
-//        res.setResponseCode(plain.substring(idx, idx += 4));
-//        res.setAuthNo(plain.substring(idx, idx += 32).trim());
-//        res.setOpenFlag(plain.substring(idx, idx += 1));
-//        res.setCardNo(plain.substring(idx, idx += 32).trim());
-//        res.setRemainPrice(plain.substring(idx, idx += 8).trim());
-//        res.setItemName(plain.substring(idx, idx += 32).trim());
-//        res.setPrintFlag1(plain.substring(idx, idx += 1));
-//        res.setPrintMsg1(plain.substring(idx, idx += 32).trim());
-//        res.setPrintFlag2(plain.substring(idx, idx += 1));
-//        res.setPrintMsg2(plain.substring(idx, idx += 32).trim());
-//        res.setPrintFlag3(plain.substring(idx, idx += 1));
-//        res.setPrintMsg3(plain.substring(idx, idx += 32).trim());
-//        res.setPrintFlag4(plain.substring(idx, idx += 1));
-//        res.setPrintMsg4(plain.substring(idx, idx += 32).trim());
-//        res.setPrintFlag5(plain.substring(idx, idx += 1));
-//        res.setPrintMsg5(plain.substring(idx, idx += 32).trim());
-//
-//        log.info("[Galaxia 응답] 승인번호: {}, 카드번호: {}, 잔액: {}, 상품명: {}, 응답코드: {}",
-//            res.getAuthNo(), res.getCardNo(), res.getRemainPrice(), res.getItemName(), res.getResponseCode());
-//
-//        return res;
-//    }
+
+    private PurchaseResponse parsePurchaseResponse(String plain) {
+        PurchaseResponse res = new PurchaseResponse();
+        int idx = 0;
+        res.setResponseCode(plain.substring(idx, idx += 4));
+        res.setAuthNo(plain.substring(idx, idx += 32).trim());
+        res.setOpenFlag(plain.substring(idx, idx += 1));
+        res.setCardNo(plain.substring(idx, idx += 32).trim());
+        res.setRemainPrice(plain.substring(idx, idx += 8).trim());
+        res.setItemName(plain.substring(idx, idx += 32).trim());
+        res.setPrintFlag1(plain.substring(idx, idx += 1));
+        res.setPrintMsg1(plain.substring(idx, idx += 32).trim());
+        res.setPrintFlag2(plain.substring(idx, idx += 1));
+        res.setPrintMsg2(plain.substring(idx, idx += 32).trim());
+        res.setPrintFlag3(plain.substring(idx, idx += 1));
+        res.setPrintMsg3(plain.substring(idx, idx += 32).trim());
+        res.setPrintFlag4(plain.substring(idx, idx += 1));
+        res.setPrintMsg4(plain.substring(idx, idx += 32).trim());
+        res.setPrintFlag5(plain.substring(idx, idx += 1));
+        res.setPrintMsg5(plain.substring(idx, idx += 32).trim());
+
+        log.info("[Galaxia 응답] 승인번호: {}, 카드번호: {}, 잔액: {}, 상품명: {}, 응답코드: {}",
+            res.getAuthNo(), res.getCardNo(), res.getRemainPrice(), res.getItemName(), res.getResponseCode());
+
+        return res;
+    }
 }
