@@ -25,6 +25,8 @@ public class PaymentController {
     * */
     @PostMapping(value = "/callback", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ApiResponse<String> handlePaymentCallback(@ModelAttribute PaymentCallbackRequest request) {
+        System.out.println(request.getORDER_ID());
+        System.out.println(request.getMESSAGE());
         purchaseUseCase.purchase(request.toPurchaseCommand());
 
         return ApiResponse.ok(null);

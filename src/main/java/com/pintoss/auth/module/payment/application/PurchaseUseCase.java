@@ -37,6 +37,7 @@ public class PurchaseUseCase {
         if (command.getMessage() == null || command.getMessage().isEmpty()) {
             payment.fail();
         }
+        System.out.println(command.getMessage());
         PaymentApprovalResponse approvalResponse = paymentApprovalService.approval(command.getServiceCode(),
             command.getOrderNo(), command.getMessage());
 

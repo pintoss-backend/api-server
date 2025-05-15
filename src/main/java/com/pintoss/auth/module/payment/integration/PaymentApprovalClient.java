@@ -25,7 +25,7 @@ public class PaymentApprovalClient implements PaymentApprovalService {
             GalaxiaCipher cipher = new Seed();
             cipher.setKey(configInfo.getKey().getBytes("EUC-KR"));
             cipher.setIV(configInfo.getIv().getBytes("EUC-KR"));
-
+            System.out.println(orderNo);
             // 1. message 문자열을 EUC-KR로 인코딩하여 바이트 배열로 반환한다.
             byte[] rawBytes = message.getBytes("EUC-KR");
             // 2. 전문 길이 필드 (4바이트)를 제외한 나머지 바이트 배열을 생성한다.
