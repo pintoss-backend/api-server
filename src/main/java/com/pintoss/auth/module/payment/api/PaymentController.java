@@ -24,11 +24,11 @@ public class PaymentController {
      * @param request 결제 콜백 요청 데이터
     * */
     @PostMapping(value = "/callback", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ApiResponse<String> handlePaymentCallback(@ModelAttribute PaymentCallbackRequest request) {
+    public ApiResponse<PaymentResponse> handlePaymentCallback(@ModelAttribute PaymentCallbackRequest request) {
         System.out.println(request.getORDER_ID());
         System.out.println(request.getMESSAGE());
         purchaseUseCase.purchase(request.toPurchaseCommand());
 
-        return ApiResponse.ok(null);
+        return ApiResponse.ok(PaymentResponse.of(request.getORDER_ID()));
     }
 }
