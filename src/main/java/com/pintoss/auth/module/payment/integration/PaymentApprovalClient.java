@@ -8,6 +8,9 @@ import com.galaxia.api.merchant.Message;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.module.payment.application.flow.PaymentApprovalService;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +21,22 @@ public class PaymentApprovalClient implements PaymentApprovalService {
     @Override
     public PaymentApprovalResponse approval(String serviceCode, String orderNo, String message) {
         try {
-            String configPath = getClass().getClassLoader().getResource("config.ini").getPath();
+            // 1. 리소스에서 config.ini InputStream으로 읽기
+            InputStream configInputStream = getClass().getClassLoader().getResourceAsStream("config.ini");
+            if (configInputStream == null) {
+                throw new IllegalStateException("config.ini not found in classpath");
+            }
 
+            // 2. 임시 파일로 복사 (ServiceBroker는 실제 경로 필요)
+            File tempConfigFile = File.createTempFile("config", ".ini");
+            tempConfigFile.deleteOnExit(); // JVM 종료 시 삭제
+            try (FileOutputStream out = new FileOutputStream(tempConfigFile)) {
+                configInputStream.transferTo(out);
+            }
+
+            String configPath = tempConfigFile.getAbsolutePath();
+//            String configPath = getClass().getClassLoader().getResource("config.ini").getPath();
+//
             ConfigInfo configInfo = new ConfigInfo(configPath, serviceCode);
             // TODO : 서비스 코드에 따라 휴대폰 결제인지, 신용카드 결제인지 확인한다.
             GalaxiaCipher cipher = new Seed();
