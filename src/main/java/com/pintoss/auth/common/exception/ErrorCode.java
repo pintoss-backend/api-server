@@ -82,7 +82,8 @@ public enum ErrorCode {
     GMAIL_API_FORBIDDEN("GMAIL_5003","Gmail API 접근이 금지되었습니다."),
     GMAIL_API_BAD_REQUEST("GMAIL_5004", "Gmail API 잘못된 요청입니다."),
     GMAIL_API_CALL_FAILED("GMAIL_5005", "Gmail API 호출 실패했습니다."),
-    GMAIL_API_NETWORK_ERROR("GMAIL_5006", "Gmail API 네트워크 오류입니다.");
+    GMAIL_API_NETWORK_ERROR("GMAIL_5006", "Gmail API 네트워크 오류입니다."),
+    GMAIL_API_AUTHENTICATION_FAILED("GMAIL_5007","Gmail 서비스 계정 JSON 파일 로드 실패입니다." );
 
     private final String code;
     private final String message;

@@ -1,8 +1,14 @@
 package com.pintoss.auth.module.user.infra.mail;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
+import com.google.auth.http.HttpCredentialsAdapter;
+import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.nimbusds.openid.connect.sdk.assurance.evidences.attachment.Attachment;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
@@ -19,26 +25,64 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Getter
-@AllArgsConstructor
 @Component
 public class GmailClient {
 
-    private final String serviceKey="asd";
-    private final String accountEmail="asd";
-    private final Gmail gmail=null;
+    private final String APPLICATION_NAME ;
+    private final String SENDER_EMAIL_ADDRESS ;
+    private final String SERVICE_ACCOUNT_KEY_FILE ;
+    private final List<String> OAUTH_SCOPES;
+    private final Gmail gmail;
 
-//    public GmailClient(GmailApiProperties gmailApiProperties) {
-//        this.serviceKey = gmailApiProperties.getServiceKey();
-//        this.accountEmail = gmailApiProperties.getAccountEmail();
-//        this.gmail = gmailApiProperties.getGmail();
-//    }
+
+    public GmailClient(GmailApiProperties gmailApiProperties) {
+        this.APPLICATION_NAME = gmailApiProperties.getApplicationName();
+        this.SENDER_EMAIL_ADDRESS = gmailApiProperties.getUserEmail();
+        this.SERVICE_ACCOUNT_KEY_FILE = gmailApiProperties.getServiceAccountKeys();
+        this.OAUTH_SCOPES = gmailApiProperties.getOauthScopes();
+        this.gmail = initializeGmail();
+    }
+
+    private Gmail initializeGmail() {
+        HttpTransport httpTransport = new NetHttpTransport();
+        JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+
+        ServiceAccountCredentials credential = null;
+
+        try {
+            credential = ServiceAccountCredentials.fromStream(
+                new ClassPathResource(SERVICE_ACCOUNT_KEY_FILE).getInputStream()
+            );
+        } catch (IOException e) {
+            log.error("[Gmail API 인증서 로드 실패] message={}, class={}, line={}",
+                e.getMessage(),
+                e.getStackTrace()[0].getClassName(),
+                e.getStackTrace()[0].getLineNumber()
+            );
+            throw new BadRequestException(ErrorCode.GMAIL_API_AUTHENTICATION_FAILED);
+        }
+        try {
+            credential = (ServiceAccountCredentials) credential.createScoped(OAUTH_SCOPES).createDelegated(SENDER_EMAIL_ADDRESS);
+        } catch (Exception e){
+            log.error("[Gmail API 인증서 위임 실패] message={}, class={}, line={}",
+                e.getMessage(),
+                e.getStackTrace()[0].getClassName(),
+                e.getStackTrace()[0].getLineNumber()
+            );
+            throw new BadRequestException(ErrorCode.GMAIL_API_AUTHENTICATION_FAILED);
+        }
+
+        return new Gmail.Builder(httpTransport, jsonFactory, new HttpCredentialsAdapter(credential))
+            .setApplicationName(APPLICATION_NAME)
+            .build();
+    }
 
     public void send(SendRequest request) {
         try {

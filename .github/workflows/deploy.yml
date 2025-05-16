@@ -19,6 +19,12 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Decode Gmail Credentials and create noreply.json
+        env:
+          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
+        run: |
+          mkdir -p src/main/resources
+          echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
 
 #      - name: Set Application Properties
 #        run: |

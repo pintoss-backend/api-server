@@ -14,7 +14,7 @@ public class GmailApiProperties {
 
     private String applicationName;
     private String userEmail;
-    private List<String> serviceAccountKeys;
+    private String serviceAccountKeys;
     private List<String> oauthScopes;
 
 }

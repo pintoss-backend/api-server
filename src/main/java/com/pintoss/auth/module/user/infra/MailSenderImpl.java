@@ -20,7 +20,7 @@ public class MailSenderImpl implements MailSender {
                 .subject("제목")
                 .content("본문")
                 .build();
-//        gmailClient.send();
+        gmailClient.send(request);
         System.out.println("Sending email to: " + to);
         System.out.println("Subject: " + "제목");
         System.out.println("Body: " + "본문");
