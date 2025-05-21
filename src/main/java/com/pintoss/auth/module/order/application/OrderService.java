@@ -1,5 +1,6 @@
 package com.pintoss.auth.module.order.application;
 
+import com.pintoss.auth.module.order.application.flow.OrderItemPurchaseResponseAdder;
 import com.pintoss.auth.module.order.application.flow.OrderReader;
 import com.pintoss.auth.module.order.application.model.Order;
 import com.pintoss.auth.module.order.application.model.OrderItem;
@@ -17,6 +18,7 @@ public class OrderService {
 
     private final OrderReader orderReader;
     private final VoucherPurchaseClient voucherPurchaseClient;
+    private final OrderItemPurchaseResponseAdder orderItemPurchaseResponseAdder;
 
     public void markAsPaid(String orderNo) {
         // 주문 번호로 주문을 조회
@@ -43,13 +45,14 @@ public class OrderService {
                 "1104501710200000"
             );
             orderItem.assignPinNum(purchaseResponse.getCardNo());
-            OrderItemPurchaseResponse.create(
+            OrderItemPurchaseResponse orderItemPurchaseResponse = OrderItemPurchaseResponse.create(
                 orderItem.getId(),
                 purchaseResponse.getApprovalCode(),
                 purchaseResponse.getRemainPrice(),
                 purchaseResponse.getItemName()
             );
-        order.issued();
+            orderItemPurchaseResponseAdder.add(orderItemPurchaseResponse);
         }
+        order.issued();
     }
 }
