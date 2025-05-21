@@ -2,6 +2,7 @@ package com.pintoss.auth.module.order.application.model;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -116,14 +117,22 @@ public class Order {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void paymentSuccess() {
-        if(this.status == OrderStatus.CANCELED) {
-            throw new BadRequestException(ErrorCode.ORDER_ALREADY_CANCELED);
-        }
-        this.status = OrderStatus.COMPLETED;
-    }
-
     public void issued() {
         this.status = OrderStatus.ISSUED;
+    }
+
+    public void markAsPaid() {
+        if (this.status == OrderStatus.PAID) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_PAID);
+        } else if (this.status == OrderStatus.CANCELED) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_CANCELED);
+        } else if (this.status == OrderStatus.ISSUED) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_ISSUED);
+        }
+        this.status = OrderStatus.PAID;
+        this.updatedAt = LocalDateTime.now();
+        for (OrderItem orderItem : orderItems) {
+            orderItem.issueProcessing();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.order.integration;
 
-import com.pintoss.auth.module.order.application.model.PaymentMethodType;
+import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,10 +20,10 @@ public class PurchaseRequestBuilder {
         return sb.toString(); // 98 bytes
     }
 
-    public static String buildBody(String orderId, String transId, String mid, String amount, PaymentMethodType paymentMethodType) {
+    public static String buildBody(String orderId, String transId, String mid, String amount, PaymentMethodType paymentMethodType, String salePrice, String productCode) {
         StringBuilder sb = new StringBuilder();
-        sb.append(fixed("1104501710200000", 48));            // ITEM_CODE
-        sb.append(fixed(amount, 8));                   // SALE_PRICE
+        sb.append(fixed(productCode, 48));            // ITEM_CODE
+        sb.append(fixed(salePrice, 8));                   // SALE_PRICE
         sb.append(fixed("", 8));                        // SETTLE_DAY
         sb.append(fixed("01020517426", 12));            // BUY_HPNO
         sb.append(fixed("01020517426", 12));                       // HPNO

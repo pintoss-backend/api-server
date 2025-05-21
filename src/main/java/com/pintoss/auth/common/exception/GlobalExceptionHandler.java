@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
             e.getMessage(),
             timestamp
         );
-        e.printStackTrace();
+
         log.error(
             "[INTERNAL_SERVER_ERROR] errorCode={}, exception={}, message={}, path={}, method={}, time={}",
             ErrorCode.INTERNAL_SERVER_ERROR,
@@ -50,8 +50,7 @@ public class GlobalExceptionHandler {
             e.getMessage(),
             request.getRequestURI(),
             request.getMethod(),
-            DateTimeUtils.formatKorean(timestamp),
-            e // 스택트레이스 포함
+            DateTimeUtils.formatKorean(timestamp)
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -111,7 +110,6 @@ public class GlobalExceptionHandler {
             timestamp
         );
         log.error(e.getMessage());
-        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }
 
@@ -142,7 +140,6 @@ public class GlobalExceptionHandler {
             LocalDateTime.now()
         );
         log.error(e.getMessage());
-        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }
 
@@ -161,7 +158,6 @@ public class GlobalExceptionHandler {
             errors
         );
         log.error(e.getMessage());
-        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = {ConstraintViolationException.class})
@@ -178,7 +174,6 @@ public class GlobalExceptionHandler {
             errors
         );
         log.error(e.getMessage());
-        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -191,7 +186,6 @@ public class GlobalExceptionHandler {
             LocalDateTime.now()
         );
         log.error(e.getMessage());
-        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = {BadCredentialsException.class})
@@ -203,7 +197,6 @@ public class GlobalExceptionHandler {
             LocalDateTime.now()
         );
         log.error(e.getMessage());
-        e.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -229,7 +222,6 @@ public class GlobalExceptionHandler {
         );
 
         log.error(e.getMessage());
-        e.printStackTrace();
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }

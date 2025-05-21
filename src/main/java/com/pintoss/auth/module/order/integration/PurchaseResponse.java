@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class PurchaseResponse {
     private String responseCode;
-    private String authNo;
+    private String approvalCode;
     private String openFlag;
     private String cardNo;
     private String remainPrice;

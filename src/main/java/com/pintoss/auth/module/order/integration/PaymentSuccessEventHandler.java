@@ -1,11 +1,11 @@
 package com.pintoss.auth.module.order.integration;
 
 import com.pintoss.auth.common.event.PaymentSuccessedEvent;
-import com.pintoss.auth.module.order.application.flow.OrderReader;
-import com.pintoss.auth.module.order.application.model.Order;
-import com.pintoss.auth.module.order.application.model.OrderItem;
+import com.pintoss.auth.common.event.VoucherPurchaseEvent;
+import com.pintoss.auth.module.order.application.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -14,22 +14,22 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PaymentSuccessEventHandler {
 
-    private final OrderReader orderReader;
-    private final VoucherPurchaseService voucherPurchaseService;
+    private final OrderService orderService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @EventListener
     public void handlePaymentCompleted(PaymentSuccessedEvent event) {
-        // Handle the payment completion logic here
-        log.info("Payment completed for order ID: {} at {}", event.getOrderNo(), event.getCompletedAt());
-        Order order = orderReader.read(event.getOrderNo());
-        order.paymentSuccess();
+        orderService.markAsPaid(event.getOrderNo());
 
-        for(OrderItem orderItem: order.getOrderItems()) {
-            PurchaseResponse purchase = voucherPurchaseService.purchase(order.getOrderNo(),
-                event.getTransactionId(), event.getMId(), event.getAmount(), event.getPaymentMethodType());
-            orderItem.assignPinNum(purchase.getCardNo());
-            orderItem.issued();
-        }
-        order.issued();
+        VoucherPurchaseEvent voucherPurchaseEvent = new VoucherPurchaseEvent(
+            event.getOrderNo(),
+            event.getTransactionId(),
+            event.getMId(),
+            event.getAmount(),
+            event.getPaymentMethodType()
+        );
+        eventPublisher.publishEvent(voucherPurchaseEvent);
+        log.info("[주문 결제 완료] orderNo: {}, transactionId: {}, mId: {}, amount: {}, paymentMethodType: {}",
+            event.getOrderNo(), event.getTransactionId(), event.getMId(), event.getAmount(), event.getPaymentMethodType());
     }
 }

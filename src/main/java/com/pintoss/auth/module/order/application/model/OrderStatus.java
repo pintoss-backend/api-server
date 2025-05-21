@@ -3,7 +3,7 @@ package com.pintoss.auth.module.order.application.model;
 public enum OrderStatus {
     PENDING("주문 접수"),      // 주문 접수 (결제 전)
     PROCESSING("결제 진행"),   // 결제 진행 중
-    COMPLETED("결제 완료"),    // 결제 완료 (주문 확정)
+    PAID("결제 완료"),    // 결제 완료 (주문 확정)
     CANCELED("주문 취소"),     // 주문 취소 (결제 전 취소)
     REFUNDED("결제 취소"),
     ISSUED("상품권 발급 완료");      // 결제 완료 후 취소 (환불)

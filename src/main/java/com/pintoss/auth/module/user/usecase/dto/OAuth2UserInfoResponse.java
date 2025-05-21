@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.user.usecase.dto;
 
-import com.pintoss.auth.common.external.kakao.KakaoUserInfoResponse;
-import com.pintoss.auth.common.external.naver.NaverUserInfoResponse;
+import com.pintoss.auth.common.client.kakao.KakaoUserInfoResponse;
+import com.pintoss.auth.common.client.naver.NaverUserInfoResponse;
 import lombok.Getter;
 
 @Getter

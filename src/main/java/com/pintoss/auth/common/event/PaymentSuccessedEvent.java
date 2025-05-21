@@ -1,6 +1,6 @@
 package com.pintoss.auth.common.event;
 
-import com.pintoss.auth.module.order.application.model.PaymentMethodType;
+import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

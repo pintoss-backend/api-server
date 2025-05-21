@@ -1,8 +1,8 @@
 package com.pintoss.auth.module.payment.store;
 
-import com.pintoss.auth.module.order.application.model.PaymentMethodType;
-import com.pintoss.auth.module.payment.application.model.Payment;
-import com.pintoss.auth.module.payment.application.model.PaymentStatus;
+import com.pintoss.auth.module.payment.application.PaymentMethodType;
+import com.pintoss.auth.module.payment.domain.PaymentDomain;
+import com.pintoss.auth.module.payment.domain.PaymentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,12 +25,10 @@ public class PaymentEntity {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String mid;
-    private String serviceId;
     private String serviceCode;
     private String orderNo;
     private LocalDateTime orderDate;
     private String transactionId;
-    private String authNumber;
     private long authAmount;
     private LocalDateTime authDate;
     @Enumerated(EnumType.STRING)
@@ -39,29 +37,25 @@ public class PaymentEntity {
     private PaymentMethodType paymentMethodType;
 
     @Builder
-    public PaymentEntity(String mid, String serviceId, String serviceCode, String orderNo, LocalDateTime orderDate, String transactionId, String authNumber, long authAmount, LocalDateTime authDate, PaymentStatus status, PaymentMethodType paymentMethodType) {
+    public PaymentEntity(String mid, String serviceCode, String orderNo, LocalDateTime orderDate, String transactionId, long authAmount, LocalDateTime authDate, PaymentStatus status, PaymentMethodType paymentMethodType) {
         this.mid = mid;
-        this.serviceId = serviceId;
         this.serviceCode = serviceCode;
         this.orderNo = orderNo;
         this.orderDate = orderDate;
         this.transactionId = transactionId;
-        this.authNumber = authNumber;
         this.authAmount = authAmount;
         this.authDate = authDate;
         this.status = status;
         this.paymentMethodType = paymentMethodType;
     }
 
-    public static PaymentEntity of(Payment payment) {
+    public static PaymentEntity of(PaymentDomain payment) {
         return PaymentEntity.builder()
-            .mid(payment.getMid())
-            .serviceId(payment.getServiceId())
+            .mid(payment.getServiceId())
             .serviceCode(payment.getServiceCode())
             .orderNo(payment.getOrderNo())
             .orderDate(payment.getOrderDate())
             .transactionId(payment.getTransactionId())
-            .authNumber(payment.getAuthNumber())
             .authAmount(payment.getAuthAmount())
             .authDate(payment.getAuthDate())
             .status(payment.getStatus())

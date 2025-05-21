@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.payment.api;
 
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.payment.application.PurchaseUseCase;
+import com.pintoss.auth.module.payment.application.PaymentService;
 import com.pintoss.auth.module.payment.integration.PaymentCallbackRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/payments")
 public class PaymentController {
-    private final PurchaseUseCase purchaseUseCase;
+    private final PaymentService paymentService;
 
     /**
      * 결제 승인 콜백을 처리한다.
@@ -28,9 +28,7 @@ public class PaymentController {
     @PostMapping(value = "/callback", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ApiResponse<PaymentResponse> handlePaymentCallback(@ModelAttribute PaymentCallbackRequest request, HttpServletResponse response)
         throws IOException {
-        System.out.println(request.getORDER_ID());
-        System.out.println(request.getMESSAGE());
-        purchaseUseCase.purchase(request.toPurchaseCommand());
+        paymentService.purchase(request.toPurchaseCommand());
         response.sendRedirect("https://pin-toss.com/payments/result?isSuccess=true&orderId="+request.getORDER_ID());
         return ApiResponse.ok(PaymentResponse.of(request.getORDER_ID()));
     }

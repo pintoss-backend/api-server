@@ -7,7 +7,7 @@ import com.pintoss.auth.module.order.application.flow.OrderValidator;
 import com.pintoss.auth.module.order.application.model.Order;
 import com.pintoss.auth.module.order.application.model.OrderItem;
 import com.pintoss.auth.module.order.application.model.OrderItemRequest;
-import com.pintoss.auth.module.order.application.model.PaymentMethodType;
+import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import com.pintoss.auth.module.voucher.model.Voucher;
 import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import java.util.List;

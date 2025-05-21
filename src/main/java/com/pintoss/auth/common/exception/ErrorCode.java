@@ -22,6 +22,10 @@ public enum ErrorCode {
     PAYMENT_APPROVAL_FAILED("40011", "결제 승인이 거절되었습니다."),
     PAYMENT_APPROVED_AMOUNT_MISMATCH("40012", "결제 승인 금액이 주문 금액과 일치하지 않습니다."),
     ORDER_ALREADY_CANCELED("40013", "이미 취소된 주문입니다."),
+    ORDER_ALREADY_PAID("40014", "이미 결제된 주문입니다."),
+    ORDER_ALREADY_REFUNDED("40015", "이미 환불된 주문입니다."),
+    ORDER_ALREADY_ISSUED("40016", "이미 발급된 주문입니다."),
+    ORDER_ITEM_ALREADY_ISSUED("40017", "이미 발급된 주문 아이템입니다."),
 
     // 401 Unauthorized
     // AUTH 관련
@@ -40,7 +44,8 @@ public enum ErrorCode {
     // 404 Not Found
     RESOURCE_NOT_FOUND("4041", "해당 리소스를 찾을 수 없습니다."),
     USER_NOT_FOUND("4042", "해당 사용자를 찾을 수 없습니다."),
-    NOT_FOUND_CART_ITEM("4042","존재하지 않는 장바구니 목록입니다."),
+    NOT_FOUND_CART_ITEM("4043","존재하지 않는 장바구니 목록입니다."),
+    ORDER_NOT_FOUND("4044", "해당 주문을 찾을 수 없습니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED("4051", "허용되지 않은 메서드입니다."),
@@ -83,7 +88,8 @@ public enum ErrorCode {
     GMAIL_API_BAD_REQUEST("GMAIL_5004", "Gmail API 잘못된 요청입니다."),
     GMAIL_API_CALL_FAILED("GMAIL_5005", "Gmail API 호출 실패했습니다."),
     GMAIL_API_NETWORK_ERROR("GMAIL_5006", "Gmail API 네트워크 오류입니다."),
-    GMAIL_API_AUTHENTICATION_FAILED("GMAIL_5007","Gmail 서비스 계정 JSON 파일 로드 실패입니다." );
+    GMAIL_API_AUTHENTICATION_FAILED("GMAIL_5007","Gmail 서비스 계정 JSON 파일 로드 실패입니다." ),
+    BILLGATE_CONFIG_FILE_NOT_FOUND("BILLGATE_5008", "빌게이트 설정 파일(config.ini)을 찾을 수 없습니다."), ;
 
     private final String code;
     private final String message;

@@ -3,6 +3,7 @@ package com.pintoss.auth.module.order.application.model;
 public enum OrderItemStatus {
 
     PENDING("발급 대기"),
+    PROCESSING("발급 진행 중"),
     ISSUED("발급 완료");
     private final String description;
 

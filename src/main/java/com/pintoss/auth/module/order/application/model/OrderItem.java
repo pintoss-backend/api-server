@@ -1,5 +1,6 @@
 package com.pintoss.auth.module.order.application.model;
 
+import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -66,9 +67,17 @@ public class OrderItem {
 
     public void assignPinNum(String pinNum) {
         this.pinNum = pinNum;
+        issued();
     }
 
     public void issued() {
         this.status = OrderItemStatus.ISSUED;
+    }
+
+    public void issueProcessing() {
+        if (this.status == OrderItemStatus.ISSUED) {
+            throw new BadRequestException(ErrorCode.ORDER_ITEM_ALREADY_ISSUED);
+        }
+        this.status = OrderItemStatus.PROCESSING;
     }
 }

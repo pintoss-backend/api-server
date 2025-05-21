@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.payment.store;
 
-import com.pintoss.auth.module.payment.application.flow.PaymentRepository;
+import com.pintoss.auth.module.payment.application.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
