@@ -2,7 +2,11 @@ package com.pintoss.auth.module.user.usecase.service;
 
 public interface MailSender {
 
-    // 이 메서드는 비밀번호 인증코드르 보내기 위한 메서드인데 메서드 네이밍을 직관적으로 수정해줘
-    void sendVerificationCodeForPasswordReset(String to);
+    /**
+     * 임시 비밀번호를 이메일로 전송합니다.
+     * @param to 수신자 이메일 주소
+     * @param temporaryPassword 생성된 임시 비밀번호
+     */
+    void sendTemporaryPassword(String to, String temporaryPassword);
 
 }

@@ -1,5 +1,6 @@
 package com.pintoss.auth.module.user.infra.persistence;
 
+import com.pintoss.auth.module.user.model.LoginType;
 import com.pintoss.auth.module.user.model.Phone;
 import com.pintoss.auth.module.user.model.User;
 import com.pintoss.auth.module.user.usecase.service.UserRepository;
@@ -61,4 +62,9 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+    @Override
+    public Optional<User> findByEmailAndNameAndPhoneAndLoginType(String email, String name,
+        Phone phone, LoginType loginType) {
+        return jpaRepository.findByEmailAndNameAndPhoneAndLoginType(email, name, phone, loginType);
+    }
 }

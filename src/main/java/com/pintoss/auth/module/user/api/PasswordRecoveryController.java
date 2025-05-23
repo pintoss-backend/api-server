@@ -1,9 +1,8 @@
 package com.pintoss.auth.module.user.api;
 
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.user.api.dto.SendCodeRequest;
-import com.pintoss.auth.module.user.usecase.SendCodeUseCase;
-import com.pintoss.auth.module.user.usecase.VerifyCodeUseCase;
+import com.pintoss.auth.module.user.api.dto.PasswordResetRequest;
+import com.pintoss.auth.module.user.usecase.PasswordResetUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,26 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PasswordRecoveryController {
 
-    private final VerifyCodeUseCase verifyCodeUseCase;
-    private final SendCodeUseCase sendCodeUseCase;
+    private final PasswordResetUseCase passwordResetUseCase;
 
-    @PostMapping("/verify-user")
-    public ApiResponse<Void> verifyUser(){
-        return ApiResponse.ok(null);
-    }
-    @PostMapping("/send-code")
-    public ApiResponse<Void> sendCode(@RequestBody SendCodeRequest request){
-        sendCodeUseCase.sendCode(request.getEmail(), request.getName(), request.getPhone());
-        return ApiResponse.ok(null);
-    }
-    @PostMapping("/verify-code")
-    public ApiResponse<Void> verifyCode(){
-        verifyCodeUseCase.verifyCode();
-        return ApiResponse.ok(null);
-    }
     @PostMapping("/reset")
-    public ApiResponse<Void> passwordReset(){
+    public ApiResponse<Void> passwordReset(@RequestBody PasswordResetRequest req){
+        passwordResetUseCase.passwordReset(req.getEmail(), req.getName(), req.getPhone());
         return ApiResponse.ok(null);
     }
+
+
 
 }

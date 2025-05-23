@@ -1,6 +1,7 @@
 package com.pintoss.auth.module.user.infra.persistence;
 
 
+import com.pintoss.auth.module.user.model.LoginType;
 import com.pintoss.auth.module.user.model.Phone;
 import com.pintoss.auth.module.user.model.User;
 import java.util.Optional;
@@ -17,4 +18,6 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
     Optional<User> findByNameAndPhone(String name, Phone phone);
 
     Optional<User> findByEmailAndNameAndPhone(String email, String name, Phone phone);
+
+    Optional<User> findByEmailAndNameAndPhoneAndLoginType(String email, String name, Phone phone, LoginType loginType);
 }

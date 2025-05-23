@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.user.usecase.service;
 
-import com.nimbusds.openid.connect.sdk.claims.UserInfo;
+import com.pintoss.auth.module.user.model.LoginType;
 import com.pintoss.auth.module.user.model.Phone;
 import com.pintoss.auth.module.user.model.User;
 import java.util.Optional;
@@ -28,4 +28,6 @@ public interface UserRepository {
     Page<User> getUsers(Pageable pageable);
 
     Optional<User> findByEmailAndNameAndPhone(String email, String name, Phone phone);
+
+    Optional<User> findByEmailAndNameAndPhoneAndLoginType(String email, String name, Phone phone, LoginType loginType);
 }

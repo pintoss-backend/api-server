@@ -68,4 +68,12 @@ public class User {
             throw new BadRequestException(ErrorCode.DUPLICATE_RESOURCE);
         };
     }
+
+    public void resetPassword(String password) {
+        this.password = password;
+    }
+
+    public void updatePassword(String encodedNewPassword) {
+        this.password = encodedNewPassword;
+    }
 }

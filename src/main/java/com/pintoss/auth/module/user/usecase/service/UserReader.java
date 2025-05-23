@@ -2,6 +2,7 @@ package com.pintoss.auth.module.user.usecase.service;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.module.user.model.LoginType;
 import com.pintoss.auth.module.user.model.Phone;
 import com.pintoss.auth.module.user.model.User;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,12 @@ public class UserReader {
 
     public User readByNameAndPhone(String name, Phone phone) {
         return userRepository.findByNameAndPhone(name, phone)
+            .orElseThrow(() -> new BadRequestException(ErrorCode.USER_NOT_FOUND));
+    }
+
+    public User readByEmailAndNameAndPhoneAndLoginType(String email, String name, Phone phone,
+        LoginType loginType) {
+        return userRepository.findByEmailAndNameAndPhoneAndLoginType(email, name, phone, loginType)
             .orElseThrow(() -> new BadRequestException(ErrorCode.USER_NOT_FOUND));
     }
 }

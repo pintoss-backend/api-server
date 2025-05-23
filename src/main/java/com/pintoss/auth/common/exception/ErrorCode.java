@@ -26,6 +26,7 @@ public enum ErrorCode {
     ORDER_ALREADY_REFUNDED("40015", "이미 환불된 주문입니다."),
     ORDER_ALREADY_ISSUED("40016", "이미 발급된 주문입니다."),
     ORDER_ITEM_ALREADY_ISSUED("40017", "이미 발급된 주문 아이템입니다."),
+    PASSWORD_NOT_MATCH("4018","현재 비밀번호가 일치하지 않습니다." ),
 
     // 401 Unauthorized
     // AUTH 관련
@@ -89,7 +90,7 @@ public enum ErrorCode {
     GMAIL_API_CALL_FAILED("GMAIL_5005", "Gmail API 호출 실패했습니다."),
     GMAIL_API_NETWORK_ERROR("GMAIL_5006", "Gmail API 네트워크 오류입니다."),
     GMAIL_API_AUTHENTICATION_FAILED("GMAIL_5007","Gmail 서비스 계정 JSON 파일 로드 실패입니다." ),
-    BILLGATE_CONFIG_FILE_NOT_FOUND("BILLGATE_5008", "빌게이트 설정 파일(config.ini)을 찾을 수 없습니다."), ;
+    BILLGATE_CONFIG_FILE_NOT_FOUND("BILLGATE_5008", "빌게이트 설정 파일(config.ini)을 찾을 수 없습니다.");
 
     private final String code;
     private final String message;
