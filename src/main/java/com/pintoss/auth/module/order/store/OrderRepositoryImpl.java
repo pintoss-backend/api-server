@@ -29,7 +29,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Optional<OrderDetail> findDetailByOrderId(Long orderId) {
-        return Optional.empty();
+        return orderQueryDslRepository.findDetailByOrderId(orderId);
     }
 
     @Override

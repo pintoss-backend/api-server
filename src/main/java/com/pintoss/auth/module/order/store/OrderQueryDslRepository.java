@@ -25,7 +25,7 @@ public class OrderQueryDslRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public Optional<OrderDetail> getOrderDetail(Long orderId) {
+    public Optional<OrderDetail> findDetailByOrderId(Long orderId) {
 
         List<Tuple> results = queryFactory
             .select(
@@ -79,23 +79,6 @@ public class OrderQueryDslRepository {
             }
         }
         return Optional.of(orderDetail);
-    }
-
-    public List<OrderSearchResult> getMyOrderList(Long userId) {
-        return queryFactory.select(
-            Projections.constructor(OrderSearchResult.class,
-                order.id.as("orderId"),
-                order.orderNo.as("orderNo"),
-                order.status,
-                paymentEntity.paymentMethodType,
-                order.createdAt.as("orderDate"),
-                order.totalPrice.as("price")
-            )
-        )
-            .from(order)
-            .leftJoin(paymentEntity).on(paymentEntity.id.eq(order.paymentId))
-            .where(order.ordererId.eq(userId))
-            .fetch();
     }
 
     public List<OrderSearchResult> searchByUserIdAndWithCondition(Long userId, OrderPageCommand command) {
