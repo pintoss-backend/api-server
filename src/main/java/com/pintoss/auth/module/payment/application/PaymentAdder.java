@@ -23,6 +23,7 @@ public class PaymentAdder {
 
         if (payment.getStatus() == PaymentStatus.SUCCESS) {
             eventPublisher.publishEvent(new PaymentSuccessedEvent(
+                paymentEntity.getId(),
                 payment.getOrderNo(),
                 payment.getTransactionId(),
                 payment.getServiceId(),
@@ -32,6 +33,7 @@ public class PaymentAdder {
             ));
         } else if (payment.getStatus() == PaymentStatus.FAILED) {
             eventPublisher.publishEvent(new PaymentFailedEvent(
+                paymentEntity.getId(),
                 payment.getOrderNo()
             ));
         }

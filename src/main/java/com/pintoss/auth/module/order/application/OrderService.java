@@ -20,19 +20,20 @@ public class OrderService {
     private final VoucherPurchaseClient voucherPurchaseClient;
     private final OrderItemPurchaseResponseAdder orderItemPurchaseResponseAdder;
 
-    public void markAsPaid(String orderNo) {
+    @Transactional
+    public void markAsPaid(String orderNo, Long paymentId) {
         // 주문 번호로 주문을 조회
-        Order order = orderReader.read(orderNo);
+        Order order = orderReader.getByOrderNo(orderNo);
 
         // 주문 상태를 결제 완료로 변경
-        order.markAsPaid();
+        order.markAsPaid(paymentId);
 
         // 추가적인 비즈니스 로직 처리 (예: 알림 전송 등)
     }
 
     @Transactional
     public void assignPinToVoucher(String orderNo, String transId, String mId, PaymentMethodType paymentMethodType) {
-        Order order = orderReader.read(orderNo);
+        Order order = orderReader.getByOrderNo(orderNo);
 
         for (OrderItem orderItem : order.getOrderItems()) {
             PurchaseResponse purchaseResponse = voucherPurchaseClient.purchase(

@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.api.dto;
+package com.pintoss.auth.api;
 
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import com.pintoss.auth.module.order.application.model.OrderItemRequest;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateOrderRequest {
+public class OrderCreateRequest {
 
     @NotNull(message = "결제 방법은 필수 입력 항목입니다.")
     private PaymentMethodType paymentMethod;

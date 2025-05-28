@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.api.dto;
+package com.pintoss.auth.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class CreateOrderResponse {
+public class OrderCreateResponse {
 
     private String serviceId;
 

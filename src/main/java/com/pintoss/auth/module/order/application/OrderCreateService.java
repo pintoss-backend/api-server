@@ -7,7 +7,6 @@ import com.pintoss.auth.module.order.application.flow.OrderValidator;
 import com.pintoss.auth.module.order.application.model.Order;
 import com.pintoss.auth.module.order.application.model.OrderItem;
 import com.pintoss.auth.module.order.application.model.OrderItemRequest;
-import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import com.pintoss.auth.module.voucher.model.Voucher;
 import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import java.util.List;
@@ -17,13 +16,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CreateOrderService {
+public class OrderCreateService {
 
     private final VoucherReader voucherReader;
     private final OrderAdder orderAdder;
     private final OrderValidator orderValidator;
 
-    public Order create(PaymentMethodType paymentMethod, List<OrderItemRequest> orderItemRequest) {
+    public Order create(List<OrderItemRequest> orderItemRequest) {
 
         // 1. 상품권 조회
         List<Voucher> vouchers = voucherReader.readAll(orderItemRequest.stream()
@@ -43,8 +42,7 @@ public class CreateOrderService {
             SecurityContextUtils.getEmail(),
             SecurityContextUtils.getPhone(),
             generateProductName(orderItems),
-            orderItems,
-            paymentMethod
+            orderItems
         );
 
         // 5. 주문 저장

@@ -2,7 +2,6 @@ package com.pintoss.auth.module.order.application.model;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,8 +52,8 @@ public class Order {
     @Column(nullable = false, name = "order_name")
     private String orderName;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentMethodType paymentMethodType;
+    @Column(nullable = true)
+    private Long paymentId;
 
     @OneToMany(
         mappedBy = "order",
@@ -71,14 +70,13 @@ public class Order {
 
     private LocalDateTime updatedAt;
 
-    private Order(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
+    private Order(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems) {
         this.ordererId = ordererId;
         this.ordererName = ordererName;
         this.ordererEmail = ordererEmail;
         this.ordererPhone = ordererPhone;
         this.orderNo = generateOrderNo();
         this.orderName = orderName;
-        this.paymentMethodType = paymentMethodType;
         orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
         this.orderItems = orderItems;
         this.status = OrderStatus.PENDING;
@@ -99,8 +97,8 @@ public class Order {
         orderItem.assignOrder(this);
     }
 
-    public static Order create(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems, PaymentMethodType paymentMethodType) {
-        return new Order(ordererId, ordererName, ordererEmail, ordererPhone, orderName, orderItems, paymentMethodType);
+    public static Order create(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems) {
+        return new Order(ordererId, ordererName, ordererEmail, ordererPhone, orderName, orderItems);
     }
 
     public void verifyTotalPrice(long taxAmount) {
@@ -121,7 +119,7 @@ public class Order {
         this.status = OrderStatus.ISSUED;
     }
 
-    public void markAsPaid() {
+    public void markAsPaid(Long paymentId) {
         if (this.status == OrderStatus.PAID) {
             throw new BadRequestException(ErrorCode.ORDER_ALREADY_PAID);
         } else if (this.status == OrderStatus.CANCELED) {
@@ -129,10 +127,15 @@ public class Order {
         } else if (this.status == OrderStatus.ISSUED) {
             throw new BadRequestException(ErrorCode.ORDER_ALREADY_ISSUED);
         }
+        this.paymentId = paymentId;
         this.status = OrderStatus.PAID;
         this.updatedAt = LocalDateTime.now();
         for (OrderItem orderItem : orderItems) {
             orderItem.issueProcessing();
         }
+    }
+
+    public void assignPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
     }
 }

@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.dto;
+package com.pintoss.auth.common.paging;
 
 import java.util.List;
 import lombok.AllArgsConstructor;

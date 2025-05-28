@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderSummary {
+public class OrderSearchResult {
     private Long orderId;
     private String orderNo;
     private OrderStatus status;

@@ -1,8 +1,7 @@
-package com.pintoss.auth.common.dto;
+package com.pintoss.auth.common.paging;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 
 /*
@@ -16,14 +15,21 @@ import lombok.Data;
         userPage.getTotalPages()
     );
 */
-@Data
-@AllArgsConstructor
+@Getter
 public class PageResponse<T> {
 
-    private List<T> content;
+    private List<T> items;
     private int page;
     private int size;
     private long totalElements;
     private int totalPages;
+
+    public PageResponse(List<T> items, int page, int size, long totalElements) {
+        this.items = items;
+        this.page = page;
+        this.size = size;
+        this.totalElements = totalElements;
+        this.totalPages = (int) Math.ceil((double) totalElements / size);
+    }
 
 }

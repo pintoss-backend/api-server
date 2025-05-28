@@ -19,7 +19,7 @@ public class PaymentService {
 
     @Transactional
     public void purchase(PurchaseCommand command) {
-        Order order = orderReader.read(command.getOrderNo());
+        Order order = orderReader.getByOrderNo(command.getOrderNo());
 
         PaymentApprovalResponse approvalResponse = paymentApprovalService.approval(
             new PaymentApprovalRequest(command.getServiceCode(), command.getOrderNo(), command.getMessage()));

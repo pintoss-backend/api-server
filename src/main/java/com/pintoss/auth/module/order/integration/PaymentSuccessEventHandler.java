@@ -19,7 +19,7 @@ public class PaymentSuccessEventHandler {
 
     @EventListener
     public void handlePaymentCompleted(PaymentSuccessedEvent event) {
-        orderService.markAsPaid(event.getOrderNo());
+        orderService.markAsPaid(event.getOrderNo(), event.getPaymentId());
 
         VoucherPurchaseEvent voucherPurchaseEvent = new VoucherPurchaseEvent(
             event.getOrderNo(),

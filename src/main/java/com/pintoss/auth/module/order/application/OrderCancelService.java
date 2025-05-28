@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CancelOrderService {
+public class OrderCancelService {
 
     private final OrderReader orderReader;
 
@@ -19,7 +19,7 @@ public class CancelOrderService {
      */
     @Transactional
     public void cancel(String orderNo) {
-        Order order = orderReader.read(orderNo);
+        Order order = orderReader.getByOrderNo(orderNo);
 
         order.cancel();
     }

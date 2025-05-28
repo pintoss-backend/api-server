@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class PaymentSuccessedEvent {
+    private final Long paymentId;
     private final String orderNo;
     private final String transactionId;
     private final String mId;
