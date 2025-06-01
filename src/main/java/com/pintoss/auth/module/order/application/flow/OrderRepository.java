@@ -1,9 +1,9 @@
 package com.pintoss.auth.module.order.application.flow;
 
-import com.pintoss.auth.module.order.application.model.OrderPageCommand;
-import com.pintoss.auth.module.order.application.model.Order;
-import com.pintoss.auth.module.order.application.model.OrderDetail;
-import com.pintoss.auth.module.order.application.model.OrderSearchResult;
+import com.pintoss.auth.module.order.domain.OrderPageCommand;
+import com.pintoss.auth.module.order.domain.Order;
+import com.pintoss.auth.module.order.domain.OrderDetail;
+import com.pintoss.auth.module.order.domain.OrderSearchResult;
 import java.util.List;
 import java.util.Optional;
 

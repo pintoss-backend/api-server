@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.payment.application;
 
 import com.pintoss.auth.module.order.application.flow.OrderReader;
-import com.pintoss.auth.module.order.application.model.Order;
+import com.pintoss.auth.module.order.domain.Order;
 import com.pintoss.auth.module.payment.domain.PaymentDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.application.model;
+package com.pintoss.auth.module.order.domain;
 
 public enum OrderSortKey {
 

@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.application.model;
+package com.pintoss.auth.module.order.domain;
 
 import com.pintoss.auth.common.paging.SortDirection;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;

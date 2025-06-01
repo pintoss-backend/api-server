@@ -1,10 +1,11 @@
 package com.pintoss.auth.module.order.store;
 
-import static com.pintoss.auth.module.order.application.model.QOrder.order;
+
+import static com.pintoss.auth.module.order.domain.QOrder.order;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.module.order.application.model.OrderSortKey;
+import com.pintoss.auth.module.order.domain.OrderSortKey;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 

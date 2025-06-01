@@ -6,9 +6,10 @@ import com.pintoss.auth.common.paging.PageResponse;
 import com.pintoss.auth.common.paging.PagedData;
 import com.pintoss.auth.module.order.application.OrderCancelService;
 import com.pintoss.auth.module.order.application.OrderCreateService;
-import com.pintoss.auth.module.order.application.model.Order;
-import com.pintoss.auth.module.order.application.model.OrderDetail;
-import com.pintoss.auth.module.order.application.model.OrderSearchResult;
+import com.pintoss.auth.module.order.application.OrderRefundService;
+import com.pintoss.auth.module.order.domain.Order;
+import com.pintoss.auth.module.order.domain.OrderDetail;
+import com.pintoss.auth.module.order.domain.OrderSearchResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +30,7 @@ public class OrderController {
     private final OrderQueryService orderQueryService;
     private final OrderCreateService orderCreateService;
     private final OrderCancelService orderCancelService;
+    private final OrderRefundService orderRefundService;
 
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/{orderId}")
@@ -69,6 +71,13 @@ public class OrderController {
     @PutMapping("/{orderNo}/cancel")
     public ApiResponse<Void> cancelOrder(@PathVariable("orderNo") String orderNo) {
         orderCancelService.cancel(orderNo);
+        return ApiResponse.ok(null);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @PostMapping("/{orderNo}/refund")
+    public ApiResponse<Void> refundOrder(@PathVariable("orderNo") String orderNo) {
+        orderRefundService.refund(orderNo);
         return ApiResponse.ok(null);
     }
 }

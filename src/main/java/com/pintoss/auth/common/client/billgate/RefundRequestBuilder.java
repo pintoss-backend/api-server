@@ -1,9 +1,9 @@
-package com.pintoss.auth.module.order.integration;
+package com.pintoss.auth.common.client.billgate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CancelRequestBuilder {
+public class RefundRequestBuilder {
 
     public static String buildHeader(String orderId) {
         StringBuilder sb = new StringBuilder();//M2483583

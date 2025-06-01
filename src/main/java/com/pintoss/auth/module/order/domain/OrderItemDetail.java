@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.application.model;
+package com.pintoss.auth.module.order.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

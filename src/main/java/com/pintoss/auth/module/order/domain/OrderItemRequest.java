@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.application.model;
+package com.pintoss.auth.module.order.domain;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

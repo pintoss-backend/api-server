@@ -1,13 +1,13 @@
 package com.pintoss.auth.module.order.store;
 
-import static com.pintoss.auth.module.order.application.model.QOrder.order;
-import static com.pintoss.auth.module.order.application.model.QOrderItem.orderItem;
+import static com.pintoss.auth.module.order.domain.QOrder.order;
+import static com.pintoss.auth.module.order.domain.QOrderItem.orderItem;
 import static com.pintoss.auth.module.payment.store.QPaymentEntity.paymentEntity;
 
-import com.pintoss.auth.module.order.application.model.OrderDetail;
-import com.pintoss.auth.module.order.application.model.OrderItemDetail;
-import com.pintoss.auth.module.order.application.model.OrderPageCommand;
-import com.pintoss.auth.module.order.application.model.OrderSearchResult;
+import com.pintoss.auth.module.order.domain.OrderDetail;
+import com.pintoss.auth.module.order.domain.OrderItemDetail;
+import com.pintoss.auth.module.order.domain.OrderPageCommand;
+import com.pintoss.auth.module.order.domain.OrderSearchResult;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;

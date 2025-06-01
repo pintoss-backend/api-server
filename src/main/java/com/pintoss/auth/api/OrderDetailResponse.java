@@ -1,8 +1,8 @@
 package com.pintoss.auth.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.pintoss.auth.module.order.application.model.OrderItemDetail;
-import com.pintoss.auth.module.order.application.model.OrderStatus;
+import com.pintoss.auth.module.order.domain.OrderItemDetail;
+import com.pintoss.auth.module.order.domain.OrderStatus;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.util.List;

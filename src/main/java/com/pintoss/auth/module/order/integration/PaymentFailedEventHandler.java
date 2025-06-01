@@ -2,7 +2,7 @@ package com.pintoss.auth.module.order.integration;
 
 import com.pintoss.auth.common.event.PaymentFailedEvent;
 import com.pintoss.auth.module.order.application.flow.OrderReader;
-import com.pintoss.auth.module.order.application.model.Order;
+import com.pintoss.auth.module.order.domain.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

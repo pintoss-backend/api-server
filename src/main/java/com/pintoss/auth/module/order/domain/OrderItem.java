@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.application.model;
+package com.pintoss.auth.module.order.domain;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
@@ -95,5 +95,13 @@ public class OrderItem {
         }
         this.status = OrderItemStatus.REFUND_FAIL;
 
+    }
+
+    public boolean isRefunded() {
+        return this.status == OrderItemStatus.REFUNDED;
+    }
+
+    public boolean isRefundFailed() {
+        return this.status == OrderItemStatus.REFUND_FAIL;
     }
 }

@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.application.model;
+package com.pintoss.auth.module.order.domain;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
@@ -137,5 +137,33 @@ public class Order {
 
     public void assignPaymentId(Long paymentId) {
         this.paymentId = paymentId;
+    }
+
+    public void markAsRefunded() {
+        if (this.status != OrderStatus.PAID && this.status != OrderStatus.ISSUED) {
+            throw new BadRequestException(ErrorCode.ORDER_NOT_REFUNDABLE);
+        }
+
+        boolean allRefunded = this.orderItems.stream().allMatch(OrderItem::isRefunded);
+        boolean allFailed = this.orderItems.stream().allMatch(OrderItem::isRefundFailed);
+
+        if (allRefunded) {
+            this.status = OrderStatus.REFUNDED;
+        } else if (allFailed) {
+            this.status = OrderStatus.REFUND_FAILED;
+        } else {
+            this.status = OrderStatus.PARTIAL_REFUNDED;
+        }
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void validateRefundable() {
+        if (this.status == OrderStatus.REFUNDED || this.status == OrderStatus.REFUND_FAILED || this.status == OrderStatus.PARTIAL_REFUNDED) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_REFUNDED);
+        } else if (this.status == OrderStatus.CANCELED) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_CANCELED);
+        } else if (this.status != OrderStatus.PAID && this.status != OrderStatus.ISSUED) {
+            throw new BadRequestException(ErrorCode.ORDER_NOT_REFUNDABLE);
+        }
     }
 }

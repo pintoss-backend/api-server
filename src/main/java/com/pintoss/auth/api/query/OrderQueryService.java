@@ -1,11 +1,11 @@
 package com.pintoss.auth.api.query;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
-import com.pintoss.auth.module.order.application.model.OrderPageCommand;
+import com.pintoss.auth.module.order.domain.OrderPageCommand;
 import com.pintoss.auth.common.paging.PagedData;
 import com.pintoss.auth.module.order.application.flow.OrderReader;
-import com.pintoss.auth.module.order.application.model.OrderDetail;
-import com.pintoss.auth.module.order.application.model.OrderSearchResult;
+import com.pintoss.auth.module.order.domain.OrderDetail;
+import com.pintoss.auth.module.order.domain.OrderSearchResult;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

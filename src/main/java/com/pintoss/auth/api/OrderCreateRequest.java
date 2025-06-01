@@ -1,7 +1,7 @@
 package com.pintoss.auth.api;
 
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
-import com.pintoss.auth.module.order.application.model.OrderItemRequest;
+import com.pintoss.auth.module.order.domain.OrderItemRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

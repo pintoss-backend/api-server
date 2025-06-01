@@ -1,9 +1,8 @@
 package com.pintoss.auth.module.order.application;
 
 import com.pintoss.auth.module.order.application.flow.OrderReader;
-import com.pintoss.auth.module.order.application.model.Order;
-import com.pintoss.auth.module.order.application.model.OrderItem;
-import com.pintoss.auth.module.order.application.model.OrderItemPurchaseResponse;
+import com.pintoss.auth.module.order.domain.Order;
+import com.pintoss.auth.module.order.domain.OrderItem;
 import com.pintoss.auth.module.order.integration.PurchaseResponse;
 import com.pintoss.auth.module.order.integration.VoucherPurchaseClient;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
@@ -44,12 +43,7 @@ public class OrderService {
                 "1104501710200000"
             );
             orderItem.assignPinNum(purchaseResponse.getCardNo());
-            OrderItemPurchaseResponse orderItemPurchaseResponse = OrderItemPurchaseResponse.create(
-                orderItem.getId(),
-                purchaseResponse.getApprovalCode(),
-                purchaseResponse.getRemainPrice(),
-                purchaseResponse.getItemName()
-            );
+
             orderItem.assignApprovalCode(purchaseResponse.getApprovalCode());
         }
         order.issued();
