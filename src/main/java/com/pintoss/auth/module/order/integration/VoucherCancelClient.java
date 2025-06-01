@@ -6,7 +6,6 @@ import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.common.client.billgate.GalaxiaClient;
-import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +16,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class VoucherPurchaseClient{
+public class VoucherCancelClient {
 
     private final GalaxiaClient client;
-    public PurchaseResponse purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
-//        return PurchaseResponse.builder().cardNo(generateRandomString()).build();
+
+    public CancelResponse refund(String orderNo, String approvalNo) {
         try {
-            String requestHeader = PurchaseRequestBuilder.buildHeader(orderNo);
-            String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo,transactionId, mid,salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
+            String requestHeader = CancelRequestBuilder.buildHeader(orderNo);
+            String bodyPlain = CancelRequestBuilder.buildBody(approvalNo);
 
             GalaxiaCipher cipher = new Seed();
             cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
@@ -55,15 +54,15 @@ public class VoucherPurchaseClient{
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
             String plainBody = new String(cleanBytes, "EUC-KR");
             System.out.println("[DEBUG] 복호화 결과:\n" + plainBody);
-            return parsePurchaseResponse(plainBody);
+            return parseCancelResponse(plainBody);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private PurchaseResponse parsePurchaseResponse(String plain) {
-        PurchaseResponse res = new PurchaseResponse();
+    private CancelResponse parseCancelResponse(String plain) {
+        CancelResponse res = new CancelResponse();
         int idx = 0;
         res.setResponseCode(plain.substring(idx, idx += 4));
         res.setApprovalCode(plain.substring(idx, idx += 32).trim());
@@ -87,4 +86,5 @@ public class VoucherPurchaseClient{
 
         return res;
     }
+
 }

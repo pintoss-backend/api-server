@@ -27,6 +27,8 @@ public enum ErrorCode {
     ORDER_ALREADY_ISSUED("40016", "이미 발급된 주문입니다."),
     ORDER_ITEM_ALREADY_ISSUED("40017", "이미 발급된 주문 아이템입니다."),
     PASSWORD_NOT_MATCH("4018","현재 비밀번호가 일치하지 않습니다." ),
+    ORDER_ITEM_NOT_ISSUED("40019", "발급되지 않은 주문 아이템입니다."),
+
 
     // 401 Unauthorized
     // AUTH 관련

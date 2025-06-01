@@ -41,6 +41,9 @@ public class OrderItem {
 
     private String pinNum;
 
+    @Column(nullable = true)
+    private String approvalCode;
+
     @Enumerated(EnumType.STRING)
     private OrderItemStatus status;
 
@@ -59,10 +62,8 @@ public class OrderItem {
         this.order = order;
     }
 
-    public void validatePriceMatch(Long price) {
-        if(!this.price.equals(price)) {
-            throw new BadRequestException("가격 불일치");
-        }
+    public void assignApprovalCode(String approvalCode) {
+        this.approvalCode = approvalCode;
     }
 
     public void assignPinNum(String pinNum) {
@@ -79,5 +80,20 @@ public class OrderItem {
             throw new BadRequestException(ErrorCode.ORDER_ITEM_ALREADY_ISSUED);
         }
         this.status = OrderItemStatus.PROCESSING;
+    }
+
+    public void markAsRefunded() {
+        if (this.status != OrderItemStatus.ISSUED) {
+            throw new BadRequestException(ErrorCode.ORDER_ITEM_NOT_ISSUED);
+        }
+        this.status = OrderItemStatus.REFUNDED;
+    }
+
+    public void markAsRefundFail() {
+        if (this.status != OrderItemStatus.ISSUED) {
+            throw new BadRequestException(ErrorCode.ORDER_ITEM_NOT_ISSUED);
+        }
+        this.status = OrderItemStatus.REFUND_FAIL;
+
     }
 }

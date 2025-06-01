@@ -3,6 +3,9 @@ package com.pintoss.auth.api;
 import com.pintoss.auth.common.paging.SortDirection;
 import com.pintoss.auth.module.order.application.model.OrderPageCommand;
 import com.pintoss.auth.module.order.application.model.OrderSortKey;
+import com.pintoss.auth.module.order.application.model.OrderStatus;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +16,13 @@ import lombok.Setter;
 public class OrderPageRequest {
     private Integer page;
     private Integer size;
+
+    private String keyword;
+    private List<OrderStatus> statuses;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
+
     private OrderSortKey sortKey = OrderSortKey.CREATED_AT;
     private SortDirection sort = SortDirection.DESC;
 
@@ -38,5 +48,4 @@ public class OrderPageRequest {
     public OrderPageCommand to() {
         return new OrderPageCommand(getOffset(), getSize(), sortKey, sort);
     }
-
 }

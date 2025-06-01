@@ -3,9 +3,9 @@ package com.pintoss.auth.api;
 import com.pintoss.auth.api.query.OrderQueryService;
 import com.pintoss.auth.common.dto.ApiResponse;
 import com.pintoss.auth.common.paging.PageResponse;
+import com.pintoss.auth.common.paging.PagedData;
 import com.pintoss.auth.module.order.application.OrderCancelService;
 import com.pintoss.auth.module.order.application.OrderCreateService;
-import com.pintoss.auth.common.paging.PagedData;
 import com.pintoss.auth.module.order.application.model.Order;
 import com.pintoss.auth.module.order.application.model.OrderDetail;
 import com.pintoss.auth.module.order.application.model.OrderSearchResult;
@@ -69,7 +69,6 @@ public class OrderController {
     @PutMapping("/{orderNo}/cancel")
     public ApiResponse<Void> cancelOrder(@PathVariable("orderNo") String orderNo) {
         orderCancelService.cancel(orderNo);
-
         return ApiResponse.ok(null);
     }
 }

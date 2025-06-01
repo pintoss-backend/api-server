@@ -4,12 +4,13 @@ import static com.pintoss.auth.module.order.application.model.QOrder.order;
 import static com.pintoss.auth.module.order.application.model.QOrderItem.orderItem;
 import static com.pintoss.auth.module.payment.store.QPaymentEntity.paymentEntity;
 
-import com.pintoss.auth.module.order.application.model.OrderPageCommand;
 import com.pintoss.auth.module.order.application.model.OrderDetail;
 import com.pintoss.auth.module.order.application.model.OrderItemDetail;
+import com.pintoss.auth.module.order.application.model.OrderPageCommand;
 import com.pintoss.auth.module.order.application.model.OrderSearchResult;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.time.LocalTime;
@@ -85,18 +86,23 @@ public class OrderQueryDslRepository {
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(order.ordererId.eq(userId));
 
-        if(command.hasStatus()) {
-            builder.and(order.status.eq(command.getStatus()));
+        if(command.statuses() != null && command.statuses().isEmpty()) {
+            builder.and(order.status.in(command.statuses()));
         }
         if (command.hasPaymentMethodType()) {
-            builder.and(paymentEntity.paymentMethodType.eq(command.getPaymentMethodType()));
+            builder.and(paymentEntity.paymentMethodType.eq(command.paymentMethodType()));
         }
         if (command.hasDateRange()) {
             builder.and(order.createdAt.between(
-                command.getStartDate().atStartOfDay(),
-                command.getEndDate().atTime(LocalTime.MAX)
+                command.startDate().atStartOfDay(),
+                command.endDate().atTime(LocalTime.MAX)
             ));
         }
+
+        OrderSpecifier<?> sort = OrderSortMapper.toOrderSpecifier(
+            command.sortKey(),
+            command.sort().isAcs()
+        );
 
         return queryFactory.select(
                 Projections.constructor(OrderSearchResult.class,
@@ -111,8 +117,9 @@ public class OrderQueryDslRepository {
             .from(order)
             .leftJoin(paymentEntity).on(paymentEntity.id.eq(order.paymentId))
             .where(builder)
-            .offset(command.getOffset())
-            .limit(command.getLimit())
+            .orderBy(sort)
+            .offset(command.offset())
+            .limit(command.limit())
             .fetch();
     }
 
@@ -120,18 +127,19 @@ public class OrderQueryDslRepository {
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(order.ordererId.eq(userId));
 
-        if(command.hasStatus()) {
-            builder.and(order.status.eq(command.getStatus()));
+        if(command.statuses() != null && !command.statuses().isEmpty()) {
+            builder.and(order.status.in(command.statuses()));
         }
         if (command.hasPaymentMethodType()) {
-            builder.and(paymentEntity.paymentMethodType.eq(command.getPaymentMethodType()));
+            builder.and(paymentEntity.paymentMethodType.eq(command.paymentMethodType()));
         }
         if (command.hasDateRange()) {
             builder.and(order.createdAt.between(
-                command.getStartDate().atStartOfDay(),
-                command.getEndDate().atTime(LocalTime.MAX)
+                command.startDate().atStartOfDay(),
+                command.endDate().atTime(LocalTime.MAX)
             ));
         }
+
         return queryFactory.select(order.count())
             .from(order)
             .leftJoin(paymentEntity).on(paymentEntity.id.eq(order.paymentId))

@@ -1,6 +1,5 @@
 package com.pintoss.auth.module.order.application;
 
-import com.pintoss.auth.module.order.application.flow.OrderItemPurchaseResponseAdder;
 import com.pintoss.auth.module.order.application.flow.OrderReader;
 import com.pintoss.auth.module.order.application.model.Order;
 import com.pintoss.auth.module.order.application.model.OrderItem;
@@ -18,7 +17,6 @@ public class OrderService {
 
     private final OrderReader orderReader;
     private final VoucherPurchaseClient voucherPurchaseClient;
-    private final OrderItemPurchaseResponseAdder orderItemPurchaseResponseAdder;
 
     @Transactional
     public void markAsPaid(String orderNo, Long paymentId) {
@@ -52,7 +50,7 @@ public class OrderService {
                 purchaseResponse.getRemainPrice(),
                 purchaseResponse.getItemName()
             );
-            orderItemPurchaseResponseAdder.add(orderItemPurchaseResponse);
+            orderItem.assignApprovalCode(purchaseResponse.getApprovalCode());
         }
         order.issued();
     }

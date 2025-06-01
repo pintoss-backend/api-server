@@ -3,43 +3,20 @@ package com.pintoss.auth.module.order.application.model;
 import com.pintoss.auth.common.paging.SortDirection;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.time.LocalDate;
-import lombok.Getter;
+import java.util.List;
 
-@Getter
-public class OrderPageCommand {
-
-    private long offset;
-    private long limit;
-    private OrderSortKey sortKey;
-    private SortDirection sort;
-
-    private OrderStatus status;
-    private PaymentMethodType paymentMethodType;
-    private LocalDate startDate;
-    private LocalDate endDate;
-
-    public OrderPageCommand(long offset, long limit, OrderSortKey sortKey, SortDirection sort,
-        OrderStatus status, PaymentMethodType paymentMethodType, LocalDate startDate,
-        LocalDate endDate) {
-        this.offset = offset;
-        this.limit = limit;
-        this.sortKey = sortKey;
-        this.sort = sort;
-        this.status = status;
-        this.paymentMethodType = paymentMethodType;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
+public record OrderPageCommand(
+    long offset,
+    long limit,
+    OrderSortKey sortKey,
+    SortDirection sort,
+    List<OrderStatus> statuses,
+    PaymentMethodType paymentMethodType,
+    LocalDate startDate,
+    LocalDate endDate
+) {
     public OrderPageCommand(long offset, long limit, OrderSortKey sortKey, SortDirection sort) {
-        this.offset = offset;
-        this.limit = limit;
-        this.sortKey = sortKey;
-        this.sort = sort;
-    }
-
-    public boolean hasStatus() {
-        return status != null;
+        this(offset, limit, sortKey, sort, null, null, null, null);
     }
 
     public boolean hasPaymentMethodType() {
