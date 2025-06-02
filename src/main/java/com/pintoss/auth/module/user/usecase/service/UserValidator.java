@@ -2,7 +2,6 @@ package com.pintoss.auth.module.user.usecase.service;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.common.exception.client.DuplicateEmailException;
 import com.pintoss.auth.common.security.SecurityContextUtils;
 import com.pintoss.auth.module.user.model.Phone;
 import com.pintoss.auth.module.user.model.User;
@@ -19,7 +18,7 @@ public class UserValidator {
 
     public void duplicateEmail(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new DuplicateEmailException("이미 존재하는 회원입니다.");
+            throw new BadRequestException(ErrorCode.DUPLICATE_USER);
         }
     }
 

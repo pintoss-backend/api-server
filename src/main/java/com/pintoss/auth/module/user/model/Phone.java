@@ -1,7 +1,6 @@
 package com.pintoss.auth.module.user.model;
 
 import com.pintoss.auth.common.exception.client.EmptyPhoneException;
-import com.pintoss.auth.common.exception.client.InvalidPhoneFormatException;
 import jakarta.persistence.Embeddable;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -28,9 +27,6 @@ public class Phone {
     private void validate(String value) {
         if(value == null || value.isBlank()) {
             throw new EmptyPhoneException("전화번호는 필수 입력 값 입니다..");
-        }
-        if(!PHONE_PATTERN.matcher(value).matches()) {
-            throw new InvalidPhoneFormatException("유효하지 않은 전화번호 형식입니다. (010-xxxx-xxxx)");
         }
     }
 
