@@ -11,9 +11,9 @@ import com.pintoss.auth.common.client.nice.encryption.NiceAuthSymmetricKeyGenera
 import com.pintoss.auth.common.client.nice.store.NiceApiCryptoToken;
 import com.pintoss.auth.common.client.nice.provider.NiceApiTokenProvider;
 import com.pintoss.auth.common.client.nice.util.NiceAuthCommandFactory;
-import com.pintoss.auth.module.user.api.IdentityVerifyPurpose;
-import com.pintoss.auth.module.user.usecase.dto.NiceEncryptedDataResult;
-import com.pintoss.auth.module.user.usecase.service.NiceAuthRequestClient;
+import com.pintoss.auth.api.auth.dto.IdentityVerifyPurpose;
+import com.pintoss.auth.module.user.application.dto.NiceEncryptedDataResult;
+import com.pintoss.auth.module.user.core.NiceAuthRequestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

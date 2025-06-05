@@ -15,10 +15,6 @@ public record OrderPageCommand(
     LocalDate startDate,
     LocalDate endDate
 ) {
-    public OrderPageCommand(long offset, long limit, OrderSortKey sortKey, SortDirection sort) {
-        this(offset, limit, sortKey, sort, null, null, null, null);
-    }
-
     public boolean hasPaymentMethodType() {
         return paymentMethodType != null;
     }
