@@ -86,7 +86,7 @@ public class OrderQueryDslRepository {
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(order.ordererId.eq(userId));
 
-        if(command.statuses() != null && command.statuses().isEmpty()) {
+        if(command.statuses() != null && !command.statuses().isEmpty()) {
             builder.and(order.status.in(command.statuses()));
         }
         if (command.hasPaymentMethodType()) {
