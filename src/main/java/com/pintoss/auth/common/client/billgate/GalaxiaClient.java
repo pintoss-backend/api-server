@@ -16,7 +16,7 @@ public class GalaxiaClient {
     private final int TIMEOUT_MILLIS ;
 
     public GalaxiaClient() {
-        this.HOST = "222.122.229,247";
+        this.HOST = "222.122.229.247";
         this.PORT = 21070;
         this.TIMEOUT_MILLIS = 2000;
     }
