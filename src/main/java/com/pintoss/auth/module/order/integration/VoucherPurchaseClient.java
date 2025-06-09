@@ -57,7 +57,8 @@ public class VoucherPurchaseClient{
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
             String plainBody = new String(cleanBytes, "EUC-KR");
-            System.out.println("[DEBUG] 복호화 결과:\n" + plainBody);
+            log.info("[DEBUG] 복호화 결과:\n" + plainBody);
+            log.debug("[DEBUG] 복호화 결과:\n" + plainBody);
             return parsePurchaseResponse(plainBody);
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +86,7 @@ public class VoucherPurchaseClient{
         res.setPrintFlag5(plain.substring(idx, idx += 1));
         res.setPrintMsg5(plain.substring(idx, idx += 32).trim());
 
-        log.info("[Galaxia 응답] 승인번호: {}, 카드번호: {}, 잔액: {}, 상품명: {}, 응답코드: {}",
+        log.debug("[Galaxia 응답] 승인번호: {}, 카드번호: {}, 잔액: {}, 상품명: {}, 응답코드: {}",
             res.getApprovalCode(), res.getCardNo(), res.getRemainPrice(), res.getItemName(), res.getResponseCode());
 
         return res;
