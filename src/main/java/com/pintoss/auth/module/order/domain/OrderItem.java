@@ -47,15 +47,19 @@ public class OrderItem {
     @Enumerated(EnumType.STRING)
     private OrderItemStatus status;
 
-    private OrderItem(String voucherIssuerName, String voucherName, Long price) {
+    @Column(nullable = false)
+    private String productCode;
+
+    private OrderItem(String voucherIssuerName, String voucherName, Long price, String productCode) {
         this.voucherIssuerName = voucherIssuerName;
         this.voucherName = voucherName;
         this.price = price;
         this.status = OrderItemStatus.PENDING;
+        this.productCode = productCode;
     }
 
-    public static OrderItem create(String voucherIssuerName, String voucherName, Long price) {
-        return new OrderItem(voucherIssuerName, voucherName, price);
+    public static OrderItem create(String voucherIssuerName, String voucherName, Long price, String productCode) {
+        return new OrderItem(voucherIssuerName, voucherName, price, productCode);
     }
 
     public void assignOrder(Order order) {

@@ -1,6 +1,7 @@
 package com.pintoss.auth.module.voucher.usecase.service;
 
 import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.store.VoucherIssuerEntity;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResult;
 import java.util.List;
@@ -11,7 +12,7 @@ public interface VoucherIssuerRepository {
 
     boolean existsByName(String name);
 
-    Optional<VoucherIssuer> findById(Long voucherIssuerId);
+    Optional<VoucherIssuerEntity> findById(Long voucherIssuerId);
 
     List<VoucherIssuerResult> fetchSummaryList();
 

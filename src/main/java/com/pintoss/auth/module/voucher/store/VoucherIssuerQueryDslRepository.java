@@ -1,11 +1,11 @@
-package com.pintoss.auth.module.voucher.external.persistence;
+package com.pintoss.auth.module.voucher.store;
 
 
-import static com.pintoss.auth.module.voucher.model.QVoucherIssuer.voucherIssuer;
-import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
+import static com.pintoss.auth.module.voucher.store.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.module.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
 
-import com.pintoss.auth.module.voucher.model.Voucher;
-import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.store.VoucherEntity;
+import com.pintoss.auth.module.voucher.store.VoucherIssuerEntity;
 import com.pintoss.auth.module.voucher.usecase.dto.QVoucherIssuerResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResult;
@@ -25,32 +25,32 @@ public class VoucherIssuerQueryDslRepository {
         return queryFactory
             .select(
                 new QVoucherIssuerResult(
-                    voucherIssuer.id,
-                    voucherIssuer.name,
-                    voucherIssuer.discount,
-                    voucherIssuer.contactInfo,
-                    voucherIssuer.description,
-                    voucherIssuer.publisher,
-                    voucherIssuer.imageUrl,
-                    voucherIssuer.note
+                    voucherIssuerEntity.id,
+                    voucherIssuerEntity.name,
+                    voucherIssuerEntity.discount,
+                    voucherIssuerEntity.contactInfo,
+                    voucherIssuerEntity.description,
+                    voucherIssuerEntity.publisher,
+                    voucherIssuerEntity.imageUrl,
+                    voucherIssuerEntity.note
                 )
             )
-            .from(voucherIssuer)
+            .from(voucherIssuerEntity)
             .fetch();
     }
 
     public Optional<VoucherIssuerDetailResult> fetchDetail(Long voucherIssuerId) {
-        VoucherIssuer issuer = queryFactory.select(voucherIssuer)
-            .from(voucherIssuer)
-            .where(voucherIssuer.id.eq(voucherIssuerId))
+        VoucherIssuerEntity issuer = queryFactory.select(voucherIssuerEntity)
+            .from(voucherIssuerEntity)
+            .where(voucherIssuerEntity.id.eq(voucherIssuerId))
             .fetchOne();
 
         if(issuer == null) {
             return Optional.empty();
         }
 
-        List<Voucher> vouchers = queryFactory.selectFrom(voucher)
-            .where(voucher.voucherIssuerId.eq(voucherIssuerId))
+        List<VoucherEntity> voucherEntities = queryFactory.selectFrom(voucherEntity)
+            .where(voucherEntity.voucherIssuerId.eq(voucherIssuerId))
             .fetch();
 
         VoucherIssuerDetailResult result = VoucherIssuerDetailResult.builder()
@@ -63,7 +63,7 @@ public class VoucherIssuerQueryDslRepository {
             .note(issuer.getNote())
             .imageUrl(issuer.getImageUrl())
             .fee(issuer.getFee())
-            .vouchers(vouchers.stream().map(v ->
+            .vouchers(voucherEntities.stream().map(v ->
                 VoucherIssuerDetailResult.VoucherInfo.builder()
                     .id(v.getId())
                     .name(v.getName())

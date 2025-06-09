@@ -24,7 +24,7 @@ public class VoucherPurchaseEventHandler {
             event.getMId(),
             event.getPaymentMethodType()
         );
-        log.info("[Voucher Purchase Event] orderNo: {}, transactionId: {}, mId: {}, amount: {}, paymentMethodType: {}",
+        log.info("[VoucherEntity Purchase Event] orderNo: {}, transactionId: {}, mId: {}, amount: {}, paymentMethodType: {}",
             event.getOrderNo(), event.getTransactionId(), event.getMId(), event.getAmount(), event.getPaymentMethodType());
     }
 }

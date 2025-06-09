@@ -19,7 +19,7 @@ public class VoucherReader {
 
     private final VoucherRepository voucherRepository;
 
-    public List<Voucher> readAll(List<Long> voucherIds) {
+    public List<Voucher> getAll(List<Long> voucherIds) {
         return voucherRepository.findAllByIds(voucherIds);
     }
 

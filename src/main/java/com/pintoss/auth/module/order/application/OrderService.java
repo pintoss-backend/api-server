@@ -40,7 +40,8 @@ public class OrderService {
                 orderItem.getPrice(),
                 paymentMethodType,
                 orderItem.getPrice(),
-                "1104501710200000"
+                orderItem.getProductCode()
+//                "1104501710200000"
             );
             orderItem.assignPinNum(purchaseResponse.getCardNo());
 

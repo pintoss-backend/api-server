@@ -1,18 +1,27 @@
-package com.pintoss.auth.module.voucher.model;
+package com.pintoss.auth.module.voucher.store;
 
+import com.pintoss.auth.module.voucher.model.ContactInfo;
+import com.pintoss.auth.module.voucher.model.Discount;
+import com.pintoss.auth.module.voucher.model.VoucherIssuer;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Entity
 @Getter
-public class VoucherIssuer {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class VoucherIssuerEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -55,7 +64,7 @@ public class VoucherIssuer {
     @Column(nullable = false, precision = 5, scale = 2) // ex) 999.99 까지 가능
     private BigDecimal fee; // 수수료
 
-    private VoucherIssuer(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, String imageUrl, BigDecimal fee) {
+    private VoucherIssuerEntity(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, String imageUrl, BigDecimal fee) {
         this.name = name;
         this.code = code;
         this.discount = discount;
@@ -69,9 +78,9 @@ public class VoucherIssuer {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public static VoucherIssuer create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
+    public static VoucherIssuerEntity create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
         String note, String imageUrl, BigDecimal fee) {
-        return new VoucherIssuer(
+        return new VoucherIssuerEntity(
             name,
             code,
             discount,
@@ -84,4 +93,17 @@ public class VoucherIssuer {
         );
     }
 
+    public static VoucherIssuerEntity from(VoucherIssuer voucherIssuer) {
+        return new VoucherIssuerEntity(
+            voucherIssuer.getName(),
+            voucherIssuer.getCode(),
+            voucherIssuer.getDiscount(),
+            voucherIssuer.getContactInfo(),
+            voucherIssuer.getDescription(),
+            voucherIssuer.getPublisher(),
+            voucherIssuer.getNote(),
+            voucherIssuer.getImageUrl(),
+            voucherIssuer.getFee()
+        );
+    }
 }

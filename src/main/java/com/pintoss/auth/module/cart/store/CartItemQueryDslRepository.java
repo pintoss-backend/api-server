@@ -1,8 +1,8 @@
 package com.pintoss.auth.module.cart.store;
 
 import static com.pintoss.auth.module.cart.application.model.QCartItem.cartItem;
-import static com.pintoss.auth.module.voucher.model.QVoucher.voucher;
-import static com.pintoss.auth.module.voucher.model.QVoucherIssuer.voucherIssuer;
+import static com.pintoss.auth.module.voucher.store.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.module.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
 
 import com.pintoss.auth.module.cart.application.model.CartItem;
 import com.pintoss.auth.module.cart.application.model.CartItemResult;
@@ -25,15 +25,15 @@ public class CartItemQueryDslRepository {
         return queryFactory
             .select(Projections.constructor(CartItemResult.class,
                 cartItem.id.as("id"),
-                voucher.id.as("productId"),
+                voucherEntity.id.as("productId"),
                 cartItem.quantity,
-                voucher.name,
-                voucher.price,
-                voucherIssuer.imageUrl
+                voucherEntity.name,
+                voucherEntity.price,
+                voucherIssuerEntity.imageUrl
             ))
             .from(cartItem)
-            .join(voucher).on(cartItem.productId.eq(voucher.id))
-            .join(voucherIssuer).on(voucher.voucherIssuerId.eq(voucherIssuer.id))
+            .join(voucherEntity).on(cartItem.productId.eq(voucherEntity.id))
+            .join(voucherIssuerEntity).on(voucherEntity.voucherIssuerId.eq(voucherIssuerEntity.id))
             .where(
                 cartItem.userId.eq(userId),
                 cartItem.isDeleted.isFalse()

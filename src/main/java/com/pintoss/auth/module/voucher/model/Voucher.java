@@ -2,25 +2,13 @@ package com.pintoss.auth.module.voucher.model;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Voucher {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "voucher_issuer_id")
     private Long voucherIssuerId;
 
     private String name;
@@ -28,6 +16,8 @@ public class Voucher {
     private String issuerName;
 
     private Long price;
+
+    private String productCode;
 
     private LocalDateTime createdAt;
 
@@ -45,10 +35,21 @@ public class Voucher {
     public static Voucher create(Long voucherIssuerId, String name, String issuerName, Long price) {
         return new Voucher(voucherIssuerId, name, issuerName, price);
     }
+    public Voucher(Long id, Long voucherIssuerId, String name, String issuerName, Long price, String productCode, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.voucherIssuerId = voucherIssuerId;
+        this.name = name;
+        this.issuerName = issuerName;
+        this.price = price;
+        this.productCode = productCode;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public void validatePrice(Long price) {
         if (!this.price.equals(price)) {
             throw new BadRequestException(ErrorCode.VOUCHER_PRICE_MISMATCH);
         }
     }
+
 }

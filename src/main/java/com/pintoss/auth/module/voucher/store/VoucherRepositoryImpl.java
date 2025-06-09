@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.voucher.external.persistence;
+package com.pintoss.auth.module.voucher.store;
 
-import com.pintoss.auth.module.voucher.usecase.service.VoucherRepository;
 import com.pintoss.auth.module.voucher.model.Voucher;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,9 @@ public class VoucherRepositoryImpl implements VoucherRepository {
 
     @Override
     public void saveAll(List<Voucher> vouchers) {
-        voucherJpaRepository.saveAll(vouchers);
+        List<VoucherEntity> entities = vouchers.stream().map(VoucherEntity::from)
+            .toList();
+        voucherJpaRepository.saveAll(entities);
     }
 
     @Override

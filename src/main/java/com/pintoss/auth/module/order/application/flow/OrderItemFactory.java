@@ -10,8 +10,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class OrderItemFactory {
-    public static List<OrderItem> create(List<Voucher> vouchers, List<OrderItemRequest> orderItemRequests){
-        Map<Long, Voucher> voucherMap = vouchers.stream()
+    public static List<OrderItem> create(List<Voucher> voucherEntities, List<OrderItemRequest> orderItemRequests){
+        Map<Long, Voucher> voucherMap = voucherEntities.stream()
             .collect(Collectors.toMap(Voucher::getId, Function.identity()));
 
         List<OrderItem> orderItems = new ArrayList<>();
@@ -23,7 +23,8 @@ public class OrderItemFactory {
                 orderItems.add(OrderItem.create(
                     voucher.getIssuerName(),
                     voucher.getName(),
-                    request.getPrice()
+                    request.getPrice(),
+                    voucher.getProductCode()
                 ));
             }
         }

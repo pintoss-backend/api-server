@@ -25,7 +25,7 @@ public class OrderCreateService {
     public Order create(List<OrderItemRequest> orderItemRequest) {
 
         // 1. 상품권 조회
-        List<Voucher> vouchers = voucherReader.readAll(orderItemRequest.stream()
+        List<Voucher> vouchers = voucherReader.getAll(orderItemRequest.stream()
             .map(OrderItemRequest::getVoucherId)
             .toList());
 

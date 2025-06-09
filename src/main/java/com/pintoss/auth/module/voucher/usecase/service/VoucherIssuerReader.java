@@ -1,7 +1,7 @@
 package com.pintoss.auth.module.voucher.usecase.service;
 
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.store.VoucherIssuerEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +11,9 @@ public class VoucherIssuerReader {
 
     private final VoucherIssuerRepository voucherIssuerRepository;
 
-    public VoucherIssuer read(Long voucherIssuerId) {
+    public VoucherIssuerEntity read(Long voucherIssuerId) {
         return voucherIssuerRepository.findById(voucherIssuerId)
-            .orElseThrow(() -> new BadRequestException("Voucher issuer not found"));
+            .orElseThrow(() -> new BadRequestException("VoucherEntity issuer not found"));
     }
 
 }

@@ -1,7 +1,7 @@
-package com.pintoss.auth.module.voucher.external.persistence;
+package com.pintoss.auth.module.voucher.store;
 
-import com.pintoss.auth.module.voucher.usecase.service.VoucherIssuerRepository;
 import com.pintoss.auth.module.voucher.model.VoucherIssuer;
+import com.pintoss.auth.module.voucher.usecase.service.VoucherIssuerRepository;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.module.voucher.usecase.dto.VoucherIssuerResult;
 import java.util.List;
@@ -21,11 +21,12 @@ public class VoucherIssuerRepositoryImpl implements VoucherIssuerRepository {
 
     @Override
     public void save(VoucherIssuer voucherIssuer) {
-        jpaRepository.save(voucherIssuer);
+        VoucherIssuerEntity voucherIssuerEntity = VoucherIssuerEntity.from(voucherIssuer);
+        jpaRepository.save(voucherIssuerEntity);
     }
 
     @Override
-    public Optional<VoucherIssuer> findById(Long voucherIssuerId) {
+    public Optional<VoucherIssuerEntity> findById(Long voucherIssuerId) {
         return jpaRepository.findById(voucherIssuerId);
     }
 
