@@ -53,7 +53,8 @@ public class OrderController {
         Order saveOrder = orderCreateService.create(request.getOrderItems());
 
         OrderCreateResponse response = OrderCreateResponse.builder()
-            .serviceId("glx_api")
+//            .serviceId("glx_api")
+            .serviceId("M2483583")
             .productName(saveOrder.getOrderName())
             .orderNo(saveOrder.getOrderNo())
             .ordererId(saveOrder.getOrdererId())
