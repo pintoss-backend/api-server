@@ -27,8 +27,11 @@ public class VoucherPurchaseClient{
             String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo,transactionId, mid,salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
 
             GalaxiaCipher cipher = new Seed();
-            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
-            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
+            cipher.setKey(Base64.decode("RkRFUUNTOEJERVAxVEpYUA==".getBytes("EUC-KR")));
+            cipher.setIV("VA8FIZ2YAXR4RR5S".getBytes("EUC-KR"));
+
+//            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
+//            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
 
             Base64Encoder encoder = new Base64Encoder();
             String encodedBody = requestHeader + encoder.encodeBuffer(cipher.encrypt(bodyPlain.getBytes("EUC-KR")));

@@ -22,8 +22,10 @@ public class RefundClient {
     public RefundResponse execute(String header, String body) {
         try {
             GalaxiaCipher cipher = new Seed();
-            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
-            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
+            cipher.setKey(Base64.decode("RkRFUUNTOEJERVAxVEpYUA==".getBytes("EUC-KR")));
+            cipher.setIV("VA8FIZ2YAXR4RR5S".getBytes("EUC-KR"));
+//            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
+//            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
 
             Base64Encoder encoder = new Base64Encoder();
             String encodedBody = header + encoder.encodeBuffer(cipher.encrypt(body.getBytes("EUC-KR")));
