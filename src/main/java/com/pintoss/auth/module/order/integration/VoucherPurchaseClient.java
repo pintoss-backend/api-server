@@ -7,7 +7,6 @@ import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.common.client.billgate.GalaxiaClient;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +37,7 @@ public class VoucherPurchaseClient{
 
             byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes("EUC-KR").length, 4) + encodedBody).getBytes("EUC-KR");
             byte[] fullMessage = client.sendEncryptedRequest(payload);
-            String response = new String(fullMessage, StandardCharsets.UTF_8);
+            String response = new String(fullMessage, "EUC-KR");
             String plainHeader = response.substring(0,98);
             String base64EncryptedBody = response.substring(98);
             BASE64Decoder decoder = new BASE64Decoder();
@@ -57,8 +56,8 @@ public class VoucherPurchaseClient{
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
             String plainBody = new String(cleanBytes, "EUC-KR");
-            log.info("[DEBUG] 복호화 결과:\n" + plainBody);
-            log.debug("[DEBUG] 복호화 결과:\n" + plainBody);
+            log.info("[DEBUG] 복호화 결과: " + base64EncryptedBody);
+            log.debug("[DEBUG] 복호화 결과:" + base64EncryptedBody);
             return parsePurchaseResponse(plainBody);
         } catch (Exception e) {
             e.printStackTrace();

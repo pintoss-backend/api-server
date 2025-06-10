@@ -5,7 +5,6 @@ import com.galaxia.api.crypto.Base64Encoder;
 import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +32,7 @@ public class RefundClient {
             byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes("EUC-KR").length, 4) + encodedBody).getBytes("EUC-KR");
             byte[] fullMessage = galaxiaClient.sendEncryptedRequest(payload);
 
-            String response = new String(fullMessage, StandardCharsets.UTF_8);
+            String response = new String(fullMessage, "EUC-KR");
             String plainHeader = response.substring(0, 98);
             String base64EncryptedBody = response.substring(98);
             BASE64Decoder decoder = new BASE64Decoder();
@@ -51,11 +50,11 @@ public class RefundClient {
             }
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length) ;
-            String plainBody = new String(cleanBytes, "EUC-KR");
+            String plainBody = new String(cleanBytes, "UTF-8");
 
             System.out.println("[DEBUG] 복호화 결과 : " + plainBody);
 
-            return parseCancelResponse(plainBody);
+            return parseCancelResponse(base64EncryptedBody);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
