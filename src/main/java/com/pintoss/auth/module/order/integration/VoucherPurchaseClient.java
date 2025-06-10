@@ -59,7 +59,7 @@ public class VoucherPurchaseClient{
             String plainBody = new String(cleanBytes, StandardCharsets.UTF_8);
             log.info("[DEBUG] 복호화 결과: " + base64EncryptedBody);
             log.debug("[DEBUG] 복호화 결과:" + base64EncryptedBody);
-            return parsePurchaseResponse(plainBody);
+            return parsePurchaseResponse(base64EncryptedBody);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
