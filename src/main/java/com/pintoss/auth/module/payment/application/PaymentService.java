@@ -4,13 +4,11 @@ import com.pintoss.auth.module.order.application.flow.OrderReader;
 import com.pintoss.auth.module.order.domain.Order;
 import com.pintoss.auth.module.payment.domain.PaymentDomain;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class PaymentService {
 
     private final PaymentApprovalService paymentApprovalService;
@@ -35,10 +33,9 @@ public class PaymentService {
             approvalResponse.getAuthAmount(),
             approvalResponse.getAuthDate(),
             approvalResponse.getPaymentMethodType(),
+            approvalResponse.getDetailResponseMessage(),
             approvalResponse.getJson()
             );
         paymentAdder.add(payment);
-        log.info("[결제 승인] orderNo: {}, serviceCode: {}, transactionId: {}, authAmount: {}, paymentMethodType: {}",
-            command.getOrderNo(), command.getServiceCode(), approvalResponse.getTransactionId(), approvalResponse.getAuthAmount(), approvalResponse.getPaymentMethodType());
     }
 }

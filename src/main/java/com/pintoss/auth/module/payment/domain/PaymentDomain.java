@@ -16,11 +16,12 @@ public class PaymentDomain {
     private LocalDateTime authDate;
     private PaymentStatus status;
     private PaymentMethodType paymentMethodType;
+    private String detailMessage;
     private String json;
 
     public PaymentDomain(Boolean isSuccess, String serviceId, String serviceCode, String orderNo,
         LocalDateTime orderDate, String transactionId, long authAmount, LocalDateTime authDate,
-        PaymentMethodType paymentMethodType, String json) {
+        PaymentMethodType paymentMethodType, String detailMessage, String json) {
         this.status = isSuccess ? PaymentStatus.SUCCESS : PaymentStatus.FAILED;
         this.serviceId = serviceId;
         this.serviceCode = serviceCode;
@@ -30,6 +31,7 @@ public class PaymentDomain {
         this.authAmount = authAmount;
         this.authDate = authDate;
         this.paymentMethodType = paymentMethodType;
+        this.detailMessage = detailMessage;
         this.json = json;
     }
 }

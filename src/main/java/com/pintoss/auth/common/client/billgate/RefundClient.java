@@ -53,7 +53,9 @@ public class RefundClient {
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length) ;
             String plainBody = new String(cleanBytes, StandardCharsets.UTF_8);
 
-            System.out.println("[DEBUG] 복호화 결과 : " + plainBody);
+            System.out.println("[DEBUG] 복호화 결과 (plainBody) : " + plainBody);
+            System.out.println("[DEBUG] 복호화 결과 (base64EncryptedBody): " + base64EncryptedBody);
+
 
             return parseCancelResponse(base64EncryptedBody);
         } catch (Exception e) {

@@ -35,9 +35,11 @@ public class PaymentEntity {
     private PaymentStatus status;
     @Enumerated(EnumType.STRING)
     private PaymentMethodType paymentMethodType;
+    private String detailMessage;
+    private String json;
 
     @Builder
-    public PaymentEntity(String mid, String serviceCode, String orderNo, LocalDateTime orderDate, String transactionId, long authAmount, LocalDateTime authDate, PaymentStatus status, PaymentMethodType paymentMethodType) {
+    public PaymentEntity(String mid, String serviceCode, String orderNo, LocalDateTime orderDate, String transactionId, long authAmount, LocalDateTime authDate, PaymentStatus status, PaymentMethodType paymentMethodType, String detailMessage, String json) {
         this.mid = mid;
         this.serviceCode = serviceCode;
         this.orderNo = orderNo;
@@ -47,6 +49,8 @@ public class PaymentEntity {
         this.authDate = authDate;
         this.status = status;
         this.paymentMethodType = paymentMethodType;
+        this.detailMessage = detailMessage;
+        this.json = json;
     }
 
     public static PaymentEntity of(PaymentDomain payment) {
@@ -60,6 +64,8 @@ public class PaymentEntity {
             .authDate(payment.getAuthDate())
             .status(payment.getStatus())
             .paymentMethodType(payment.getPaymentMethodType())
+            .detailMessage(payment.getDetailMessage())
+            .json(payment.getJson())
             .build();
     }
 }
