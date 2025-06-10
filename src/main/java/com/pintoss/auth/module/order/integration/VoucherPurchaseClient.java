@@ -7,6 +7,7 @@ import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.common.client.billgate.GalaxiaClient;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +56,7 @@ public class VoucherPurchaseClient{
             }
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
-            String plainBody = new String(cleanBytes, "EUC-KR");
+            String plainBody = new String(cleanBytes, StandardCharsets.UTF_8);
             log.info("[DEBUG] 복호화 결과: " + base64EncryptedBody);
             log.debug("[DEBUG] 복호화 결과:" + base64EncryptedBody);
             return parsePurchaseResponse(plainBody);

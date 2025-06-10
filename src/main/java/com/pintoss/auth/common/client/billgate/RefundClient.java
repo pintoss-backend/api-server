@@ -5,6 +5,7 @@ import com.galaxia.api.crypto.Base64Encoder;
 import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +51,7 @@ public class RefundClient {
             }
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length) ;
-            String plainBody = new String(cleanBytes, "UTF-8");
+            String plainBody = new String(cleanBytes, StandardCharsets.UTF_8);
 
             System.out.println("[DEBUG] 복호화 결과 : " + plainBody);
 
