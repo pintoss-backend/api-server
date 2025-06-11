@@ -26,6 +26,9 @@ public class PurchaseRequestBuilder {
         sb.append(fixed(productCode, 48));            // ITEM_CODE
         sb.append(fixed(salePrice, 8));                   // SALE_PRICE
         sb.append(fixed("", 8));                        // SETTLE_DAY
+        System.out.println("ID : " + SecurityContextUtils.getUserId());
+        System.out.println("EMAIL : " + SecurityContextUtils.getEmail());
+        System.out.println("NAME : " + SecurityContextUtils.getName());
         System.out.println("PHONE : " + SecurityContextUtils.getPhone());
         sb.append(fixed(SecurityContextUtils.getPhone(), 12));            // BUY_HPNO
         sb.append(fixed(SecurityContextUtils.getPhone(), 12));                       // HPNO
