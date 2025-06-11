@@ -1,5 +1,6 @@
 package com.pintoss.auth.module.order.integration;
 
+import com.pintoss.auth.common.security.SecurityContextUtils;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,8 +26,8 @@ public class PurchaseRequestBuilder {
         sb.append(fixed(productCode, 48));            // ITEM_CODE
         sb.append(fixed(salePrice, 8));                   // SALE_PRICE
         sb.append(fixed("", 8));                        // SETTLE_DAY
-        sb.append(fixed("01020517426", 12));            // BUY_HPNO
-        sb.append(fixed("01020517426", 12));                       // HPNO
+        sb.append(fixed(SecurityContextUtils.getPhone(), 12));            // BUY_HPNO
+        sb.append(fixed(SecurityContextUtils.getPhone(), 12));                       // HPNO
         sb.append(fixed("", 6));                        // OTP_NO
         sb.append(fixed("", 20));                       // PIN_NO
         sb.append(fixed(mid, 20));            // BILLGATE_MID
