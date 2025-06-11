@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+    import: application-jwt.yaml, application-nice.yaml, application-oauth.yaml, application-gmail.yaml, galaxia-test.yaml
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MARIADB;DATABASE_TO_UPPER=FALSE;NON_KEYWORDS=USER
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
+    database-platform: org.hibernate.dialect.MariaDBDialect

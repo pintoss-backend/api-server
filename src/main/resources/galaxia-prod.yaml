@@ -1,0 +1,8 @@
+galaxia:
+  secret:
+    key: "cnlNUWJUd1FOMEFGeE5rcw=="
+    iv: "1234567890123456"
+  server:
+    host: "222.122.229.247"
+    port: 21070
+    time-out: 2000

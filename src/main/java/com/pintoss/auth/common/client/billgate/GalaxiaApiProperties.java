@@ -1,27 +1,28 @@
 package com.pintoss.auth.common.client.billgate;
 
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 @Getter
-@Setter
-@Component
 @ConfigurationProperties(prefix = "galaxia")
 public class GalaxiaApiProperties {
-    private Secret secret;
-    private Server server;
 
-    @Getter
-    @Setter
+    private final Secret secret;
+    private final Server server;
+
+    public GalaxiaApiProperties(Secret secret, Server server) {
+        this.secret = secret;
+        this.server = server;
+    }
+
+    @Data
     public static class Secret {
         private String key;
         private String iv;
     }
 
-    @Getter
-    @Setter
+    @Data
     public static class Server {
         private String host;
         private int port;

@@ -15,10 +15,10 @@ public class GalaxiaClient {
     private final int PORT ;
     private final int TIMEOUT_MILLIS ;
 
-    public GalaxiaClient() {
-        this.HOST = "222.122.229.247";
-        this.PORT = 21070;
-        this.TIMEOUT_MILLIS = 2000;
+    public GalaxiaClient(GalaxiaApiProperties properties) {
+        this.HOST = properties.getServer().getHost();
+        this.PORT = properties.getServer().getPort();
+        this.TIMEOUT_MILLIS = properties.getServer().getTimeOut();
     }
 
     public byte[] sendEncryptedRequest(byte[] payload) throws IOException {
