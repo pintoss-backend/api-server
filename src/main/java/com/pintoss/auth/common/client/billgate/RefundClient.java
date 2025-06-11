@@ -57,7 +57,7 @@ public class RefundClient {
             System.out.println("[DEBUG] 복호화 결과 (base64EncryptedBody): " + base64EncryptedBody);
 
 
-            return parseCancelResponse(base64EncryptedBody);
+            return parseCancelResponse(plainBody);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

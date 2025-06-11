@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PurchaseResponse {
+    private boolean isSuccess;
     private String responseCode;
     private String approvalCode;
     private String openFlag;

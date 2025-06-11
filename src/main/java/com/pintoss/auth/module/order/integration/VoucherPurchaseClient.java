@@ -7,7 +7,6 @@ import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.common.client.billgate.GalaxiaClient;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,10 +55,10 @@ public class VoucherPurchaseClient{
             }
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
-            String plainBody = new String(cleanBytes, StandardCharsets.UTF_8);
-            log.info("[DEBUG] 복호화 결과: " + base64EncryptedBody);
-            log.debug("[DEBUG] 복호화 결과:" + base64EncryptedBody);
-            return parsePurchaseResponse(base64EncryptedBody);
+            String plainBody = new String(cleanBytes, "EUC-KR");
+            log.info("[DEBUG] 복호화 결과 (plainBody): " + plainBody);
+            log.debug("[DEBUG] 복호화 결과(base64EncryptedBody): " + base64EncryptedBody);
+            return parsePurchaseResponse(plainBody);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -70,6 +69,7 @@ public class VoucherPurchaseClient{
         PurchaseResponse res = new PurchaseResponse();
         int idx = 0;
         res.setResponseCode(plain.substring(idx, idx += 4));
+        res.setSuccess(res.getResponseCode().equals("0000")? true : false);
         res.setApprovalCode(plain.substring(idx, idx += 32).trim());
         res.setOpenFlag(plain.substring(idx, idx += 1));
         res.setCardNo(plain.substring(idx, idx += 32).trim());

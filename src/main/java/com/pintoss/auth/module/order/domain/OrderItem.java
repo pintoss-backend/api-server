@@ -108,4 +108,8 @@ public class OrderItem {
     public boolean isRefundFailed() {
         return this.status == OrderItemStatus.REFUND_FAIL;
     }
+
+    public void issueFailed() {
+        this.status = OrderItemStatus.ISSUE_FAILED;
+    }
 }

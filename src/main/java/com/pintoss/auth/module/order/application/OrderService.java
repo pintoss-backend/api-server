@@ -43,9 +43,13 @@ public class OrderService {
                 orderItem.getProductCode()
 //                "1104501710200000"
             );
-            orderItem.assignPinNum(purchaseResponse.getCardNo());
-
-            orderItem.assignApprovalCode(purchaseResponse.getApprovalCode());
+            if (purchaseResponse.isSuccess()) {
+                orderItem.assignPinNum(purchaseResponse.getCardNo());
+                orderItem.assignApprovalCode(purchaseResponse.getApprovalCode());
+                orderItem.issued();
+            }else{
+                orderItem.issueFailed();
+            }
         }
         order.issued();
     }
