@@ -7,31 +7,35 @@ import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
-public class RefundClient {
+public class RefundApiClient {
 
-    private final GalaxiaClient galaxiaClient;
+    private final GalaxiaClient client;
+    private final String KEY;
+    private final String IV;
+
+    public RefundApiClient(GalaxiaClient client, GalaxiaApiProperties properties) {
+        this.client = client;
+        this.KEY = properties.getSecret().getKey();
+        this.IV = properties.getSecret().getIv();
+    }
 
     public RefundResponse execute(String header, String body) {
         try {
             GalaxiaCipher cipher = new Seed();
-            cipher.setKey(Base64.decode("cnlNUWJUd1FOMEFGeE5rcw==".getBytes("EUC-KR")));
-            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
-//            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
-//            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
+            cipher.setKey(Base64.decode(KEY.getBytes("EUC-KR")));
+            cipher.setIV(IV.getBytes("EUC-KR"));
 
             Base64Encoder encoder = new Base64Encoder();
             String encodedBody = header + encoder.encodeBuffer(cipher.encrypt(body.getBytes("EUC-KR")));
 
             byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes("EUC-KR").length, 4) + encodedBody).getBytes("EUC-KR");
-            byte[] fullMessage = galaxiaClient.sendEncryptedRequest(payload);
+            byte[] fullMessage = client.sendEncryptedRequest(payload);
 
             String response = new String(fullMessage, "EUC-KR");
             String plainHeader = response.substring(0, 98);

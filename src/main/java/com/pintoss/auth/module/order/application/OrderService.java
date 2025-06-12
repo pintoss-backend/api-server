@@ -4,7 +4,7 @@ import com.pintoss.auth.module.order.application.flow.OrderReader;
 import com.pintoss.auth.module.order.domain.Order;
 import com.pintoss.auth.module.order.domain.OrderItem;
 import com.pintoss.auth.module.order.integration.PurchaseResponse;
-import com.pintoss.auth.module.order.integration.VoucherPurchaseClient;
+import com.pintoss.auth.common.client.billgate.PurchaseApiClient;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderService {
 
     private final OrderReader orderReader;
-    private final VoucherPurchaseClient voucherPurchaseClient;
+    private final PurchaseApiClient purchaseApiClient;
 
     @Transactional
     public void markAsPaid(String orderNo, Long paymentId) {
@@ -33,7 +33,7 @@ public class OrderService {
         Order order = orderReader.getByOrderNo(orderNo);
 
         for (OrderItem orderItem : order.getOrderItems()) {
-            PurchaseResponse purchaseResponse = voucherPurchaseClient.purchase(
+            PurchaseResponse purchaseResponse = purchaseApiClient.purchase(
                 orderNo,
                 transId,
                 mId,

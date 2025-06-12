@@ -1,24 +1,32 @@
-package com.pintoss.auth.module.order.integration;
+package com.pintoss.auth.common.client.billgate;
 
 import com.galaxia.api.base64.BASE64Decoder;
 import com.galaxia.api.crypto.Base64Encoder;
 import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
-import com.pintoss.auth.common.client.billgate.GalaxiaClient;
+import com.pintoss.auth.module.order.integration.PurchaseRequestBuilder;
+import com.pintoss.auth.module.order.integration.PurchaseResponse;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.util.Arrays;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
-public class VoucherPurchaseClient{
+public class PurchaseApiClient {
 
     private final GalaxiaClient client;
+    private final String KEY;
+    private final String IV;
+
+    public PurchaseApiClient(GalaxiaClient client, GalaxiaApiProperties properties) {
+        this.client = client;
+        this.KEY = properties.getSecret().getKey();
+        this.IV = properties.getSecret().getIv();
+    }
+
     public PurchaseResponse purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
 //        return PurchaseResponse.builder().cardNo(generateRandomString()).build();
         try {
@@ -26,11 +34,8 @@ public class VoucherPurchaseClient{
             String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo,transactionId, mid,salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
 
             GalaxiaCipher cipher = new Seed();
-            cipher.setKey(Base64.decode("cnlNUWJUd1FOMEFGeE5rcw==".getBytes("EUC-KR")));
-            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
-
-//            cipher.setKey(Base64.decode("Z2FsYXhpYW1vbmV5dHJlZQ==".getBytes("EUC-KR")));
-//            cipher.setIV("1234567890123456".getBytes("EUC-KR"));
+            cipher.setKey(Base64.decode(KEY.getBytes("EUC-KR")));
+            cipher.setIV(IV.getBytes("EUC-KR"));
 
             Base64Encoder encoder = new Base64Encoder();
             String encodedBody = requestHeader + encoder.encodeBuffer(cipher.encrypt(bodyPlain.getBytes("EUC-KR")));

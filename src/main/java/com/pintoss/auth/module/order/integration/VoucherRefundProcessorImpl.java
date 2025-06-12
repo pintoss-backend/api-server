@@ -1,6 +1,6 @@
 package com.pintoss.auth.module.order.integration;
 
-import com.pintoss.auth.common.client.billgate.RefundClient;
+import com.pintoss.auth.common.client.billgate.RefundApiClient;
 import com.pintoss.auth.common.client.billgate.RefundRequestBuilder;
 import com.pintoss.auth.common.client.billgate.RefundResponse;
 import com.pintoss.auth.module.order.application.flow.VoucherRefundProcessor;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class VoucherRefundProcessorImpl implements VoucherRefundProcessor {
 
-    private final RefundClient refundClient;
+    private final RefundApiClient refundApiClient;
 
     @Override
     public RefundResult refund(String orderNo, String approvalCode) {
         String requestHeader = RefundRequestBuilder.buildHeader(orderNo);
         String requestBody = RefundRequestBuilder.buildBody(approvalCode);
 
-        RefundResponse refundResponse = refundClient.execute(requestHeader, requestBody);
+        RefundResponse refundResponse = refundApiClient.execute(requestHeader, requestBody);
         if (refundResponse.getResponseCode().equals("0000")) {
             log.info("[환불 성공] orderNo: {}, approvalCode: {}, response: {}", orderNo, approvalCode, refundResponse);
             return RefundResult.success();
