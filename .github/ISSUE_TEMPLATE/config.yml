@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🙋 질문은 Discussions로
+    url: https://github.com/your-org/your-repo/discussions
+    about: 일반적인 질문은 Discussions에서 다뤄주세요.
