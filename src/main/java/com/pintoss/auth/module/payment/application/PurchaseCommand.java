@@ -18,5 +18,6 @@ public class PurchaseCommand {
     private String transactionId;   // 거래번호
     private String responseCode;    // 응답 코드
     private String message;         // 암호화 메시지 ( 성공 시 전달 )
+    private String getParamsHp; // 휴대폰 번호 (결제 수단이 휴대폰 결제인 경우에만 사용됨)
 
 }

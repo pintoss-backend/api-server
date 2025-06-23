@@ -23,6 +23,7 @@ public class PaymentCallbackRequest {
     private String RESERVED2;                 // 예비 필드 2
     private String RESERVED3;                 // 예비 필드 3
     private String CERT_TYPE;                 // (신용카드 응답 추가) 네이버페이 인증구분 (4자)
+    private String GET_PARAMS_HP;
 
     public PurchaseCommand toPurchaseCommand() {
         return PurchaseCommand.builder()
@@ -33,6 +34,7 @@ public class PaymentCallbackRequest {
             .transactionId(TRANSACTION_ID)
             .responseCode(RESPONSE_CODE)
             .message(MESSAGE)
+            .getParamsHp(GET_PARAMS_HP)
             .build();
     }
 }

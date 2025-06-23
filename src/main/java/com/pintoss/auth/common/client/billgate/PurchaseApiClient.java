@@ -5,8 +5,7 @@ import com.galaxia.api.crypto.Base64Encoder;
 import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
-import com.pintoss.auth.module.order.integration.PurchaseRequestBuilder;
-import com.pintoss.auth.module.order.integration.PurchaseResponse;
+import com.pintoss.auth.module.order.integration.PurchaseResult;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class PurchaseApiClient {
 
+    private static final String ENCODING = "EUC-KR";
     private final GalaxiaClient client;
     private final String KEY;
     private final String IV;
@@ -27,22 +27,45 @@ public class PurchaseApiClient {
         this.IV = properties.getSecret().getIv();
     }
 
-    public PurchaseResponse purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
-//        return PurchaseResponse.builder().cardNo(generateRandomString()).build();
+//    public PurchaseResult execute(String orderNo, String transId, String mid, PaymentMethodType paymentMethodType, String productCode) {
+//        try {
+//            String request = buildEncryptedRequest(orderNo, transId, mid, paymentMethodType, productCode);
+//        } catch (Exception e) {
+//            log.error("갤럭시아머니트리 구매 요청 생성 중 오류 발생: {}", e.getMessage(), e);
+//            return null;
+//        }
+//    }
+//
+//
+//    private String buildEncryptedRequest(String orderNo, String transactionId, String mid, PaymentMethodType paymentMethodType, String productCode) throws Exception {
+//        String header = PurchaseRequestBuilder.buildHeader(orderNo);
+//        String body = PurchaseRequestBuilder.buildBody(orderNo, transactionId, mid, salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
+//
+//        GalaxiaCipher cipher = new Seed();
+//        cipher.setKey(Base64.decode(KEY.getBytes(ENCODING)));
+//        cipher.setIV(IV.getBytes(ENCODING));
+//
+//        byte[] encryptedBody = cipher.encrypt(body.getBytes(ENCODING));
+//
+//        Base64Encoder encoder = new Base64Encoder();
+//        return header + encoder.encodeBuffer(encryptedBody);
+//    }
+
+    public PurchaseResult purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
         try {
             String requestHeader = PurchaseRequestBuilder.buildHeader(orderNo);
             String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo,transactionId, mid,salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
 
             GalaxiaCipher cipher = new Seed();
-            cipher.setKey(Base64.decode(KEY.getBytes("EUC-KR")));
-            cipher.setIV(IV.getBytes("EUC-KR"));
+            cipher.setKey(Base64.decode(KEY.getBytes(ENCODING)));
+            cipher.setIV(IV.getBytes(ENCODING));
 
             Base64Encoder encoder = new Base64Encoder();
             String encodedBody = requestHeader + encoder.encodeBuffer(cipher.encrypt(bodyPlain.getBytes("EUC-KR")));
 
-            byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes("EUC-KR").length, 4) + encodedBody).getBytes("EUC-KR");
+            byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes(ENCODING).length, 4) + encodedBody).getBytes(ENCODING);
             byte[] fullMessage = client.sendEncryptedRequest(payload);
-            String response = new String(fullMessage, "EUC-KR");
+            String response = new String(fullMessage, ENCODING);
             String plainHeader = response.substring(0,98);
             String base64EncryptedBody = response.substring(98);
             BASE64Decoder decoder = new BASE64Decoder();
@@ -60,7 +83,7 @@ public class PurchaseApiClient {
             }
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
-            String plainBody = new String(cleanBytes, "EUC-KR");
+            String plainBody = new String(cleanBytes, ENCODING);
             log.info("[DEBUG] 복호화 결과 (plainBody): " + plainBody);
             log.debug("[DEBUG] 복호화 결과(base64EncryptedBody): " + base64EncryptedBody);
             return parsePurchaseResponse(plainBody);
@@ -70,8 +93,8 @@ public class PurchaseApiClient {
         }
     }
 
-    private PurchaseResponse parsePurchaseResponse(String plain) {
-        PurchaseResponse res = new PurchaseResponse();
+    private PurchaseResult parsePurchaseResponse(String plain) {
+        PurchaseResult res = new PurchaseResult();
         int idx = 0;
         res.setResponseCode(plain.substring(idx, idx += 4));
         res.setSuccess(res.getResponseCode().equals("0000")? true : false);

@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.integration;
+package com.pintoss.auth.common.client.billgate;
 
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.time.LocalDateTime;

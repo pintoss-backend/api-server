@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseResponse {
+public class PurchaseResult {
     private boolean isSuccess;
     private String responseCode;
     private String approvalCode;
