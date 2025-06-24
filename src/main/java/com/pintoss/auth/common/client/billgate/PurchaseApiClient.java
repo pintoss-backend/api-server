@@ -8,7 +8,10 @@ import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.module.order.integration.PurchaseRequestBuilder;
 import com.pintoss.auth.module.order.integration.PurchaseResponse;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
@@ -62,43 +65,54 @@ public class PurchaseApiClient {
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
             String plainBody = new String(cleanBytes, "EUC-KR");
             log.info("[DEBUG] 복호화 결과 (plainBody): " + plainBody);
-            log.debug("[DEBUG] 복호화 결과(base64EncryptedBody): " + base64EncryptedBody);
-            return parsePurchaseResponse(plainBody);
+            return parsePurchaseResponse(cleanBytes);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private PurchaseResponse parsePurchaseResponse(String plain) {
+    private PurchaseResponse parsePurchaseResponse(byte[] plainBytes) throws UnsupportedEncodingException {
         PurchaseResponse res = new PurchaseResponse();
         int idx = 0;
-        res.setResponseCode(plain.substring(idx, idx += 4));
-        res.setSuccess(res.getResponseCode().equals("0000")? true : false);
-        res.setApprovalCode(plain.substring(idx, idx += 32).trim());
-        res.setOpenFlag(plain.substring(idx, idx += 1));
-        res.setCardNo(plain.substring(idx, idx += 32).trim());
-        res.setRemainPrice(plain.substring(idx, idx += 8).trim());
-        res.setItemName(plain.substring(idx, idx += 32).trim());
-        log.info("[Item Name] {}", res.getItemName());
-        res.setPrintFlag1(plain.substring(idx, idx += 1));
-        log.info("[Print Flag 1] {}", res.getPrintFlag1());
-        res.setPrintMsg1(plain.substring(idx, idx += 32).trim());
-        log.info("[Print Msg 1] {}", res.getPrintMsg1());
-        res.setPrintFlag2(plain.substring(idx, idx += 1));
-        log.info("[Print Flag 2] {}", res.getPrintFlag2());
-        res.setPrintMsg2(plain.substring(idx, idx += 32).trim());
-        log.info("[Print Msg 2] {}", res.getPrintMsg2());
-        res.setPrintFlag3(plain.substring(idx, idx += 1));
-        res.setPrintMsg3(plain.substring(idx, idx += 32).trim());
-        res.setPrintFlag4(plain.substring(idx, idx += 1));
-        res.setPrintMsg4(plain.substring(idx, idx += 32).trim());
-        res.setPrintFlag5(plain.substring(idx, idx += 1));
-        res.setPrintMsg5(plain.substring(idx, idx += 32).trim());
+
+        res.setResponseCode(readField(plainBytes, idx, 4)); idx += 4;
+        res.setSuccess("0000".equals(res.getResponseCode()));
+        res.setApprovalCode(readField(plainBytes, idx, 32)); idx += 32;
+        res.setOpenFlag(readField(plainBytes, idx, 1)); idx += 1;
+        res.setCardNo(readField(plainBytes, idx, 32)); idx += 32;
+        res.setRemainPrice(readField(plainBytes, idx, 8)); idx += 8;
+        res.setItemName(readField(plainBytes, idx, 32)); idx += 32;
+
+        res.setPrintFlag1(readField(plainBytes, idx, 1)); idx += 1;
+        res.setPrintMsg1(readField(plainBytes, idx, 32)); idx += 32;
+        if(res.getItemName().equals("도서문화상품권")) {
+            String msg = res.getPrintMsg1();
+            Matcher matcher = Pattern.compile("비밀번호[:：\\s]*([0-9]{4})").matcher(msg);
+            if(matcher.find()) {
+                String password = matcher.group();
+                res.setCardNo(res.getCardNo()+"-"+password);
+            }
+        }
+        res.setPrintFlag2(readField(plainBytes, idx, 1)); idx += 1;
+        res.setPrintMsg2(readField(plainBytes, idx, 32)); idx += 32;
+
+        res.setPrintFlag3(readField(plainBytes, idx, 1)); idx += 1;
+        res.setPrintMsg3(readField(plainBytes, idx, 32)); idx += 32;
+
+        res.setPrintFlag4(readField(plainBytes, idx, 1)); idx += 1;
+        res.setPrintMsg4(readField(plainBytes, idx, 32)); idx += 32;
+
+        res.setPrintFlag5(readField(plainBytes, idx, 1)); idx += 1;
+        res.setPrintMsg5(readField(plainBytes, idx, 32)); idx += 32;
 
         log.debug("[Galaxia 응답] 승인번호: {}, 카드번호: {}, 잔액: {}, 상품명: {}, 응답코드: {}",
             res.getApprovalCode(), res.getCardNo(), res.getRemainPrice(), res.getItemName(), res.getResponseCode());
 
         return res;
+    }
+
+    private String readField(byte[] bytes, int offset, int length) throws UnsupportedEncodingException {
+        return new String(Arrays.copyOfRange(bytes, offset, offset + length), "EUC-KR").trim();
     }
 }
