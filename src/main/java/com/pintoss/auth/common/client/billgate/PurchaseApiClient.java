@@ -90,7 +90,7 @@ public class PurchaseApiClient {
             String msg = res.getPrintMsg1();
             Matcher matcher = Pattern.compile("비밀번호[:：\\s]*([0-9]{4})").matcher(msg);
             if(matcher.find()) {
-                String password = matcher.group();
+                String password = matcher.group(1); // 괄호로 캡처한 숫자 4자리
                 res.setCardNo(res.getCardNo()+"-"+password);
             }
         }
