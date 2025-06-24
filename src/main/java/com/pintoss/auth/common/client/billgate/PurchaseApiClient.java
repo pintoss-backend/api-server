@@ -80,10 +80,15 @@ public class PurchaseApiClient {
         res.setCardNo(plain.substring(idx, idx += 32).trim());
         res.setRemainPrice(plain.substring(idx, idx += 8).trim());
         res.setItemName(plain.substring(idx, idx += 32).trim());
+        log.info("[Item Name] {}", res.getItemName());
         res.setPrintFlag1(plain.substring(idx, idx += 1));
+        log.info("[Print Flag 1] {}", res.getPrintFlag1());
         res.setPrintMsg1(plain.substring(idx, idx += 32).trim());
+        log.info("[Print Msg 1] {}", res.getPrintMsg1());
         res.setPrintFlag2(plain.substring(idx, idx += 1));
+        log.info("[Print Flag 2] {}", res.getPrintFlag2());
         res.setPrintMsg2(plain.substring(idx, idx += 32).trim());
+        log.info("[Print Msg 2] {}", res.getPrintMsg2());
         res.setPrintFlag3(plain.substring(idx, idx += 1));
         res.setPrintMsg3(plain.substring(idx, idx += 32).trim());
         res.setPrintFlag4(plain.substring(idx, idx += 1));
