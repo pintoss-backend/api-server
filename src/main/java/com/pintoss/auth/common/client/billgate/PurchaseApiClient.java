@@ -6,6 +6,7 @@ import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.module.order.integration.PurchaseRequestBuilder;
+import com.pintoss.auth.module.order.integration.PurchaseResult;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class PurchaseApiClient {
         this.IV = properties.getSecret().getIv();
     }
 
-    public GalaxiaPurchaseResponse purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
+    public PurchaseResult purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
         try {
             String requestHeader = PurchaseRequestBuilder.buildHeader(orderNo);
             String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo,transactionId, mid,salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
@@ -60,7 +61,7 @@ public class PurchaseApiClient {
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
             String plainBody = new String(cleanBytes, "EUC-KR");
             log.info("[DEBUG] 복호화 결과 (plainBody): " + plainBody);
-            return GalaxiaPurchaseResponse.fromBytes(cleanBytes);
+            return GalaxiaPurchaseResponse.fromBytes(cleanBytes).toResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
