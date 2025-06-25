@@ -1,10 +1,10 @@
 package com.pintoss.auth.module.order.application;
 
+import com.pintoss.auth.common.client.billgate.PurchaseApiClient;
 import com.pintoss.auth.module.order.application.flow.OrderReader;
 import com.pintoss.auth.module.order.domain.Order;
 import com.pintoss.auth.module.order.domain.OrderItem;
-import com.pintoss.auth.module.order.integration.PurchaseResponse;
-import com.pintoss.auth.common.client.billgate.PurchaseApiClient;
+import com.pintoss.auth.module.order.integration.PurchaseResult;
 import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class OrderService {
         Order order = orderReader.getByOrderNo(orderNo);
 
         for (OrderItem orderItem : order.getOrderItems()) {
-            PurchaseResponse purchaseResponse = purchaseApiClient.purchase(
+            PurchaseResult purchaseResult = purchaseApiClient.purchase(
                 orderNo,
                 transId,
                 mId,
@@ -43,9 +43,9 @@ public class OrderService {
                 orderItem.getProductCode()
 //                "1104501710200000"
             );
-            if (purchaseResponse.isSuccess()) {
-                orderItem.assignPinNum(purchaseResponse.getCardNo());
-                orderItem.assignApprovalCode(purchaseResponse.getApprovalCode());
+            if (purchaseResult.isSuccess()) {
+                orderItem.assignPinNum(purchaseResult.getPinNo());
+                orderItem.assignApprovalCode(purchaseResult.getApprovalCode());
                 orderItem.issued();
             }else{
                 orderItem.issueFailed();
