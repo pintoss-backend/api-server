@@ -1,4 +1,4 @@
-package com.pintoss.auth.module.order.integration;
+package com.pintoss.auth.common.client.billgate;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseResponse {
+public class GalaxiaPurchaseResponse {
     private boolean isSuccess;
     private String responseCode;
     private String approvalCode;
@@ -36,9 +36,9 @@ public class PurchaseResponse {
     private String printFlag5;
     private String printMsg5;
 
-    public static PurchaseResponse fromBytes(byte[] plainBytes)
+    public static GalaxiaPurchaseResponse fromBytes(byte[] plainBytes)
         throws UnsupportedEncodingException {
-        PurchaseResponse res = new PurchaseResponse();
+        GalaxiaPurchaseResponse res = new GalaxiaPurchaseResponse();
         int idx = 0;
 
         try {
