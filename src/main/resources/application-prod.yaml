@@ -1,0 +1,33 @@
+spring:
+  config:
+    active:
+      on-profile: prod
+    import: application-jwt.yaml, application-nice.yaml, application-oauth.yaml, application-gmail.yaml, galaxia-prod.yaml
+  application:
+    name : giftmall
+  datasource:
+    username: pintoss
+    password: cho459800
+    url: jdbc:mariadb://pintoss-db.ch2uwekqo8yv.ap-northeast-2.rds.amazonaws.com:3306/pintoss?useUnicode=true&characterEncoding=utf8mb4&connectionCollation=utf8mb4_general_ci
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        connection:
+          CharSet: utf8mb4
+          charsetEncoding: utf8mb4
+          useUnicode: true
+        highlight_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
+logging:
+  level:
+    root: info
+    com.pintoss.auth: info
+    org.springframework.web: warn
+    org.hibernate.SQL: debug
+    org.hibernate.type: off
+    org.hibernate.orm.jdbc.bind: off
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
