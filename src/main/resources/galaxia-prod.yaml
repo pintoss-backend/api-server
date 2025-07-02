@@ -1,4 +1,5 @@
 galaxia:
+  service-id: "M2483583"
   secret:
     key: "cnlNUWJUd1FOMEFGeE5rcw=="
     iv: "1234567890123456"
@@ -6,3 +7,6 @@ galaxia:
     host: "222.122.229.247"
     port: 21070
     time-out: 2000
+  payment:
+    config-file-path: "config-prod.ini"
+
