@@ -19,6 +19,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,15 +27,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ApprovalServiceImpl implements PaymentApprovalService {
 
+    @Value("${galaxia.payment.config-file-path}")
+    private String configFilePath;
     private final ApprovalResponseParserFactory responseParserFactory;
 
     @Override
     public PaymentApprovalResponse approval(PaymentApprovalRequest req) {
         try {
             // 1. 리소스에서 config.ini InputStream으로 읽기
-            InputStream configInputStream = getClass().getClassLoader().getResourceAsStream("config.ini");
+            InputStream configInputStream = getClass().getClassLoader().getResourceAsStream(configFilePath);
             if (configInputStream == null) {
-                log.error("[결제 승인 실패] 설정 파일 (config.ini) 누락 - orderNo: {}, serviceCode={}", req.getOrderNo(), req.getServiceCode());
+                log.error("[결제 승인 실패] 설정 파일 (config-prod.ini) 누락 - 주문 번호: {}, 서비스 코드={}", req.getOrderNo(), req.getServiceCode());
                 throw new InternalServerException(ErrorCode.BILLGATE_CONFIG_FILE_NOT_FOUND);
             }
 

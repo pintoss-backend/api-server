@@ -34,4 +34,8 @@ public class PaymentDomain {
         this.detailMessage = detailMessage;
         this.json = json;
     }
+
+    public void assignId(Long id) {
+        this.id = id;
+    }
 }

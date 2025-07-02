@@ -5,9 +5,10 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
-public class PaymentSuccessedEvent {
+@AllArgsConstructor
+public class PaymentCompletedEvent {
+    private final boolean isSuccess;
     private final Long paymentId;
     private final String orderNo;
     private final String transactionId;

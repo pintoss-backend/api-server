@@ -112,4 +112,8 @@ public class OrderItem {
     public void issueFailed() {
         this.status = OrderItemStatus.ISSUE_FAILED;
     }
+
+    public void updateStatus(OrderItemStatus status) {
+        this.status = status;
+    }
 }

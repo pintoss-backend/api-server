@@ -1,9 +1,12 @@
 package com.pintoss.auth.module.payment.application;
 
+import com.pintoss.auth.common.event.PaymentCompletedEvent;
 import com.pintoss.auth.module.order.application.flow.OrderReader;
 import com.pintoss.auth.module.order.domain.Order;
 import com.pintoss.auth.module.payment.domain.PaymentDomain;
+import com.pintoss.auth.module.payment.domain.PaymentStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,7 @@ public class PaymentService {
     private final PaymentApprovalService paymentApprovalService;
     private final OrderReader orderReader;
     private final PaymentAdder paymentAdder;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public void purchase(PurchaseCommand command) {
@@ -35,7 +39,20 @@ public class PaymentService {
             approvalResponse.getPaymentMethodType(),
             approvalResponse.getDetailResponseMessage(),
             approvalResponse.getJson()
-            );
+        );
         paymentAdder.add(payment);
+
+        eventPublisher.publishEvent(
+            new PaymentCompletedEvent(
+                payment.getStatus() == PaymentStatus.SUCCESS ? true : false,
+                payment.getId(),
+                payment.getOrderNo(),
+                payment.getTransactionId(),
+                payment.getServiceId(),
+                payment.getAuthAmount(),
+                payment.getAuthDate(),
+                payment.getPaymentMethodType()
+            )
+        );
     }
 }

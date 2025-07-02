@@ -12,6 +12,7 @@ import com.pintoss.auth.module.order.domain.OrderDetail;
 import com.pintoss.auth.module.order.domain.OrderSearchResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/orders")
 public class OrderController {
 
+    @Value("${galaxia.service-id}")
+    private String serviceId;
     private final OrderQueryService orderQueryService;
     private final OrderCreateService orderCreateService;
     private final OrderCancelService orderCancelService;
@@ -53,8 +56,7 @@ public class OrderController {
         Order saveOrder = orderCreateService.create(request.getOrderItems());
 
         OrderCreateResponse response = OrderCreateResponse.builder()
-//            .serviceId("glx_api")
-            .serviceId("M2483583")
+            .serviceId(serviceId)
             .productName(saveOrder.getOrderName())
             .orderNo(saveOrder.getOrderNo())
             .ordererId(saveOrder.getOrdererId())

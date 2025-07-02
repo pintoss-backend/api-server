@@ -85,6 +85,33 @@ public class Order {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public void updateItemStatus(Long orderItemId, OrderItemStatus status) {
+        OrderItem item = orderItems.stream()
+            .filter(i -> i.getId().equals(orderItemId))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("OrderItem not found"));
+        item.updateStatus(status);
+    }
+
+    public void syncOverallStatus() {
+        long total = orderItems.size();
+        long successCount = orderItems.stream().filter(i -> i.getStatus() == OrderItemStatus.ISSUED).count();
+        long failedCount = orderItems.stream().filter(i -> i.getStatus() == OrderItemStatus.ISSUE_FAILED).count();
+        long pendingCount = orderItems.stream().filter(i -> i.getStatus() == OrderItemStatus.PROCESSING).count();
+
+        if (successCount == 0 && failedCount == 0 && pendingCount == total) {
+            this.status = OrderStatus.ISSUE_PROCESSING;
+        } else if (successCount == total) {
+            this.status = OrderStatus.ISSUED;
+        } else if (failedCount == total) {
+            this.status = OrderStatus.ISSUE_FAILED;
+        } else if (successCount > 0 && failedCount > 0) {
+            this.status = OrderStatus.ISSUED_PARTIAL;
+        } else {
+            this.status = OrderStatus.PENDING;
+        }
+    }
+
     private String generateOrderNo() {
         String datePart = LocalDate.now().format(DATE_FORMAT); // "YYYYMMdd"
         int randomPart = 10000000 + RANDOM.nextInt(90000000); // 8자리 랜덤 숫자
@@ -107,6 +134,13 @@ public class Order {
         }
     }
 
+    public void markAsPaymentFailed(){
+        if (this.status == OrderStatus.PAYMENT_FAILED) {
+            throw new BadRequestException(ErrorCode.ORDER_ALREADY_PAYMENT_FAILED);
+        }
+        this.status = OrderStatus.PAYMENT_FAILED;
+        this.updatedAt = LocalDateTime.now();
+    }
     public void cancel() {
         if (this.status == OrderStatus.CANCELED) {
             throw new BadRequestException(ErrorCode.ORDER_ALREADY_CANCELED);
