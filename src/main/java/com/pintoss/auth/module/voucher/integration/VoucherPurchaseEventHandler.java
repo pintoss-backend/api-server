@@ -17,15 +17,16 @@ public class VoucherPurchaseEventHandler {
 
     @EventListener
     public void handle(VoucherPurchaseEvent event) {
-        log.info("[상품권 구매 요청] 주문번호: {}, 주문상품ID: {}, 트랜잭션ID: {}, mId: {}, 가격: {}, 결제수단: {}, 상품번호: {}",
-            event.getOrderNo(), event.getOrderItemId(), event.getTransactionId(), event.getMId(), event.getAmount(), event.getPaymentMethodType(), event.getProductCode());
+        log.info("[상품권 구매 요청] 주문번호: {}, 주문상품ID: {}, 트랜잭션ID: {}, mId: {}, 결제 가격: {}, 상품 가격: {}, 결제수단: {}, 상품번호: {}",
+            event.getOrderNo(), event.getOrderItemId(), event.getTransactionId(), event.getMId(), event.getPaymentPrice(), event.getSalePrice(), event.getPaymentMethodType(), event.getProductCode());
 
         voucherPurchaseService.purchase(
             event.getOrderNo(),
             event.getOrderItemId(),
             event.getTransactionId(),
             event.getMId(),
-            event.getAmount(),
+            event.getPaymentPrice(),
+            event.getSalePrice(),
             event.getPaymentMethodType(),
             event.getProductCode()
         );

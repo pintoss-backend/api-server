@@ -22,7 +22,8 @@ public class VoucherPurchaseService {
         Long orderItemId,
         String transactionId,
         String mId,
-        Long price,
+        Long paymentPrice,
+        Long salePrice,
         PaymentMethodType paymentMethodType,
         String productCode
         ) {
@@ -31,9 +32,9 @@ public class VoucherPurchaseService {
             orderNo,
             transactionId,
             mId,
-            price,
+            paymentPrice,
             paymentMethodType,
-            price,
+            salePrice,
             productCode
 //                "1104501710200000"
         );

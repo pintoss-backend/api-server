@@ -11,7 +11,8 @@ public class VoucherPurchaseEvent {
     private final Long orderItemId;
     private final String transactionId;
     private final String mId;
-    private final Long amount;
+    private final Long paymentPrice;
+    private final Long salePrice;
     private final PaymentMethodType paymentMethodType;
     private final String productCode;
 }

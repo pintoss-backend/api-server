@@ -21,7 +21,7 @@ public class OrderPaymentResultService {
     }
 
     @Transactional
-    public void completed(boolean success, String orderNo, String transactionId, String mId, Long amount, PaymentMethodType paymentMethodType, Long paymentId) {
+    public void completed(boolean success, String orderNo, String transactionId, String mId, Long paymentPrice, PaymentMethodType paymentMethodType, Long paymentId) {
         Order order = orderReader.getByOrderNo(orderNo);
 
         order.assignPaymentId(paymentId);
@@ -39,7 +39,8 @@ public class OrderPaymentResultService {
                 item.getId(),
                 transactionId,
                 mId,
-                amount,
+                paymentPrice,
+                item.getPrice(),
                 paymentMethodType,
                 item.getProductCode()
             );

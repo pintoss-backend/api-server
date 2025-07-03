@@ -27,10 +27,10 @@ public class PurchaseApiClient {
         this.IV = properties.getSecret().getIv();
     }
 
-    public PurchaseResult purchase(String orderNo, String transactionId, String mid, Long amount, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
+    public PurchaseResult purchase(String orderNo, String transactionId, String mid, Long paymentPrice, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
         try {
             String requestHeader = PurchaseRequestBuilder.buildHeader(orderNo);
-            String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo,transactionId, mid,salePrice.toString(), paymentMethodType, salePrice.toString(), productCode);
+            String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo, transactionId, mid, paymentPrice.toString(), paymentMethodType, salePrice.toString(), productCode);
 
             GalaxiaCipher cipher = new Seed();
             cipher.setKey(Base64.decode(KEY.getBytes("EUC-KR")));
