@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.auth.dto;
 
-import com.pintoss.auth.module.user.application.dto.LoginCommand;
+import com.pintoss.auth.core.user.application.dto.LoginCommand;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

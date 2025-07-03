@@ -2,9 +2,9 @@ package com.pintoss.auth.api.user;
 
 import com.pintoss.auth.api.user.dto.PasswordUpdateRequest;
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.user.domain.UserInfo;
-import com.pintoss.auth.module.user.application.PasswordUpdateUseCase;
-import com.pintoss.auth.module.user.application.UserQueryUseCase;
+import com.pintoss.auth.core.user.domain.UserInfo;
+import com.pintoss.auth.core.user.application.PasswordUpdateUseCase;
+import com.pintoss.auth.core.user.application.UserQueryUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

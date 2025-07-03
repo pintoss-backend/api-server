@@ -1,6 +1,6 @@
 package com.pintoss.auth.common.client.billgate;
 
-import com.pintoss.auth.module.order.integration.PurchaseResult;
+import com.pintoss.auth.core.order.integration.PurchaseResult;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.regex.Matcher;

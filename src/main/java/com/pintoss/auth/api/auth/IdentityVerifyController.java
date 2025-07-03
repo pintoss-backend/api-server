@@ -2,9 +2,9 @@ package com.pintoss.auth.api.auth;
 
 import com.pintoss.auth.api.auth.dto.IdentityVerifyPurpose;
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.user.application.IdentityVerificationUseCase;
-import com.pintoss.auth.module.user.application.dto.NiceEncryptedDataResult;
-import com.pintoss.auth.module.user.application.dto.NiceVerificationResult;
+import com.pintoss.auth.core.user.application.IdentityVerificationUseCase;
+import com.pintoss.auth.core.user.application.dto.NiceEncryptedDataResult;
+import com.pintoss.auth.core.user.application.dto.NiceVerificationResult;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;

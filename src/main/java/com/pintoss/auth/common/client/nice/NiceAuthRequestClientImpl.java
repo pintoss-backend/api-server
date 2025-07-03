@@ -12,8 +12,8 @@ import com.pintoss.auth.common.client.nice.store.NiceApiCryptoToken;
 import com.pintoss.auth.common.client.nice.provider.NiceApiTokenProvider;
 import com.pintoss.auth.common.client.nice.util.NiceAuthCommandFactory;
 import com.pintoss.auth.api.auth.dto.IdentityVerifyPurpose;
-import com.pintoss.auth.module.user.application.dto.NiceEncryptedDataResult;
-import com.pintoss.auth.module.user.core.NiceAuthRequestClient;
+import com.pintoss.auth.core.user.application.dto.NiceEncryptedDataResult;
+import com.pintoss.auth.core.user.core.NiceAuthRequestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

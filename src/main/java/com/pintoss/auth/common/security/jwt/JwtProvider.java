@@ -1,6 +1,6 @@
 package com.pintoss.auth.common.security.jwt;
 
-import com.pintoss.auth.module.user.domain.User;
+import com.pintoss.auth.core.user.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

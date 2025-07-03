@@ -1,9 +1,9 @@
 package com.pintoss.auth.api.order;
 
 import com.pintoss.auth.common.paging.SortDirection;
-import com.pintoss.auth.module.order.domain.OrderPageCommand;
-import com.pintoss.auth.module.order.domain.OrderSortKey;
-import com.pintoss.auth.module.order.domain.OrderStatus;
+import com.pintoss.auth.core.order.domain.OrderPageCommand;
+import com.pintoss.auth.core.order.domain.OrderSortKey;
+import com.pintoss.auth.core.order.domain.OrderStatus;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.Getter;

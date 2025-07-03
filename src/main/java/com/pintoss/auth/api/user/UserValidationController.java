@@ -2,8 +2,8 @@ package com.pintoss.auth.api.user;
 
 import com.pintoss.auth.api.user.dto.FindAccountResponse;
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.module.user.application.FindUserAccountUseCase;
-import com.pintoss.auth.module.user.application.UserValidationUseCase;
+import com.pintoss.auth.core.user.application.FindUserAccountUseCase;
+import com.pintoss.auth.core.user.application.UserValidationUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
