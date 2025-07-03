@@ -7,6 +7,7 @@ import com.pintoss.auth.module.order.application.flow.OrderValidator;
 import com.pintoss.auth.module.order.domain.Order;
 import com.pintoss.auth.module.order.domain.OrderItem;
 import com.pintoss.auth.module.order.domain.OrderItemRequest;
+import com.pintoss.auth.module.payment.application.PaymentMethodType;
 import com.pintoss.auth.module.voucher.model.Voucher;
 import com.pintoss.auth.module.voucher.usecase.service.VoucherReader;
 import java.util.List;
@@ -22,7 +23,7 @@ public class OrderCreateService {
     private final OrderAdder orderAdder;
     private final OrderValidator orderValidator;
 
-    public Order create(List<OrderItemRequest> orderItemRequest) {
+    public Order create(List<OrderItemRequest> orderItemRequest, PaymentMethodType paymentMethod) {
 
         // 1. 상품권 조회
         List<Voucher> vouchers = voucherReader.getAll(orderItemRequest.stream()
@@ -42,7 +43,8 @@ public class OrderCreateService {
             SecurityContextUtils.getEmail(),
             SecurityContextUtils.getPhone(),
             generateProductName(orderItems),
-            orderItems
+            orderItems,
+            paymentMethod
         );
 
         // 5. 주문 저장
