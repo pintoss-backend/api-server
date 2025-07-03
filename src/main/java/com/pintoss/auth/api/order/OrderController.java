@@ -53,7 +53,7 @@ public class OrderController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping
     public ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request) {
-        Order saveOrder = orderCreateService.create(request.getOrderItems());
+        Order saveOrder = orderCreateService.create(request.getOrderItems(), request.getPaymentMethod());
 
         OrderCreateResponse response = OrderCreateResponse.builder()
             .serviceId(serviceId)
