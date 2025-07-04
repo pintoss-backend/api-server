@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.cart.dto;
 
-import com.pintoss.auth.core.cart.application.model.CartItemResult;
+import com.pintoss.auth.core.cart.domain.CartItemResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.voucher.store;
 
-import com.pintoss.auth.core.voucher.model.Voucher;
+import com.pintoss.auth.core.voucher.domain.Voucher;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

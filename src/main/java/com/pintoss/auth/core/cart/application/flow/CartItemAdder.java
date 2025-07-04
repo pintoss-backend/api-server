@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.cart.application.flow;
 
-import com.pintoss.auth.core.cart.application.model.CartItem;
+import com.pintoss.auth.core.cart.domain.CartItem;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

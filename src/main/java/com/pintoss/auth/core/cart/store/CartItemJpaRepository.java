@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.cart.store;
 
-import com.pintoss.auth.core.cart.application.model.CartItem;
+import com.pintoss.auth.core.cart.domain.CartItem;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

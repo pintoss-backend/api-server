@@ -4,9 +4,9 @@ package com.pintoss.auth.core.voucher.store;
 import static com.pintoss.auth.core.voucher.store.QVoucherEntity.voucherEntity;
 import static com.pintoss.auth.core.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
 
-import com.pintoss.auth.core.voucher.usecase.dto.QVoucherIssuerResult;
-import com.pintoss.auth.core.voucher.usecase.dto.VoucherIssuerDetailResult;
-import com.pintoss.auth.core.voucher.usecase.dto.VoucherIssuerResult;
+import com.pintoss.auth.core.voucher.application.dto.QVoucherIssuerResult;
+import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
+import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import java.util.Optional;

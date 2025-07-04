@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.store;
 
-import com.pintoss.auth.core.voucher.model.Voucher;
-import com.pintoss.auth.core.voucher.usecase.service.VoucherRepository;
+import com.pintoss.auth.core.voucher.domain.Voucher;
+import com.pintoss.auth.core.voucher.application.service.VoucherRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
