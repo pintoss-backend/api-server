@@ -4,7 +4,7 @@ package com.pintoss.auth.core.voucher.store;
 import static com.pintoss.auth.core.voucher.store.QVoucherEntity.voucherEntity;
 import static com.pintoss.auth.core.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
 
-import com.pintoss.auth.core.voucher.model.Voucher;
+import com.pintoss.auth.core.voucher.domain.Voucher;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;

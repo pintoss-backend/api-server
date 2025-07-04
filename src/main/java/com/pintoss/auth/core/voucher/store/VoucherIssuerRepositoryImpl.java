@@ -1,9 +1,9 @@
 package com.pintoss.auth.core.voucher.store;
 
-import com.pintoss.auth.core.voucher.model.VoucherIssuer;
-import com.pintoss.auth.core.voucher.usecase.service.VoucherIssuerRepository;
-import com.pintoss.auth.core.voucher.usecase.dto.VoucherIssuerDetailResult;
-import com.pintoss.auth.core.voucher.usecase.dto.VoucherIssuerResult;
+import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
+import com.pintoss.auth.core.voucher.application.service.VoucherIssuerRepository;
+import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
+import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

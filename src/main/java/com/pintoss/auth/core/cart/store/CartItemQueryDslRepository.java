@@ -4,8 +4,8 @@ import static com.pintoss.auth.core.cart.application.model.QCartItem.cartItem;
 import static com.pintoss.auth.core.voucher.store.QVoucherEntity.voucherEntity;
 import static com.pintoss.auth.core.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
 
-import com.pintoss.auth.core.cart.application.model.CartItem;
-import com.pintoss.auth.core.cart.application.model.CartItemResult;
+import com.pintoss.auth.core.cart.domain.CartItem;
+import com.pintoss.auth.core.cart.domain.CartItemResult;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.cart.application.flow;
 
-import com.pintoss.auth.core.cart.application.model.CartItem;
-import com.pintoss.auth.core.cart.application.model.CartItemResult;
+import com.pintoss.auth.core.cart.domain.CartItem;
+import com.pintoss.auth.core.cart.domain.CartItemResult;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

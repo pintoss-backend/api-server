@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.cart.application;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
-import com.pintoss.auth.core.cart.application.model.CartItem;
+import com.pintoss.auth.core.cart.domain.CartItem;
 import com.pintoss.auth.core.cart.application.flow.CartItemReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

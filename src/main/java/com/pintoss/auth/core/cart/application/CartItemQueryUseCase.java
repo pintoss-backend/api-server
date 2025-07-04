@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.cart.application;
 
 import com.pintoss.auth.common.security.SecurityContextUtils;
-import com.pintoss.auth.core.cart.application.model.CartItemResult;
+import com.pintoss.auth.core.cart.domain.CartItemResult;
 import com.pintoss.auth.core.cart.application.flow.CartItemViewer;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

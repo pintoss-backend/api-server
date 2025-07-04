@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.voucher.store;
 
-import com.pintoss.auth.core.voucher.model.ContactInfo;
-import com.pintoss.auth.core.voucher.model.Discount;
-import com.pintoss.auth.core.voucher.model.VoucherIssuer;
+import com.pintoss.auth.core.voucher.domain.ContactInfo;
+import com.pintoss.auth.core.voucher.domain.Discount;
+import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;

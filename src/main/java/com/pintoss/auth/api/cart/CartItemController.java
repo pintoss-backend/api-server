@@ -8,7 +8,7 @@ import com.pintoss.auth.core.cart.application.CartItemDeleteUseCase;
 import com.pintoss.auth.core.cart.application.CartItemUpdateUseCase;
 import com.pintoss.auth.core.cart.application.CartItemQueryUseCase;
 import com.pintoss.auth.core.cart.application.dto.CartItemAddRequest;
-import com.pintoss.auth.core.cart.application.model.CartItemResult;
+import com.pintoss.auth.core.cart.domain.CartItemResult;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

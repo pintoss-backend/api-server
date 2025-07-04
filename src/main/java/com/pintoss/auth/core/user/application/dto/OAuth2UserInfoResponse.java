@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.user.application.dto;
 
-import com.pintoss.auth.common.client.kakao.KakaoUserInfoResponse;
-import com.pintoss.auth.common.client.naver.NaverUserInfoResponse;
+import com.pintoss.auth.client.kakao.KakaoUserInfoResponse;
+import com.pintoss.auth.client.naver.NaverUserInfoResponse;
 import lombok.Getter;
 
 @Getter

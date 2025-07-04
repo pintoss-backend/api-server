@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.order.application.flow;
 
 import com.pintoss.auth.core.order.domain.OrderItemRequest;
-import com.pintoss.auth.core.voucher.model.Voucher;
+import com.pintoss.auth.core.voucher.domain.Voucher;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;

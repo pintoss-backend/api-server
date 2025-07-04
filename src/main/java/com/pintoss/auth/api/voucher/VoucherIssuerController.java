@@ -2,10 +2,10 @@ package com.pintoss.auth.api.voucher;
 
 import com.pintoss.auth.common.dto.ApiResponse;
 import com.pintoss.auth.api.voucher.dto.RegisterVoucherIssuerRequest;
-import com.pintoss.auth.core.voucher.usecase.FetchVoucherIssuerUseCase;
-import com.pintoss.auth.core.voucher.usecase.RegisterVoucherIssuerUseCase;
-import com.pintoss.auth.core.voucher.usecase.dto.VoucherIssuerDetailResult;
-import com.pintoss.auth.core.voucher.usecase.dto.VoucherIssuerResult;
+import com.pintoss.auth.core.voucher.application.FetchVoucherIssuerUseCase;
+import com.pintoss.auth.core.voucher.application.RegisterVoucherIssuerUseCase;
+import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
+import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

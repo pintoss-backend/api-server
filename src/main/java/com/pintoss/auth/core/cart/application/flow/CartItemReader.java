@@ -2,7 +2,7 @@ package com.pintoss.auth.core.cart.application.flow;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.NotFoundException;
-import com.pintoss.auth.core.cart.application.model.CartItem;
+import com.pintoss.auth.core.cart.domain.CartItem;
 import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;

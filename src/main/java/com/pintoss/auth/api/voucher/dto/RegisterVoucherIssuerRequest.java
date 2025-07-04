@@ -1,7 +1,7 @@
 package com.pintoss.auth.api.voucher.dto;
 
-import com.pintoss.auth.core.voucher.usecase.dto.RegisterVoucherIssuerCommand;
-import com.pintoss.auth.core.voucher.usecase.dto.RegisterVoucherIssuerCommand.RegisterVoucherCommand;
+import com.pintoss.auth.core.voucher.application.dto.RegisterVoucherIssuerCommand;
+import com.pintoss.auth.core.voucher.application.dto.RegisterVoucherIssuerCommand.RegisterVoucherCommand;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
