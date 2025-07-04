@@ -113,7 +113,9 @@ public class OrderItem {
         this.status = OrderItemStatus.ISSUE_FAILED;
     }
 
-    public void updateStatus(OrderItemStatus status) {
+    public void updateStatus(OrderItemStatus status, String pinNum, String approvalCode) {
         this.status = status;
+        this.pinNum = pinNum;
+        this.approvalCode = approvalCode;
     }
 }
