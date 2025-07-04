@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.payment.store;
+package com.pintoss.auth.storage.payment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

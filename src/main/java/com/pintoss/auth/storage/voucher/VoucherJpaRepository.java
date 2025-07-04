@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.store;
+package com.pintoss.auth.storage.voucher;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

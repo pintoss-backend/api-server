@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.payment.application;
 
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
-import com.pintoss.auth.core.payment.store.PaymentEntity;
+import com.pintoss.auth.storage.payment.PaymentEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.order.store;
+package com.pintoss.auth.storage.order;
 
 import com.pintoss.auth.core.order.domain.OrderPageCommand;
 import com.pintoss.auth.core.order.application.flow.OrderRepository;

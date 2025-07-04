@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.payment.store;
+package com.pintoss.auth.storage.payment;
 
 import com.pintoss.auth.core.payment.application.PaymentMethodType;
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
