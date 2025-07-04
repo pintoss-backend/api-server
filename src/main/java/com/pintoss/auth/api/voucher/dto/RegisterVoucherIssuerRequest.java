@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.api.dto;
+package com.pintoss.auth.api.voucher.dto;
 
 import com.pintoss.auth.core.voucher.usecase.dto.RegisterVoucherIssuerCommand;
 import com.pintoss.auth.core.voucher.usecase.dto.RegisterVoucherIssuerCommand.RegisterVoucherCommand;
