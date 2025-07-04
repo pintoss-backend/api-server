@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.payment.api.config;
+package com.pintoss.auth.api.payment.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
