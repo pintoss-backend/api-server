@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.cart.api.dto;
+package com.pintoss.auth.api.cart.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

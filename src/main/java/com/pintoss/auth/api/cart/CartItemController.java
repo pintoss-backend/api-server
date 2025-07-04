@@ -1,8 +1,8 @@
-package com.pintoss.auth.core.cart.api;
+package com.pintoss.auth.api.cart;
 
 import com.pintoss.auth.common.dto.ApiResponse;
-import com.pintoss.auth.core.cart.api.dto.CartItemListResponse;
-import com.pintoss.auth.core.cart.api.dto.CartItemUpdateRequest;
+import com.pintoss.auth.api.cart.dto.CartItemListResponse;
+import com.pintoss.auth.api.cart.dto.CartItemUpdateRequest;
 import com.pintoss.auth.core.cart.application.CartItemAddUseCase;
 import com.pintoss.auth.core.cart.application.CartItemDeleteUseCase;
 import com.pintoss.auth.core.cart.application.CartItemUpdateUseCase;
