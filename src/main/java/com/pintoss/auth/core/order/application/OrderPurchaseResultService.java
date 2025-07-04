@@ -19,7 +19,7 @@ public class OrderPurchaseResultService {
     public void completed(boolean success, String orderNo, Long orderItemId, String pinNo, String approvalCode) {
         Order order = orderReader.getByOrderNo(orderNo);
 
-        order.updateItemStatus(orderItemId, success ? OrderItemStatus.ISSUED : OrderItemStatus.ISSUE_FAILED);
+        order.updateItemIssueResult(orderItemId, success ? OrderItemStatus.ISSUED : OrderItemStatus.ISSUE_FAILED, pinNo, approvalCode);
 
         order.syncOverallStatus();
     }

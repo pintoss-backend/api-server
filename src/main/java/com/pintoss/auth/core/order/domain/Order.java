@@ -100,12 +100,12 @@ public class Order {
         return basePrice; // 다른 결제 수단은 세금 적용 없음
     }
 
-    public void updateItemStatus(Long orderItemId, OrderItemStatus status) {
+    public void updateItemIssueResult(Long orderItemId, OrderItemStatus status, String pinNo, String approvalCode) {
         OrderItem item = orderItems.stream()
             .filter(i -> i.getId().equals(orderItemId))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("OrderItem not found"));
-        item.updateStatus(status);
+        item.updateStatus(status, pinNo, approvalCode);
     }
 
     public void syncOverallStatus() {
