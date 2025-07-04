@@ -1,8 +1,8 @@
-package com.pintoss.auth.core.cart.store;
+package com.pintoss.auth.storage.cart;
 
 import static com.pintoss.auth.core.cart.domain.QCartItem.cartItem;
-import static com.pintoss.auth.core.voucher.store.QVoucherEntity.voucherEntity;
-import static com.pintoss.auth.core.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
+import static com.pintoss.auth.storage.voucher.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.storage.voucher.QVoucherIssuerEntity.voucherIssuerEntity;
 
 import com.pintoss.auth.core.cart.domain.CartItem;
 import com.pintoss.auth.core.cart.domain.CartItemResult;

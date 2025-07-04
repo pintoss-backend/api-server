@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.store;
+package com.pintoss.auth.storage.voucher;
 
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import jakarta.persistence.Column;

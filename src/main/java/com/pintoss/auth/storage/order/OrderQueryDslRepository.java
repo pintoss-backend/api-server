@@ -1,8 +1,8 @@
-package com.pintoss.auth.core.order.store;
+package com.pintoss.auth.storage.order;
 
 import static com.pintoss.auth.core.order.domain.QOrder.order;
 import static com.pintoss.auth.core.order.domain.QOrderItem.orderItem;
-import static com.pintoss.auth.core.payment.store.QPaymentEntity.paymentEntity;
+import static com.pintoss.auth.storage.payment.QPaymentEntity.paymentEntity;
 
 import com.pintoss.auth.core.order.domain.OrderDetail;
 import com.pintoss.auth.core.order.domain.OrderItemDetail;

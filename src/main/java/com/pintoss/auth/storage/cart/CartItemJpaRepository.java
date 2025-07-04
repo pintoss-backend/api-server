@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.cart.store;
+package com.pintoss.auth.storage.cart;
 
 import com.pintoss.auth.core.cart.domain.CartItem;
 import java.util.List;

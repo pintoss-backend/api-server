@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.order.store;
+package com.pintoss.auth.storage.order;
 
 import com.pintoss.auth.core.order.domain.OrderItemRefund;
 import org.springframework.data.jpa.repository.JpaRepository;

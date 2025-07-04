@@ -1,8 +1,6 @@
-package com.pintoss.auth.core.voucher.store;
+package com.pintoss.auth.storage.voucher;
 
 
-import static com.pintoss.auth.core.voucher.store.QVoucherEntity.voucherEntity;
-import static com.pintoss.auth.core.voucher.store.QVoucherIssuerEntity.voucherIssuerEntity;
 
 import com.pintoss.auth.core.voucher.application.dto.QVoucherIssuerResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
@@ -12,6 +10,9 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import static com.pintoss.auth.storage.voucher.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.storage.voucher.QVoucherIssuerEntity.voucherIssuerEntity;
 
 @Repository
 @RequiredArgsConstructor
