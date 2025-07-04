@@ -2,7 +2,7 @@ spring:
   config:
     active:
       on-profile: prod
-    import: application-jwt.yaml, application-nice.yaml, application-oauth.yaml, application-gmail.yaml, galaxia-prod.yaml
+    import: application-jwt.yaml, application-oauth.yaml, application-gmail.yaml, galaxia-prod.yaml, nice-prod.yaml
   application:
     name : giftmall
   datasource:

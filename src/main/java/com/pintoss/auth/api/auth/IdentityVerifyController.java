@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/nice")
 public class IdentityVerifyController {
 
+    @Value("${nice-auth.client-redirect-uri}")
+    private String identityVerifyRedirectUrl;
     private final IdentityVerificationUseCase identityVerificationUseCase;
+
     @GetMapping("/encrypted-data")
     public ApiResponse<NiceEncryptedDataResult> getEncryptedData(@RequestParam(name="purpose") IdentityVerifyPurpose purpose) {
         NiceEncryptedDataResult encryptedData = identityVerificationUseCase.getEncryptedData(purpose);
@@ -53,9 +57,9 @@ public class IdentityVerifyController {
 
         String redirectUrl = "";
         if(IdentityVerifyPurpose.SIGNUP.getCode().equals(result.getPurpose())){
-            redirectUrl = String.format("https://pin-toss.com/register/nice?name=%s&tel=%s&success=%s", URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
+            redirectUrl = String.format("%s/register/nice?name=%s&tel=%s&success=%s", identityVerifyRedirectUrl, URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
         } else if (IdentityVerifyPurpose.PASSWORD_RESET.getCode().equals(result.getPurpose())) {
-            redirectUrl = String.format("https://pin-toss.com/password-reset/nice?name=%s&tel=%s&success=%s", URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
+            redirectUrl = String.format("%s/password-reset/nice?name=%s&tel=%s&success=%s", identityVerifyRedirectUrl, URLEncoder.encode(result.getName(), StandardCharsets.UTF_8.toString()), result.getTel(), result.getIsSuccess());
         }
 
         response.sendRedirect(redirectUrl);

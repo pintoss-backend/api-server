@@ -8,4 +8,4 @@ galaxia:
     port: 21070
     time-out: 2000
   payment:
-    config-file-path: "config-test.ini"
+    config-file-path: "config-dev.ini"
