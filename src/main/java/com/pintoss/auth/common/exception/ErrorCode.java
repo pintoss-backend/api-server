@@ -94,7 +94,8 @@ public enum ErrorCode {
     GMAIL_API_CALL_FAILED("GMAIL_5005", "Gmail API 호출 실패했습니다."),
     GMAIL_API_NETWORK_ERROR("GMAIL_5006", "Gmail API 네트워크 오류입니다."),
     GMAIL_API_AUTHENTICATION_FAILED("GMAIL_5007","Gmail 서비스 계정 JSON 파일 로드 실패입니다." ),
-    BILLGATE_CONFIG_FILE_NOT_FOUND("BILLGATE_5008", "빌게이트 설정 파일(config-prod.ini)을 찾을 수 없습니다.");
+    BILLGATE_CONFIG_FILE_NOT_FOUND("BILLGATE_5008", "빌게이트 설정 파일(config-prod.ini)을 찾을 수 없습니다."),
+    BILLGATE_CHECHKSUM_GENERATION_FAILED("BILLGATE_5009", "빌게이트 체크섬 생성에 실패했습니다.");
 
 
     private final String code;

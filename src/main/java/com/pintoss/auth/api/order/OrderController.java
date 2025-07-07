@@ -1,9 +1,13 @@
 package com.pintoss.auth.api.order;
 
+import com.galaxia.api.util.ChecksumUtil;
 import com.pintoss.auth.api.order.query.OrderQueryService;
 import com.pintoss.auth.common.dto.ApiResponse;
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.common.paging.PageResponse;
 import com.pintoss.auth.common.paging.PagedData;
+import com.pintoss.auth.common.security.SecurityContextUtils;
 import com.pintoss.auth.core.order.application.OrderCancelService;
 import com.pintoss.auth.core.order.application.OrderCreateService;
 import com.pintoss.auth.core.order.application.OrderRefundService;
@@ -12,6 +16,7 @@ import com.pintoss.auth.core.order.domain.OrderDetail;
 import com.pintoss.auth.core.order.domain.OrderSearchResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/orders")
@@ -55,18 +61,40 @@ public class OrderController {
     public ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request) {
         Order saveOrder = orderCreateService.create(request.getOrderItems(), request.getPaymentMethod());
 
-        OrderCreateResponse response = OrderCreateResponse.builder()
-            .serviceId(serviceId)
-            .productName(saveOrder.getOrderName())
-            .orderNo(saveOrder.getOrderNo())
-            .ordererId(saveOrder.getOrdererId())
-            .ordererName(saveOrder.getOrdererName())
-            .ordererEmail(saveOrder.getOrdererEmail())
-            .ordererPhone(saveOrder.getOrdererPhone())
-            .serviceCode(request.getPaymentMethod().getServiceCode())
-            .price(saveOrder.getTotalPrice())
-            .orderDate(saveOrder.getCreatedAt())
-            .build();
+        log.info("[주문 생성] 주문 번호: {}, 주문자 ID: {}, 주문자 이름: {}, 주문자 휴대폰번호: {}",
+            saveOrder.getOrderNo(),
+            saveOrder.getOrdererId(),
+            saveOrder.getOrdererName(),
+            saveOrder.getOrdererPhone()
+        );
+
+        OrderCreateResponse response = null;
+        try {
+            response = OrderCreateResponse.builder()
+                .serviceId(serviceId)
+                .productName(saveOrder.getOrderName())
+                .orderNo(saveOrder.getOrderNo())
+                .ordererId(saveOrder.getOrdererId())
+                .ordererName(saveOrder.getOrdererName())
+                .ordererEmail(saveOrder.getOrdererEmail())
+                .ordererPhone(saveOrder.getOrdererPhone())
+                .serviceCode(request.getPaymentMethod().getServiceCode())
+                .price(saveOrder.getTotalPrice())
+                .orderDate(saveOrder.getCreatedAt())
+                .checkSum(
+                    ChecksumUtil.genCheckSum(
+                        serviceId+
+                            saveOrder.getOrderNo()+
+                            saveOrder.getTotalPrice()
+                    )
+                )
+                .checkSumHp(ChecksumUtil.genCheckSum(
+                    SecurityContextUtils.getPhone()
+                ))
+                .build();
+        } catch (Exception e) {
+            throw new BadRequestException(ErrorCode.BILLGATE_CHECHKSUM_GENERATION_FAILED);
+        }
         return ApiResponse.ok(response);
     }
 
