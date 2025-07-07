@@ -32,6 +32,9 @@ public class OrderCreateResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMddHHmmss")
     private LocalDateTime orderDate;
 
+    private String checkSum;
+    private String checkSumHp;
+
 //    private String returnUrl; TODO : 추후 예정
 
 }
