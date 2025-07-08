@@ -87,6 +87,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-webflux')
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
 }
 
 def querydslGenerated = layout.buildDirectory.dir("generated/querydsl").get().asFile
