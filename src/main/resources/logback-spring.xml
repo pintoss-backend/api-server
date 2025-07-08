@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+  <!-- spring profile 가져오기 -->
+  <springProperty name="ACTIVE_PROFILE" source="spring.profiles.active" defaultValue="dev"/>
+
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <!-- Logstash Encoder 설정 -->
+  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>52.79.233.9:5001</destination>
+
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <customFields>{"env":"${ACTIVE_PROFILE}","app_name":"order-service"}</customFields>
+    </encoder>
+
+    <!-- 재시도 정책 -->
+    <keepAliveDuration>5 minutes</keepAliveDuration>
+    <reconnectionDelay>10000</reconnectionDelay>
+  </appender>
+
+  <!-- Console에도 JSON 출력 (선택 사항) -->
+  <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <customFields>{"env":"${ACTIVE_PROFILE}","app_name":"order-service"}</customFields>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="LOGSTASH"/>
+    <appender-ref ref="JSON_CONSOLE"/>
+  </root>
+</configuration>
