@@ -24,10 +24,3 @@ spring:
 logging:
   level:
     root: info
-    com.pintoss.auth: info
-    org.springframework.web: warn
-    org.hibernate.SQL: debug
-    org.hibernate.type: off
-    org.hibernate.orm.jdbc.bind: off
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
