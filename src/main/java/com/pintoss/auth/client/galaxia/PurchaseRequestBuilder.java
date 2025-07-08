@@ -33,7 +33,7 @@ public class PurchaseRequestBuilder {
         sb.append(fixed(paymentMethodType == PaymentMethodType.CARD ? "02" : "03", 2));                      // PG_METHOD
         sb.append(fixed(orderId, 64));           // PG_ORDER_ID
         sb.append(fixed(transId, 20));          // PG_TRID
-        sb.append(fixed(amount, 8));                   // PG_PAY_PRICE
+        sb.append(fixed(salePrice, 8));                   // PG_PAY_PRICE
         sb.append(fixed("", 186));                      // RESERVED
 
         return sb.toString();
