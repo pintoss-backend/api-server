@@ -16,9 +16,23 @@ public class PurchaseResult {
         Long price, String msg) {
         this.isSuccess = isSuccess;
         this.approvalCode = approvalCode;
-        this.pinNo = pinNo;
+        this.pinNo = formatPinNo(pinNo);
         this.itemName = itemName;
         this.price = price;
         this.msg = msg;
+    }
+
+    private String formatPinNo(String pinNo) {
+        if (pinNo == null || pinNo.isEmpty()) {
+            return "";
+        }
+        StringBuilder formatted = new StringBuilder();
+        for(int i = 0 ; i < pinNo.length(); i++) {
+            if(i > 0 && i% 4 == 0) {
+                formatted.append("-");
+            }
+            formatted.append(pinNo.charAt(i));
+        }
+        return formatted.toString();
     }
 }
