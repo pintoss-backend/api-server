@@ -3,6 +3,7 @@ package com.pintoss.auth.common.security;
 import com.pintoss.auth.common.security.jwt.JwtFilter;
 import com.pintoss.auth.common.security.jwt.JwtParser;
 import com.pintoss.auth.common.security.jwt.JwtValidator;
+import com.pintoss.auth.common.security.jwt.MdcLoggingFilter;
 import com.pintoss.auth.common.util.HttpServletUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtFilter(jwtParser, jwtValidator, servletUtils), UsernamePasswordAuthenticationFilter.class)
+            .addFilterAfter(new MdcLoggingFilter(), JwtFilter.class)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .build();
     }
