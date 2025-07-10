@@ -1,5 +1,6 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.flow.reader;
 
+import com.pintoss.auth.core.voucher.application.repository.VoucherRepository;
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

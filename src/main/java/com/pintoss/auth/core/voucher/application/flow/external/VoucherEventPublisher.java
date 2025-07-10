@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.flow.external;
 
 import com.pintoss.auth.common.event.VoucherPurchaseCompletedEvent;
 

@@ -10,7 +10,7 @@ import com.pintoss.auth.core.order.domain.OrderItem;
 import com.pintoss.auth.core.order.application.dto.OrderItemRequest;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.domain.Voucher;
-import com.pintoss.auth.core.voucher.application.service.VoucherReader;
+import com.pintoss.auth.core.voucher.application.flow.reader.VoucherReader;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

@@ -7,9 +7,9 @@ import com.pintoss.auth.core.voucher.domain.HomePage;
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import com.pintoss.auth.core.voucher.application.dto.RegisterVoucherIssuerCommand;
-import com.pintoss.auth.core.voucher.application.service.VoucherAdder;
-import com.pintoss.auth.core.voucher.application.service.VoucherIssuerAdder;
-import com.pintoss.auth.core.voucher.application.service.VoucherIssuerValidator;
+import com.pintoss.auth.core.voucher.application.flow.writer.VoucherAdder;
+import com.pintoss.auth.core.voucher.application.flow.writer.VoucherIssuerAdder;
+import com.pintoss.auth.core.voucher.application.flow.validator.VoucherIssuerValidator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterVoucherIssuerUseCase {
+public class RegisterVoucherIssuerUsecase {
 
     private final VoucherIssuerValidator voucherIssuerValidator;
     private final VoucherIssuerAdder voucherIssuerAdder;

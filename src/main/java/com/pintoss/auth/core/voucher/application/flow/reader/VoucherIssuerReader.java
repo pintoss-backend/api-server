@@ -1,6 +1,7 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.flow.reader;
 
 import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import com.pintoss.auth.storage.voucher.VoucherIssuerEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

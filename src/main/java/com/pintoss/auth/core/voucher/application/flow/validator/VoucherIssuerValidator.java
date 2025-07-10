@@ -1,5 +1,6 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.flow.validator;
 
+import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.repository;
 
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import com.pintoss.auth.storage.voucher.VoucherIssuerEntity;

@@ -3,7 +3,7 @@ package com.pintoss.auth.api.event;
 
 import com.pintoss.auth.common.event.VoucherPurchaseRequestEvent;
 import com.pintoss.auth.common.logging.LogContext;
-import com.pintoss.auth.core.voucher.application.VoucherPurchaseService;
+import com.pintoss.auth.core.voucher.application.VoucherPurchaseUsecase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class VoucherPurchaseRequestEventHandler {
 
-    private final VoucherPurchaseService voucherPurchaseService;
+    private final VoucherPurchaseUsecase voucherPurchaseUsecase;
 
     @EventListener
     public void handle(VoucherPurchaseRequestEvent event) {
@@ -31,7 +31,7 @@ public class VoucherPurchaseRequestEventHandler {
 
         log.info("[상품권 구매 요청]");
 
-        voucherPurchaseService.purchase(
+        voucherPurchaseUsecase.purchase(
             event.getOrderNo(),
             event.getOrderItemId(),
             event.getTransactionId(),

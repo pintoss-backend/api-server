@@ -1,10 +1,12 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.flow.viewer;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.NotFoundException;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import java.util.List;
+
+import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Component;
 * */
 @Component
 @RequiredArgsConstructor
-public class VoucherIssuerFetcher {
+public class VoucherIssuerProjectionReader {
 
     private final VoucherIssuerRepository voucherIssuerRepository;
 

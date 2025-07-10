@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.application.service;
+package com.pintoss.auth.core.voucher.application.repository;
 
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import java.util.List;
