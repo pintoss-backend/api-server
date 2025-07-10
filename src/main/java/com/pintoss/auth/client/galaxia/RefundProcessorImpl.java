@@ -1,6 +1,5 @@
 package com.pintoss.auth.client.galaxia;
 
-import com.pintoss.auth.core.order.application.flow.VoucherRefundProcessor;
 import com.pintoss.auth.core.order.domain.RefundResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,11 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class RefundProcessorImpl implements VoucherRefundProcessor {
+public class RefundProcessorImpl {
 
     private final RefundApiClient refundApiClient;
 
-    @Override
     public RefundResult refund(String orderNo, String approvalCode) {
         String requestHeader = RefundRequestBuilder.buildHeader(orderNo);
         String requestBody = RefundRequestBuilder.buildBody(approvalCode);

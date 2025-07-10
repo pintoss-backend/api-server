@@ -4,10 +4,10 @@ import static com.pintoss.auth.core.order.domain.QOrder.order;
 import static com.pintoss.auth.core.order.domain.QOrderItem.orderItem;
 import static com.pintoss.auth.storage.payment.QPaymentEntity.paymentEntity;
 
-import com.pintoss.auth.core.order.domain.OrderDetail;
-import com.pintoss.auth.core.order.domain.OrderItemDetail;
-import com.pintoss.auth.core.order.domain.OrderPageCommand;
-import com.pintoss.auth.core.order.domain.OrderSearchResult;
+import com.pintoss.auth.core.order.application.dto.OrderDetail;
+import com.pintoss.auth.core.order.application.dto.OrderItemDetail;
+import com.pintoss.auth.core.order.application.dto.OrderPageCommand;
+import com.pintoss.auth.core.order.application.dto.OrderSearchResult;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;

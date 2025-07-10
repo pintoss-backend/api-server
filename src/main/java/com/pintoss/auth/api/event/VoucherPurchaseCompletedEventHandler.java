@@ -2,7 +2,7 @@ package com.pintoss.auth.api.event;
 
 import com.pintoss.auth.common.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.common.logging.LogContext;
-import com.pintoss.auth.core.order.application.OrderPurchaseResultService;
+import com.pintoss.auth.core.order.application.OrderPurchaseResultUsecase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class VoucherPurchaseCompletedEventHandler {
 
-    private final OrderPurchaseResultService orderPurchaseResultService;
+    private final OrderPurchaseResultUsecase orderPurchaseResultUsecase;
 
     @EventListener
     public void handle(VoucherPurchaseCompletedEvent event) {
@@ -30,7 +30,7 @@ public class VoucherPurchaseCompletedEventHandler {
             log.info("[상품권 구매 실패]");
         }
 
-        orderPurchaseResultService.completed(
+        orderPurchaseResultUsecase.completed(
             event.isSuccess(),
             event.getOrderNo(),
             event.getOrderItemId(),
