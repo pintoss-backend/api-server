@@ -1,10 +1,10 @@
 package com.pintoss.auth.storage.order;
 
-import com.pintoss.auth.core.order.domain.OrderPageCommand;
-import com.pintoss.auth.core.order.application.flow.OrderRepository;
+import com.pintoss.auth.core.order.application.dto.OrderPageCommand;
+import com.pintoss.auth.core.order.application.repository.OrderRepository;
 import com.pintoss.auth.core.order.domain.Order;
-import com.pintoss.auth.core.order.domain.OrderDetail;
-import com.pintoss.auth.core.order.domain.OrderSearchResult;
+import com.pintoss.auth.core.order.application.dto.OrderDetail;
+import com.pintoss.auth.core.order.application.dto.OrderSearchResult;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

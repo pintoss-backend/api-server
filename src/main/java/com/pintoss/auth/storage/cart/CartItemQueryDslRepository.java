@@ -5,7 +5,7 @@ import static com.pintoss.auth.storage.voucher.QVoucherEntity.voucherEntity;
 import static com.pintoss.auth.storage.voucher.QVoucherIssuerEntity.voucherIssuerEntity;
 
 import com.pintoss.auth.core.cart.domain.CartItem;
-import com.pintoss.auth.core.cart.domain.CartItemResult;
+import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
@@ -20,10 +20,10 @@ public class CartItemQueryDslRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<CartItemResult> getMyCartItems(Long userId) {
+    public List<CartItemView> getMyCartItems(Long userId) {
 
         return queryFactory
-            .select(Projections.constructor(CartItemResult.class,
+            .select(Projections.constructor(CartItemView.class,
                 cartItem.id.as("id"),
                 voucherEntity.id.as("productId"),
                 cartItem.quantity,

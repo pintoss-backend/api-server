@@ -1,6 +1,6 @@
 package com.pintoss.auth.common.logging;
 
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import org.slf4j.MDC;
 
 public class LogContext {

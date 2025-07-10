@@ -6,7 +6,7 @@ import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.core.order.domain.PurchaseResult;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;

@@ -2,8 +2,9 @@ package com.pintoss.auth.api.voucher;
 
 import com.pintoss.auth.api.common.response.ApiResponse;
 import com.pintoss.auth.api.voucher.dto.RegisterVoucherIssuerRequest;
-import com.pintoss.auth.core.voucher.application.FetchVoucherIssuerUseCase;
-import com.pintoss.auth.core.voucher.application.RegisterVoucherIssuerUseCase;
+import com.pintoss.auth.core.voucher.application.GetVoucherIssuerDetailUsecase;
+import com.pintoss.auth.core.voucher.application.GetVoucherIssuersUsecase;
+import com.pintoss.auth.core.voucher.application.RegisterVoucherIssuerUsecase;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import jakarta.validation.Valid;
@@ -22,27 +23,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class VoucherIssuerController {
 
-    private final RegisterVoucherIssuerUseCase registerUseCase;
-    private final FetchVoucherIssuerUseCase fetchIssuerUseCase;
+    private final RegisterVoucherIssuerUsecase registerUseCase;
+    private final GetVoucherIssuersUsecase getVoucherIssuersUsecase;
+    private final GetVoucherIssuerDetailUsecase getVoucherIssuerDetailUsecase;
 
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping
     public ApiResponse<Void> registerVoucherIssuer(@RequestBody @Valid RegisterVoucherIssuerRequest request) {
         registerUseCase.register(request.to());
-
         return ApiResponse.ok(null);
     }
 
     @GetMapping
     public ApiResponse<List<VoucherIssuerResult>> getVoucherIssuers() {
-        List<VoucherIssuerResult> result = fetchIssuerUseCase.getVoucherIssuers();
+        List<VoucherIssuerResult> result = getVoucherIssuersUsecase.getVoucherIssuers();
+
         return ApiResponse.ok(result);
     }
 
     @GetMapping("/{voucherIssuerId}")
     public ApiResponse<VoucherIssuerDetailResult> getVoucherIssuerDetail(@PathVariable(name = "voucherIssuerId") Long voucherIssuerId) {
-        VoucherIssuerDetailResult response = fetchIssuerUseCase.getVoucherIssuerDetail(voucherIssuerId);
-        return ApiResponse.ok(response);
+        VoucherIssuerDetailResult result = getVoucherIssuerDetailUsecase.getVoucherIssuerDetail(voucherIssuerId);
+        return ApiResponse.ok(result);
     }
 
 }

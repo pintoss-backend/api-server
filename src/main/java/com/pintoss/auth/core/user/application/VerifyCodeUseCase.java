@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.application;
 
-import com.pintoss.auth.core.user.core.UserReader;
+import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

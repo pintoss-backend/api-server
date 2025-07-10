@@ -3,8 +3,8 @@ package com.pintoss.auth.core.user.application;
 import com.pintoss.auth.api.auth.dto.IdentityVerifyPurpose;
 import com.pintoss.auth.core.user.application.dto.NiceEncryptedDataResult;
 import com.pintoss.auth.core.user.application.dto.NiceVerificationResult;
-import com.pintoss.auth.core.user.core.NiceAuthRequestClient;
-import com.pintoss.auth.core.user.core.NiceAuthVerifyClient;
+import com.pintoss.auth.core.user.application.flow.external.NiceAuthRequestClient;
+import com.pintoss.auth.core.user.application.flow.external.NiceAuthVerifyClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

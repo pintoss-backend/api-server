@@ -4,9 +4,9 @@ import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import com.pintoss.auth.core.user.domain.User;
 import com.pintoss.auth.core.user.domain.UserRole;
 import com.pintoss.auth.core.user.application.dto.RegisterCommand;
-import com.pintoss.auth.core.user.core.UserAdder;
-import com.pintoss.auth.core.user.core.UserCreator;
-import com.pintoss.auth.core.user.core.UserValidator;
+import com.pintoss.auth.core.user.application.flow.writer.UserAdder;
+import com.pintoss.auth.core.user.application.flow.processor.UserCreateProcessor;
+import com.pintoss.auth.core.user.application.flow.validator.UserValidator;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,12 +17,12 @@ public class RegisterUseCase {
 
     private final UserValidator userValidator;
     private final UserAdder userAdder;
-    private final UserCreator userCreator;
+    private final UserCreateProcessor userCreateProcessor;
 
     public void register(RegisterCommand command) {
         userValidator.duplicateEmail(command.getEmail());
 
-        User user = userCreator.register(
+        User user = userCreateProcessor.register(
             command.getEmail(),
             command.getPassword(),
             command.getName(),

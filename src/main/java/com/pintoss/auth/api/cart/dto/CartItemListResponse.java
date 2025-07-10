@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.cart.dto;
 
-import com.pintoss.auth.core.cart.domain.CartItemResult;
+import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,7 +15,7 @@ public class CartItemListResponse {
     private Long price;
     private String imageUrl;
 
-    public static CartItemListResponse of(CartItemResult result) {
+    public static CartItemListResponse of(CartItemView result) {
             return new CartItemListResponse(
                 result.getId(),
                 result.getProductId(),

@@ -1,6 +1,6 @@
 package com.pintoss.auth.client.gmail;
 
-import com.pintoss.auth.core.user.core.MailSender;
+import com.pintoss.auth.core.user.application.flow.external.MailSender;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

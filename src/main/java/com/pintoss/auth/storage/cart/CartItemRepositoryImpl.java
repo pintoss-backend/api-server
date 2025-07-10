@@ -1,8 +1,8 @@
 package com.pintoss.auth.storage.cart;
 
 import com.pintoss.auth.core.cart.domain.CartItem;
-import com.pintoss.auth.core.cart.domain.CartItemResult;
-import com.pintoss.auth.core.cart.application.flow.CartItemRepository;
+import com.pintoss.auth.core.cart.application.dto.CartItemView;
+import com.pintoss.auth.core.cart.application.repository.CartItemRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     }
 
     @Override
-    public List<CartItemResult> getMyCartItems(Long userId) {
+    public List<CartItemView> getMyCartItems(Long userId) {
         return queryDslRepository.getMyCartItems(userId);
     }
 

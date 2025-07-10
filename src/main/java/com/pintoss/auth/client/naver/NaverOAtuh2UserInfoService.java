@@ -1,7 +1,7 @@
 package com.pintoss.auth.client.naver;
 
 import com.pintoss.auth.core.user.application.dto.OAuth2UserInfoResponse;
-import com.pintoss.auth.core.user.core.OAuth2UserInfoService;
+import com.pintoss.auth.core.user.application.flow.policy.OAuth2UserInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.application;
 
-import com.pintoss.auth.core.user.core.UserReader;
+import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import com.pintoss.auth.core.user.domain.Phone;
 import com.pintoss.auth.core.user.domain.User;
 import lombok.RequiredArgsConstructor;

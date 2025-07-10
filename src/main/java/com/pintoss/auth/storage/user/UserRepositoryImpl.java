@@ -3,7 +3,7 @@ package com.pintoss.auth.storage.user;
 import com.pintoss.auth.core.user.domain.LoginType;
 import com.pintoss.auth.core.user.domain.Phone;
 import com.pintoss.auth.core.user.domain.User;
-import com.pintoss.auth.core.user.core.UserRepository;
+import com.pintoss.auth.core.user.application.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
