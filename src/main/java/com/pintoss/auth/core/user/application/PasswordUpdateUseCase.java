@@ -4,7 +4,7 @@ import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.user.domain.User;
-import com.pintoss.auth.core.user.core.UserReader;
+import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.user.domain.UserInfo;
-import com.pintoss.auth.core.user.core.UserViewer;
+import com.pintoss.auth.core.user.application.flow.viewer.UserViewer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

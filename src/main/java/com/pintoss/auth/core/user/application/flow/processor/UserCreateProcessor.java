@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.core;
+package com.pintoss.auth.core.user.application.flow.processor;
 
 import com.pintoss.auth.core.user.domain.LoginType;
 import com.pintoss.auth.core.user.domain.Phone;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserCreator {
+public class UserCreateProcessor {
 
     private final PasswordEncoder passwordEncoder;
 

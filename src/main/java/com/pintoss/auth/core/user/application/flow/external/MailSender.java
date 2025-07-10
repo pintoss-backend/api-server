@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.core;
+package com.pintoss.auth.core.user.application.flow.external;
 
 public interface MailSender {
 

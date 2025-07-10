@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.core;
+package com.pintoss.auth.core.user.application.flow.processor;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class AuthTokenService {
+public class AuthTokenProcessor {
 
     private final JwtProvider jwtProvider;
     private final JwtParser jwtParser;
@@ -35,6 +35,4 @@ public class AuthTokenService {
             throw new BadRequestException(ErrorCode.AUTH_INVALID_REFRESH_TOKEN);
         }
     }
-
-
 }

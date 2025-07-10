@@ -8,7 +8,7 @@ import com.pintoss.auth.client.nice.provider.NiceApiTokenProvider;
 import com.pintoss.auth.client.nice.store.NiceApiSymmetricKey;
 import com.pintoss.auth.client.nice.util.NiceAuthCommandFactory;
 import com.pintoss.auth.core.user.application.dto.NiceVerificationResult;
-import com.pintoss.auth.core.user.core.NiceAuthVerifyClient;
+import com.pintoss.auth.core.user.application.flow.external.NiceAuthVerifyClient;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;

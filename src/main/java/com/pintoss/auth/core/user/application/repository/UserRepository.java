@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.core;
+package com.pintoss.auth.core.user.application.repository;
 
 import com.pintoss.auth.core.user.domain.LoginType;
 import com.pintoss.auth.core.user.domain.Phone;
