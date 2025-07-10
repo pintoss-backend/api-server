@@ -1,11 +1,10 @@
 package com.pintoss.auth.core.order.application;
 
-import com.pintoss.auth.common.event.VoucherPurchaseEvent;
+import com.pintoss.auth.common.event.VoucherPurchaseRequestEvent;
 import com.pintoss.auth.core.order.application.flow.OrderReader;
 import com.pintoss.auth.core.order.domain.Order;
 import com.pintoss.auth.core.order.domain.OrderItem;
 import com.pintoss.auth.core.payment.application.PaymentMethodType;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderPaymentResultService {
 
     private final OrderReader orderReader;
-    private final ApplicationEventPublisher eventPublisher;
+    private final OrderEventPublisher eventPublisher;
 
-    public OrderPaymentResultService(OrderReader orderReader, ApplicationEventPublisher eventPublisher) {
+    public OrderPaymentResultService(OrderReader orderReader, OrderEventPublisher eventPublisher) {
         this.orderReader = orderReader;
         this.eventPublisher = eventPublisher;
     }
@@ -34,7 +33,7 @@ public class OrderPaymentResultService {
         order.markAsPaid(paymentId);
 
         for(OrderItem item : order.getOrderItems()) {
-            VoucherPurchaseEvent voucherPurchaseEvent = new VoucherPurchaseEvent(
+            VoucherPurchaseRequestEvent voucherPurchaseRequestEvent = new VoucherPurchaseRequestEvent(
                 orderNo,
                 item.getId(),
                 transactionId,
@@ -45,7 +44,7 @@ public class OrderPaymentResultService {
                 item.getProductCode()
             );
 
-            eventPublisher.publishEvent(voucherPurchaseEvent);
+            eventPublisher.publish(voucherPurchaseRequestEvent);
         }
     }
 }

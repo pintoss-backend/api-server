@@ -1,7 +1,7 @@
 package com.pintoss.auth.api.event;
 
 
-import com.pintoss.auth.common.event.VoucherPurchaseEvent;
+import com.pintoss.auth.common.event.VoucherPurchaseRequestEvent;
 import com.pintoss.auth.common.logging.LogContext;
 import com.pintoss.auth.core.voucher.application.VoucherPurchaseService;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class VoucherPurchaseEventHandler {
+public class VoucherPurchaseRequestEventHandler {
 
     private final VoucherPurchaseService voucherPurchaseService;
 
     @EventListener
-    public void handle(VoucherPurchaseEvent event) {
+    public void handle(VoucherPurchaseRequestEvent event) {
         LogContext.putPurchaseRequest(
             event.getOrderNo(),
             event.getOrderItemId(),
