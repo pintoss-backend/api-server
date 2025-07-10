@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.voucher;
 
-import com.pintoss.auth.common.dto.ApiResponse;
+import com.pintoss.auth.api.common.response.ApiResponse;
 import com.pintoss.auth.api.voucher.dto.RegisterVoucherIssuerRequest;
 import com.pintoss.auth.core.voucher.application.FetchVoucherIssuerUseCase;
 import com.pintoss.auth.core.voucher.application.RegisterVoucherIssuerUseCase;

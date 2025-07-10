@@ -1,6 +1,6 @@
 package com.pintoss.auth.common.logging;
 
-import com.pintoss.auth.common.security.SecurityContextUtils;
+import com.pintoss.auth.api.security.SecurityContextUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.application;
 
-import com.pintoss.auth.common.security.SecurityContextUtils;
+import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.user.domain.UserInfo;
 import com.pintoss.auth.core.user.core.UserViewer;
 import lombok.RequiredArgsConstructor;

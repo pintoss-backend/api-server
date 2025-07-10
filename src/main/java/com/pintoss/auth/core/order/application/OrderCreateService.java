@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.order.application;
 
-import com.pintoss.auth.common.security.SecurityContextUtils;
+import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.order.application.flow.OrderAdder;
 import com.pintoss.auth.core.order.application.flow.OrderItemFactory;
 import com.pintoss.auth.core.order.application.flow.OrderValidator;

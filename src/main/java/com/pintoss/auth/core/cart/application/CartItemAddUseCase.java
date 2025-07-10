@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.cart.application;
 
-import com.pintoss.auth.common.security.SecurityContextUtils;
+import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.cart.domain.CartItem;
 import com.pintoss.auth.core.cart.application.dto.CartItemAddRequest;
 import com.pintoss.auth.core.cart.application.flow.CartItemAdder;

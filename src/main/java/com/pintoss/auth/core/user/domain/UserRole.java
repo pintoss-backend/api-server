@@ -1,6 +1,5 @@
 package com.pintoss.auth.core.user.domain;
 
-import com.pintoss.auth.common.security.UserRoleEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.order;
 
-import com.pintoss.auth.common.paging.SortDirection;
+import com.pintoss.auth.api.common.paging.SortDirection;
 import com.pintoss.auth.core.order.domain.OrderPageCommand;
 import com.pintoss.auth.core.order.domain.OrderSortKey;
 import com.pintoss.auth.core.order.domain.OrderStatus;

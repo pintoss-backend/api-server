@@ -1,7 +1,7 @@
 package com.pintoss.auth.api.user;
 
 import com.pintoss.auth.api.user.dto.PasswordResetRequest;
-import com.pintoss.auth.common.dto.ApiResponse;
+import com.pintoss.auth.api.common.response.ApiResponse;
 import com.pintoss.auth.core.user.application.PasswordResetUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

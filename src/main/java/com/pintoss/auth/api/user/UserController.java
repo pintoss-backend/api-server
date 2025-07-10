@@ -1,7 +1,7 @@
 package com.pintoss.auth.api.user;
 
 import com.pintoss.auth.api.user.dto.PasswordUpdateRequest;
-import com.pintoss.auth.common.dto.ApiResponse;
+import com.pintoss.auth.api.common.response.ApiResponse;
 import com.pintoss.auth.core.user.domain.UserInfo;
 import com.pintoss.auth.core.user.application.PasswordUpdateUseCase;
 import com.pintoss.auth.core.user.application.UserQueryUseCase;

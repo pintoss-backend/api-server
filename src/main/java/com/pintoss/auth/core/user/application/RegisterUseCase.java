@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.application;
 
-import com.pintoss.auth.common.security.UserRoleEnum;
+import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import com.pintoss.auth.core.user.domain.User;
 import com.pintoss.auth.core.user.domain.UserRole;
 import com.pintoss.auth.core.user.application.dto.RegisterCommand;

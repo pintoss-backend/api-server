@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.order.domain;
 
-import com.pintoss.auth.common.paging.SortDirection;
+import com.pintoss.auth.api.common.paging.SortDirection;
 import com.pintoss.auth.core.payment.application.PaymentMethodType;
 import java.time.LocalDate;
 import java.util.List;
