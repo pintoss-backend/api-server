@@ -17,7 +17,7 @@ public class PaymentService {
     private final PaymentApprovalService paymentApprovalService;
     private final OrderReader orderReader;
     private final PaymentAdder paymentAdder;
-    private final ApplicationEventPublisher eventPublisher;
+    private final PaymentEventPublisher eventPublisher;
 
     @Transactional
     public void purchase(PurchaseCommand command) {
@@ -42,7 +42,7 @@ public class PaymentService {
         );
         paymentAdder.add(payment);
 
-        eventPublisher.publishEvent(
+        eventPublisher.publish(
             new PaymentCompletedEvent(
                 payment.getStatus() == PaymentStatus.SUCCESS ? true : false,
                 payment.getId(),
