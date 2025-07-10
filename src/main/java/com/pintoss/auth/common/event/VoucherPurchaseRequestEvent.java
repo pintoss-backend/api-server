@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class VoucherPurchaseEvent {
+public class VoucherPurchaseRequestEvent {
     private final String orderNo;
     private final Long orderItemId;
     private final String transactionId;
