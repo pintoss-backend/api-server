@@ -4,15 +4,16 @@ import com.pintoss.auth.client.galaxia.PurchaseApiClient;
 import com.pintoss.auth.common.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.order.domain.PurchaseResult;
 import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.voucher.application.service.VoucherEventPublisher;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VoucherPurchaseService {
     private final PurchaseApiClient purchaseApiClient;
-    private final ApplicationEventPublisher eventPublisher;
+    private final VoucherEventPublisher eventPublisher;
 
-    public VoucherPurchaseService(PurchaseApiClient purchaseApiClient, ApplicationEventPublisher eventPublisher) {
+    public VoucherPurchaseService(PurchaseApiClient purchaseApiClient, VoucherEventPublisher eventPublisher) {
         this.purchaseApiClient = purchaseApiClient;
         this.eventPublisher = eventPublisher;
     }
@@ -39,7 +40,7 @@ public class VoucherPurchaseService {
 //                "1104501710200000"
         );
 
-        eventPublisher.publishEvent(
+        eventPublisher.publish(
             new VoucherPurchaseCompletedEvent(
                 result.isSuccess(),
                 orderNo,
