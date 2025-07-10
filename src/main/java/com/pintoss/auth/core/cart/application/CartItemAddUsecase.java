@@ -3,8 +3,8 @@ package com.pintoss.auth.core.cart.application;
 import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.cart.domain.CartItem;
 import com.pintoss.auth.core.cart.application.dto.CartItemAddRequest;
-import com.pintoss.auth.core.cart.application.flow.CartItemAdder;
-import com.pintoss.auth.core.cart.application.flow.CartItemReader;
+import com.pintoss.auth.core.cart.application.flow.writer.CartItemAdder;
+import com.pintoss.auth.core.cart.application.flow.reader.CartItemReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CartItemAddUseCase {
+public class CartItemAddUsecase {
 
     private final CartItemReader cartItemReader;
     private final CartItemAdder cartItemAdder;

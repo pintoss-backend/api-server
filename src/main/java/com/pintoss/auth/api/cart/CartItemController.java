@@ -3,12 +3,12 @@ package com.pintoss.auth.api.cart;
 import com.pintoss.auth.api.common.response.ApiResponse;
 import com.pintoss.auth.api.cart.dto.CartItemListResponse;
 import com.pintoss.auth.api.cart.dto.CartItemUpdateRequest;
-import com.pintoss.auth.core.cart.application.CartItemAddUseCase;
-import com.pintoss.auth.core.cart.application.CartItemDeleteUseCase;
-import com.pintoss.auth.core.cart.application.CartItemUpdateUseCase;
-import com.pintoss.auth.core.cart.application.CartItemQueryUseCase;
+import com.pintoss.auth.core.cart.application.CartItemAddUsecase;
+import com.pintoss.auth.core.cart.application.CartItemDeleteUsecase;
+import com.pintoss.auth.core.cart.application.CartItemUpdateUsecase;
+import com.pintoss.auth.core.cart.application.GetMyCartItemsUsecase;
 import com.pintoss.auth.core.cart.application.dto.CartItemAddRequest;
-import com.pintoss.auth.core.cart.domain.CartItemResult;
+import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,15 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/carts")
 public class CartItemController {
 
-    private final CartItemQueryUseCase cartItemQueryUseCase;
-    private final CartItemAddUseCase cartItemAddUseCase;
-    private final CartItemUpdateUseCase cartItemUpdateUseCase;
-    private final CartItemDeleteUseCase cartItemDeleteUseCase;
+    private final GetMyCartItemsUsecase getMyCartItemsUseCase;
+    private final CartItemAddUsecase cartItemAddUseCase;
+    private final CartItemUpdateUsecase cartItemUpdateUseCase;
+    private final CartItemDeleteUsecase cartItemDeleteUseCase;
 
     @GetMapping("/items")
     @PreAuthorize("hasAuthority('USER')")
     public ApiResponse<List<CartItemListResponse>> getCartItems() {
-        List<CartItemResult> result = cartItemQueryUseCase.getCartItems();
+        List<CartItemView> result = getMyCartItemsUseCase.getCartItems();
 
         List<CartItemListResponse> response = result.stream()
             .map(item -> CartItemListResponse.of(item))

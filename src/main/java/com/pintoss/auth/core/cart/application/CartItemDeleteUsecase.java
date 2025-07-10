@@ -1,24 +1,25 @@
 package com.pintoss.auth.core.cart.application;
 
 import com.pintoss.auth.api.security.SecurityContextUtils;
+import com.pintoss.auth.core.cart.application.flow.validator.CartItemValidator;
 import com.pintoss.auth.core.cart.domain.CartItem;
-import com.pintoss.auth.core.cart.application.flow.CartItemReader;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
-public class CartItemDeleteUseCase {
+public class CartItemDeleteUsecase {
 
-    private final CartItemReader cartItemReader;
+    private final CartItemValidator cartItemValidator;
+
+    public CartItemDeleteUsecase(CartItemValidator cartItemValidator) {
+        this.cartItemValidator = cartItemValidator;
+    }
 
     @Transactional
     public void deleteCartItem(Long cartItemId) {
         Long userId = SecurityContextUtils.getUserId();
 
-        CartItem cartItem = cartItemReader.readByUserIdAndId(userId, cartItemId);
+        CartItem cartItem = cartItemValidator.getOrThrowIfNotExists(userId, cartItemId);
         cartItem.deleted();
     }
-
 }

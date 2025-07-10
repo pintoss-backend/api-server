@@ -1,5 +1,6 @@
-package com.pintoss.auth.core.cart.application.flow;
+package com.pintoss.auth.core.cart.application.flow.writer;
 
+import com.pintoss.auth.core.cart.application.repository.CartItemRepository;
 import com.pintoss.auth.core.cart.domain.CartItem;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

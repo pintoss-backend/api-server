@@ -1,6 +1,7 @@
-package com.pintoss.auth.core.cart.application.flow;
+package com.pintoss.auth.core.cart.application.flow.viewer;
 
-import com.pintoss.auth.core.cart.domain.CartItemResult;
+import com.pintoss.auth.core.cart.application.repository.CartItemRepository;
+import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Component;
  * */
 @Component
 @RequiredArgsConstructor
-public class CartItemViewer {
+public class CartItemProjectionReader {
 
     private final CartItemRepository cartItemRepository;
 
-    public List<CartItemResult> getMyCartItems(Long userId) {
+    public List<CartItemView> getMyCartItems(Long userId) {
         return cartItemRepository.getMyCartItems(userId);
     }
 }
