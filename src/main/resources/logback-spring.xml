@@ -11,7 +11,7 @@
     <destination>52.79.233.9:5001</destination>
 
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-      <customFields>{"env":"${ACTIVE_PROFILE}","app_name":"order-service"}</customFields>
+      <customFields>{"env":"${ACTIVE_PROFILE}"}</customFields>
     </encoder>
 
     <!-- 재시도 정책 -->
@@ -22,7 +22,7 @@
   <!-- Console에도 JSON 출력 (선택 사항) -->
   <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-      <customFields>{"env":"${ACTIVE_PROFILE}","app_name":"order-service"}</customFields>
+      <customFields>{"env":"${ACTIVE_PROFILE}"}</customFields>
     </encoder>
   </appender>
 
