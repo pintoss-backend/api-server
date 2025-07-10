@@ -2,6 +2,12 @@ package com.pintoss.auth.core.payment.application;
 
 import com.pintoss.auth.common.event.PaymentCompletedEvent;
 import com.pintoss.auth.core.order.application.flow.validator.OrderValidator;
+import com.pintoss.auth.core.payment.application.dto.PaymentApprovalRequest;
+import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
+import com.pintoss.auth.core.payment.application.dto.PurchaseCommand;
+import com.pintoss.auth.core.payment.application.flow.event.PaymentEventPublisher;
+import com.pintoss.auth.core.payment.application.flow.external.PaymentApprover;
+import com.pintoss.auth.core.payment.application.flow.writer.PaymentAdder;
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
 import com.pintoss.auth.core.payment.domain.PaymentStatus;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-public class PaymentService {
+public class PurchasePaymentUsecase {
 
-    private final PaymentApprovalService paymentApprovalService;
+    private final PaymentApprover paymentApprover;
     private final OrderValidator orderValidator;
     private final PaymentAdder paymentAdder;
     private final PaymentEventPublisher eventPublisher;
@@ -21,7 +27,7 @@ public class PaymentService {
     public void purchase(PurchaseCommand command) {
         orderValidator.getOrThrowIfNotExists(command.getOrderNo());
 
-        PaymentApprovalResponse approvalResponse = paymentApprovalService.approval(
+        PaymentApprovalResponse approvalResponse = paymentApprover.approval(
             new PaymentApprovalRequest(command.getServiceCode(), command.getOrderNo(), command.getMessage()));
 
 

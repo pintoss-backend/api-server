@@ -1,5 +1,6 @@
-package com.pintoss.auth.core.payment.application;
+package com.pintoss.auth.core.payment.application.flow.writer;
 
+import com.pintoss.auth.core.payment.application.repository.PaymentRepository;
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
 import com.pintoss.auth.storage.payment.PaymentEntity;
 import lombok.RequiredArgsConstructor;

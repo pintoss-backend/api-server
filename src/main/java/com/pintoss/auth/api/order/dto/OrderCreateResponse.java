@@ -8,9 +8,7 @@ import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import com.pintoss.auth.core.order.application.dto.OrderCreateResult;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 @Data

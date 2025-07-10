@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.order.dto;
 
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.order.application.dto.OrderItemRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;

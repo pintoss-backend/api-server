@@ -7,10 +7,10 @@ import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.merchant.Message;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.server.InternalServerException;
-import com.pintoss.auth.core.payment.application.PaymentApprovalRequest;
-import com.pintoss.auth.core.payment.application.PaymentApprovalResponse;
-import com.pintoss.auth.core.payment.application.PaymentApprovalService;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.application.dto.PaymentApprovalRequest;
+import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
+import com.pintoss.auth.core.payment.application.flow.external.PaymentApprover;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ApprovalServiceImpl implements PaymentApprovalService {
+public class ApproverImpl implements PaymentApprover {
 
     @Value("${galaxia.payment.config-file-path}")
     private String configFilePath;

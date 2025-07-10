@@ -3,7 +3,7 @@ package com.pintoss.auth.core.order.application.dto;
 import com.pintoss.auth.api.common.paging.SortDirection;
 import com.pintoss.auth.core.order.domain.OrderSortKey;
 import com.pintoss.auth.core.order.domain.OrderStatus;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.time.LocalDate;
 import java.util.List;
 

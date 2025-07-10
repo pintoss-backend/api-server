@@ -2,7 +2,7 @@ package com.pintoss.auth.core.order.domain;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

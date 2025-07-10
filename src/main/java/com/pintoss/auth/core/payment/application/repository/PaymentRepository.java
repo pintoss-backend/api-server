@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.payment.application;
+package com.pintoss.auth.core.payment.application.repository;
 
 import com.pintoss.auth.storage.payment.PaymentEntity;
 

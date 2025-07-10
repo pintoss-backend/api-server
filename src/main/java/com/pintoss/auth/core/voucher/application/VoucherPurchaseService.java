@@ -3,9 +3,8 @@ package com.pintoss.auth.core.voucher.application;
 import com.pintoss.auth.client.galaxia.PurchaseApiClient;
 import com.pintoss.auth.common.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.order.domain.PurchaseResult;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.application.service.VoucherEventPublisher;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service

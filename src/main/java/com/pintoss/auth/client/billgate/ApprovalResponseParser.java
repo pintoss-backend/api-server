@@ -1,7 +1,7 @@
 package com.pintoss.auth.client.billgate;
 
 import com.galaxia.api.merchant.Message;
-import com.pintoss.auth.core.payment.application.PaymentApprovalResponse;
+import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
 import java.util.Map;
 
 public interface ApprovalResponseParser<T> {

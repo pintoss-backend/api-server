@@ -5,7 +5,7 @@ import com.pintoss.auth.core.order.application.flow.validator.OrderValidator;
 import com.pintoss.auth.core.order.application.flow.event.OrderEventPublisher;
 import com.pintoss.auth.core.order.domain.Order;
 import com.pintoss.auth.core.order.domain.OrderItem;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

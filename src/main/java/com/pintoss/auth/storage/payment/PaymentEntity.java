@@ -1,6 +1,6 @@
 package com.pintoss.auth.storage.payment;
 
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
 import com.pintoss.auth.core.payment.domain.PaymentStatus;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.payment;
 
-import com.pintoss.auth.core.payment.application.PurchaseCommand;
+import com.pintoss.auth.core.payment.application.dto.PurchaseCommand;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

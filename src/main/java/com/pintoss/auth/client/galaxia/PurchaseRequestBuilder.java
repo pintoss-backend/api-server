@@ -1,6 +1,6 @@
 package com.pintoss.auth.client.galaxia;
 
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

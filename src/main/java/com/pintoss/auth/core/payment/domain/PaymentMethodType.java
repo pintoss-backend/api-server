@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.payment.application;
+package com.pintoss.auth.core.payment.domain;
 
 import com.pintoss.auth.common.exception.client.BadRequestException;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package com.pintoss.auth.core.order.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pintoss.auth.core.order.domain.OrderStatus;
-import com.pintoss.auth.core.payment.application.PaymentMethodType;
+import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
