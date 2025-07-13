@@ -5,7 +5,7 @@ import com.galaxia.api.crypto.Base64Encoder;
 import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
-import com.pintoss.auth.core.order.domain.PurchaseResult;
+import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
 import java.util.Arrays;
