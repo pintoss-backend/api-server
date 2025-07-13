@@ -7,6 +7,7 @@ import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.core.order.domain.PurchaseResult;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
+import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class PurchaseApiClient {
+public class PurchaseApiClient implements Purchaser {
 
     private final GalaxiaClient client;
     private final String KEY;
@@ -26,6 +27,7 @@ public class PurchaseApiClient {
         this.IV = properties.getSecret().getIv();
     }
 
+    @Override
     public PurchaseResult purchase(String orderNo, String transactionId, String mid, Long paymentPrice, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
         try {
             String requestHeader = PurchaseRequestBuilder.buildHeader(orderNo);

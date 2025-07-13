@@ -1,19 +1,19 @@
 package com.pintoss.auth.core.voucher.application;
 
-import com.pintoss.auth.client.galaxia.PurchaseApiClient;
 import com.pintoss.auth.common.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.order.domain.PurchaseResult;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
+import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
 import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VoucherPurchaseUsecase {
-    private final PurchaseApiClient purchaseApiClient;
+    private final Purchaser purchaser;
     private final VoucherEventPublisher eventPublisher;
 
-    public VoucherPurchaseUsecase(PurchaseApiClient purchaseApiClient, VoucherEventPublisher eventPublisher) {
-        this.purchaseApiClient = purchaseApiClient;
+    public VoucherPurchaseUsecase(Purchaser purchaser, VoucherEventPublisher eventPublisher) {
+        this.purchaser = purchaser;
         this.eventPublisher = eventPublisher;
     }
 
@@ -28,7 +28,7 @@ public class VoucherPurchaseUsecase {
         String productCode
         ) {
 
-        PurchaseResult result = purchaseApiClient.purchase(
+        PurchaseResult result = purchaser.purchase(
             orderNo,
             transactionId,
             mId,
