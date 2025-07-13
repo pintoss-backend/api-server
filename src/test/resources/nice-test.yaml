@@ -1,0 +1,8 @@
+nice-auth:
+  client-id: test
+  client-secret: test
+  access-token-uri: test
+  encrypted-token-uri: test
+  redirect-uri: http://localhost:8080/api/nice/callback
+  client-redirect-uri: http://localhost:8080
+  product-id: 2101979031
