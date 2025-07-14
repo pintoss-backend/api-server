@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.order.domain;
+package com.pintoss.auth.core.voucher.application.dto;
 
 import lombok.Getter;
 
