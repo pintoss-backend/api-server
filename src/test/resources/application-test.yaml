@@ -13,5 +13,6 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
-        dialect: org.hibernate.dialect.MariaDBDialect
-    database-platform: org.hibernate.dialect.MariaDBDialect
+        dialect: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
+
