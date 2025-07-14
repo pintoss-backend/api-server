@@ -105,6 +105,6 @@ tasks.withType(JavaCompile) {
     options.annotationProcessorGeneratedSourcesDirectory = querydslGenerated
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
