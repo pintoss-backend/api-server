@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.order.application;
 
-import com.pintoss.auth.support.event.VoucherPurchaseRequestEvent;
+import com.pintoss.auth.core.order.domain.VoucherPurchaseRequestEvent;
 import com.pintoss.auth.core.order.application.flow.validator.OrderValidator;
 import com.pintoss.auth.core.order.application.flow.event.OrderEventPublisher;
 import com.pintoss.auth.core.order.domain.Order;

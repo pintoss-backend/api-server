@@ -1,4 +1,4 @@
-package com.pintoss.auth.support.event;
+package com.pintoss.auth.core.voucher.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

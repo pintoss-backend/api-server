@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.payment.application;
 
-import com.pintoss.auth.support.event.PaymentCompletedEvent;
+import com.pintoss.auth.core.payment.domain.PaymentCompletedEvent;
 import com.pintoss.auth.core.order.application.flow.validator.OrderValidator;
 import com.pintoss.auth.core.payment.application.dto.PaymentApprovalRequest;
 import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;

@@ -1,6 +1,6 @@
-package com.pintoss.auth.api.event;
+package com.pintoss.auth.support.event;
 
-import com.pintoss.auth.support.event.PaymentCompletedEvent;
+import com.pintoss.auth.core.payment.domain.PaymentCompletedEvent;
 import com.pintoss.auth.support.logging.LogContext;
 import com.pintoss.auth.core.order.application.OrderPaymentResultUsecase;
 import lombok.RequiredArgsConstructor;

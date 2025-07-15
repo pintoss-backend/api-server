@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.voucher.application;
 
-import com.pintoss.auth.support.event.VoucherPurchaseCompletedEvent;
+import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;

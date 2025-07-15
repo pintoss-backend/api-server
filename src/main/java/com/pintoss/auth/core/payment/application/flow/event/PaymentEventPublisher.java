@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.payment.application.flow.event;
 
-import com.pintoss.auth.support.event.PaymentCompletedEvent;
+import com.pintoss.auth.core.payment.domain.PaymentCompletedEvent;
 
 public interface PaymentEventPublisher {
 

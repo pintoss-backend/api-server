@@ -1,6 +1,5 @@
-package com.pintoss.auth.support.event;
+package com.pintoss.auth.core.payment.domain;
 
-import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

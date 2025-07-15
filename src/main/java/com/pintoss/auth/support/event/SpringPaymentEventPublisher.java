@@ -1,6 +1,6 @@
-package com.pintoss.auth.event;
+package com.pintoss.auth.support.event;
 
-import com.pintoss.auth.support.event.PaymentCompletedEvent;
+import com.pintoss.auth.core.payment.domain.PaymentCompletedEvent;
 import com.pintoss.auth.core.payment.application.flow.event.PaymentEventPublisher;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
