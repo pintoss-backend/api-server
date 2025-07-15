@@ -18,16 +18,16 @@ public class ApiErrorResponse {
     private final Map<String, String> errors;
 
     @Builder
-    private ApiErrorResponse(HttpStatus status, ErrorCode errorCode, String errorMessage, LocalDateTime timestamp, Map<String, String> errors) {
-        this.code = errorCode != null ? errorCode.getCode() : null;
+    private ApiErrorResponse(HttpStatus status, String errorCode, String errorMessage, LocalDateTime timestamp, Map<String, String> errors) {
+        this.code = errorCode;
         this.status = status;
-        this.errorCodeMessage = errorCode != null ? errorCode.getMessage() : null;
+        this.errorCodeMessage = errorCode;
         this.errorMessage = errorMessage;
         this.timestamp = timestamp;
         this.errors = errors;
     }
 
-    public static ApiErrorResponse of(HttpStatus status, ErrorCode errorCode, String errorMessage, LocalDateTime timestamp) {
+    public static ApiErrorResponse of(HttpStatus status, String errorCode, String errorMessage, LocalDateTime timestamp) {
         return ApiErrorResponse.builder()
             .status(status)
             .errorCode(errorCode)
@@ -36,19 +36,7 @@ public class ApiErrorResponse {
             .build();
     }
 
-    public static ApiErrorResponse of(HttpStatus status, ErrorCode errorCode, String errorMessage) {
-        return of(status, errorCode, errorMessage, LocalDateTime.now());
-    }
-
-    public static ApiErrorResponse of(HttpStatus status, String errorMessage) {
-        return ApiErrorResponse.builder()
-            .status(status)
-            .errorMessage(errorMessage)
-            .timestamp(LocalDateTime.now())
-            .build();
-    }
-
-    public static ApiErrorResponse withErrors(HttpStatus status, ErrorCode errorCode, String errorMessage, Map<String, String> errors) {
+    public static ApiErrorResponse withErrors(HttpStatus status, String errorCode, String errorMessage, Map<String, String> errors) {
         return ApiErrorResponse.builder()
             .status(status)
             .errorCode(errorCode)
