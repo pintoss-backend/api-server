@@ -4,7 +4,7 @@ package com.pintoss.auth.storage.order;
 import static com.pintoss.auth.core.order.domain.QOrder.order;
 
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.support.exception.client.BadRequestException;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.order.domain.OrderSortKey;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;

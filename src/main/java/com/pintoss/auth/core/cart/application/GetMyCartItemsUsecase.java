@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.cart.application;
 
-import com.pintoss.auth.api.security.SecurityContextUtils;
+import com.pintoss.auth.api.support.security.SecurityContextUtils;
 import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import com.pintoss.auth.core.cart.application.flow.reader.CartItemProjectionReader;
 import lombok.RequiredArgsConstructor;

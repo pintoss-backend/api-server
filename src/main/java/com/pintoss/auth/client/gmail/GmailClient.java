@@ -11,7 +11,7 @@ import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.nimbusds.openid.connect.sdk.assurance.evidences.attachment.Attachment;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.support.exception.client.BadRequestException;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Multipart;
 import jakarta.mail.Session;

@@ -1,5 +1,6 @@
 package com.pintoss.auth.api.cart;
 
+import com.pintoss.auth.api.support.dto.ApiResponse;
 import com.pintoss.auth.api.cart.dto.CartItemListResponse;
 import com.pintoss.auth.api.cart.dto.CartItemUpdateRequest;
 import com.pintoss.auth.api.common.response.ApiResponse;

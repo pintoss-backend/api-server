@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galaxia.api.merchant.Message;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.support.exception.server.InternalServerException;
+import com.pintoss.auth.api.support.exception.server.InternalServerException;
 import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.time.LocalDateTime;

@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.user.application.flow.validator;
 
-import com.pintoss.auth.api.security.SecurityContextUtils;
+import com.pintoss.auth.api.support.security.SecurityContextUtils;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.support.exception.client.BadRequestException;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
 import com.pintoss.auth.core.user.application.repository.UserRepository;
 import com.pintoss.auth.core.user.domain.Phone;

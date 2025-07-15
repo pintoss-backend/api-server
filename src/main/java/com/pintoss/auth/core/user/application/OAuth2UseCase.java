@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.support.exception.client.BadRequestException;
-import com.pintoss.auth.api.security.jwt.JwtProvider;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.api.support.security.jwt.JwtProvider;
 import com.pintoss.auth.api.auth.dto.OAuth2FailResponse;
 import com.pintoss.auth.api.auth.dto.OAuth2LoginSuccess;
 import com.pintoss.auth.api.auth.dto.OAuth2Response;
