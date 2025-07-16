@@ -22,28 +22,15 @@ class CartItemUpdaterTest {
 
     @Test
     @DisplayName("장바구니 항목을 삭제로 표시할 때, 업데이트가 호출된다.")
-    void givenCartItem_whenMarkAsDeleted_thenUpdateShouldBeCalled() {
+    void givenCartItem_whenUpdate_thenUpdateShouldBeCalled() {
         // Given
         CartItem cartItem = createCartItem(1L, 10L, 2);
 
         // When
-        updater.markAsDeleted(cartItem);
+        updater.update(cartItem);
 
         // Then
         verify(repository).update(cartItem);
-    }
-
-    @Test
-    @DisplayName("장바구니 항목을 삭제로 표시할 때, 항목의 상태가 변경된다.")
-    void givenCartItem_whenMarkAsDeleted_thenCartItemShouldBeDeleted() {
-        // Given
-        CartItem cartItem = createCartItem(1L, 10L, 2);
-
-        // When
-        updater.markAsDeleted(cartItem);
-
-        // Then
-        assert cartItem.isDeleted();  // Assuming isDeleted() method exists in CartItem
     }
 
     private static CartItem createCartItem(Long id, Long productId, int quantity) {
