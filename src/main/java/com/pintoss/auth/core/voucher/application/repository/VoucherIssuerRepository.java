@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.application.repository;
 
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
-import com.pintoss.auth.storage.voucher.VoucherIssuerEntity;
+import com.pintoss.auth.storage.voucher.jpa.entity.VoucherIssuerEntity;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import java.util.List;

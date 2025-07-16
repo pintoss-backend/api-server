@@ -1,13 +1,17 @@
 package com.pintoss.auth.storage.voucher;
 
-import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
-import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
-import java.util.List;
-import java.util.Optional;
+import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
+import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
+import com.pintoss.auth.storage.voucher.jpa.VoucherIssuerJpaRepository;
+import com.pintoss.auth.storage.voucher.jpa.entity.VoucherIssuerEntity;
+import com.pintoss.auth.storage.voucher.querydsl.VoucherIssuerQueryDslRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 /**
  * "비즈니스 도메인 객체 조회" = find, get
  * "UI 표시용 가공된 데이터 조회" = fetch, query, search, read

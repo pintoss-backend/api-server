@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.domain;
+package com.pintoss.auth.storage.voucher.jpa.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class HomePage {
+public class HomePageEmbeddable {
     private String url;
 
-    public HomePage(String url) {
+    public HomePageEmbeddable(String url) {
         validate(url);
         this.url = url;
     }

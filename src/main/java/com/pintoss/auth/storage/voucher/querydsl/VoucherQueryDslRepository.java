@@ -1,4 +1,4 @@
-package com.pintoss.auth.storage.voucher;
+package com.pintoss.auth.storage.voucher.querydsl;
 
 
 

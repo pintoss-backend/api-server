@@ -1,9 +1,9 @@
 package com.pintoss.auth.core.voucher.application;
 
-import com.pintoss.auth.core.voucher.domain.ContactInfo;
-import com.pintoss.auth.core.voucher.domain.CsCenter;
-import com.pintoss.auth.core.voucher.domain.Discount;
-import com.pintoss.auth.core.voucher.domain.HomePage;
+import com.pintoss.auth.storage.voucher.jpa.entity.ContactInfoEmbeddable;
+import com.pintoss.auth.storage.voucher.jpa.entity.CsCenterEmbeddable;
+import com.pintoss.auth.storage.voucher.jpa.entity.DiscountEmbeddable;
+import com.pintoss.auth.storage.voucher.jpa.entity.HomePageEmbeddable;
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import com.pintoss.auth.core.voucher.application.dto.RegisterVoucherIssuerCommand;
@@ -29,10 +29,10 @@ public class RegisterVoucherIssuerUsecase {
         VoucherIssuer voucherIssuer = VoucherIssuer.create(
             command.getName(),
             command.getCode(),
-            new Discount(command.getCardDiscount(), command.getPhoneDiscount()),
-            new ContactInfo(
-                new HomePage(command.getHomePage()),
-                new CsCenter(command.getCsCenter())
+            new DiscountEmbeddable(command.getCardDiscount(), command.getPhoneDiscount()),
+            new ContactInfoEmbeddable(
+                new HomePageEmbeddable(command.getHomePage()),
+                new CsCenterEmbeddable(command.getCsCenter())
             ),
             command.getDescription(),
             command.getPublisher(),
