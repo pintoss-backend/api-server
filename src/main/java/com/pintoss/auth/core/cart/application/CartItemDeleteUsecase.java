@@ -20,7 +20,8 @@ public class CartItemDeleteUsecase {
         Long userId = SecurityContextUtils.getUserId();
 
         CartItem cartItem = cartItemReader.getOrElseThrow(userId, cartItemId);
-        cartItemUpdater.markAsDeleted(cartItem);
+        cartItem.deleted();
+        cartItemUpdater.update(cartItem);
     }
 
 }

@@ -11,8 +11,7 @@ public class CartItemUpdater {
 
     private final CartItemRepository cartItemRepository;
 
-    public void markAsDeleted(CartItem cartItem) {
-        cartItem.deleted();
+    public void update(CartItem cartItem) {
         cartItemRepository.update(cartItem);
     }
 

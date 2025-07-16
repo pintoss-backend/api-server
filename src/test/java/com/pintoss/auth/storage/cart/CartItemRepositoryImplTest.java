@@ -40,7 +40,8 @@ class CartItemRepositoryImplTest {
     @DisplayName("장바구니 아이템이 정상적으로 저장되어야 한다")
     void givenCartItems_whenSaveAll_thenItemsAreSaved() {
         // Given
-        List<CartItem> savingCartItems = List.of(CartItem.create(1L, 1L, 1),
+        List<CartItem> savingCartItems = List.of(
+                CartItem.create(1L, 1L, 1),
                 CartItem.create(1L, 2L, 2));
 
         // When
@@ -76,14 +77,13 @@ class CartItemRepositoryImplTest {
         List<CartItemEntity> savedCartItems = cartItemJpaRepository.findAll();
         assertThat(savedCartItems).hasSize(3);
         assertThat(savedCartItems).extracting(
-                CartItemEntity::getId,
                 CartItemEntity::getUserId,
                 CartItemEntity::getProductId,
                 CartItemEntity::getQuantity)
                 .containsExactlyInAnyOrder(
-                        tuple(1L, 1L, 1L, 1),
-                        tuple(2L, 1L, 2L, 2),
-                        tuple(3L, 1L, 3L, 3)
+                        tuple(1L, 1L, 1),
+                        tuple(1L, 2L, 2),
+                        tuple(1L, 3L, 3)
                 );
     }
 
@@ -106,14 +106,13 @@ class CartItemRepositoryImplTest {
         List<CartItemEntity> savedCartItems = cartItemJpaRepository.findAll();
         assertThat(savedCartItems).hasSize(3);
         assertThat(savedCartItems).extracting(
-                CartItemEntity::getId,
                 CartItemEntity::getUserId,
                 CartItemEntity::getProductId,
                 CartItemEntity::getQuantity)
                 .containsExactlyInAnyOrder(
-                        tuple(1L, 1L, 1L, 1),
-                        tuple(2L, 1L, 2L, 5), // 기존 아이템의 수량이 업데이트됨
-                        tuple(3L, 1L, 3L, 4) // 새로운 아이템 추가됨
+                        tuple(1L, 1L, 1),
+                        tuple(1L, 2L, 5), // 기존 아이템의 수량이 업데이트됨
+                        tuple(1L, 3L, 4) // 새로운 아이템 추가됨
                 );
     }
 

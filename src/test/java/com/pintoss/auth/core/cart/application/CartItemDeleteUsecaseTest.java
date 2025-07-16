@@ -3,6 +3,7 @@ package com.pintoss.auth.core.cart.application;
 import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.core.cart.application.flow.reader.CartItemReader;
 import com.pintoss.auth.core.cart.application.flow.writer.CartItemUpdater;
+import com.pintoss.auth.core.cart.domain.CartItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,8 @@ class CartItemDeleteUsecaseTest {
         // Given
         Long userId = 1L;
         Long cartItemId = 10L;
+        when(reader.getOrElseThrow(userId, cartItemId))
+                .thenReturn(CartItem.create(userId, cartItemId, 10L, 2, false));
 
         try (MockedStatic<SecurityContextUtils> mockedStatic = mockStatic(SecurityContextUtils.class)) {
             mockedStatic.when(com.pintoss.auth.api.security.SecurityContextUtils::getUserId).thenReturn(userId);
@@ -41,7 +44,7 @@ class CartItemDeleteUsecaseTest {
 
             // Then
             verify(reader).getOrElseThrow(userId, cartItemId);
-            verify(updater).markAsDeleted(any());
+            verify(updater).update(any());
         }
     }
 
