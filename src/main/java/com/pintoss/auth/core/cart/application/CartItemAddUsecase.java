@@ -1,16 +1,19 @@
 package com.pintoss.auth.core.cart.application;
 
 import com.pintoss.auth.api.security.SecurityContextUtils;
-import com.pintoss.auth.core.cart.domain.CartItem;
 import com.pintoss.auth.core.cart.application.dto.CartItemAddRequest;
-import com.pintoss.auth.core.cart.application.flow.writer.CartItemAdder;
 import com.pintoss.auth.core.cart.application.flow.reader.CartItemReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.pintoss.auth.core.cart.application.flow.writer.CartItemAdder;
+import com.pintoss.auth.core.cart.domain.CartItems;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,33 +22,15 @@ public class CartItemAddUsecase {
     private final CartItemReader cartItemReader;
     private final CartItemAdder cartItemAdder;
 
+    @Transactional
     public void addCartItem(List<CartItemAddRequest> command) {
-        List<CartItem> selectedCartItems = cartItemReader.readSelectedCartItems(
-            SecurityContextUtils.getUserId(), extractProductIds(command));
+        Long userId = SecurityContextUtils.getUserId();
+        CartItems cartItems = new CartItems(cartItemReader.readSelectedCartItems(userId, extractProductIds(command)));
+        Map<Long, Integer> productQuantityMap = toOrderedQuantityMap(command);
 
-        Set<Long> existingProductIds = selectedCartItems.stream()
-            .map(CartItem::getProductId)
-            .collect(Collectors.toSet());
+        CartItems mergedCartItems = cartItems.addCartItems(userId, productQuantityMap);
 
-        selectedCartItems.forEach(cartItem -> {
-            Integer quantity = command.stream()
-                .filter(item -> item.getProductId().equals(cartItem.getProductId()))
-                .findFirst()
-                .map(CartItemAddRequest::getQuantity)
-                .orElse(0);
-
-            cartItem.increaseQuantity(quantity);
-        });
-
-        List<CartItem> newCartItems = command.stream().filter(
-            item -> !existingProductIds.contains(item.getProductId()))
-            .map(item -> CartItem.create(SecurityContextUtils.getUserId(), item.getProductId(), item.getQuantity()))
-            .toList();
-
-        List<CartItem> allCartItems = new ArrayList<>(selectedCartItems);
-
-        allCartItems.addAll(newCartItems);
-        cartItemAdder.addAll(allCartItems);
+        cartItemAdder.addAll(mergedCartItems.getCartItems());
     }
 
     private Set<Long> extractProductIds(List<CartItemAddRequest> command) {
@@ -53,4 +38,15 @@ public class CartItemAddUsecase {
             .map(CartItemAddRequest::getProductId)
             .collect(Collectors.toSet());
     }
+
+    private static LinkedHashMap<Long, Integer> toOrderedQuantityMap(List<CartItemAddRequest> command) {
+        return command.stream()
+                .collect(Collectors.toMap(
+                        CartItemAddRequest::getProductId,
+                        CartItemAddRequest::getQuantity,
+                        (existing, replacement) -> replacement,
+                        LinkedHashMap::new
+                ));
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.cart.application.flow.viewer;
+package com.pintoss.auth.core.cart.application.flow.reader;
 
 import com.pintoss.auth.core.cart.application.repository.CartItemRepository;
 import com.pintoss.auth.core.cart.application.dto.CartItemView;

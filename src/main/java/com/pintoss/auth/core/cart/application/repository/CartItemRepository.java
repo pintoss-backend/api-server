@@ -1,9 +1,9 @@
 package com.pintoss.auth.core.cart.application.repository;
 
-import com.pintoss.auth.core.cart.domain.CartItem;
 import com.pintoss.auth.core.cart.application.dto.CartItemView;
+import com.pintoss.auth.core.cart.domain.CartItem;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public interface CartItemRepository {
@@ -14,5 +14,7 @@ public interface CartItemRepository {
 
     void saveAll(List<CartItem> cartItems);
 
-    Optional<CartItem> findByUserIdAndId(Long userId, Long cartItemId);
+    CartItem findByUserIdAndIdOrElseThrow(Long userId, Long cartItemId);
+
+    void update(CartItem cartItem);
 }
