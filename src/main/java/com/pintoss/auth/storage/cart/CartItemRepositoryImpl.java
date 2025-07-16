@@ -24,10 +24,7 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     @Override
     public void saveAll(List<CartItem> cartItems) {
         List<CartItemEntity> entities = cartItems.stream()
-                .map(cartItem -> CartItemEntity.create(
-                        cartItem.getUserId(),
-                        cartItem.getProductId(),
-                        cartItem.getQuantity()))
+                .map(CartItemEntity::from)
                 .toList();
         jpaRepository.saveAll(entities);
     }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 @Transactional
 @SpringBootTest
@@ -48,13 +49,72 @@ class CartItemRepositoryImplTest {
         // Then
         List<CartItemEntity> savedCartItems = cartItemJpaRepository.findAll();
         assertThat(savedCartItems).hasSize(2);
-        assertThat(savedCartItems.get(0).getUserId()).isEqualTo(1L);
-        assertThat(savedCartItems.get(0).getProductId()).isEqualTo(1L);
-        assertThat(savedCartItems.get(0).getQuantity()).isEqualTo(1);
+        assertThat(savedCartItems).extracting(
+                CartItemEntity::getUserId,
+                CartItemEntity::getProductId,
+                CartItemEntity::getQuantity)
+                .containsExactlyInAnyOrder(
+                        tuple(1L, 1L, 1),
+                        tuple(1L, 2L, 2)
+                );
+    }
 
-        assertThat(savedCartItems.get(1).getUserId()).isEqualTo(1L);
-        assertThat(savedCartItems.get(1).getProductId()).isEqualTo(2L);
-        assertThat(savedCartItems.get(1).getQuantity()).isEqualTo(2);
+    @Test
+    @DisplayName("장바구니에 새로운 아이템이 정상적으로 추가되어야 한다")
+    void givenNewCartItems_whenAdd_thenItemsAreAdded() {
+        // Given
+        List<CartItem> existingCartItems = List.of(
+                CartItem.create(1L, 1L, 1),
+                CartItem.create(1L, 2L, 2));
+        cartItemRepository.saveAll(existingCartItems);
+
+        // When
+        List<CartItem> newCartItems = List.of(CartItem.create(1L, 3L, 3));
+        cartItemRepository.saveAll(newCartItems);
+
+        // Then
+        List<CartItemEntity> savedCartItems = cartItemJpaRepository.findAll();
+        assertThat(savedCartItems).hasSize(3);
+        assertThat(savedCartItems).extracting(
+                CartItemEntity::getId,
+                CartItemEntity::getUserId,
+                CartItemEntity::getProductId,
+                CartItemEntity::getQuantity)
+                .containsExactlyInAnyOrder(
+                        tuple(1L, 1L, 1L, 1),
+                        tuple(2L, 1L, 2L, 2),
+                        tuple(3L, 1L, 3L, 3)
+                );
+    }
+
+    @Test
+    @DisplayName("기존 아이템의 개수는 유지되면서 새로운 아이템이 추가되어야 한다")
+    void givenExistingCartItems_whenAddNew_thenItemsAreAddedWithoutDuplicates() {
+        // Given
+        CartItemEntity existingCartItem1 = CartItemEntity.create(1L, 1L, 1);
+        CartItemEntity existingCartItem2 = CartItemEntity.create(1L, 2L, 2);
+        existingCartItem1 = cartItemJpaRepository.save(existingCartItem1);
+        existingCartItem2 = cartItemJpaRepository.save(existingCartItem2);
+
+        // When
+        List<CartItem> newCartItems = List.of(
+                CartItem.create(existingCartItem2.getId(), 1L, 2L, 5, existingCartItem1.isDeleted()),
+                CartItem.create(1L, 3L, 4));
+        cartItemRepository.saveAll(newCartItems);
+
+        // Then
+        List<CartItemEntity> savedCartItems = cartItemJpaRepository.findAll();
+        assertThat(savedCartItems).hasSize(3);
+        assertThat(savedCartItems).extracting(
+                CartItemEntity::getId,
+                CartItemEntity::getUserId,
+                CartItemEntity::getProductId,
+                CartItemEntity::getQuantity)
+                .containsExactlyInAnyOrder(
+                        tuple(1L, 1L, 1L, 1),
+                        tuple(2L, 1L, 2L, 5), // 기존 아이템의 수량이 업데이트됨
+                        tuple(3L, 1L, 3L, 4) // 새로운 아이템 추가됨
+                );
     }
 
     @Test

@@ -33,6 +33,16 @@ public class CartItemEntity {
                 .build();
     }
 
+    public static CartItemEntity from(CartItem cartItem) {
+        return CartItemEntity.builder()
+                .id(cartItem.getId())
+                .userId(cartItem.getUserId())
+                .productId(cartItem.getProductId())
+                .quantity(cartItem.getQuantity())
+                .isDeleted(cartItem.isDeleted())
+                .build();
+    }
+
     public CartItem toDomain() {
         return CartItem.create(id, userId, productId, quantity, isDeleted);
     }
