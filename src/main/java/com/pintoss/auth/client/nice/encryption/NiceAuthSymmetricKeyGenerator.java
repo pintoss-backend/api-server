@@ -1,7 +1,7 @@
 package com.pintoss.auth.client.nice.encryption;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.support.exception.client.BadRequestException;
 import com.pintoss.auth.client.nice.store.NiceApiSymmetricKey;
 import com.pintoss.auth.client.nice.provider.NiceApiTokenProvider;
 import com.pintoss.auth.client.nice.encryption.dto.GenerateSymmetricKeyCommand;

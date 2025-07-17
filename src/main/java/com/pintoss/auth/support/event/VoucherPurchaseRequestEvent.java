@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.event;
+package com.pintoss.auth.support.event;
 
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import lombok.AllArgsConstructor;

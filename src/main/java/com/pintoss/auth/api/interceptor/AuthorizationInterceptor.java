@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.interceptor;
 
-import com.pintoss.auth.common.exception.client.UnauthorizedException;
+import com.pintoss.auth.support.exception.client.UnauthorizedException;
 import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

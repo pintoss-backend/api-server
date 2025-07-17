@@ -1,10 +1,10 @@
-package com.pintoss.auth.common.exception;
+package com.pintoss.auth.support.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.pintoss.auth.api.common.response.ApiErrorResponse;
-import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.common.exception.client.UnauthorizedException;
+import com.pintoss.auth.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.client.UnauthorizedException;
 import com.pintoss.auth.api.common.util.DateTimeUtils;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletRequest;

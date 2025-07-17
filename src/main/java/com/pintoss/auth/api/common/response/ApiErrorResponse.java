@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.common.response;
 
-import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.support.exception.ErrorCode;
 import java.time.LocalDateTime;
 import java.util.Map;
 import lombok.Builder;

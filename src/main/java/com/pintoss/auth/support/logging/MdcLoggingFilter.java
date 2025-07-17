@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.logging;
+package com.pintoss.auth.support.logging;
 
 import com.pintoss.auth.api.security.SecurityContextUtils;
 import jakarta.servlet.FilterChain;

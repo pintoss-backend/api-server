@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.event;
+package com.pintoss.auth.support.event;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;

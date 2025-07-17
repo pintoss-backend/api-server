@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.exception;
+package com.pintoss.auth.support.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.pintoss.auth.event;
 
-import com.pintoss.auth.common.event.VoucherPurchaseRequestEvent;
+import com.pintoss.auth.support.event.VoucherPurchaseRequestEvent;
 import com.pintoss.auth.core.order.application.flow.event.OrderEventPublisher;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

@@ -3,7 +3,7 @@ package com.pintoss.auth.api.security;
 import com.pintoss.auth.api.security.jwt.JwtFilter;
 import com.pintoss.auth.api.security.jwt.JwtParser;
 import com.pintoss.auth.api.security.jwt.JwtValidator;
-import com.pintoss.auth.common.logging.MdcLoggingFilter;
+import com.pintoss.auth.support.logging.MdcLoggingFilter;
 import com.pintoss.auth.api.common.util.HttpServletUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

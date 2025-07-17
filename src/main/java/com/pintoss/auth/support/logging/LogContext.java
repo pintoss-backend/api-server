@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.logging;
+package com.pintoss.auth.support.logging;
 
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import org.slf4j.MDC;

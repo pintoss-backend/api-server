@@ -1,8 +1,8 @@
 package com.pintoss.auth.api.event;
 
 
-import com.pintoss.auth.common.event.VoucherPurchaseRequestEvent;
-import com.pintoss.auth.common.logging.LogContext;
+import com.pintoss.auth.support.event.VoucherPurchaseRequestEvent;
+import com.pintoss.auth.support.logging.LogContext;
 import com.pintoss.auth.core.voucher.application.VoucherPurchaseUsecase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

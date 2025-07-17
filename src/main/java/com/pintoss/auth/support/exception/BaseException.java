@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.exception;
+package com.pintoss.auth.support.exception;
 
 import java.time.LocalDateTime;
 import lombok.Getter;

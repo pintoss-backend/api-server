@@ -1,4 +1,4 @@
-package com.pintoss.auth.common.event;
+package com.pintoss.auth.support.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

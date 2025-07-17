@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.user.application.flow.policy;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.user.domain.LoginType;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
