@@ -22,13 +22,4 @@ public class WebInterceptorConfig implements WebMvcConfigurer {
     AuthorizationInterceptor authorizationInterceptor() {
         return new AuthorizationInterceptor();
     }
-
-    @Bean
-    public FilterRegistrationBean<MdcLoggingFilter> mdcFilterRegistration() {
-        FilterRegistrationBean<MdcLoggingFilter> registration = new FilterRegistrationBean<>();
-        registration.setFilter(new MdcLoggingFilter());
-        registration.setOrder(Ordered.LOWEST_PRECEDENCE); // 거의 마지막에 실행
-        registration.addUrlPatterns("/*");
-        return registration;
-    }
 }
