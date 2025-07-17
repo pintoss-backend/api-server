@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.cart.domain;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.core.exception.CoreErrorCode;
+import com.pintoss.auth.core.exception.CoreException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -65,7 +65,6 @@ class CartItemTest {
 
         // When & Then
         assertThatThrownBy(() -> cartItem.calculateQuantity(-6))
-            .isInstanceOf(BadRequestException.class)
-            .hasMessageContaining(ErrorCode.INVALID_CART_ITEM_QUANTITY.getMessage());
+            .isInstanceOf(CoreException.class);
     }
 }

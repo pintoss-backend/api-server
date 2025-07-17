@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.payment;
 
-import com.pintoss.auth.api.common.response.ApiResponse;
+import com.pintoss.auth.api.support.dto.ApiResponse;
 import com.pintoss.auth.core.payment.application.PurchasePaymentUsecase;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;

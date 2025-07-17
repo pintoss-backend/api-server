@@ -1,10 +1,10 @@
 package com.pintoss.auth.core.user.application.flow.processor;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.api.security.jwt.JwtParser;
-import com.pintoss.auth.api.security.jwt.JwtProvider;
-import com.pintoss.auth.api.security.jwt.JwtValidator;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.api.support.security.jwt.JwtParser;
+import com.pintoss.auth.api.support.security.jwt.JwtProvider;
+import com.pintoss.auth.api.support.security.jwt.JwtValidator;
 import com.pintoss.auth.core.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

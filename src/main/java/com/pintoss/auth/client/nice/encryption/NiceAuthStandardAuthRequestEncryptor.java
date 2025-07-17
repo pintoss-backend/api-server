@@ -2,8 +2,8 @@ package com.pintoss.auth.client.nice.encryption;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.client.nice.encryption.dto.NiceAuthStandardAuthRequest;
 import com.pintoss.auth.client.nice.encryption.dto.EncryptedRequestDataCommand;
 import java.nio.charset.StandardCharsets;

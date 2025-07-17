@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.application.flow.viewer;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.NotFoundException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.NotFoundException;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import java.util.List;

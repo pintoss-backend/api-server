@@ -1,10 +1,11 @@
 package com.pintoss.auth.storage.cart;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.NotFoundException;
 import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import com.pintoss.auth.core.cart.application.repository.CartItemRepository;
 import com.pintoss.auth.core.cart.domain.CartItem;
+import com.pintoss.auth.core.exception.CoreErrorCode;
+import com.pintoss.auth.core.exception.HttpErrorType;
+import com.pintoss.auth.core.exception.CoreException;
 import com.pintoss.auth.storage.cart.jpa.CartItemJpaRepository;
 import com.pintoss.auth.storage.cart.jpa.entity.CartItemEntity;
 import com.pintoss.auth.storage.cart.querydsl.CartItemQueryDslRepository;
@@ -46,7 +47,7 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     @Override
     public CartItem findByUserIdAndIdOrElseThrow(Long userId, Long cartItemId) {
         CartItemEntity entity = queryDslRepository.findByUserIdAndId(userId, cartItemId)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_CART_ITEM));
+                .orElseThrow(() -> new CoreException(CoreErrorCode.CART_ITEM_NOT_FOUND));
 
         return entity.toDomain();
     }
@@ -54,7 +55,7 @@ public class CartItemRepositoryImpl implements CartItemRepository {
     @Override
     public void update(CartItem cartItem) {
         CartItemEntity entity = jpaRepository.findById(cartItem.getId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_CART_ITEM));
+                .orElseThrow(() -> new CoreException(CoreErrorCode.CART_ITEM_NOT_FOUND));
         entity.update(cartItem.getQuantity(), cartItem.isDeleted());
     }
 }

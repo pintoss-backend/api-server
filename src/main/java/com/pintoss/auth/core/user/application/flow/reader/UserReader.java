@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.user.application.flow.reader;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.user.application.repository.UserRepository;
 import com.pintoss.auth.core.user.domain.LoginType;
 import com.pintoss.auth.core.user.domain.Phone;

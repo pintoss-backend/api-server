@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.domain;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import java.time.LocalDateTime;
 import lombok.Getter;
 
