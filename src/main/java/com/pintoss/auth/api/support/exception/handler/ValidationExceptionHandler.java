@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.support.exception;
+package com.pintoss.auth.api.support.exception.handler;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;

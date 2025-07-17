@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.support.exception;
+package com.pintoss.auth.api.support.exception.handler;
 
 
 import com.pintoss.auth.api.support.dto.ApiErrorResponse;
