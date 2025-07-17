@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.application.flow.viewer;
+package com.pintoss.auth.core.voucher.application.flow.reader;
 
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.NotFoundException;

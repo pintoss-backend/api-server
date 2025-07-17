@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.voucher.application.flow.validator;
+package com.pintoss.auth.core.voucher.application.flow.reader;
 
 import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import lombok.RequiredArgsConstructor;
