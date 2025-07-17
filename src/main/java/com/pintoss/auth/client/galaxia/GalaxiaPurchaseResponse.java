@@ -1,6 +1,6 @@
 package com.pintoss.auth.client.galaxia;
 
-import com.pintoss.auth.core.order.domain.PurchaseResult;
+import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.regex.Matcher;

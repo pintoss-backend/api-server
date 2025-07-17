@@ -1,13 +1,13 @@
 package com.pintoss.auth.core.user.application.flow.validator;
 
+import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.api.security.SecurityContextUtils;
+import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
 import com.pintoss.auth.core.user.application.repository.UserRepository;
 import com.pintoss.auth.core.user.domain.Phone;
 import com.pintoss.auth.core.user.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class UserValidator {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoderWrapper passwordEncoder;
 
     public void duplicateEmail(String email) {
         if (userRepository.existsByEmail(email)) {

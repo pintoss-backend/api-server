@@ -40,6 +40,13 @@ jobs:
 #          echo "${{ secrets.APPLICATION_TEST_YAML }}" | base64 --decode > src/main/resources/application-test.yaml
 #          find src
 
+      - name: Decode Gmail Credentials and create noreply.json
+        env:
+          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
+        run: |
+          mkdir -p src/main/resources
+          echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
+
       - name: Gradle Caching
         uses: actions/cache@v3
         with:
@@ -54,4 +61,4 @@ jobs:
         run: chmod +x gradlew
 
       - name: Test With Gradle
-        run: ./gradlew --info test
+        run: ./gradlew --info test -Dspring.profiles.active=test

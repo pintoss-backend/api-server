@@ -1,0 +1,6 @@
+gmail:
+  application-name: passwordreset
+  user-email: noreply@pin-toss.com
+  service-account-keys: noreply.json
+  oauth-scopes:
+    - https://www.googleapis.com/auth/gmail.send

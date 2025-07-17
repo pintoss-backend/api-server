@@ -1,13 +1,18 @@
 package com.pintoss.auth.storage.cart;
 
-import com.pintoss.auth.core.cart.domain.CartItem;
+import com.pintoss.auth.common.exception.ErrorCode;
+import com.pintoss.auth.common.exception.client.NotFoundException;
 import com.pintoss.auth.core.cart.application.dto.CartItemView;
 import com.pintoss.auth.core.cart.application.repository.CartItemRepository;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import com.pintoss.auth.core.cart.domain.CartItem;
+import com.pintoss.auth.storage.cart.jpa.CartItemJpaRepository;
+import com.pintoss.auth.storage.cart.jpa.entity.CartItemEntity;
+import com.pintoss.auth.storage.cart.querydsl.CartItemQueryDslRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Set;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,7 +23,10 @@ public class CartItemRepositoryImpl implements CartItemRepository {
 
     @Override
     public void saveAll(List<CartItem> cartItems) {
-        jpaRepository.saveAll(cartItems);
+        List<CartItemEntity> entities = cartItems.stream()
+                .map(CartItemEntity::from)
+                .toList();
+        jpaRepository.saveAll(entities);
     }
 
     @Override
@@ -28,11 +36,25 @@ public class CartItemRepositoryImpl implements CartItemRepository {
 
     @Override
     public List<CartItem> findByUserIdAndProductIdIn(Long userId, Set<Long> productIds) {
-        return queryDslRepository.findByUserIdAndProductIdIn(userId, productIds);
+        List<CartItemEntity> entities = queryDslRepository.findByUserIdAndProductIdIn(userId, productIds);
+        
+        return entities.stream()
+                .map(CartItemEntity::toDomain)
+                .toList();
     }
 
     @Override
-    public Optional<CartItem> findByUserIdAndId(Long userId, Long cartItemId) {
-        return queryDslRepository.findByUserIdAndId(userId, cartItemId);
+    public CartItem findByUserIdAndIdOrElseThrow(Long userId, Long cartItemId) {
+        CartItemEntity entity = queryDslRepository.findByUserIdAndId(userId, cartItemId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_CART_ITEM));
+
+        return entity.toDomain();
+    }
+
+    @Override
+    public void update(CartItem cartItem) {
+        CartItemEntity entity = jpaRepository.findById(cartItem.getId())
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_CART_ITEM));
+        entity.update(cartItem.getQuantity(), cartItem.isDeleted());
     }
 }

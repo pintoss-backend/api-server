@@ -1,12 +1,12 @@
 package com.pintoss.auth.core.user.application;
 
+import com.pintoss.auth.api.security.SecurityContextUtils;
 import com.pintoss.auth.common.exception.ErrorCode;
 import com.pintoss.auth.common.exception.client.BadRequestException;
-import com.pintoss.auth.api.security.SecurityContextUtils;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
+import com.pintoss.auth.core.user.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PasswordUpdateUseCase {
 
     private final UserReader userReader;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoderWrapper passwordEncoder;
 
     @Transactional
     public void updatePassword(String originPassword, String newPassword) {
