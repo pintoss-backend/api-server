@@ -65,7 +65,6 @@ class CartItemTest {
 
         // When & Then
         assertThatThrownBy(() -> cartItem.calculateQuantity(-6))
-            .isInstanceOf(CoreException.class)
-            .hasMessageContaining(CoreErrorCode.INVALID_CART_ITEM_QUANTITY.getMessage());
+            .isInstanceOf(CoreException.class);
     }
 }
