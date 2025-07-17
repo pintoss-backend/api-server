@@ -3,7 +3,6 @@ package com.pintoss.auth.api.cart;
 import com.pintoss.auth.api.support.dto.ApiResponse;
 import com.pintoss.auth.api.cart.dto.CartItemListResponse;
 import com.pintoss.auth.api.cart.dto.CartItemUpdateRequest;
-import com.pintoss.auth.api.common.response.ApiResponse;
 import com.pintoss.auth.core.cart.application.CartItemAddUsecase;
 import com.pintoss.auth.core.cart.application.CartItemDeleteUsecase;
 import com.pintoss.auth.core.cart.application.CartItemUpdateUsecase;

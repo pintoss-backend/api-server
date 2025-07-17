@@ -1,7 +1,8 @@
 package com.pintoss.auth.core.cart.domain;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.core.exception.CoreErrorCode;
+import com.pintoss.auth.core.exception.HttpErrorType;
+import com.pintoss.auth.core.exception.CoreException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,8 +51,9 @@ public class CartItem {
 
     public void calculateQuantity(int quantity) {
         this.quantity += quantity;
+
         if (this.quantity < 0) {
-            throw new BadRequestException(ErrorCode.INVALID_CART_ITEM_QUANTITY);
+            throw new CoreException(CoreErrorCode.INVALID_CART_ITEM_QUANTITY);
         }
 
         if (this.quantity == 0) {
