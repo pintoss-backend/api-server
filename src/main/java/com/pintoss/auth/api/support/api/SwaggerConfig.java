@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.support.config;
+package com.pintoss.auth.api.support.api;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;

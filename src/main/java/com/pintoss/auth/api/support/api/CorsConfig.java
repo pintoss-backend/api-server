@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.support.config;
+package com.pintoss.auth.api.support.api;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

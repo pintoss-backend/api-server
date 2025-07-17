@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.support.config;
+package com.pintoss.auth.api.support.api;
 
 import com.pintoss.auth.api.support.interceptor.AuthorizationInterceptor;
 import com.pintoss.auth.api.support.filter.MdcLoggingFilter;
