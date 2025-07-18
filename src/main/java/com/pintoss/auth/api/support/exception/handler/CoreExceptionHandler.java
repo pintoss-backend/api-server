@@ -2,10 +2,10 @@ package com.pintoss.auth.api.support.exception.handler;
 
 import com.pintoss.auth.api.support.dto.ApiErrorResponse;
 import com.pintoss.auth.api.support.util.DateTimeUtils;
-import com.pintoss.auth.core.exception.*;
+import com.pintoss.auth.core.exception.CoreException;
+import com.pintoss.auth.core.exception.HttpErrorType;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,13 +16,16 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 @Slf4j
 public class CoreExceptionHandler {
+    /**
+     * TODO : 결제 관련 예외 => error 레벨 수정 필요
+     */
 
     @ExceptionHandler({CoreException.class})
     public final ResponseEntity<ApiErrorResponse> handleCoreExceptions(CoreException e, HttpServletRequest request) {
         LocalDateTime timestamp = LocalDateTime.now();
         HttpStatus status = resolveHttpStatus(e.getErrorCode().getHttpErrorType());
         ApiErrorResponse errorResponse = ApiErrorResponse.of(status, e.getErrorCode().getCode(), e.getErrorCode().getMessage(), timestamp);
-        log.error("[CoreException] errorCode={}, message={}, path={}, method={}, time={}",
+        log.warn("[CoreException] errorCode={}, message={}, path={}, method={}, time={}",
                 e.getErrorCode(), e.getMessage(), request.getRequestURI(), request.getMethod(), DateTimeUtils.formatKorean(timestamp));
         return new ResponseEntity<>(errorResponse, status);
     }
