@@ -30,7 +30,7 @@ public class ClientExceptionHandler {
     private ResponseEntity<ApiErrorResponse> buildError(BaseException e, HttpServletRequest request) {
         LocalDateTime timestamp = LocalDateTime.now();
         ApiErrorResponse errorResponse = ApiErrorResponse.of(e.getHttpStatus(), e.getErrorCode().getCode(), e.getErrorCode().getMessage(), timestamp);
-        log.error("[ClientException] errorCode={}, message={}, path={}, method={}, time={}",
+        log.warn("[ClientException] errorCode={}, message={}, path={}, method={}, time={}",
                 e.getErrorCode(), e.getMessage(), request.getRequestURI(), request.getMethod(), DateTimeUtils.formatKorean(timestamp));
         return new ResponseEntity<>(errorResponse, e.getHttpStatus());
     }
