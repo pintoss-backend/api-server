@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VoucherPurchaseUsecase {
+
     private final Purchaser purchaser;
     private final VoucherEventPublisher eventPublisher;
 
@@ -49,4 +50,5 @@ public class VoucherPurchaseUsecase {
             )
         );
     }
+
 }

@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.application;
 
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
-import com.pintoss.auth.core.voucher.application.flow.viewer.VoucherIssuerProjectionReader;
+import com.pintoss.auth.core.voucher.application.flow.reader.VoucherIssuerProjectionReader;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,4 +16,5 @@ public class GetVoucherIssuerDetailUsecase {
     public VoucherIssuerDetailResult getVoucherIssuerDetail(Long voucherIssuerId) {
         return voucherIssuerProjectionReader.fetchDetail(voucherIssuerId);
     }
+
 }
