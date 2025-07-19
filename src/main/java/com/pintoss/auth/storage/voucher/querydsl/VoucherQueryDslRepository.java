@@ -1,16 +1,16 @@
 package com.pintoss.auth.storage.voucher.querydsl;
 
 
-
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import static com.pintoss.auth.storage.voucher.QVoucherEntity.voucherEntity;
-import static com.pintoss.auth.storage.voucher.QVoucherIssuerEntity.voucherIssuerEntity;
+import java.util.List;
+
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherIssuerEntity.voucherIssuerEntity;
 
 @Repository
 @RequiredArgsConstructor
