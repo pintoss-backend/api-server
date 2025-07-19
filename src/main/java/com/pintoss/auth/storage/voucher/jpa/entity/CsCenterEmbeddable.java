@@ -1,5 +1,6 @@
 package com.pintoss.auth.storage.voucher.jpa.entity;
 
+import com.pintoss.auth.core.voucher.domain.CsCenter;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,27 +12,11 @@ import lombok.NoArgsConstructor;
 public class CsCenterEmbeddable {
     private String tel;
 
-    public CsCenterEmbeddable(String tel) {
-        validate(tel);
-        this.tel = tel;
+    public CsCenterEmbeddable(CsCenter csCenter) {
+        this.tel = csCenter.getTel();
     }
 
-    private void validate(String tel){
-        // TODO : 유효성 검증
-        // Case1 . xxxx-xxxx
-        // Case2 . xxx-xxxx-xxxx
-        // Case3 . 빈값, null
-        // 이외에 IllegalArgumentException을 던진다.
-        if (tel == null || tel.isBlank()) {
-            throw new IllegalArgumentException("고객센터 전화번호는 필수 입력 값 입니다.");
-        }
-
-        boolean isValidFormat = tel.matches("^\\d{4}-\\d{4}$")
-            || tel.matches("^\\d{3}-\\d{4}-\\d{4}$")
-            || tel.matches("^\\d{3}-\\d{3}-\\d{4}$");
-
-        if (!isValidFormat) {
-            throw new IllegalArgumentException("유효한 전화번호 형식이 아닙니다. (xxxx-xxxx, xxx-xxxx-xxxx 또는 xxx-xxx-xxxx 형식이어야 합니다.)");
-        }
+    public CsCenter toDomain() {
+        return new CsCenter(tel);
     }
 }

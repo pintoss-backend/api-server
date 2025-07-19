@@ -1,11 +1,17 @@
 package com.pintoss.auth.core.voucher.domain;
 
-import com.pintoss.auth.support.exception.ErrorCode;
 import com.pintoss.auth.api.support.exception.client.BadRequestException;
-import java.time.LocalDateTime;
+import com.pintoss.auth.support.exception.ErrorCode;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
+@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Voucher {
     private Long id;
 
@@ -23,27 +29,27 @@ public class Voucher {
 
     private LocalDateTime updatedAt;
 
-    private Voucher(Long voucherIssuerId, String name, String issuerName, Long price) {
-        this.voucherIssuerId = voucherIssuerId;
-        this.name = name;
-        this.issuerName = issuerName;
-        this.price = price;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+    public static Voucher create(Long voucherIssuerId, String name, String issuerName, Long price) {
+        return Voucher.builder()
+            .voucherIssuerId(voucherIssuerId)
+            .name(name)
+            .issuerName(issuerName)
+            .price(price)
+            .createdAt(LocalDateTime.now())
+            .updatedAt(LocalDateTime.now())
+            .build();
     }
 
-    public static Voucher create(Long voucherIssuerId, String name, String issuerName, Long price) {
-        return new Voucher(voucherIssuerId, name, issuerName, price);
-    }
-    public Voucher(Long id, Long voucherIssuerId, String name, String issuerName, Long price, String productCode, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.voucherIssuerId = voucherIssuerId;
-        this.name = name;
-        this.issuerName = issuerName;
-        this.price = price;
-        this.productCode = productCode;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public static Voucher create(Long id, Long voucherIssuerId, String name, String issuerName, Long price) {
+        return Voucher.builder()
+            .id(id)
+            .voucherIssuerId(voucherIssuerId)
+            .name(name)
+            .issuerName(issuerName)
+            .price(price)
+            .createdAt(LocalDateTime.now())
+            .updatedAt(LocalDateTime.now())
+            .build();
     }
 
     public void validatePrice(Long price) {

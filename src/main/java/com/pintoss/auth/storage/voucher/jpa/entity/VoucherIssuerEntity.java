@@ -2,15 +2,15 @@ package com.pintoss.auth.storage.voucher.jpa.entity;
 
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class VoucherIssuerEntity {
 
@@ -56,46 +56,33 @@ public class VoucherIssuerEntity {
     @Column(nullable = false, precision = 5, scale = 2) // ex) 999.99 까지 가능
     private BigDecimal fee; // 수수료
 
-    private VoucherIssuerEntity(String name, String code, DiscountEmbeddable discountEmbeddable, ContactInfoEmbeddable contactInfoEmbeddable, String description, String publisher, String note, String imageUrl, BigDecimal fee) {
-        this.name = name;
-        this.code = code;
-        this.discountEmbeddable = discountEmbeddable;
-        this.contactInfoEmbeddable = contactInfoEmbeddable;
-        this.description = description;
-        this.publisher = publisher;
-        this.note = note;
-        this.imageUrl = imageUrl;
-        this.fee = fee;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public static VoucherIssuerEntity create(String name, String code, DiscountEmbeddable discountEmbeddable, ContactInfoEmbeddable contactInfoEmbeddable, String description, String publisher,
-                                             String note, String imageUrl, BigDecimal fee) {
-        return new VoucherIssuerEntity(
-            name,
-            code,
-                discountEmbeddable,
-                contactInfoEmbeddable,
-            description,
-            publisher,
-            note,
-            imageUrl,
-            fee
-        );
-    }
-
     public static VoucherIssuerEntity from(VoucherIssuer voucherIssuer) {
-        return new VoucherIssuerEntity(
-            voucherIssuer.getName(),
-            voucherIssuer.getCode(),
-            voucherIssuer.getDiscountEmbeddable(),
-            voucherIssuer.getContactInfoEmbeddable(),
-            voucherIssuer.getDescription(),
-            voucherIssuer.getPublisher(),
-            voucherIssuer.getNote(),
-            voucherIssuer.getImageUrl(),
-            voucherIssuer.getFee()
+        return VoucherIssuerEntity.builder()
+                .name(voucherIssuer.getName())
+                .code(voucherIssuer.getCode())
+                .discountEmbeddable(new DiscountEmbeddable(voucherIssuer.getDiscount()))
+                .contactInfoEmbeddable(new ContactInfoEmbeddable(voucherIssuer.getContactInfo()))
+                .description(voucherIssuer.getDescription())
+                .publisher(voucherIssuer.getPublisher())
+                .note(voucherIssuer.getNote())
+                .imageUrl(voucherIssuer.getImageUrl())
+                .fee(voucherIssuer.getFee())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
+    public VoucherIssuer toDomain() {
+        return VoucherIssuer.create(
+                this.name,
+                this.code,
+                this.discountEmbeddable.toDomain(),
+                this.contactInfoEmbeddable.toDomain(),
+                this.description,
+                this.publisher,
+                this.note,
+                this.imageUrl,
+                this.fee
         );
     }
 }
