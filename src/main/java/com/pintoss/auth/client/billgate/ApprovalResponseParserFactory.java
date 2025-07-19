@@ -1,6 +1,6 @@
 package com.pintoss.auth.client.billgate;
 
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

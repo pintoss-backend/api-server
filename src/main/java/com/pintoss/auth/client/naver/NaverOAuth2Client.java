@@ -1,8 +1,8 @@
 package com.pintoss.auth.client.naver;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.user.domain.LoginType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;

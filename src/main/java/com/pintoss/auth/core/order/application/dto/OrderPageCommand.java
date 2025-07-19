@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.order.application.dto;
 
-import com.pintoss.auth.api.common.paging.SortDirection;
+import com.pintoss.auth.api.support.paging.SortDirection;
 import com.pintoss.auth.core.order.domain.OrderSortKey;
 import com.pintoss.auth.core.order.domain.OrderStatus;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;

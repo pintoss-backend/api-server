@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.order.application.flow.viewer;
 
-import com.pintoss.auth.common.exception.ErrorCode;
-import com.pintoss.auth.common.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.order.application.repository.OrderRepository;
 import com.pintoss.auth.core.order.application.dto.OrderDetail;
 import com.pintoss.auth.core.order.application.dto.OrderPageCommand;
