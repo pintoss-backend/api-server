@@ -1,8 +1,7 @@
 package com.pintoss.auth.core.voucher.application.flow.reader;
 
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
 import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
-import com.pintoss.auth.storage.voucher.jpa.entity.VoucherIssuerEntity;
+import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +11,8 @@ public class VoucherIssuerReader {
 
     private final VoucherIssuerRepository voucherIssuerRepository;
 
-    public VoucherIssuerEntity read(Long voucherIssuerId) {
-        return voucherIssuerRepository.findById(voucherIssuerId)
-            .orElseThrow(() -> new BadRequestException("VoucherEntity issuer not found"));
+    public VoucherIssuer read(Long voucherIssuerId) {
+        return voucherIssuerRepository.findById(voucherIssuerId);
     }
 
 }

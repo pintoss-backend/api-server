@@ -26,7 +26,6 @@ public class VoucherIssuerProjectionReader {
     }
 
     public VoucherIssuerDetailResult fetchDetail(Long voucherIssuerId) {
-        return voucherIssuerRepository.fetchDetail(voucherIssuerId)
-            .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_FOUND, "상품권 발급처를 찾을 수 없습니다."));
+        return voucherIssuerRepository.fetchDetail(voucherIssuerId);
     }
 }
