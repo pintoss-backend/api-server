@@ -1,6 +1,5 @@
-package com.pintoss.auth.support.event;
+package com.pintoss.auth.support.event.voucher;
 
-import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.support.logging.LogContext;
 import com.pintoss.auth.core.order.application.OrderPurchaseResultUsecase;
 import lombok.RequiredArgsConstructor;

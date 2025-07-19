@@ -1,6 +1,5 @@
-package com.pintoss.auth.support.event;
+package com.pintoss.auth.support.event.voucher;
 
-import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
