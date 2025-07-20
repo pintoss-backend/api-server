@@ -1,6 +1,7 @@
 package com.pintoss.auth.core.order.domain;
 
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
+import com.pintoss.auth.core.voucher.application.dto.VoucherPurchaseCommand;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,4 +16,17 @@ public class VoucherPurchaseRequestEvent {
     private final Long salePrice;
     private final PaymentMethodType paymentMethodType;
     private final String productCode;
+
+    public VoucherPurchaseCommand toCommand() {
+        return new VoucherPurchaseCommand(
+            orderNo,
+            orderItemId,
+            transactionId,
+            mId,
+            paymentPrice,
+            salePrice,
+            paymentMethodType,
+            productCode
+        );
+    }
 }
