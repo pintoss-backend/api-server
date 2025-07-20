@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.voucher.application.flow.reader;
 
-import com.pintoss.auth.api.support.exception.client.NotFoundException;
+import com.pintoss.auth.core.exception.CoreErrorCode;
+import com.pintoss.auth.core.exception.CoreException;
 import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
-import com.pintoss.auth.support.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +13,8 @@ public class VoucherIssuerValidator {
     private final VoucherIssuerRepository voucherIssuerRepository;
 
     public void validateIssuerNameDuplicate(String issuerName) {
-        if (!voucherIssuerRepository.existsByName(issuerName)) {
-            throw new NotFoundException(ErrorCode.RESOURCE_NOT_FOUND, "상품권 발급처를 찾을 수 없습니다.");
+        if (voucherIssuerRepository.existsByName(issuerName)) {
+            throw new CoreException(CoreErrorCode.VOUCHER_ISSUER_ALREADY_EXISTS);
         }
     }
 
