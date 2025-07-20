@@ -1,12 +1,16 @@
 package com.pintoss.auth.core.voucher.domain;
 
-import jakarta.persistence.Column;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
+@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class VoucherIssuer {
 
     private Long id;
@@ -29,36 +33,21 @@ public class VoucherIssuer {
 
     private String imageUrl;
 
-    @Column(nullable = false, precision = 5, scale = 2) // ex) 999.99 까지 가능
     private BigDecimal fee; // 수수료
-
-    private VoucherIssuer(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher, String note, String imageUrl, BigDecimal fee) {
-        this.name = name;
-        this.code = code;
-        this.discount = discount;
-        this.contactInfo = contactInfo;
-        this.description = description;
-        this.publisher = publisher;
-        this.note = note;
-        this.imageUrl = imageUrl;
-        this.fee = fee;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
 
     public static VoucherIssuer create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
                                        String note, String imageUrl, BigDecimal fee) {
-        return new VoucherIssuer(
-                name,
-                code,
-                discount,
-                contactInfo,
-                description,
-                publisher,
-                note,
-                imageUrl,
-                fee
-        );
+        return VoucherIssuer.builder()
+                .name(name)
+                .code(code)
+                .discount(discount)
+                .contactInfo(contactInfo)
+                .description(description)
+                .publisher(publisher)
+                .note(note)
+                .imageUrl(imageUrl)
+                .fee(fee)
+                .build();
     }
 
 }
