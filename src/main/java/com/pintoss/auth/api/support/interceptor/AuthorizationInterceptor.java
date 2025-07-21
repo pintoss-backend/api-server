@@ -1,7 +1,9 @@
 package com.pintoss.auth.api.support.interceptor;
 
+import com.pintoss.auth.api.support.exception.client.ForbiddenException;
 import com.pintoss.auth.api.support.exception.client.UnauthorizedException;
 import com.pintoss.auth.core.user.domain.UserRoleEnum;
+import com.pintoss.auth.support.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Arrays;
@@ -22,21 +24,22 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        Collection<? extends GrantedAuthority> possibleAuthority = roleToAuthority(annotation.value());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (!hasAuthority(possibleAuthority)) {
+        if (authentication == null || !authentication.isAuthenticated()) {
             throw new UnauthorizedException(annotation.failureMessage());
         }
 
+        Collection<? extends GrantedAuthority> requiredAuthorities = roleToAuthority(annotation.value());
+
+        boolean hasRequiredRole = authentication.getAuthorities().stream()
+                .anyMatch(requiredAuthorities::contains);
+
+        if (!hasRequiredRole) {
+            throw new ForbiddenException(ErrorCode.AUTH_ACCESS_DENIED);
+        }
+
         return true;
-
-    }
-
-    private boolean hasAuthority(Collection<? extends GrantedAuthority> possibleAuthority) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        return authentication != null && authentication.getAuthorities()
-            .stream().anyMatch(possibleAuthority::contains);
     }
 
     private AuthorizationRequired getAnnotation(Object handler) {
