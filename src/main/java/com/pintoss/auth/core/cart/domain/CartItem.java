@@ -1,8 +1,7 @@
 package com.pintoss.auth.core.cart.domain;
 
-import com.pintoss.auth.core.exception.CoreErrorCode;
-import com.pintoss.auth.core.exception.HttpErrorType;
-import com.pintoss.auth.core.exception.CoreException;
+import com.pintoss.auth.core.support.exception.CoreErrorCode;
+import com.pintoss.auth.core.support.exception.CoreException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

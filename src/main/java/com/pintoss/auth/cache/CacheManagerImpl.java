@@ -1,7 +1,7 @@
 package com.pintoss.auth.cache;
 
-import com.pintoss.auth.api.support.exception.server.InternalServerException;
-import com.pintoss.auth.core.shared.cache.CoreCacheManager;
+import com.pintoss.auth.support.exception.InternalServerException;
+import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import com.pintoss.auth.support.exception.ErrorCode;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;

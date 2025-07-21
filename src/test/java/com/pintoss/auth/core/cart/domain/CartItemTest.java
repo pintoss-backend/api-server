@@ -1,7 +1,6 @@
 package com.pintoss.auth.core.cart.domain;
 
-import com.pintoss.auth.core.exception.CoreErrorCode;
-import com.pintoss.auth.core.exception.CoreException;
+import com.pintoss.auth.core.support.exception.CoreException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

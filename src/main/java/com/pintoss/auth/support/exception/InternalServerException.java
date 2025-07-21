@@ -1,7 +1,5 @@
-package com.pintoss.auth.api.support.exception.server;
+package com.pintoss.auth.support.exception;
 
-import com.pintoss.auth.support.exception.BaseException;
-import com.pintoss.auth.support.exception.ErrorCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

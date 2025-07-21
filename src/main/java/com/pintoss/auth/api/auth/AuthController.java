@@ -6,7 +6,7 @@ import com.pintoss.auth.api.auth.dto.RegisterRequest;
 import com.pintoss.auth.api.auth.dto.ReissueResponse;
 import com.pintoss.auth.api.support.dto.ApiResponse;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.api.support.util.HttpServletUtils;
 import com.pintoss.auth.core.user.application.LoginUseCase;
 import com.pintoss.auth.core.user.application.RegisterUseCase;

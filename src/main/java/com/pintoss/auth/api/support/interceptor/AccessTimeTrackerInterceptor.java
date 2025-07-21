@@ -2,8 +2,8 @@ package com.pintoss.auth.api.support.interceptor;
 
 import com.pintoss.auth.api.support.security.SecurityContextUtils;
 import com.pintoss.auth.api.support.security.jwt.JwtAuthenticationToken;
-import com.pintoss.auth.core.shared.cache.CacheType;
-import com.pintoss.auth.core.shared.cache.CoreCacheManager;
+import com.pintoss.auth.core.support.cache.CacheType;
+import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;

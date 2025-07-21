@@ -2,7 +2,7 @@ package com.pintoss.auth.api.support.api;
 
 import com.pintoss.auth.api.support.interceptor.AccessTimeTrackerInterceptor;
 import com.pintoss.auth.api.support.interceptor.AuthorizationInterceptor;
-import com.pintoss.auth.core.shared.cache.CoreCacheManager;
+import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

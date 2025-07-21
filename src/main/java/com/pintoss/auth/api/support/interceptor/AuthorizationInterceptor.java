@@ -1,7 +1,7 @@
 package com.pintoss.auth.api.support.interceptor;
 
-import com.pintoss.auth.api.support.exception.client.ForbiddenException;
-import com.pintoss.auth.api.support.exception.client.UnauthorizedException;
+import com.pintoss.auth.support.exception.ForbiddenException;
+import com.pintoss.auth.support.exception.UnauthorizedException;
 import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import com.pintoss.auth.support.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
