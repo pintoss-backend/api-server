@@ -5,6 +5,8 @@ import com.pintoss.auth.api.order.dto.OrderCreateResponse;
 import com.pintoss.auth.api.order.dto.OrderDetailResponse;
 import com.pintoss.auth.api.order.dto.OrderPageRequest;
 import com.pintoss.auth.api.support.dto.ApiResponse;
+import com.pintoss.auth.api.support.interceptor.AuthorizationRequired;
+import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import com.pintoss.auth.support.logging.LogContext;
 import com.pintoss.auth.api.support.paging.PageResponse;
 import com.pintoss.auth.api.support.paging.PagedData;
@@ -57,8 +59,8 @@ public class OrderController {
         return ApiResponse.ok(new PageResponse(response.getItems(), request.getPage(), request.getSize(),response.getTotalElements()));
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @PostMapping
+    @AuthorizationRequired(value = {UserRoleEnum.USER})
     public ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request) {
         OrderCreateResult result = orderCreateUsecase.create(request.getOrderItems(), request.getPaymentMethod());
 
