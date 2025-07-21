@@ -1,21 +1,23 @@
 package com.pintoss.auth.storage.voucher.jpa.entity;
 
 import com.pintoss.auth.core.voucher.domain.ContactInfo;
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class ContactInfoEmbeddable {
 
-    @Column(length = 100)
+    @Valid
     private HomePageEmbeddable homePageEmbeddable;
 
-    @Column(length = 20)
+    @Valid
     private CsCenterEmbeddable csCenterEmbeddable;
 
     public ContactInfoEmbeddable(ContactInfo contactInfo) {

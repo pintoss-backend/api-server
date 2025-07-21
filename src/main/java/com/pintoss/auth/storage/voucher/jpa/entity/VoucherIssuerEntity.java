@@ -2,6 +2,7 @@ package com.pintoss.auth.storage.voucher.jpa.entity;
 
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ public class VoucherIssuerEntity {
     private String code;
 
     @Embedded
+    @Valid
     @AttributeOverrides({
         @AttributeOverride(name = "cardDiscount", column = @Column(name = "cardDiscount", nullable = false)),
         @AttributeOverride(name = "phoneDiscount", column = @Column(name = "phoneDiscount", nullable = false))
@@ -32,6 +34,7 @@ public class VoucherIssuerEntity {
     private DiscountEmbeddable discountEmbeddable;
 
     @Embedded
+    @Valid
     @AttributeOverrides({
         @AttributeOverride(name = "homePage", column = @Column(name = "homePage", nullable = false)),
         @AttributeOverride(name = "csCenter", column = @Column(name = "csCenter", nullable = false)),

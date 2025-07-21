@@ -3,12 +3,14 @@ package com.pintoss.auth.storage.voucher.jpa.entity;
 import com.pintoss.auth.core.voucher.domain.Discount;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Embeddable
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class DiscountEmbeddable {
