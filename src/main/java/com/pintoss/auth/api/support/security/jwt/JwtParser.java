@@ -1,6 +1,7 @@
 package com.pintoss.auth.api.support.security.jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,18 @@ public class JwtParser {
 
     public String getSubject(String token) {
         return getClaims(token).getSubject();
+    }
+
+    public Claims getClaimsAllowExpired(String token) {
+        try {
+            return getClaims(token);
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
+        }
+    }
+
+    public String getSubjectAllowExpired(String token) {
+        return getClaimsAllowExpired(token).getSubject();
     }
 
 }
