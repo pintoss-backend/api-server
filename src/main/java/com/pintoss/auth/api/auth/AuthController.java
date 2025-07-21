@@ -19,7 +19,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +51,6 @@ public class AuthController {
         return ApiResponse.ok(new LoginResponse(result.getAccessToken()));
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/reissue")
     public ApiResponse<ReissueResponse> reissue(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         String refreshToken = servletUtils.getCookie(servletRequest, "RefreshToken")
