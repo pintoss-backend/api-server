@@ -26,7 +26,6 @@ public class CartItemController {
     private final CartItemDeleteUsecase cartItemDeleteUseCase;
 
     @GetMapping("/items")
-    @PreAuthorize("hasAuthority('USER')")
     public ApiResponse<List<CartItemListResponse>> getCartItems() {
         List<CartItemView> result = getMyCartItemsUseCase.getCartItems();
 
@@ -38,21 +37,18 @@ public class CartItemController {
     }
 
     @PostMapping("/items")
-    @PreAuthorize("hasAuthority('USER')")
     public ApiResponse<Void> addCartItem(@RequestBody List<CartItemAddRequest> request) {
         cartItemAddUseCase.addCartItem(request);
         return ApiResponse.ok(null);
     }
 
     @PatchMapping("/items/{cartItemId}")
-    @PreAuthorize("hasAuthority('USER')")
     public ApiResponse<Integer> updateCartItem(@PathVariable(value = "cartItemId") Long cartItemId, @RequestBody CartItemUpdateRequest request) {
         cartItemUpdateUseCase.update(cartItemId, request.getQuantity());
         return ApiResponse.ok(null);
     }
 
     @DeleteMapping("/items/{cartItemId}")
-    @PreAuthorize("hasAuthority('USER')")
     public ApiResponse<Void> deleteCartItem(@PathVariable(value = "cartItemId") Long cartItemId) {
         cartItemDeleteUseCase.deleteCartItem(cartItemId);
         return ApiResponse.ok(null);
