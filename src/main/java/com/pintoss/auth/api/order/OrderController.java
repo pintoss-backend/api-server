@@ -44,14 +44,14 @@ public class OrderController {
     private final OrderCreateUsecase orderCreateUsecase;
     private final OrderCancelUsecase orderCancelUseCase;
 
-    @PreAuthorize("hasAuthority('USER')")
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     @GetMapping("/{orderId}")
     public ApiResponse<OrderDetailResponse> getOrderDetail(@PathVariable("orderId") Long orderId) {
         OrderDetail response = getOrderDetailUsecase.getOrderDetail(orderId);
         return ApiResponse.ok(OrderDetailResponse.from(response));
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     @GetMapping()
     public ApiResponse<PageResponse<OrderSearchResult>> getMyOrderList(@ModelAttribute OrderPageRequest request) {
         PagedData<OrderSearchResult> response = getMyOrdersUsecase.getMyOrders(request.to());
@@ -59,8 +59,8 @@ public class OrderController {
         return ApiResponse.ok(new PageResponse(response.getItems(), request.getPage(), request.getSize(),response.getTotalElements()));
     }
 
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     @PostMapping
-    @AuthorizationRequired(value = {UserRoleEnum.USER})
     public ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request) {
         OrderCreateResult result = orderCreateUsecase.create(request.getOrderItems(), request.getPaymentMethod());
 
@@ -72,14 +72,14 @@ public class OrderController {
         return ApiResponse.ok(response);
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     @PutMapping("/{orderNo}/cancel")
     public ApiResponse<Void> cancelOrder(@PathVariable("orderNo") String orderNo) {
         orderCancelUseCase.cancel(orderNo);
         return ApiResponse.ok(null);
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     @PostMapping("/{orderNo}/refund")
     public ApiResponse<Void> refundOrder(@PathVariable("orderNo") String orderNo) {
         return ApiResponse.ok(null);
