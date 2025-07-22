@@ -34,16 +34,14 @@ public class JwtFilter extends OncePerRequestFilter {
         String accessToken = getAccessToken(request);
 
         if ( accessToken != null ) {
-            if ( jwtValidator.validateToken(accessToken) ) {
-                setAuthentication(accessToken, true);
-            } else {
-                setAuthentication(accessToken, false);
-            }
+            setAuthentication(accessToken);
         }
         filterChain.doFilter(request, response);
     }
 
-    private void setAuthentication(String accessToken, boolean isAuthenticated) {
+    private void setAuthentication(String accessToken) {
+        boolean isAuthenticated = jwtValidator.validateToken(accessToken);
+
         Claims claims = jwtParser.getClaimsAllowExpired(accessToken);
 
         Authentication authentication = new JwtAuthenticationToken(
