@@ -23,18 +23,18 @@ public class SecurityExceptionHandler {
 
     @ExceptionHandler(value = {AuthorizationDeniedException.class})
     public final ResponseEntity<ApiErrorResponse> handleAccessDenied(AuthorizationDeniedException e, HttpServletRequest request) {
-        return error(ErrorCode.AUTH_ACCESS_DENIED, HttpStatus.FORBIDDEN, e, request);
+        return warn(ErrorCode.AUTH_ACCESS_DENIED, HttpStatus.FORBIDDEN, e, request);
     }
 
     @ExceptionHandler(value = {AuthenticationException.class, UsernameNotFoundException.class, BadCredentialsException.class})
     public ResponseEntity<ApiErrorResponse> handleAuthenticationException(Exception e, HttpServletRequest request) {
-        return error(ErrorCode.UNAUTHORIZED, HttpStatus.BAD_REQUEST, e, request);
+        return warn(ErrorCode.UNAUTHORIZED, HttpStatus.BAD_REQUEST, e, request);
     }
 
-    private ResponseEntity<ApiErrorResponse> error(ErrorCode code, HttpStatus status, Exception e, HttpServletRequest request) {
+    private ResponseEntity<ApiErrorResponse> warn(ErrorCode code, HttpStatus status, Exception e, HttpServletRequest request) {
         LocalDateTime timestamp = LocalDateTime.now();
         ApiErrorResponse errorResponse = ApiErrorResponse.of(status, code.getCode(), code.getMessage(), timestamp);
-        log.error("[SecurityException] errorCode={}, message={}, path={}, method={}, time={}",
+        log.warn("[SecurityException] errorCode={}, message={}, path={}, method={}, time={}",
                 code,
                 e.getMessage(),
                 request.getRequestURI(),

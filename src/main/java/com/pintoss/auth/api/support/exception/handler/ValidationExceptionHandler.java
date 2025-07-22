@@ -32,7 +32,7 @@ public class ValidationExceptionHandler {
         }
         ApiErrorResponse errorResponse = ApiErrorResponse.withErrors(
                 HttpStatus.BAD_REQUEST, ErrorCode.BAD_REQUEST.getCode(), "유효하지 않은 요청입니다", errors);
-        log.error(e.getMessage());
+        log.warn(e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -42,7 +42,7 @@ public class ValidationExceptionHandler {
         e.getConstraintViolations().forEach(v -> errors.put(v.getPropertyPath().toString(), v.getMessage()));
         ApiErrorResponse errorResponse = ApiErrorResponse.withErrors(
                 HttpStatus.BAD_REQUEST, ErrorCode.BAD_REQUEST.getCode(), ErrorCode.BAD_REQUEST.getMessage(), errors);
-        log.error(e.getMessage());
+        log.warn(e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -59,7 +59,7 @@ public class ValidationExceptionHandler {
         }
         ApiErrorResponse errorResponse = ApiErrorResponse.of(
                 HttpStatus.BAD_REQUEST, ErrorCode.BAD_REQUEST.getCode(), message, LocalDateTime.now());
-        log.error(e.getMessage());
+        log.warn(e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
