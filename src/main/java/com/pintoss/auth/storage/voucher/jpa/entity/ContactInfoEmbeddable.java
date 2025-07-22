@@ -2,6 +2,7 @@ package com.pintoss.auth.storage.voucher.jpa.entity;
 
 import com.pintoss.auth.core.voucher.domain.ContactInfo;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,9 +15,11 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ContactInfoEmbeddable {
 
+    @Embedded
     @Valid
     private HomePageEmbeddable homePageEmbeddable;
 
+    @Embedded
     @Valid
     private CsCenterEmbeddable csCenterEmbeddable;
 
