@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Transactional
 @SpringBootTest
@@ -37,13 +36,14 @@ class HomePageEmbeddableTest {
         // given
         String longUrl = "a".repeat(101); // 101글자 길이의 URL
         HomePageEmbeddable homePage = new HomePageEmbeddable(longUrl);
+
+        // when
         TestEntity testEntity = new TestEntity(homePage);
 
-        // when, then
-        assertThatThrownBy(() -> {
-            em.persist(testEntity);
-            em.flush();
-        }).isInstanceOf(PersistenceException.class);
+        // then
+        Set<ConstraintViolation<TestEntity>> violations = validator.validate(testEntity);
+        assertThat(violations).hasSize(1);
+        assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("homePage.url"));
     }
 
     @Test
@@ -68,9 +68,11 @@ class HomePageEmbeddableTest {
     void givenEmptyUrl_whenPersist_thenThrowsException() {
         // given
         HomePageEmbeddable homePage = new HomePageEmbeddable("");
+
+        // when
         TestEntity testEntity = new TestEntity(homePage);
 
-        // when, then
+        // then
         Set<ConstraintViolation<TestEntity>> violations = validator.validate(testEntity);
         assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("homePage.url"));
     }
