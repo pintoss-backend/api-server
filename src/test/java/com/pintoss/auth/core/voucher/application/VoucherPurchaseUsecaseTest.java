@@ -5,7 +5,7 @@ import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherPurchaseCommand;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
 import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
-import com.pintoss.auth.support.event.voucher.VoucherPurchaseCompletedEvent;
+import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.support.exception.BaseException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
