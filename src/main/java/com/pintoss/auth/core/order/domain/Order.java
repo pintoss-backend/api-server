@@ -2,7 +2,6 @@ package com.pintoss.auth.core.order.domain;
 
 import com.pintoss.auth.support.exception.ErrorCode;
 import com.pintoss.auth.support.exception.BadRequestException;
-import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,8 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -73,8 +70,7 @@ public class Order {
 
     private LocalDateTime updatedAt;
 
-    private Order(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems,
-        PaymentMethodType paymentMethod) {
+    private Order(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems) {
         this.ordererId = ordererId;
         this.ordererName = ordererName;
         this.ordererEmail = ordererEmail;
@@ -84,20 +80,10 @@ public class Order {
         orderItems.forEach(this::addOrderItem); // 연관관계 메서드 사용
         this.orderItems = orderItems;
         this.status = OrderStatus.PENDING;
-        long basePrice = orderItems.stream().mapToLong(item -> item.getPrice()).sum();
-        this.totalPrice = applyTaxPolicy(basePrice, paymentMethod);
+        long totalPrice = orderItems.stream().mapToLong(item -> item.getPrice()).sum();
+        this.totalPrice = totalPrice;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-    }
-
-    private long applyTaxPolicy(long basePrice, PaymentMethodType paymentMethodType) {
-        if (paymentMethodType == PaymentMethodType.PHONE) {
-            return BigDecimal.valueOf(basePrice)
-                .multiply(BigDecimal.valueOf(1.1))
-                .setScale(0, RoundingMode.UP) // 올림
-                .longValue();
-        }
-        return basePrice; // 다른 결제 수단은 세금 적용 없음
     }
 
     public void updateItemIssueResult(Long orderItemId, OrderItemStatus status, String pinNo, String approvalCode) {
@@ -139,9 +125,8 @@ public class Order {
         orderItem.assignOrder(this);
     }
 
-    public static Order create(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems,
-        PaymentMethodType paymentMethod) {
-        return new Order(ordererId, ordererName, ordererEmail, ordererPhone, orderName, orderItems, paymentMethod);
+    public static Order create(Long ordererId, String ordererName, String ordererEmail, String ordererPhone, String orderName, List<OrderItem> orderItems) {
+        return new Order(ordererId, ordererName, ordererEmail, ordererPhone, orderName, orderItems);
     }
 
     public void verifyTotalPrice(long taxAmount) {

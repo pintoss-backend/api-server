@@ -1,14 +1,12 @@
 package com.pintoss.auth.core.order.application;
 
 import com.pintoss.auth.api.support.security.SecurityContextUtils;
-import com.pintoss.auth.core.order.application.dto.OrderCreateResult;
 import com.pintoss.auth.core.order.application.flow.writer.OrderAdder;
 import com.pintoss.auth.core.order.application.flow.processor.OrderItemFactory;
 import com.pintoss.auth.core.order.application.flow.validator.OrderValidator;
 import com.pintoss.auth.core.order.domain.Order;
 import com.pintoss.auth.core.order.domain.OrderItem;
 import com.pintoss.auth.core.order.application.dto.OrderItemRequest;
-import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import com.pintoss.auth.core.voucher.application.flow.reader.VoucherReader;
 import java.util.List;
@@ -24,7 +22,7 @@ public class OrderCreateUsecase {
     private final OrderAdder orderAdder;
     private final OrderValidator orderValidator;
 
-    public OrderCreateResult create(List<OrderItemRequest> orderItemRequest, PaymentMethodType paymentMethod) {
+    public String create(List<OrderItemRequest> orderItemRequest) {
 
         // 1. 상품권 조회
         List<Voucher> vouchers = voucherReader.getAll(orderItemRequest.stream()
@@ -44,20 +42,13 @@ public class OrderCreateUsecase {
             SecurityContextUtils.getEmail(),
             SecurityContextUtils.getPhone(),
             generateProductName(orderItems),
-            orderItems,
-            paymentMethod
+            orderItems
         );
 
         // 5. 주문 저장
         orderAdder.add(order);
 
-        return OrderCreateResult.of(
-            order.getOrderNo(),
-            order.getOrderName(),
-            order.getTotalPrice(),
-            order.getCreatedAt(),
-            order.getStatus()
-        );
+        return order.getOrderNo();
     }
 
     private String generateProductName(List<OrderItem> orderItems) {
