@@ -1,11 +1,12 @@
-package com.pintoss.auth.core.payment.domain;
+package com.pintoss.auth.core.support.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PaymentCreatedEvent {
+public class OrderCanceledEvent {
 
     private final String orderNo;
+
 }

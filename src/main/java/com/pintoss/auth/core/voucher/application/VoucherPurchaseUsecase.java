@@ -1,18 +1,18 @@
 package com.pintoss.auth.core.voucher.application;
 
-import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
+import com.pintoss.auth.core.support.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
-import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
+import com.pintoss.auth.core.voucher.application.event.VoucherPurchaseCompletedEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VoucherPurchaseUsecase {
     private final Purchaser purchaser;
-    private final VoucherEventPublisher eventPublisher;
+    private final VoucherPurchaseCompletedEventPublisher eventPublisher;
 
-    public VoucherPurchaseUsecase(Purchaser purchaser, VoucherEventPublisher eventPublisher) {
+    public VoucherPurchaseUsecase(Purchaser purchaser, VoucherPurchaseCompletedEventPublisher eventPublisher) {
         this.purchaser = purchaser;
         this.eventPublisher = eventPublisher;
     }
@@ -35,8 +35,8 @@ public class VoucherPurchaseUsecase {
             paymentPrice,
             paymentMethodType,
             salePrice,
-            productCode
-//                "1104501710200000"
+//            productCode
+                "1104501710200000"
         );
 
         eventPublisher.publish(

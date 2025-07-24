@@ -1,6 +1,9 @@
 package com.pintoss.auth.storage.payment;
 
 import com.pintoss.auth.core.payment.application.repository.PaymentRepository;
+import com.pintoss.auth.core.payment.domain.PaymentDomain;
+import com.pintoss.auth.core.support.exception.CoreErrorCode;
+import com.pintoss.auth.core.support.exception.CoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,9 +14,17 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     private final PaymentJpaRepository paymentJpaRepository;
 
     @Override
-    public PaymentEntity save(PaymentEntity paymentEntity) {
+    public PaymentDomain save(PaymentDomain paymentDomain) {
+        PaymentEntity paymentEntity = PaymentEntity.from(paymentDomain);
         paymentJpaRepository.save(paymentEntity);
-        // TODO : PaymentEntity 도메인 객체를 PaymentEntity 객체로 변환해서 데이터베이스에 저장한다.
-        return paymentEntity;
+        paymentDomain.assignId(paymentEntity.getId());
+        return paymentDomain;
+    }
+
+    @Override
+    public PaymentDomain findByOrderNo(String orderNo) {
+        PaymentEntity entity  = paymentJpaRepository.findByOrderNo(orderNo)
+            .orElseThrow(() -> new CoreException(CoreErrorCode.PAYMENT_NOT_FOUND));
+        return entity.toDomain();
     }
 }

@@ -26,6 +26,7 @@ public enum CoreErrorCode {
     // Payment Errors
     PAYMENT_APPROVAL_FAILED("40011", "결제 승인이 거절되었습니다.", HttpErrorType.BAD_REQUEST),
     PAYMENT_APPROVED_AMOUNT_MISMATCH("40012", "결제 승인 금액이 주문 금액과 일치하지 않습니다.", HttpErrorType.BAD_REQUEST),
+    PAYMENT_NOT_FOUND("PAYMENT_NOT_FOUND", "결제를 찾을 수 없습니다.", HttpErrorType.NOT_FOUND),
 
     // Voucher Errors
 

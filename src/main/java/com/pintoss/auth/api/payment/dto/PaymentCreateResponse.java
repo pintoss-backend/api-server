@@ -3,9 +3,12 @@ package com.pintoss.auth.api.payment.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pintoss.auth.core.payment.application.dto.PaymentCreateResult;
-
 import java.time.LocalDateTime;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class PaymentCreateResponse {
     private String serviceId;
     private String orderNo;

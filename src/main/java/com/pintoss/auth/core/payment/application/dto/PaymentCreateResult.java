@@ -1,5 +1,6 @@
 package com.pintoss.auth.core.payment.application.dto;
 
+import com.pintoss.auth.core.order.domain.Order;
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,21 +23,20 @@ public class PaymentCreateResult {
     private String checkSum;
     private String checkSumHp;
 
-
-    public static PaymentCreateResult from(PaymentDomain payment) {
+    public static PaymentCreateResult from(Order order, PaymentDomain payment, String checkSum, String checkSumHp) {
         return new PaymentCreateResult(
                 payment.getServiceId(),
                 payment.getOrderNo(),
-                null, // ordererId is not available in PaymentDomain
-                null, // ordererName is not available in PaymentDomain
-                null, // ordererEmail is not available in PaymentDomain
-                null, // ordererPhone is not available in PaymentDomain
+                order.getOrdererId(),
+                order.getOrdererName(),
+                order.getOrdererEmail(),
+                order.getOrdererPhone(),
                 payment.getServiceCode(),
                 payment.getAuthAmount(),
-                null, // productName is not available in PaymentDomain
+                order.getOrderName(),
                 payment.getOrderDate(),
-                null, // checkSum is not available in PaymentDomain
-                null  // checkSumHp is not available in PaymentDomain
+                checkSum,
+                checkSumHp
         );
     }
 }

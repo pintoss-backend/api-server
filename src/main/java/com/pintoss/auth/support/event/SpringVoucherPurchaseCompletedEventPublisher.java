@@ -1,16 +1,17 @@
 package com.pintoss.auth.support.event;
 
-import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
-import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
+import com.pintoss.auth.core.support.event.VoucherPurchaseCompletedEvent;
+import com.pintoss.auth.core.voucher.application.event.VoucherPurchaseCompletedEventPublisher;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpringVoucherEventPublisher implements VoucherEventPublisher {
+public class SpringVoucherPurchaseCompletedEventPublisher implements
+    VoucherPurchaseCompletedEventPublisher {
 
     private final ApplicationEventPublisher delegate;
 
-    public SpringVoucherEventPublisher(ApplicationEventPublisher delegate) {
+    public SpringVoucherPurchaseCompletedEventPublisher(ApplicationEventPublisher delegate) {
         this.delegate = delegate;
     }
 

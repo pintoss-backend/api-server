@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.payment;
+package com.pintoss.auth.api.payment.dto;
 
 import com.pintoss.auth.core.payment.application.dto.PurchaseCommand;
 import lombok.AllArgsConstructor;
@@ -33,6 +33,7 @@ public class PaymentCallbackRequest {
             .transactionId(TRANSACTION_ID)
             .responseCode(RESPONSE_CODE)
             .message(MESSAGE)
+            .responseCode(RESPONSE_CODE)
             .build();
     }
 }
