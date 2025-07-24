@@ -1,7 +1,7 @@
 package com.pintoss.auth.client.kakao;
 
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.core.user.domain.LoginType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

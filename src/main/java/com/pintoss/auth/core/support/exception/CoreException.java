@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.exception;
+package com.pintoss.auth.core.support.exception;
 
 public class CoreException extends RuntimeException {
 

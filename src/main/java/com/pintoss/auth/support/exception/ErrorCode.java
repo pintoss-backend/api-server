@@ -1,6 +1,5 @@
 package com.pintoss.auth.support.exception;
 
-import com.pintoss.auth.core.exception.HttpErrorType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

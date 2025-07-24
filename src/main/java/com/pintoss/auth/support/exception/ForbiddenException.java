@@ -1,7 +1,5 @@
-package com.pintoss.auth.api.support.exception.client;
+package com.pintoss.auth.support.exception;
 
-import com.pintoss.auth.support.exception.BaseException;
-import com.pintoss.auth.support.exception.ErrorCode;
 import org.springframework.http.HttpStatus;
 
 public class ForbiddenException extends BaseException {

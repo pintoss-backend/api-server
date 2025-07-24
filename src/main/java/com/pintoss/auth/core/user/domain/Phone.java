@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.domain;
 
-import com.pintoss.auth.api.support.exception.client.EmptyPhoneException;
+import com.pintoss.auth.support.exception.EmptyPhoneException;
 import jakarta.persistence.Embeddable;
 import java.util.Objects;
 import java.util.regex.Pattern;

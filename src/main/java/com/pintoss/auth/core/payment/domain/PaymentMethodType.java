@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.payment.domain;
 
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

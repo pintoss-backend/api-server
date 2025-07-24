@@ -1,10 +1,10 @@
 package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.api.support.security.SecurityContextUtils;
-import com.pintoss.auth.core.exception.CoreErrorCode;
-import com.pintoss.auth.core.exception.CoreException;
-import com.pintoss.auth.core.shared.cache.CacheType;
-import com.pintoss.auth.core.shared.cache.CoreCacheManager;
+import com.pintoss.auth.core.support.exception.CoreErrorCode;
+import com.pintoss.auth.core.support.exception.CoreException;
+import com.pintoss.auth.core.support.cache.CacheType;
+import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import com.pintoss.auth.core.user.application.flow.processor.AuthTokenProcessor;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import com.pintoss.auth.core.user.application.flow.validator.UserValidator;

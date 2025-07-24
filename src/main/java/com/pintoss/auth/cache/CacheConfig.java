@@ -1,7 +1,7 @@
 package com.pintoss.auth.cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.pintoss.auth.core.shared.cache.CacheType;
-import com.pintoss.auth.core.shared.cache.CoreCacheManager;
+import com.pintoss.auth.core.support.cache.CacheType;
+import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCache;

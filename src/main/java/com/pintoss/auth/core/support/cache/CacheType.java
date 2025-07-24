@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.shared.cache;
+package com.pintoss.auth.core.support.cache;
 
 import lombok.Getter;
 

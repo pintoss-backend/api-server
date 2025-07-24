@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.domain;
 
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.support.exception.ErrorCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
