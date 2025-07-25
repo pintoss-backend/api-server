@@ -1,11 +1,11 @@
 package com.pintoss.auth.core.user.domain;
 
+import com.pintoss.auth.storage.user.EncryptConverter;
 import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.support.exception.ErrorCode;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Table(name = "users")
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
@@ -20,10 +22,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Convert(converter = EncryptConverter.class)
     private String email;
 
+    @NotBlank
     private String password;
 
+    @NotBlank
     private String name;
 
     @Embedded
@@ -35,20 +41,19 @@ public class User {
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Set<UserRole> roles = new HashSet<>();
 
+    @Convert(converter = EncryptConverter.class)
     @Column(columnDefinition = "TEXT")
     private String refreshToken;
 
-    private User(String email, String password, String name, Phone phone, LoginType loginType, Set<UserRole> roles) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.phone = phone;
-        this.loginType = loginType;
-        this.roles = roles;
-    }
-
     public static User register(String email, String password, String name, Phone phone, LoginType loginType, Set<UserRole> roles) {
-        return new User(email, password, name, phone, loginType, roles);
+        return User.builder()
+                .email(email)
+                .password(password)
+                .name(name)
+                .phone(phone)
+                .loginType(loginType)
+                .roles(roles)
+                .build();
     }
 
     public void storeRefreshToken(String refreshToken) {

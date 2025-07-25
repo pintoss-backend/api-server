@@ -8,7 +8,6 @@ import com.pintoss.auth.core.user.application.PasswordUpdateUseCase;
 import com.pintoss.auth.core.user.application.UserQueryUseCase;
 import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
