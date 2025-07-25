@@ -2,7 +2,7 @@ package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.api.support.security.SecurityContextUtils;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import com.pintoss.auth.core.user.domain.User;

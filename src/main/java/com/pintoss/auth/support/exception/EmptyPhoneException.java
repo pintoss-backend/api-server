@@ -1,6 +1,5 @@
-package com.pintoss.auth.api.support.exception.client;
+package com.pintoss.auth.support.exception;
 
-import com.pintoss.auth.support.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter

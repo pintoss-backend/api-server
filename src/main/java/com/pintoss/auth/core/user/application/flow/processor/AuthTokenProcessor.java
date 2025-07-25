@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.user.application.flow.processor;
 
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.api.support.security.jwt.JwtParser;
 import com.pintoss.auth.api.support.security.jwt.JwtProvider;
 import com.pintoss.auth.api.support.security.jwt.JwtValidator;

@@ -1,6 +1,5 @@
 package com.pintoss.auth.storage.voucher;
 
-import com.pintoss.auth.api.support.exception.client.NotFoundException;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
@@ -9,6 +8,7 @@ import com.pintoss.auth.storage.voucher.jpa.VoucherIssuerJpaRepository;
 import com.pintoss.auth.storage.voucher.jpa.entity.VoucherIssuerEntity;
 import com.pintoss.auth.storage.voucher.querydsl.VoucherIssuerQueryDslRepository;
 import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.support.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

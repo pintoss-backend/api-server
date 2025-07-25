@@ -1,9 +1,9 @@
-package com.pintoss.auth.api.support.exception.handler;
+package com.pintoss.auth.support.exception.handler;
 
 import com.pintoss.auth.api.support.dto.ApiErrorResponse;
 import com.pintoss.auth.api.support.util.DateTimeUtils;
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
-import com.pintoss.auth.api.support.exception.client.UnauthorizedException;
+import com.pintoss.auth.support.exception.BadRequestException;
+import com.pintoss.auth.support.exception.UnauthorizedException;
 import com.pintoss.auth.support.exception.BaseException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

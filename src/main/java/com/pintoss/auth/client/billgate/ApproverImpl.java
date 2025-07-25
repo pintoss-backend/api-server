@@ -6,7 +6,7 @@ import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.merchant.Message;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.api.support.exception.server.InternalServerException;
+import com.pintoss.auth.support.exception.InternalServerException;
 import com.pintoss.auth.core.payment.application.dto.PaymentApprovalRequest;
 import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
 import com.pintoss.auth.core.payment.application.flow.external.PaymentApprover;

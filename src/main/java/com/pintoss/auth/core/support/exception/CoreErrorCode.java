@@ -1,6 +1,10 @@
-package com.pintoss.auth.core.exception;
+package com.pintoss.auth.core.support.exception;
 
 public enum CoreErrorCode {
+
+    // Auth Errors
+    INVALID_REFRESH_TOKEN_SUBJECT("INVALID_REFRESH_TOKEN_SUBJECT", "리프레쉬 토큰의 subject가 유효하지 않습니다.", HttpErrorType.BAD_REQUEST),
+    SESSION_EXPIRED("SESSION_EXPIRED", "마지막 접속 이후 30분이 지나 세션이 만료되었습니다. 다시 로그인해주세요.", HttpErrorType.UNAUTHORIZED),
 
     // Cart Item Errors
     CART_ITEM_NOT_FOUND("CART_ITEM_NOT_FOUND", "장바구니 아이템을 찾을 수 없습니다.", HttpErrorType.NOT_FOUND),

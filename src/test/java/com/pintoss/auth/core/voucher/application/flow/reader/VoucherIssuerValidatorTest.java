@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.application.flow.reader;
 
-import com.pintoss.auth.core.exception.CoreErrorCode;
-import com.pintoss.auth.core.exception.CoreException;
+import com.pintoss.auth.core.support.exception.CoreErrorCode;
+import com.pintoss.auth.core.support.exception.CoreException;
 import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

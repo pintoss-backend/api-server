@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.voucher.domain;
 
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.support.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

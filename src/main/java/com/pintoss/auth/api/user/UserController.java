@@ -1,10 +1,12 @@
 package com.pintoss.auth.api.user;
 
+import com.pintoss.auth.api.support.interceptor.AuthorizationRequired;
 import com.pintoss.auth.api.user.dto.PasswordUpdateRequest;
 import com.pintoss.auth.api.support.dto.ApiResponse;
 import com.pintoss.auth.core.user.domain.UserInfo;
 import com.pintoss.auth.core.user.application.PasswordUpdateUseCase;
 import com.pintoss.auth.core.user.application.UserQueryUseCase;
+import com.pintoss.auth.core.user.domain.UserRoleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +24,14 @@ public class UserController {
     private final PasswordUpdateUseCase passwordUpdateUseCase;
 
     @GetMapping("/info")
-    @PreAuthorize("hasAuthority('USER')")
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     public ApiResponse<UserInfo> getUserInfo() {
         UserInfo userInfo = userQueryUseCase.getUserInfo();
         return ApiResponse.ok(userInfo);
     }
 
     @PutMapping("/password")
-    @PreAuthorize("hasAuthority('USER')")
+    @AuthorizationRequired(value = UserRoleEnum.USER)
     public ApiResponse<Void> updatePassword(@RequestBody PasswordUpdateRequest request) {
         passwordUpdateUseCase.updatePassword(request.getOriginPassword(), request.getNewPassword());
         return ApiResponse.ok(null);

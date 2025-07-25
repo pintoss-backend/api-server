@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.voucher.application;
 
-import com.pintoss.auth.core.exception.CoreErrorCode;
-import com.pintoss.auth.core.exception.CoreException;
+import com.pintoss.auth.core.support.exception.CoreErrorCode;
+import com.pintoss.auth.core.support.exception.CoreException;
 import com.pintoss.auth.core.voucher.application.dto.RegisterVoucherIssuerCommand;
 import com.pintoss.auth.core.voucher.application.flow.reader.VoucherIssuerValidator;
 import com.pintoss.auth.core.voucher.application.flow.writer.VoucherAdder;
