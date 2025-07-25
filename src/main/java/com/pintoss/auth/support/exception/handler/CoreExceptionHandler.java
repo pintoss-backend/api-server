@@ -1,9 +1,9 @@
-package com.pintoss.auth.api.support.exception.handler;
+package com.pintoss.auth.support.exception.handler;
 
 import com.pintoss.auth.api.support.dto.ApiErrorResponse;
 import com.pintoss.auth.api.support.util.DateTimeUtils;
-import com.pintoss.auth.core.exception.CoreException;
-import com.pintoss.auth.core.exception.HttpErrorType;
+import com.pintoss.auth.core.support.exception.CoreException;
+import com.pintoss.auth.core.support.exception.HttpErrorType;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

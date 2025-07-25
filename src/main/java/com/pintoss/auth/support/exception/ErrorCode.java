@@ -95,7 +95,11 @@ public enum ErrorCode {
     GMAIL_API_NETWORK_ERROR("GMAIL_5006", "Gmail API 네트워크 오류입니다."),
     GMAIL_API_AUTHENTICATION_FAILED("GMAIL_5007","Gmail 서비스 계정 JSON 파일 로드 실패입니다." ),
     BILLGATE_CONFIG_FILE_NOT_FOUND("BILLGATE_5008", "빌게이트 설정 파일(config-prod.ini)을 찾을 수 없습니다."),
-    BILLGATE_CHECHKSUM_GENERATION_FAILED("BILLGATE_5009", "빌게이트 체크섬 생성에 실패했습니다.");
+    BILLGATE_CHECHKSUM_GENERATION_FAILED("BILLGATE_5009", "빌게이트 체크섬 생성에 실패했습니다."),
+
+    // Cache Errors
+    CACHE_ACCESS_ERROR("CACHE_ACCESS_ERROR", "캐시 접근 중 오류가 발생했습니다."),
+    CACHE_NOT_FOUND("CACHE_NOT_FOUND", "캐시를 찾을 수 없습니다.");
 
 
     private final String code;

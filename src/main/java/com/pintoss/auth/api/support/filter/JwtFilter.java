@@ -34,15 +34,15 @@ public class JwtFilter extends OncePerRequestFilter {
         String accessToken = getAccessToken(request);
 
         if ( accessToken != null ) {
-            if ( jwtValidator.validateToken(accessToken) ) {
-                setAuthentication(accessToken);
-            }
+            setAuthentication(accessToken);
         }
         filterChain.doFilter(request, response);
     }
 
     private void setAuthentication(String accessToken) {
-        Claims claims = jwtParser.getClaims(accessToken);
+        boolean isAuthenticated = jwtValidator.validateToken(accessToken);
+
+        Claims claims = jwtParser.getClaimsAllowExpired(accessToken);
 
         Authentication authentication = new JwtAuthenticationToken(
             ((Number) claims.get("userId")).longValue(),
@@ -51,7 +51,7 @@ public class JwtFilter extends OncePerRequestFilter {
             (String) claims.get("phone"),
             extractRolesFromClaims(claims)
         );
-        authentication.setAuthenticated(true);
+        authentication.setAuthenticated(isAuthenticated);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
     private Set<UserRoleEnum> extractRolesFromClaims(Claims claims) {

@@ -1,5 +1,5 @@
 jwt:
   token:
     secret-key: sgjasg3123adadg3123123hdfh21ad53422dadasf5123adadg3123123hdfh21ad53425
-    access-token-expiration: 320000000000
-    refresh-token-expiration: 6400000000000000
+    access-token-expiration: 300000           # 5분
+    refresh-token-expiration: 604800000       # 7일

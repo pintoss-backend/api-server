@@ -1,8 +1,9 @@
 package com.pintoss.auth.core.user.application.flow.validator;
 
-import com.pintoss.auth.api.support.security.SecurityContextUtils;
+import com.pintoss.auth.core.support.exception.CoreErrorCode;
+import com.pintoss.auth.core.support.exception.CoreException;
 import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.api.support.exception.client.BadRequestException;
+import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
 import com.pintoss.auth.core.user.application.repository.UserRepository;
 import com.pintoss.auth.core.user.domain.Phone;
@@ -37,10 +38,9 @@ public class UserValidator {
         }
     }
 
-    public void validateRefreshTokenOwner(String subject) {
-        Long loginUserId = SecurityContextUtils.getUserId();
-        if(!subject.equals(String.valueOf(loginUserId))) {
-            throw new BadRequestException(ErrorCode.INVALID_REFRESH_TOKEN_SUBJECT);
+    public void validateRefreshTokenOwner(String subject, Long userId) {
+        if(!subject.equals(userId.toString())) {
+            throw new CoreException(CoreErrorCode.INVALID_REFRESH_TOKEN_SUBJECT);
         }
     }
 
