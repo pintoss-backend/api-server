@@ -1,16 +1,16 @@
 package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.api.support.security.SecurityContextUtils;
+import com.pintoss.auth.core.support.cache.CacheManagerWrapper;
+import com.pintoss.auth.core.support.cache.CacheType;
 import com.pintoss.auth.core.support.exception.CoreErrorCode;
 import com.pintoss.auth.core.support.exception.CoreException;
-import com.pintoss.auth.core.support.cache.CacheType;
-import com.pintoss.auth.core.support.cache.CoreCacheManager;
+import com.pintoss.auth.core.user.application.dto.ReissueCommand;
+import com.pintoss.auth.core.user.application.dto.ReissueResult;
 import com.pintoss.auth.core.user.application.flow.processor.AuthTokenProcessor;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import com.pintoss.auth.core.user.application.flow.validator.UserValidator;
 import com.pintoss.auth.core.user.domain.User;
-import com.pintoss.auth.core.user.application.dto.ReissueCommand;
-import com.pintoss.auth.core.user.application.dto.ReissueResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class ReissueUseCase {
     private final UserReader userReader;
     private final UserValidator userValidator;
     private final AuthTokenProcessor authTokenProcessor;
-    private final CoreCacheManager coreCacheManager;
+    private final CacheManagerWrapper cacheManagerWrapper;
 
     public ReissueResult reissue(ReissueCommand command) {
         // 1. 리프레쉬 토큰에서 subject (userId)추출
@@ -34,7 +34,7 @@ public class ReissueUseCase {
         User user = userReader.readById(Long.parseLong(subject));
 
         // 4. 캐시에서 리프레쉬 토큰 조회
-        if (!coreCacheManager.exists(CacheType.AUTH_TOKEN_CACHE.getCacheName(), user.getId())) {
+        if (!cacheManagerWrapper.exists(CacheType.AUTH_TOKEN_CACHE.getCacheName(), user.getId())) {
             throw new CoreException(CoreErrorCode.SESSION_EXPIRED);
         }
 

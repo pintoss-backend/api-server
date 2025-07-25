@@ -2,7 +2,7 @@ package com.pintoss.auth.api.support.api;
 
 import com.pintoss.auth.api.support.interceptor.AccessTimeTrackerInterceptor;
 import com.pintoss.auth.api.support.interceptor.AuthorizationInterceptor;
-import com.pintoss.auth.core.support.cache.CoreCacheManager;
+import com.pintoss.auth.core.support.cache.CacheManagerWrapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,10 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebInterceptorConfig implements WebMvcConfigurer {
 
-    private final CoreCacheManager coreCacheManager;
+    private final CacheManagerWrapper cacheManagerWrapper;
 
-    public WebInterceptorConfig(CoreCacheManager coreCacheManager) {
-        this.coreCacheManager = coreCacheManager;
+    public WebInterceptorConfig(CacheManagerWrapper cacheManagerWrapper) {
+        this.cacheManagerWrapper = cacheManagerWrapper;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class WebInterceptorConfig implements WebMvcConfigurer {
 
     @Bean
     AccessTimeTrackerInterceptor accessTimeTrackerInterceptor() {
-        return new AccessTimeTrackerInterceptor(coreCacheManager);
+        return new AccessTimeTrackerInterceptor(cacheManagerWrapper);
     }
 
     @Bean

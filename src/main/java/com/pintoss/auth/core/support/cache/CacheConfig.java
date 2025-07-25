@@ -1,17 +1,15 @@
-package com.pintoss.auth.cache;
+package com.pintoss.auth.core.support.cache;
+
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.pintoss.auth.core.support.cache.CacheType;
-import com.pintoss.auth.core.support.cache.CoreCacheManager;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @Configuration
 public class CacheConfig {
@@ -33,8 +31,8 @@ public class CacheConfig {
     }
 
     @Bean
-    public CoreCacheManager coreCacheManager(CacheManager cacheManager) {
-        return new CacheManagerImpl(cacheManager);
+    public CacheManagerWrapper coreCacheManager(CacheManager cacheManager) {
+        return new CacheManagerWrapper(cacheManager);
     }
 
 }

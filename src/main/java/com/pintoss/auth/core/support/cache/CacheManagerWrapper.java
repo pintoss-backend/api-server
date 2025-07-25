@@ -1,20 +1,18 @@
-package com.pintoss.auth.cache;
+package com.pintoss.auth.core.support.cache;
 
-import com.pintoss.auth.support.exception.InternalServerException;
-import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.support.exception.InternalServerException;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
-public class CacheManagerImpl implements CoreCacheManager {
+public class CacheManagerWrapper {
 
     private final CacheManager cacheManager;
 
-    public CacheManagerImpl(CacheManager cacheManager) {
+    public CacheManagerWrapper(CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }
 
-    @Override
     public <T> void put(String cacheName, Object key, T value) {
         try {
             getCacheOrThrow(cacheName).put(key, value);
@@ -23,7 +21,6 @@ public class CacheManagerImpl implements CoreCacheManager {
         }
     }
 
-    @Override
     public <T> T get(String cacheName, Object key, Class<T> type) {
         try {
             return getCacheOrThrow(cacheName).get(key, type);
@@ -32,7 +29,6 @@ public class CacheManagerImpl implements CoreCacheManager {
         }
     }
 
-    @Override
     public void evict(String cacheName, Object key) {
         try {
             getCacheOrThrow(cacheName).evict(key);
@@ -41,7 +37,6 @@ public class CacheManagerImpl implements CoreCacheManager {
         }
     }
 
-    @Override
     public boolean exists(String cacheName, Object key) {
         try {
             Cache cache = getCacheOrThrow(cacheName);

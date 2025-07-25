@@ -2,18 +2,18 @@ package com.pintoss.auth.api.support.interceptor;
 
 import com.pintoss.auth.api.support.security.SecurityContextUtils;
 import com.pintoss.auth.api.support.security.jwt.JwtAuthenticationToken;
+import com.pintoss.auth.core.support.cache.CacheManagerWrapper;
 import com.pintoss.auth.core.support.cache.CacheType;
-import com.pintoss.auth.core.support.cache.CoreCacheManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AccessTimeTrackerInterceptor implements HandlerInterceptor {
 
-    private final CoreCacheManager coreCacheManager;
+    private final CacheManagerWrapper cacheManagerWrapper;
 
-    public AccessTimeTrackerInterceptor(CoreCacheManager coreCacheManager) {
-        this.coreCacheManager = coreCacheManager;
+    public AccessTimeTrackerInterceptor(CacheManagerWrapper cacheManagerWrapper) {
+        this.cacheManagerWrapper = cacheManagerWrapper;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class AccessTimeTrackerInterceptor implements HandlerInterceptor {
             String cacheName = CacheType.AUTH_TOKEN_CACHE.getCacheName();
             Long cacheKey = jwtAuthentication.getId();
 
-            coreCacheManager.put(cacheName, cacheKey, System.currentTimeMillis());
+            cacheManagerWrapper.put(cacheName, cacheKey, System.currentTimeMillis());
         }
         return true;
     }
