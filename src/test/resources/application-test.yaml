@@ -15,4 +15,8 @@ spring:
         show_sql: true
         dialect: org.hibernate.dialect.H2Dialect
     database-platform: org.hibernate.dialect.H2Dialect
+  security:
+    encrypt:
+      algorithm: AES
+      secret-key: S8r4Ty9uVm2nCx0Z
 
