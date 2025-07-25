@@ -24,5 +24,4 @@ public class VoucherReader {
         return voucherRepository.findAllByIds(voucherIds);
     }
 
-
 }

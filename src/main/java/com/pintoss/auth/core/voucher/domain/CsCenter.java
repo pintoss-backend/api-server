@@ -1,14 +1,14 @@
 package com.pintoss.auth.core.voucher.domain;
 
-import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Embeddable
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class CsCenter {
+
+    private static final String LANDLINE_PHONE_REGEX = "^\\d{4}-\\d{4}$";
+    private static final String MOBILE_PHONE_REGEX = "^\\d{3}-\\d{4}-\\d{4}$";
+    private static final String MOBILE_PHONE_SHORT_REGEX = "^\\d{3}-\\d{3}-\\d{4}$";
+    
     private String tel;
 
     public CsCenter(String tel) {
@@ -26,9 +26,9 @@ public class CsCenter {
             throw new IllegalArgumentException("고객센터 전화번호는 필수 입력 값 입니다.");
         }
 
-        boolean isValidFormat = tel.matches("^\\d{4}-\\d{4}$")
-            || tel.matches("^\\d{3}-\\d{4}-\\d{4}$")
-            || tel.matches("^\\d{3}-\\d{3}-\\d{4}$");
+        boolean isValidFormat = tel.matches(LANDLINE_PHONE_REGEX)
+                || tel.matches(MOBILE_PHONE_REGEX)
+                || tel.matches(MOBILE_PHONE_SHORT_REGEX);
 
         if (!isValidFormat) {
             throw new IllegalArgumentException("유효한 전화번호 형식이 아닙니다. (xxxx-xxxx, xxx-xxxx-xxxx 또는 xxx-xxx-xxxx 형식이어야 합니다.)");

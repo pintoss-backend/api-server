@@ -28,6 +28,7 @@ public enum CoreErrorCode {
     PAYMENT_APPROVED_AMOUNT_MISMATCH("40012", "결제 승인 금액이 주문 금액과 일치하지 않습니다.", HttpErrorType.BAD_REQUEST),
 
     // Voucher Errors
+    VOUCHER_ISSUER_ALREADY_EXISTS("40013", "이미 존재하는 상품권 발급자입니다.", HttpErrorType.BAD_REQUEST),
 
     ;
     private final String code;

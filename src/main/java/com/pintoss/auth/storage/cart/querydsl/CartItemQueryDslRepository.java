@@ -12,8 +12,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import static com.pintoss.auth.storage.cart.jpa.entity.QCartItemEntity.cartItemEntity;
-import static com.pintoss.auth.storage.voucher.QVoucherEntity.voucherEntity;
-import static com.pintoss.auth.storage.voucher.QVoucherIssuerEntity.voucherIssuerEntity;
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherIssuerEntity.voucherIssuerEntity;
 
 @Repository
 @RequiredArgsConstructor

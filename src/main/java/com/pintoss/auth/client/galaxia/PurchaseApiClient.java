@@ -6,16 +6,19 @@ import com.galaxia.api.crypto.GalaxiaCipher;
 import com.galaxia.api.crypto.Seed;
 import com.galaxia.api.util.NumberUtil;
 import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
-import com.pintoss.auth.core.payment.domain.PaymentMethodType;
+import com.pintoss.auth.core.voucher.application.dto.VoucherPurchaseCommand;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
-import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
 @Slf4j
 public class PurchaseApiClient implements Purchaser {
+
+    private static final String EUC_ENCODING = "EUC-KR";
 
     private final GalaxiaClient client;
     private final String KEY;
@@ -28,21 +31,20 @@ public class PurchaseApiClient implements Purchaser {
     }
 
     @Override
-    public PurchaseResult purchase(String orderNo, String transactionId, String mid, Long paymentPrice, PaymentMethodType paymentMethodType, Long salePrice, String productCode) {
+    public PurchaseResult purchase(VoucherPurchaseCommand command) {
         try {
-            String requestHeader = PurchaseRequestBuilder.buildHeader(orderNo);
-            String bodyPlain = PurchaseRequestBuilder.buildBody(orderNo, transactionId, mid, paymentPrice.toString(), paymentMethodType, salePrice.toString(), productCode);
+            String requestHeader = PurchaseRequestBuilder.buildHeader(command.getOrderNo());
+            String bodyPlain = PurchaseRequestBuilder.buildBody(command);
 
-            GalaxiaCipher cipher = new Seed();
-            cipher.setKey(Base64.decode(KEY.getBytes("EUC-KR")));
-            cipher.setIV(IV.getBytes("EUC-KR"));
+            GalaxiaCipher cipher = getGalaxiaCipher();
 
             Base64Encoder encoder = new Base64Encoder();
-            String encodedBody = requestHeader + encoder.encodeBuffer(cipher.encrypt(bodyPlain.getBytes("EUC-KR")));
+            String encodedBody = requestHeader + encoder.encodeBuffer(cipher.encrypt(bodyPlain.getBytes(EUC_ENCODING)));
 
-            byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes("EUC-KR").length, 4) + encodedBody).getBytes("EUC-KR");
+            byte[] payload = (NumberUtil.toZeroString(encodedBody.getBytes(EUC_ENCODING).length, 4) + encodedBody).getBytes(EUC_ENCODING);
             byte[] fullMessage = client.sendEncryptedRequest(payload);
-            String response = new String(fullMessage, "EUC-KR");
+            String response = new String(fullMessage, EUC_ENCODING);
+
             String plainHeader = response.substring(0,98);
             String base64EncryptedBody = response.substring(98);
             BASE64Decoder decoder = new BASE64Decoder();
@@ -53,19 +55,25 @@ public class PurchaseApiClient implements Purchaser {
 
             // 바이트에서 실제 문자열로 사용 가능한 부분만 추출 (EUC-KR 기준 null byte 제거)
             int length = 0;
-            for (int i = 0; i < decryptedBytes.length; i++) {
-                byte b = decryptedBytes[i];
-                if (b == 0x00) break; // null byte 만나면 멈춤
+            while (length < decryptedBytes.length && decryptedBytes[length] != 0x00) {
                 length++;
             }
 
             byte[] cleanBytes = Arrays.copyOfRange(decryptedBytes, 0, length);
-            String plainBody = new String(cleanBytes, "EUC-KR");
+            String plainBody = new String(cleanBytes, EUC_ENCODING);
             log.info("[DEBUG] 복호화 결과 (plainBody): " + plainBody);
+
             return GalaxiaPurchaseResponse.fromBytes(cleanBytes).toResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private GalaxiaCipher getGalaxiaCipher() throws Exception {
+        GalaxiaCipher cipher = new Seed();
+        cipher.setKey(Base64.decode(KEY.getBytes(EUC_ENCODING)));
+        cipher.setIV(IV.getBytes(EUC_ENCODING));
+        return cipher;
     }
 }

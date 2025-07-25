@@ -1,18 +1,21 @@
-package com.pintoss.auth.storage.voucher;
-
+package com.pintoss.auth.storage.voucher.querydsl;
 
 
 import com.pintoss.auth.core.voucher.application.dto.QVoucherIssuerResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
+import com.pintoss.auth.storage.voucher.jpa.entity.VoucherEntity;
+import com.pintoss.auth.storage.voucher.jpa.entity.VoucherIssuerEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import static com.pintoss.auth.storage.voucher.QVoucherEntity.voucherEntity;
-import static com.pintoss.auth.storage.voucher.QVoucherIssuerEntity.voucherIssuerEntity;
+import java.util.List;
+import java.util.Optional;
+
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherIssuerEntity.voucherIssuerEntity;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -26,8 +29,8 @@ public class VoucherIssuerQueryDslRepository {
                 new QVoucherIssuerResult(
                     voucherIssuerEntity.id,
                     voucherIssuerEntity.name,
-                    voucherIssuerEntity.discount,
-                    voucherIssuerEntity.contactInfo,
+                    voucherIssuerEntity.discountEmbeddable,
+                    voucherIssuerEntity.contactInfoEmbeddable,
                     voucherIssuerEntity.description,
                     voucherIssuerEntity.publisher,
                     voucherIssuerEntity.imageUrl,
@@ -56,8 +59,8 @@ public class VoucherIssuerQueryDslRepository {
             .id(issuer.getId())
             .name(issuer.getName())
             .description(issuer.getDescription())
-            .discount(issuer.getDiscount())
-            .contactInfo(issuer.getContactInfo())
+            .discountEmbeddable(issuer.getDiscountEmbeddable())
+            .contactInfoEmbeddable(issuer.getContactInfoEmbeddable())
             .publisher(issuer.getPublisher())
             .note(issuer.getNote())
             .imageUrl(issuer.getImageUrl())

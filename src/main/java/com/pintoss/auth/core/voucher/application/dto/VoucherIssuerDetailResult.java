@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.voucher.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.pintoss.auth.core.voucher.domain.ContactInfo;
-import com.pintoss.auth.core.voucher.domain.Discount;
+import com.pintoss.auth.storage.voucher.jpa.entity.ContactInfoEmbeddable;
+import com.pintoss.auth.storage.voucher.jpa.entity.DiscountEmbeddable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +17,8 @@ public class VoucherIssuerDetailResult {
     private Long id;
     private String name;
     private String description;
-    private Discount discount;
-    private ContactInfo contactInfo;
+    private DiscountEmbeddable discountEmbeddable;
+    private ContactInfoEmbeddable contactInfoEmbeddable;
     private String publisher;
     private String note;
     private String imageUrl;

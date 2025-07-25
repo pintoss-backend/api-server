@@ -3,6 +3,10 @@ package com.pintoss.auth.storage.voucher;
 import com.pintoss.auth.core.voucher.domain.Voucher;
 import com.pintoss.auth.core.voucher.application.repository.VoucherRepository;
 import java.util.List;
+
+import com.pintoss.auth.storage.voucher.jpa.entity.VoucherEntity;
+import com.pintoss.auth.storage.voucher.jpa.VoucherJpaRepository;
+import com.pintoss.auth.storage.voucher.querydsl.VoucherQueryDslRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -11,8 +11,8 @@ public class VoucherIssuerAdder {
 
     private final VoucherIssuerRepository voucherIssuerRepository;
 
-
     public void add(VoucherIssuer voucherIssuer) {
         voucherIssuerRepository.save(voucherIssuer);
     }
+
 }
