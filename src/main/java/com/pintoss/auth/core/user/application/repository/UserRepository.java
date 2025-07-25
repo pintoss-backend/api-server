@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.user.application.repository;
 
-import com.pintoss.auth.core.user.domain.LoginType;
-import com.pintoss.auth.core.user.domain.Phone;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.Phone;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

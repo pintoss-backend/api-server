@@ -1,6 +1,6 @@
-package com.pintoss.auth.core.user.domain;
+package com.pintoss.auth.storage.user.jpa.entity;
 
-import com.pintoss.auth.storage.user.EncryptConverter;
+import com.pintoss.auth.storage.user.jpa.utils.EncryptConverter;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;

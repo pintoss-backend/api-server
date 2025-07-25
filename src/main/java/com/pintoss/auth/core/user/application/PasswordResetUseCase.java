@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.user.application;
 
-import com.pintoss.auth.core.user.domain.LoginType;
-import com.pintoss.auth.core.user.domain.Phone;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.Phone;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import com.pintoss.auth.core.user.application.flow.external.MailSender;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import java.security.SecureRandom;

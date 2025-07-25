@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.core.user.application.flow.validator.UserValidator;
-import com.pintoss.auth.core.user.domain.Phone;
+import com.pintoss.auth.storage.user.jpa.entity.Phone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

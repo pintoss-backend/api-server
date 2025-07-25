@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.application.flow.processor;
+package com.pintoss.auth.storage.user.jpa.utils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

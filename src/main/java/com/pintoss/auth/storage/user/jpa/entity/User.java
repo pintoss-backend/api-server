@@ -1,6 +1,6 @@
-package com.pintoss.auth.core.user.domain;
+package com.pintoss.auth.storage.user.jpa.entity;
 
-import com.pintoss.auth.storage.user.EncryptConverter;
+import com.pintoss.auth.storage.user.jpa.utils.EncryptConverter;
 import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.support.exception.ErrorCode;
 import jakarta.persistence.*;

@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.auth.dto;
 
-import com.pintoss.auth.core.user.domain.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
 import com.pintoss.auth.core.user.application.dto.RegisterCommand;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

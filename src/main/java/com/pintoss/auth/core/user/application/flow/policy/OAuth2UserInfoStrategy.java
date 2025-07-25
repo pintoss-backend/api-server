@@ -2,7 +2,7 @@ package com.pintoss.auth.core.user.application.flow.policy;
 
 import com.pintoss.auth.support.exception.ErrorCode;
 import com.pintoss.auth.support.exception.BadRequestException;
-import com.pintoss.auth.core.user.domain.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

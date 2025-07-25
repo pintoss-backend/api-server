@@ -3,8 +3,8 @@ package com.pintoss.auth.core.user.application.flow.viewer;
 import com.pintoss.auth.support.exception.ErrorCode;
 import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.core.user.application.repository.UserRepository;
-import com.pintoss.auth.core.user.domain.User;
-import com.pintoss.auth.core.user.domain.UserInfo;
+import com.pintoss.auth.storage.user.jpa.entity.User;
+import com.pintoss.auth.storage.user.jpa.entity.UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

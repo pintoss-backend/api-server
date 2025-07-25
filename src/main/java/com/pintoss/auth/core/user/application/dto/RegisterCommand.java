@@ -1,6 +1,6 @@
 package com.pintoss.auth.core.user.application.dto;
 
-import com.pintoss.auth.core.user.domain.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

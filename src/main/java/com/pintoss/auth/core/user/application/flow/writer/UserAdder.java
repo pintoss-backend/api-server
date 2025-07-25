@@ -1,7 +1,7 @@
 package com.pintoss.auth.core.user.application.flow.writer;
 
 import com.pintoss.auth.core.user.application.repository.UserRepository;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

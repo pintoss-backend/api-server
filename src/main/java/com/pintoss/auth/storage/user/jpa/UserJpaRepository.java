@@ -1,11 +1,12 @@
-package com.pintoss.auth.storage.user;
+package com.pintoss.auth.storage.user.jpa;
 
 
-import com.pintoss.auth.core.user.domain.LoginType;
-import com.pintoss.auth.core.user.domain.Phone;
-import com.pintoss.auth.core.user.domain.User;
-import java.util.Optional;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.Phone;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 public interface UserJpaRepository extends JpaRepository<User, Long> {
 

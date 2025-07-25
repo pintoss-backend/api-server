@@ -4,7 +4,7 @@ import com.pintoss.auth.api.auth.dto.OAuth2LoginSuccess;
 import com.pintoss.auth.api.auth.dto.OAuth2Response;
 import com.pintoss.auth.api.auth.dto.OAuth2SignupRequired;
 import com.pintoss.auth.api.support.dto.ApiResponse;
-import com.pintoss.auth.core.user.domain.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
 import com.pintoss.auth.core.user.application.OAuth2UseCase;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;

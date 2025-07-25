@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.support.security.jwt;
 
-import com.pintoss.auth.core.user.domain.UserRoleEnum;
+import com.pintoss.auth.storage.user.jpa.entity.UserRoleEnum;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -3,7 +3,7 @@ package com.pintoss.auth.core.user.application;
 import com.pintoss.auth.core.user.application.flow.processor.AuthTokenProcessor;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
 import com.pintoss.auth.core.user.application.flow.validator.UserValidator;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import com.pintoss.auth.core.user.application.dto.LoginCommand;
 import com.pintoss.auth.core.user.application.dto.LoginResult;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,5 @@
-package com.pintoss.auth.storage.user;
+package com.pintoss.auth.storage.user.jpa.utils;
 
-import com.pintoss.auth.core.user.application.flow.processor.EncryptUtil;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import lombok.RequiredArgsConstructor;
