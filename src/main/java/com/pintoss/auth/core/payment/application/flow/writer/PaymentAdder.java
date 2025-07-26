@@ -2,10 +2,8 @@ package com.pintoss.auth.core.payment.application.flow.writer;
 
 import com.pintoss.auth.core.payment.application.repository.PaymentRepository;
 import com.pintoss.auth.core.payment.domain.PaymentDomain;
-import com.pintoss.auth.storage.payment.PaymentEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,14 +12,8 @@ import org.springframework.stereotype.Component;
 public class PaymentAdder {
 
     private final PaymentRepository paymentRepository;
-    private final ApplicationEventPublisher eventPublisher;
 
     public PaymentDomain add(PaymentDomain payment){
-        PaymentEntity paymentEntity = PaymentEntity.of(payment);
-
-        paymentRepository.save(paymentEntity);
-        payment.assignId(paymentEntity.getId());
-        
-        return payment;
+        return paymentRepository.save(payment);
     }
 }

@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.order.domain;
+package com.pintoss.auth.core.support.event;
 
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import com.pintoss.auth.core.voucher.application.dto.VoucherPurchaseCommand;

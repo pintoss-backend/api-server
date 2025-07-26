@@ -1,13 +1,20 @@
 package com.pintoss.auth.api.payment;
 
+import com.pintoss.auth.api.payment.dto.PaymentCallbackRequest;
+import com.pintoss.auth.api.payment.dto.PaymentCallbackResponse;
+import com.pintoss.auth.api.payment.dto.PaymentCreateRequest;
+import com.pintoss.auth.api.payment.dto.PaymentCreateResponse;
 import com.pintoss.auth.api.support.dto.ApiResponse;
+import com.pintoss.auth.core.payment.application.PaymentCreateUsecase;
 import com.pintoss.auth.core.payment.application.PurchasePaymentUsecase;
+import com.pintoss.auth.core.payment.application.dto.PaymentCreateResult;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/payments")
 public class PaymentController {
     private final PurchasePaymentUsecase purchasePaymentUsecase;
+    private final PaymentCreateUsecase paymentCreateUsecase;
 
     /**
      * 결제 승인 콜백을 처리한다.
@@ -30,5 +38,14 @@ public class PaymentController {
         purchasePaymentUsecase.purchase(request.toPurchaseCommand());
         response.sendRedirect("https://pin-toss.com/payments/result?isSuccess=true&orderId="+request.getORDER_ID());
         return ApiResponse.ok(PaymentCallbackResponse.of(request.getORDER_ID()));
+    }
+
+    @PostMapping
+    public ApiResponse<PaymentCreateResponse> createPayment(@RequestBody PaymentCreateRequest req) {
+        PaymentCreateResult result = paymentCreateUsecase.createPayment(req.to());
+
+        PaymentCreateResponse response = PaymentCreateResponse.from(result);
+
+        return ApiResponse.ok(response);
     }
 }

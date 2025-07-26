@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.payment;
+package com.pintoss.auth.api.payment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

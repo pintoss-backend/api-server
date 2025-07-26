@@ -1,8 +1,11 @@
 package com.pintoss.auth.core.payment.application.repository;
 
-import com.pintoss.auth.storage.payment.PaymentEntity;
+import com.pintoss.auth.core.payment.domain.PaymentDomain;
 
 public interface PaymentRepository {
 
-    PaymentEntity save(PaymentEntity paymentEntity);
+    PaymentDomain save(PaymentDomain paymentDomain);
+
+    PaymentDomain findByOrderNo(String orderNo);
+
 }

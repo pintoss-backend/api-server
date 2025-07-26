@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.order.application;
 
-import com.pintoss.auth.core.order.domain.VoucherPurchaseRequestEvent;
+import com.pintoss.auth.core.support.event.VoucherPurchaseRequestEvent;
 import com.pintoss.auth.core.order.application.flow.validator.OrderValidator;
-import com.pintoss.auth.core.order.application.flow.event.OrderEventPublisher;
+import com.pintoss.auth.core.order.application.event.VoucherPurchaseRequestEventPublisher;
 import com.pintoss.auth.core.order.domain.Order;
 import com.pintoss.auth.core.order.domain.OrderItem;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderPaymentResultUsecase {
 
     private final OrderValidator orderValidator;
-    private final OrderEventPublisher eventPublisher;
+    private final VoucherPurchaseRequestEventPublisher eventPublisher;
 
-    public OrderPaymentResultUsecase(OrderValidator orderValidator, OrderEventPublisher eventPublisher) {
+    public OrderPaymentResultUsecase(OrderValidator orderValidator, VoucherPurchaseRequestEventPublisher eventPublisher) {
         this.orderValidator = orderValidator;
         this.eventPublisher = eventPublisher;
     }
@@ -47,5 +47,11 @@ public class OrderPaymentResultUsecase {
 
             eventPublisher.publish(voucherPurchaseRequestEvent);
         }
+    }
+
+    @Transactional
+    public void canceled(String orderNo) {
+        Order order = orderValidator.getOrThrowIfNotExists(orderNo);
+        order.cancel();
     }
 }
