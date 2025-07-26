@@ -1,4 +1,4 @@
-package com.pintoss.auth.api.support.api;
+package com.pintoss.auth.api.config;
 
 import com.pintoss.auth.api.support.interceptor.AccessTimeTrackerInterceptor;
 import com.pintoss.auth.api.support.interceptor.AuthorizationInterceptor;

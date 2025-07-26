@@ -1,11 +1,11 @@
 package com.pintoss.auth.core.voucher.application;
 
+import com.pintoss.auth.core.support.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherPurchaseCommand;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
-import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
-import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
 import lombok.RequiredArgsConstructor;
+import com.pintoss.auth.core.voucher.application.event.VoucherPurchaseCompletedEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class VoucherPurchaseUsecase {
 
     private final Purchaser purchaser;
-    private final VoucherEventPublisher eventPublisher;
+    private final VoucherPurchaseCompletedEventPublisher eventPublisher;
 
     public void purchase(VoucherPurchaseCommand command) {
 
