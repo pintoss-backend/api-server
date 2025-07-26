@@ -1,7 +1,6 @@
 package com.pintoss.auth.storage.voucher.querydsl;
 
 
-import com.pintoss.auth.core.voucher.application.dto.QVoucherIssuerResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import com.pintoss.auth.storage.voucher.jpa.entity.VoucherEntity;
@@ -24,21 +23,17 @@ public class VoucherIssuerQueryDslRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<VoucherIssuerResult> fetchSummaryList() {
-        return queryFactory
-            .select(
-                new QVoucherIssuerResult(
-                    voucherIssuerEntity.id,
-                    voucherIssuerEntity.name,
-                    voucherIssuerEntity.discountEmbeddable,
-                    voucherIssuerEntity.contactInfoEmbeddable,
-                    voucherIssuerEntity.description,
-                    voucherIssuerEntity.publisher,
-                    voucherIssuerEntity.imageUrl,
-                    voucherIssuerEntity.note
-                )
-            )
-            .from(voucherIssuerEntity)
-            .fetch();
+        List<VoucherIssuerEntity> entities = queryFactory.select(voucherIssuerEntity)
+                .from(voucherIssuerEntity)
+                .fetch();
+
+        if (entities.isEmpty()) {
+            return List.of();
+        }
+
+        return entities.stream()
+                .map(VoucherIssuerResult::create)
+                .toList();
     }
 
     public Optional<VoucherIssuerDetailResult> fetchDetail(Long voucherIssuerId) {
@@ -59,8 +54,8 @@ public class VoucherIssuerQueryDslRepository {
             .id(issuer.getId())
             .name(issuer.getName())
             .description(issuer.getDescription())
-            .discountEmbeddable(issuer.getDiscountEmbeddable())
-            .contactInfoEmbeddable(issuer.getContactInfoEmbeddable())
+            .discount(issuer.getDiscountEmbeddable().toDomain())
+            .contactInfo(issuer.getContactInfoEmbeddable().toDomain())
             .publisher(issuer.getPublisher())
             .note(issuer.getNote())
             .imageUrl(issuer.getImageUrl())
