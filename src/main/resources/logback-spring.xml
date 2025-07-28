@@ -6,7 +6,7 @@
 
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-  <!-- Logstash Encoder 설정 -->
+  <!-- Logstash Appender -->
   <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <destination>52.79.233.9:5001</destination>
 
@@ -19,8 +19,26 @@
     <reconnectionDelay>10000</reconnectionDelay>
   </appender>
 
-  <!-- Console에도 JSON 출력 (선택 사항) -->
+  <!-- Console Appender -->
   <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <customFields>{"env":"${ACTIVE_PROFILE}"}</customFields>
+    </encoder>
+  </appender>
+
+  <!-- File Appender with Rolling Policy -->
+  <appender name="LOG_JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/app-${ACTIVE_PROFILE}.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+      <!-- 하루 단위로 롤링 -->
+      <fileNamePattern>logs/app-${ACTIVE_PROFILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+      <!-- 최대 보관 기간 -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
       <customFields>{"env":"${ACTIVE_PROFILE}"}</customFields>
     </encoder>
@@ -29,5 +47,6 @@
   <root level="INFO">
     <appender-ref ref="LOGSTASH"/>
     <appender-ref ref="JSON_CONSOLE"/>
+    <appender-ref ref="LOG_JSON_FILE"/>
   </root>
 </configuration>
