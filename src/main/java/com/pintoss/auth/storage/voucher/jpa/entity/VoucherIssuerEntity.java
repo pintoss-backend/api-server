@@ -44,10 +44,6 @@ public class VoucherIssuerEntity {
 
     @Embedded
     @Valid
-    @AttributeOverrides({
-            @AttributeOverride(name = "homePageEmbeddable.url", column = @Column(name = "homePage", nullable = false)),
-            @AttributeOverride(name = "csCenterEmbeddable.tel", column = @Column(name = "csCenter", nullable = false))
-    })
     private ContactInfoEmbeddable contactInfoEmbeddable;
 
     @NotNull

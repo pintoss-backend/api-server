@@ -15,9 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderCreateRequest {
 
-    @NotNull(message = "결제 방법은 필수 입력 항목입니다.")
-    private PaymentMethodType paymentMethod;
-
     @NotEmpty(message = "주문 항목을 한 개 이상 포함해야 합니다.")
     @Valid
     private List<OrderItemRequest> orderItems;

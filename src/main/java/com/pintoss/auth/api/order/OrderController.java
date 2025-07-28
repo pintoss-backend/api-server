@@ -1,7 +1,6 @@
 package com.pintoss.auth.api.order;
 
 import com.pintoss.auth.api.order.dto.OrderCreateRequest;
-import com.pintoss.auth.api.order.dto.OrderCreateResponse;
 import com.pintoss.auth.api.order.dto.OrderDetailResponse;
 import com.pintoss.auth.api.order.dto.OrderPageRequest;
 import com.pintoss.auth.api.support.dto.ApiResponse;
@@ -14,13 +13,11 @@ import com.pintoss.auth.core.order.application.GetMyOrdersUsecase;
 import com.pintoss.auth.core.order.application.GetOrderDetailUsecase;
 import com.pintoss.auth.core.order.application.OrderCancelUsecase;
 import com.pintoss.auth.core.order.application.OrderCreateUsecase;
-import com.pintoss.auth.core.order.application.dto.OrderCreateResult;
 import com.pintoss.auth.core.order.application.dto.OrderDetail;
 import com.pintoss.auth.core.order.application.dto.OrderSearchResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    @Value("${galaxia.service-id}")
-    private String serviceId;
     private final GetMyOrdersUsecase getMyOrdersUsecase;
     private final GetOrderDetailUsecase getOrderDetailUsecase;
     private final OrderCreateUsecase orderCreateUsecase;
@@ -60,15 +55,13 @@ public class OrderController {
 
     @AuthorizationRequired(value = UserRoleEnum.USER)
     @PostMapping
-    public ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request) {
-        OrderCreateResult result = orderCreateUsecase.create(request.getOrderItems(), request.getPaymentMethod());
+    public ApiResponse<String> createOrder(@RequestBody @Valid OrderCreateRequest request) {
+        String orderNo = orderCreateUsecase.create(request.getOrderItems());
 
-        LogContext.putOrder(result.getOrderNo());
+        LogContext.putOrder(orderNo);
         log.info("[주문 생성]");
 
-        OrderCreateResponse response = OrderCreateResponse.of(serviceId, result, request.getPaymentMethod().getServiceCode());
-
-        return ApiResponse.ok(response);
+        return ApiResponse.ok(orderNo);
     }
 
     @AuthorizationRequired(value = UserRoleEnum.USER)

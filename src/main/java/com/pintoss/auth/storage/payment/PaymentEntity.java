@@ -39,7 +39,8 @@ public class PaymentEntity {
     private String json;
 
     @Builder
-    public PaymentEntity(String mid, String serviceCode, String orderNo, LocalDateTime orderDate, String transactionId, long authAmount, LocalDateTime authDate, PaymentStatus status, PaymentMethodType paymentMethodType, String detailMessage, String json) {
+    public PaymentEntity(Long id, String mid, String serviceCode, String orderNo, LocalDateTime orderDate, String transactionId, long authAmount, LocalDateTime authDate, PaymentStatus status, PaymentMethodType paymentMethodType, String detailMessage, String json) {
+        this.id = id;
         this.mid = mid;
         this.serviceCode = serviceCode;
         this.orderNo = orderNo;
@@ -53,19 +54,37 @@ public class PaymentEntity {
         this.json = json;
     }
 
-    public static PaymentEntity of(PaymentDomain payment) {
+    public static PaymentEntity from(PaymentDomain paymentDomain) {
         return PaymentEntity.builder()
-            .mid(payment.getServiceId())
-            .serviceCode(payment.getServiceCode())
-            .orderNo(payment.getOrderNo())
-            .orderDate(payment.getOrderDate())
-            .transactionId(payment.getTransactionId())
-            .authAmount(payment.getAuthAmount())
-            .authDate(payment.getAuthDate())
-            .status(payment.getStatus())
-            .paymentMethodType(payment.getPaymentMethodType())
-            .detailMessage(payment.getDetailMessage())
-            .json(payment.getJson())
+            .id(paymentDomain.getId())
+            .mid(paymentDomain.getServiceId())
+            .serviceCode(paymentDomain.getServiceCode())
+            .orderNo(paymentDomain.getOrderNo())
+            .orderDate(paymentDomain.getOrderDate())
+            .transactionId(paymentDomain.getTransactionId())
+            .authAmount(paymentDomain.getAuthAmount())
+            .authDate(paymentDomain.getAuthDate())
+            .status(paymentDomain.getStatus())
+            .paymentMethodType(paymentDomain.getPaymentMethodType())
+            .detailMessage(paymentDomain.getDetailMessage())
+            .json(paymentDomain.getJson())
             .build();
+    }
+
+    public PaymentDomain toDomain() {
+        return PaymentDomain.create(
+            this.id,
+            this.mid,
+            this.serviceCode,
+            this.orderNo,
+            this.orderDate,
+            this.transactionId,
+            this.authAmount,
+            this.authDate,
+            this.status,
+            this.paymentMethodType,
+            this.detailMessage,
+            this.json
+        );
     }
 }

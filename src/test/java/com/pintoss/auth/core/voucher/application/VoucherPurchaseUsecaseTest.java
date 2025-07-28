@@ -1,11 +1,17 @@
 package com.pintoss.auth.core.voucher.application;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
+import com.pintoss.auth.core.support.event.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.core.voucher.application.dto.PurchaseResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherPurchaseCommand;
+import com.pintoss.auth.core.voucher.application.event.VoucherPurchaseCompletedEventPublisher;
 import com.pintoss.auth.core.voucher.application.flow.external.Purchaser;
-import com.pintoss.auth.core.voucher.application.flow.external.VoucherEventPublisher;
-import com.pintoss.auth.core.voucher.domain.VoucherPurchaseCompletedEvent;
 import com.pintoss.auth.support.exception.BaseException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +20,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 class VoucherPurchaseUsecaseTest {
 
@@ -25,7 +27,7 @@ class VoucherPurchaseUsecaseTest {
     Purchaser purchaser;
 
     @Mock
-    VoucherEventPublisher eventPublisher;
+    VoucherPurchaseCompletedEventPublisher eventPublisher;
 
     @InjectMocks
     VoucherPurchaseUsecase usecase;
