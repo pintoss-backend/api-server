@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @SpringBootTest
 @ActiveProfiles("test")
-class PasswordEncoderTest {
+class EncodedPasswordEncoderTest {
 
     @Autowired
     PasswordEncoder passwordEncoder;

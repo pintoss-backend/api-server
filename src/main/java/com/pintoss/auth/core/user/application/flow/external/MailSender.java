@@ -1,5 +1,7 @@
 package com.pintoss.auth.core.user.application.flow.external;
 
+import com.pintoss.auth.core.user.domain.vo.Password;
+
 public interface MailSender {
 
     /**
@@ -7,6 +9,6 @@ public interface MailSender {
      * @param to 수신자 이메일 주소
      * @param temporaryPassword 생성된 임시 비밀번호
      */
-    void sendTemporaryPassword(String to, String temporaryPassword);
+    void sendTemporaryPassword(String to, Password temporaryPassword);
 
 }
