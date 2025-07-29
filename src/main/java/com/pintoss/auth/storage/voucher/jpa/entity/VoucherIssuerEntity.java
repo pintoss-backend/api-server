@@ -67,10 +67,12 @@ public class VoucherIssuerEntity {
 
     private String imageUrl;
 
+    private String descriptionImageUrl;
+
     @Column(nullable = false, precision = 5, scale = 2) // ex) 999.99 까지 가능
     private BigDecimal fee; // 수수료
 
-    public static VoucherIssuerEntity create(String name, String code, DiscountEmbeddable discountEmbeddable, ContactInfoEmbeddable contactInfoEmbeddable, String description, String publisher, String note, String imageUrl, BigDecimal fee) {
+    public static VoucherIssuerEntity create(String name, String code, DiscountEmbeddable discountEmbeddable, ContactInfoEmbeddable contactInfoEmbeddable, String description, String publisher, String note, String imageUrl, String detailImageUrl, BigDecimal fee) {
         return VoucherIssuerEntity.builder()
                 .name(name)
                 .code(code)
@@ -80,6 +82,7 @@ public class VoucherIssuerEntity {
                 .publisher(publisher)
                 .note(note)
                 .imageUrl(imageUrl)
+                .descriptionImageUrl(detailImageUrl)
                 .fee(fee)
                 .build();
     }
@@ -94,6 +97,7 @@ public class VoucherIssuerEntity {
                 .publisher(voucherIssuer.getPublisher())
                 .note(voucherIssuer.getNote())
                 .imageUrl(voucherIssuer.getImageUrl())
+                .descriptionImageUrl(voucherIssuer.getDescriptionImageUrl())
                 .fee(voucherIssuer.getFee())
                 .build();
     }
@@ -108,6 +112,7 @@ public class VoucherIssuerEntity {
                 this.publisher,
                 this.note,
                 this.imageUrl,
+                this.descriptionImageUrl,
                 this.fee
         );
     }

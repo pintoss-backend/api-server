@@ -23,6 +23,7 @@ public class VoucherIssuerDetailResult {
     private String publisher;
     private String note;
     private String imageUrl;
+    private String descriptionImageUrl;
     private List<VoucherInfo> vouchers;
     private BigDecimal fee;
 

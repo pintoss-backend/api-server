@@ -1,11 +1,16 @@
 package com.pintoss.auth.storage.voucher.jpa.entity;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import java.math.BigDecimal;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,12 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Transactional
 @SpringBootTest
@@ -55,6 +54,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -83,6 +83,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -111,6 +112,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
         em.persist(existingEntity);
@@ -132,6 +134,7 @@ class VoucherIssuerEntityTest {
                 "test publisher 2",
                 "test note 2",
                 "https://example.com/logo2.png",
+            "https://example.com/detail2.png",
                 new BigDecimal("20")
         );
 
@@ -160,6 +163,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -188,6 +192,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -216,6 +221,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
         em.persist(existingEntity);
@@ -237,6 +243,7 @@ class VoucherIssuerEntityTest {
                 "test publisher 2",
                 "test note 2",
                 "https://example.com/logo2.png",
+            "https://example.com/detail2.png",
                 new BigDecimal("20")
         );
 
@@ -265,6 +272,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -294,6 +302,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+                "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -324,6 +333,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+                "https://example.com/detail.png",
                 new BigDecimal("10")
         );
 
@@ -353,6 +363,7 @@ class VoucherIssuerEntityTest {
                 "test publisher",
                 "test note",
                 "https://example.com/logo.png",
+            "https://example.com/descrition.png",
                 new BigDecimal("10")
         );
 

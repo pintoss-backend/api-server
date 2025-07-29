@@ -45,6 +45,8 @@ public class RegisterVoucherIssuerRequest {
     @NotBlank(message = "로고 이미지는 필수 항목입니다.")
     private String imageUrl;
 
+    private String descriptionImageUrl;
+
     @NotBlank(message = "상품 유의사항은 필수 항목입니다.")
     private String note;
 
@@ -84,6 +86,7 @@ public class RegisterVoucherIssuerRequest {
             .description(this.description)
             .publisher(this.publisher)
             .imageUrl(this.imageUrl)
+            .descriptionImageUrl(this.descriptionImageUrl)
             .note(this.note)
             .vouchers(this.vouchers.stream()
                 .map(RegisterVoucherRequest::toCommand)
