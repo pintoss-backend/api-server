@@ -37,22 +37,22 @@ def decrypt(encrypted_b64, key):
 def encrypt_user_data():
     conn = pymysql.connect(**DB_CONFIG)
     with conn.cursor() as cursor:
-        cursor.execute("SELECT id, email, refresh_token, value FROM users")
+        cursor.execute("SELECT id, email, refresh_token, tel FROM users")
         users = cursor.fetchall()
 
-        for user_id, email, refresh_token, value in users:
+        for user_id, email, refresh_token, tel in users:
             encrypted_email = encrypt(email, SECRET_KEY)
             encrypted_token = encrypt(refresh_token, SECRET_KEY)
-            encrypted_value = encrypt(value, SECRET_KEY)
+            encrypted_tel = encrypt(tel, SECRET_KEY)
 
             update_sql = """
                 UPDATE user
                 SET email = %s,
                     refresh_token = %s,
-                    value = %s
+                    tel = %s
                 WHERE id = %s
             """
-            cursor.execute(update_sql, (encrypted_email, encrypted_token, encrypted_value, user_id))
+            cursor.execute(update_sql, (encrypted_email, encrypted_token, encrypted_tel, user_id))
             print(f"✅ Encrypted and updated user {user_id}")
 
         conn.commit()
