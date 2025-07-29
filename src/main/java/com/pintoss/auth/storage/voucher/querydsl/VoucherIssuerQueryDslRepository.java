@@ -1,19 +1,18 @@
 package com.pintoss.auth.storage.voucher.querydsl;
 
 
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherEntity.voucherEntity;
+import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherIssuerEntity.voucherIssuerEntity;
+
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerDetailResult;
 import com.pintoss.auth.core.voucher.application.dto.VoucherIssuerResult;
 import com.pintoss.auth.storage.voucher.jpa.entity.VoucherEntity;
 import com.pintoss.auth.storage.voucher.jpa.entity.VoucherIssuerEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
-
-import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherEntity.voucherEntity;
-import static com.pintoss.auth.storage.voucher.jpa.entity.QVoucherIssuerEntity.voucherIssuerEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 
 @Repository
@@ -59,6 +58,7 @@ public class VoucherIssuerQueryDslRepository {
             .publisher(issuer.getPublisher())
             .note(issuer.getNote())
             .imageUrl(issuer.getImageUrl())
+            .descriptionImageUrl(issuer.getDescriptionImageUrl())
             .fee(issuer.getFee())
             .vouchers(voucherEntities.stream().map(v ->
                 VoucherIssuerDetailResult.VoucherInfo.builder()
