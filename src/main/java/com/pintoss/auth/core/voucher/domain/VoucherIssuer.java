@@ -33,10 +33,12 @@ public class VoucherIssuer {
 
     private String imageUrl;
 
+    private String descriptionImageUrl;
+
     private BigDecimal fee; // 수수료
 
     public static VoucherIssuer create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
-                                       String note, String imageUrl, BigDecimal fee) {
+                                       String note, String imageUrl, String detailImageUrl, BigDecimal fee) {
         return VoucherIssuer.builder()
                 .name(name)
                 .code(code)
@@ -46,6 +48,7 @@ public class VoucherIssuer {
                 .publisher(publisher)
                 .note(note)
                 .imageUrl(imageUrl)
+                .descriptionImageUrl(detailImageUrl)
                 .fee(fee)
                 .build();
     }
