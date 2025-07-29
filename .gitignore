@@ -36,3 +36,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Log Files ###
+logs/
+*.log
+!logs/.gitkeep
