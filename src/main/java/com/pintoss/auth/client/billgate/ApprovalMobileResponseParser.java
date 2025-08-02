@@ -9,6 +9,7 @@ import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -42,8 +43,8 @@ public class ApprovalMobileResponseParser implements ApprovalResponseParser<Appr
             data.get("5031")
         );
         ApprovalMobileResponse mobileResponse = ApprovalMobileResponse.builder()
-            .partCancelType(data.get("7049"))
-            .mobileNumber(data.get("0007"))
+            .partCancelType(safeGet(data, "7049"))
+            .mobileNumber(safeGet(data, "0007"))
             .build();
 
         String json ;
@@ -61,10 +62,31 @@ public class ApprovalMobileResponseParser implements ApprovalResponseParser<Appr
             .detailResponseCode(common.getDetailResponseCode())
             .detailResponseMessage(common.getDetailResponseMessage())
             .orderId(common.getOrderId())
-            .orderDate(LocalDateTime.parse(common.getOrderDate(), formatter))
-            .authAmount(Long.parseLong(common.getAuthAmount()))
-            .authDate(LocalDateTime.parse(common.getAuthDate(), formatter))
+            .orderDate(safeParseDateOrNull(common.getOrderDate(), formatter))
+            .authAmount(safeParseLongOrDefault(common.getAuthAmount(), 0L))
+            .authDate(safeParseDateOrNull(common.getAuthDate(), formatter))
             .json(json)
             .build();
+    }
+
+    private String safeGet(Map<String, String> data, String key) {
+        String value = data.get(key);
+        return (value != null && !"null".equalsIgnoreCase(value)) ? value : "";
+    }
+
+    private Long safeParseLongOrDefault(String value, long defaultValue) {
+        try {
+            return value != null && !value.isBlank() ? Long.parseLong(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private LocalDateTime safeParseDateOrNull(String value, DateTimeFormatter formatter) {
+        try {
+            return value != null && !value.isBlank() ? LocalDateTime.parse(value, formatter) : null;
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 }
