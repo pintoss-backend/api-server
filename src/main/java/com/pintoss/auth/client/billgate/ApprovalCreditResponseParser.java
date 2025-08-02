@@ -3,12 +3,13 @@ package com.pintoss.auth.client.billgate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galaxia.api.merchant.Message;
-import com.pintoss.auth.support.exception.ErrorCode;
-import com.pintoss.auth.support.exception.InternalServerException;
 import com.pintoss.auth.core.payment.application.dto.PaymentApprovalResponse;
 import com.pintoss.auth.core.payment.domain.PaymentMethodType;
+import com.pintoss.auth.support.exception.ErrorCode;
+import com.pintoss.auth.support.exception.InternalServerException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -43,16 +44,16 @@ public class ApprovalCreditResponseParser implements ApprovalResponseParser<Appr
         );
 
         ApprovalCreditResponse creditResponse = ApprovalCreditResponse.builder()
-            .authNumber(data.get("1004"))
-            .quota(data.get("0031"))
-            .cardCompanyCode(data.get("0034"))
-            .pinNumber(data.get("0008"))
-            .partCancelUse(data.get("5312"))
-            .taxAmount(data.get("5304"))
-            .taxFreeAmount(data.get("5305"))
-            .simpleAffName(data.get("5315"))
-            .simpleDealType(data.get("5321"))
-            .cashReceiptAuthNumber(data.get("5337"))
+            .authNumber(safeGet(data, "1004"))
+            .quota(safeGet(data, "0031"))
+            .cardCompanyCode(safeGet(data,"0034"))
+            .pinNumber(safeGet(data, "0008"))
+            .partCancelUse(safeGet(data, "5312"))
+            .taxAmount(safeGet(data, "5304"))
+            .taxFreeAmount(safeGet(data, "5305"))
+            .simpleAffName(safeGet(data, "5315"))
+            .simpleDealType(safeGet(data, "5321"))
+            .cashReceiptAuthNumber(safeGet(data, "5337"))
             .build();
 
         String json ;
@@ -71,10 +72,31 @@ public class ApprovalCreditResponseParser implements ApprovalResponseParser<Appr
             .detailResponseCode(common.getDetailResponseCode())
             .detailResponseMessage(common.getDetailResponseMessage())
             .orderId(common.getOrderId())
-            .orderDate(LocalDateTime.parse(common.getOrderDate(), formatter))
-            .authAmount(Long.parseLong(common.getAuthAmount()))
-            .authDate(LocalDateTime.parse(common.getAuthDate(), formatter))
+            .orderDate(safeParseDateOrNull(common.getOrderDate(), formatter))
+            .authAmount(safeParseLongOrDefault(common.getAuthAmount(), 0L))
+            .authDate(safeParseDateOrNull(common.getAuthDate(), formatter))
             .json(json)
             .build();
     }
+
+    private String safeGet(Map<String, String> data, String key) {
+        String value = data.get(key);
+        return (value != null && !"null".equalsIgnoreCase(value)) ? value : "";
+    }
+    private Long safeParseLongOrDefault(String value, long defaultValue) {
+        try {
+            return value != null && !value.isBlank() ? Long.parseLong(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private LocalDateTime safeParseDateOrNull(String value, DateTimeFormatter formatter) {
+        try {
+            return value != null && !value.isBlank() ? LocalDateTime.parse(value, formatter) : null;
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
 }
