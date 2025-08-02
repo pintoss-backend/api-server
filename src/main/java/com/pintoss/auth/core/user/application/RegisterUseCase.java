@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.user.application;
 
-import com.pintoss.auth.core.user.domain.UserRoleEnum;
-import com.pintoss.auth.core.user.domain.User;
-import com.pintoss.auth.core.user.domain.UserRole;
+import com.pintoss.auth.storage.user.jpa.entity.UserRoleEnum;
+import com.pintoss.auth.storage.user.jpa.entity.User;
+import com.pintoss.auth.storage.user.jpa.entity.UserRole;
 import com.pintoss.auth.core.user.application.dto.RegisterCommand;
 import com.pintoss.auth.core.user.application.flow.writer.UserAdder;
 import com.pintoss.auth.core.user.application.flow.processor.UserCreateProcessor;

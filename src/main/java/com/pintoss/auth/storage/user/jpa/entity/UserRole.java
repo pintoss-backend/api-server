@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.domain;
+package com.pintoss.auth.storage.user.jpa.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

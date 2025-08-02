@@ -10,7 +10,7 @@ import com.pintoss.auth.core.cart.application.CartItemUpdateUsecase;
 import com.pintoss.auth.core.cart.application.GetMyCartItemsUsecase;
 import com.pintoss.auth.core.cart.application.dto.CartItemAddRequest;
 import com.pintoss.auth.core.cart.application.dto.CartItemView;
-import com.pintoss.auth.core.user.domain.UserRoleEnum;
+import com.pintoss.auth.storage.user.jpa.entity.UserRoleEnum;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;

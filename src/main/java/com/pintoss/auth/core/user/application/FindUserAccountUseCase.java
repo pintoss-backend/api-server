@@ -1,8 +1,8 @@
 package com.pintoss.auth.core.user.application;
 
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
-import com.pintoss.auth.core.user.domain.Phone;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.Phone;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,15 @@
-package com.pintoss.auth.core.user.domain;
+package com.pintoss.auth.storage.user.jpa.entity;
 
-import com.pintoss.auth.support.exception.EmptyPhoneException;
+import com.pintoss.auth.storage.user.jpa.utils.EncryptConverter;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
-import java.util.Objects;
-import java.util.regex.Pattern;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,17 +20,12 @@ public class Phone {
     private static final String PHONE_REGEX = "^010-\\d{4}-\\d{4}$";;
     private static final Pattern PHONE_PATTERN = Pattern.compile(PHONE_REGEX);
 
-    private String value;
+    @NotBlank(message = "전화번호는 필수 입력 값 입니다.")
+    @Convert(converter = EncryptConverter.class)
+    private String phone;
 
-    public Phone(String value) {
-        validate(value);
-        this.value = value;
-    }
-
-    private void validate(String value) {
-        if(value == null || value.isBlank()) {
-            throw new EmptyPhoneException("전화번호는 필수 입력 값 입니다..");
-        }
+    public Phone(String phone) {
+        this.phone = phone;
     }
 
     @Override
@@ -35,17 +33,17 @@ public class Phone {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         Phone target = (Phone) o;
-        return Objects.equals(value, target.value);
+        return Objects.equals(phone, target.phone);
     }
 
     @Override
     public int hashCode() {
-        return  Objects.hash(value);
+        return  Objects.hash(phone);
     }
 
     @Override
     public String toString() {
-        return value;
+        return phone;
     }
 }
 

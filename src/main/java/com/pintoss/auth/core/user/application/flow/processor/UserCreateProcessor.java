@@ -1,10 +1,10 @@
 package com.pintoss.auth.core.user.application.flow.processor;
 
 import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
-import com.pintoss.auth.core.user.domain.LoginType;
-import com.pintoss.auth.core.user.domain.Phone;
-import com.pintoss.auth.core.user.domain.User;
-import com.pintoss.auth.core.user.domain.UserRole;
+import com.pintoss.auth.storage.user.jpa.entity.LoginType;
+import com.pintoss.auth.storage.user.jpa.entity.Phone;
+import com.pintoss.auth.storage.user.jpa.entity.User;
+import com.pintoss.auth.storage.user.jpa.entity.UserRole;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

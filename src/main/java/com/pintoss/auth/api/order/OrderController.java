@@ -5,7 +5,7 @@ import com.pintoss.auth.api.order.dto.OrderDetailResponse;
 import com.pintoss.auth.api.order.dto.OrderPageRequest;
 import com.pintoss.auth.api.support.dto.ApiResponse;
 import com.pintoss.auth.api.support.interceptor.AuthorizationRequired;
-import com.pintoss.auth.core.user.domain.UserRoleEnum;
+import com.pintoss.auth.storage.user.jpa.entity.UserRoleEnum;
 import com.pintoss.auth.support.logging.LogContext;
 import com.pintoss.auth.api.support.paging.PageResponse;
 import com.pintoss.auth.api.support.paging.PagedData;

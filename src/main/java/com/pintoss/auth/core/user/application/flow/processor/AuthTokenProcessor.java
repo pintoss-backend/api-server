@@ -5,7 +5,7 @@ import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.api.support.security.jwt.JwtParser;
 import com.pintoss.auth.api.support.security.jwt.JwtProvider;
 import com.pintoss.auth.api.support.security.jwt.JwtValidator;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

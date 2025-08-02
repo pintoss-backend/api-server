@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.support.interceptor;
 
-import com.pintoss.auth.core.user.domain.UserRoleEnum;
+import com.pintoss.auth.storage.user.jpa.entity.UserRoleEnum;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

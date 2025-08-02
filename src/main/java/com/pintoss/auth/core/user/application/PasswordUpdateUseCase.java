@@ -5,7 +5,7 @@ import com.pintoss.auth.support.exception.ErrorCode;
 import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.core.user.application.flow.external.PasswordEncoderWrapper;
 import com.pintoss.auth.core.user.application.flow.reader.UserReader;
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

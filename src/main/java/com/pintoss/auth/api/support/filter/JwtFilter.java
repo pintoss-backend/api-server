@@ -3,7 +3,7 @@ package com.pintoss.auth.api.support.filter;
 import com.pintoss.auth.api.support.security.jwt.JwtAuthenticationToken;
 import com.pintoss.auth.api.support.security.jwt.JwtParser;
 import com.pintoss.auth.api.support.security.jwt.JwtValidator;
-import com.pintoss.auth.core.user.domain.UserRoleEnum;
+import com.pintoss.auth.storage.user.jpa.entity.UserRoleEnum;
 import com.pintoss.auth.api.support.util.HttpServletUtils;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

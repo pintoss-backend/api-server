@@ -1,6 +1,6 @@
 package com.pintoss.auth.api.support.security.jwt;
 
-import com.pintoss.auth.core.user.domain.User;
+import com.pintoss.auth.storage.user.jpa.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -47,7 +47,7 @@ public class JwtProvider {
         claims.put("userId", user.getId());
         claims.put("email", user.getEmail());
         claims.put("name", user.getName());
-        claims.put("phone", user.getPhone().getValue());
+        claims.put("phone", user.getPhone().getPhone());
         claims.put("roles", user.getRoles()
             .stream()
             .map(role -> role.getName().name()).collect(Collectors.toSet()));
