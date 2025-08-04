@@ -29,6 +29,7 @@ jobs:
         run: |
           mkdir -p src/test/resources
           echo "$GOOGLE_GMAIL" | base64 --decode > src/test/resources/noreply.json
+          echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
 
       - name: Process Test Resources
         run: ./gradlew processTestResources
@@ -36,6 +37,9 @@ jobs:
       - name: Debug noreply.json presence
         run: |
           find build/resources/test -name "noreply.json" || echo "noreply.json not found in build/resources/test"
+
+      - name: Verify noreply.json is in test build path
+        run: ls -la build/resources/test
 
       - name: Gradle Caching
         uses: actions/cache@v3
