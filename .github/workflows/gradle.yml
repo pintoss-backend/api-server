@@ -56,3 +56,10 @@ jobs:
 
       - name: Test With Gradle
         run: ./gradlew --info test -Dspring.profiles.active=test
+
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: build/reports/tests/test
