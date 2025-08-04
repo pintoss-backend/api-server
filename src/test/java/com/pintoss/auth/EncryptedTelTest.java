@@ -1,14 +1,15 @@
 package com.pintoss.auth;
 
 import com.galaxia.api.util.ChecksumUtil;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 @SpringBootTest
-@ActiveProfiles("prod")
+@ActiveProfiles("test")
 public class EncryptedTelTest {
     @Test
     void test() throws Exception {

@@ -20,7 +20,7 @@ public class UserViewer {
         return UserInfo.builder()
             .email(user.getEmail())
             .name(user.getName())
-            .phone(user.getPhone().getValue())
+            .phone(user.getPhone().getPhone())
             .build();
     }
 }

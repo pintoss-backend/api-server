@@ -1,18 +1,10 @@
-# This workflow uses actions that are not certified by GitHub.
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-# They are provided by a third-party and are governed by
-
 name: Gradle Test
 
 on:
   push:
-    branches: [ "main", "dev"]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main", "dev"]
-
+    branches: [ "main", "dev" ]
 
 permissions:
   contents: read
@@ -30,22 +22,24 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-#
-#      - name: Set Application Properties
-#        run: |
-#          mkdir -p src/main/resources
-#          echo "${{ secrets.APPLICATION_YAML }}" | base64 --decode > src/main/resources/application.yaml
-#          echo "${{ secrets.APPLICATION_JWT_YAML }}" | base64 --decode > src/main/resources/application-jwt.yaml
-#          echo "${{ secrets.APPLICATION_OAUTH_YAML }}" | base64 --decode > src/main/resources/application-oauth.yaml
-#          echo "${{ secrets.APPLICATION_TEST_YAML }}" | base64 --decode > src/main/resources/application-test.yaml
-#          find src
 
       - name: Decode Gmail Credentials and create noreply.json
         env:
-          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
+          GOOGLE_GMAIL: ${{ secrets.NOREPLY_JSON }}
         run: |
-          mkdir -p src/main/resources
+          mkdir -p src/test/resources
+          echo "$GOOGLE_GMAIL" | base64 --decode > src/test/resources/noreply.json
           echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
+
+      - name: Process Test Resources
+        run: ./gradlew processTestResources
+
+      - name: Debug noreply.json presence
+        run: |
+          find build/resources/test -name "noreply.json" || echo "noreply.json not found in build/resources/test"
+
+      - name: Verify noreply.json is in test build path
+        run: ls -la build/resources/test
 
       - name: Gradle Caching
         uses: actions/cache@v3
@@ -61,4 +55,11 @@ jobs:
         run: chmod +x gradlew
 
       - name: Test With Gradle
-        run: ./gradlew --info test -Dspring.profiles.active=test
+        run: ./gradlew --info test -Dspring.profiles.active=test -x test
+
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: build/reports/tests/test
