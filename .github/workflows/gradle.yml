@@ -37,10 +37,6 @@ jobs:
         run: |
           mkdir -p src/main/resources
           echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
-      - name: Debug noreply.json presence
-        run: |
-          find build/resources/test -name "noreply.json" || echo "noreply.json not found in build/resources/test"
-
 
       - name: Decode Gmail Credentials for test classpath
         env:
@@ -48,6 +44,10 @@ jobs:
         run: |
           mkdir -p src/test/resources
           echo "$GOOGLE_GMAIL" | base64 --decode > src/test/resources/noreply.json
+
+      - name: Debug noreply.json presence
+        run: |
+          find build/resources/test -name "noreply.json" || echo "noreply.json not found in build/resources/test"
 
       - name: Gradle Caching
         uses: actions/cache@v3
