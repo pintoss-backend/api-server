@@ -20,7 +20,7 @@ jobs:
         run: chmod +x gradlew
       - name: Decode Gmail Credentials and create noreply.json
         env:
-          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
+          GOOGLE_GMAIL: ${{secrets.NOREPLY_JSON}}
         run: |
           mkdir -p src/main/resources
           echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
