@@ -30,15 +30,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-#
-#      - name: Set Application Properties
-#        run: |
-#          mkdir -p src/main/resources
-#          echo "${{ secrets.APPLICATION_YAML }}" | base64 --decode > src/main/resources/application.yaml
-#          echo "${{ secrets.APPLICATION_JWT_YAML }}" | base64 --decode > src/main/resources/application-jwt.yaml
-#          echo "${{ secrets.APPLICATION_OAUTH_YAML }}" | base64 --decode > src/main/resources/application-oauth.yaml
-#          echo "${{ secrets.APPLICATION_TEST_YAML }}" | base64 --decode > src/main/resources/application-test.yaml
-#          find src
 
       - name: Decode Gmail Credentials and create noreply.json
         env:
@@ -46,6 +37,13 @@ jobs:
         run: |
           mkdir -p src/main/resources
           echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
+
+      - name: Decode Gmail Credentials for test classpath
+        env:
+          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
+        run: |
+          mkdir -p src/test/resources
+          echo "$GOOGLE_GMAIL" | base64 --decode > src/test/resources/noreply.json
 
       - name: Gradle Caching
         uses: actions/cache@v3
