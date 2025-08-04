@@ -6,9 +6,6 @@ import com.pintoss.auth.core.user.application.IdentityVerificationUseCase;
 import com.pintoss.auth.core.user.application.dto.NiceEncryptedDataResult;
 import com.pintoss.auth.core.user.application.dto.NiceVerificationResult;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @RestController
@@ -33,18 +34,6 @@ public class IdentityVerifyController {
         return ApiResponse.ok(encryptedData);
     }
 
-//    @GetMapping("/callback")
-//    public ApiResponse<VerifyResponse> niceCallback(
-//            @RequestParam(name = "token_version_id") String tokenVersionId,
-//            @RequestParam(name = "enc_data") String encData,
-//            @RequestParam(name = "integrity_value") String integrityValue
-//    ) {
-//        NiceVerificationServiceCommand command = new NiceVerificationServiceCommand(tokenVersionId, encData, integrityValue);
-//
-//        NiceVerificationResult verifyResult = niceAuthVerificationService.verify(command);
-//
-//        return ApiResponse.ok(VerifyResponse.from(verifyResult));
-//    }
     @GetMapping("/callback")
     public void niceCallback(
         @RequestParam(name = "token_version_id") String tokenVersionId,

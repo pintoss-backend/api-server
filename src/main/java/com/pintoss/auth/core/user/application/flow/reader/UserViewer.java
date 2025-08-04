@@ -1,4 +1,4 @@
-package com.pintoss.auth.core.user.application.flow.viewer;
+package com.pintoss.auth.core.user.application.flow.reader;
 
 import com.pintoss.auth.support.exception.ErrorCode;
 import com.pintoss.auth.support.exception.BadRequestException;
