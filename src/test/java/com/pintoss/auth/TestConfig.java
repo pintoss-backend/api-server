@@ -2,10 +2,10 @@ package com.pintoss.auth;
 
 import com.pintoss.auth.core.user.application.flow.external.MailSender;
 import com.pintoss.auth.core.user.domain.vo.Password;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@TestConfiguration
+@Configuration
 public class TestConfig {
 
     @Bean
