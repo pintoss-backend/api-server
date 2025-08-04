@@ -1,18 +1,10 @@
-# This workflow uses actions that are not certified by GitHub.
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-# They are provided by a third-party and are governed by
-
 name: Gradle Test
 
 on:
   push:
-    branches: [ "main", "dev"]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main", "dev"]
-
+    branches: [ "main", "dev" ]
 
 permissions:
   contents: read
@@ -33,17 +25,13 @@ jobs:
 
       - name: Decode Gmail Credentials and create noreply.json
         env:
-          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
-        run: |
-          mkdir -p src/main/resources
-          echo "$GOOGLE_GMAIL" | base64 --decode > src/main/resources/noreply.json
-
-      - name: Decode Gmail Credentials for test classpath
-        env:
-          GOOGLE_GMAIL: ${{secrets.GOOGLE_GMAIL}}
+          GOOGLE_GMAIL: ${{ secrets.GOOGLE_GMAIL }}
         run: |
           mkdir -p src/test/resources
           echo "$GOOGLE_GMAIL" | base64 --decode > src/test/resources/noreply.json
+
+      - name: Process Test Resources
+        run: ./gradlew processTestResources
 
       - name: Debug noreply.json presence
         run: |
