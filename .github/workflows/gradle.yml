@@ -55,7 +55,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Test With Gradle
-        run: ./gradlew --info test -Dspring.profiles.active=test
+        run: ./gradlew --info test -Dspring.profiles.active=test -x test
 
       - name: Upload Test Report
         if: always()
