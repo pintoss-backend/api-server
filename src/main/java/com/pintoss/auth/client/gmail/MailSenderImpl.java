@@ -4,12 +4,14 @@ import com.pintoss.auth.core.user.application.flow.external.MailSender;
 import com.pintoss.auth.core.user.domain.vo.Password;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
+@Profile("!test")
 @Slf4j
 public class MailSenderImpl implements MailSender {
 
