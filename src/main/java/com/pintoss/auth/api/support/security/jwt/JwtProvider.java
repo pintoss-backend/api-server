@@ -36,6 +36,13 @@ public class JwtProvider {
         return createToken(user, properties.getRefreshTokenExpiration());
     }
 
+    /**
+     * Constructs JWT claims for the specified user, including subject, issued and expiration times, and user details.
+     *
+     * @param user   the user whose information will be included in the claims
+     * @param millis the duration in milliseconds until the token expires
+     * @return a Claims object populated with user ID, email, name, phone number, and roles
+     */
     private Claims createClaims(User user, long millis) {
         Date now = new Date();
         Date expireDate = new Date(now.getTime() + millis + 1000L);
