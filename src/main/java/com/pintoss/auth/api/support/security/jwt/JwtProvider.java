@@ -47,7 +47,7 @@ public class JwtProvider {
         claims.put("userId", user.getId());
         claims.put("email", user.getEmail());
         claims.put("name", user.getName());
-        claims.put("phone", user.getPhone().getValue());
+        claims.put("phone", user.getPhone().getPhone());
         claims.put("roles", user.getRoles()
             .stream()
             .map(role -> role.getName().name()).collect(Collectors.toSet()));
