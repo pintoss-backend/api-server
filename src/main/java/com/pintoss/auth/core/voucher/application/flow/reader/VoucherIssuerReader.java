@@ -1,6 +1,5 @@
 package com.pintoss.auth.core.voucher.application.flow.reader;
 
-import com.pintoss.auth.support.exception.BadRequestException;
 import com.pintoss.auth.core.voucher.application.repository.VoucherIssuerRepository;
 import com.pintoss.auth.core.voucher.domain.VoucherIssuer;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,7 @@ public class VoucherIssuerReader {
 
     private final VoucherIssuerRepository voucherIssuerRepository;
 
-    public VoucherIssuer read(Long voucherIssuerId) {
+    public VoucherIssuer getOrElseThrow(Long voucherIssuerId) {
         return voucherIssuerRepository.findById(voucherIssuerId);
     }
 
