@@ -17,8 +17,6 @@ public class VoucherIssuer {
     private String name;
     private String code;
 
-    private Discount discount;
-
     private ContactInfo contactInfo;
 
     private String description;
@@ -37,12 +35,11 @@ public class VoucherIssuer {
 
     private BigDecimal fee; // 수수료
 
-    public static VoucherIssuer create(String name, String code, Discount discount, ContactInfo contactInfo, String description, String publisher,
+    public static VoucherIssuer create(String name, String code, ContactInfo contactInfo, String description, String publisher,
                                        String note, String imageUrl, String detailImageUrl, BigDecimal fee) {
         return VoucherIssuer.builder()
                 .name(name)
                 .code(code)
-                .discount(discount)
                 .contactInfo(contactInfo)
                 .description(description)
                 .publisher(publisher)

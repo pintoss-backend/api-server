@@ -53,7 +53,6 @@ public class VoucherIssuerQueryDslRepository {
             .id(issuer.getId())
             .name(issuer.getName())
             .description(issuer.getDescription())
-            .discount(issuer.getDiscountEmbeddable().toDomain())
             .contactInfo(issuer.getContactInfoEmbeddable().toDomain())
             .publisher(issuer.getPublisher())
             .note(issuer.getNote())

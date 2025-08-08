@@ -32,7 +32,6 @@ public class RegisterVoucherIssuerUsecase {
         VoucherIssuer voucherIssuer = VoucherIssuer.create(
                 command.getName(),
                 command.getCode(),
-                new Discount(command.getCardDiscount(), command.getPhoneDiscount()),
                 new ContactInfo(
                         new HomePage(command.getHomePage()),
                         new CsCenter(command.getCsCenter())

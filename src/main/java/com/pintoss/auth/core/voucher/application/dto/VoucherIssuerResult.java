@@ -24,7 +24,6 @@ public class VoucherIssuerResult {
         return VoucherIssuerResult.builder()
                 .id(voucher.getId())
                 .name(voucher.getName())
-                .discount(voucher.getDiscountEmbeddable().toDomain())
                 .contactInfo(voucher.getContactInfoEmbeddable().toDomain())
                 .description(voucher.getDescription())
                 .publisher(voucher.getPublisher())

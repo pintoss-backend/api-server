@@ -36,14 +36,6 @@ public class VoucherIssuerEntity {
 
     @Embedded
     @Valid
-    @AttributeOverrides({
-            @AttributeOverride(name = "cardDiscount", column = @Column(name = "cardDiscount", nullable = false)),
-            @AttributeOverride(name = "phoneDiscount", column = @Column(name = "phoneDiscount", nullable = false))
-    })
-    private DiscountEmbeddable discountEmbeddable;
-
-    @Embedded
-    @Valid
     private ContactInfoEmbeddable contactInfoEmbeddable;
 
     @NotNull
@@ -72,11 +64,10 @@ public class VoucherIssuerEntity {
     @Column(nullable = false, precision = 5, scale = 2) // ex) 999.99 까지 가능
     private BigDecimal fee; // 수수료
 
-    public static VoucherIssuerEntity create(String name, String code, DiscountEmbeddable discountEmbeddable, ContactInfoEmbeddable contactInfoEmbeddable, String description, String publisher, String note, String imageUrl, String detailImageUrl, BigDecimal fee) {
+    public static VoucherIssuerEntity create(String name, String code, ContactInfoEmbeddable contactInfoEmbeddable, String description, String publisher, String note, String imageUrl, String detailImageUrl, BigDecimal fee) {
         return VoucherIssuerEntity.builder()
                 .name(name)
                 .code(code)
-                .discountEmbeddable(discountEmbeddable)
                 .contactInfoEmbeddable(contactInfoEmbeddable)
                 .description(description)
                 .publisher(publisher)
@@ -91,7 +82,6 @@ public class VoucherIssuerEntity {
         return VoucherIssuerEntity.builder()
                 .name(voucherIssuer.getName())
                 .code(voucherIssuer.getCode())
-                .discountEmbeddable(new DiscountEmbeddable(voucherIssuer.getDiscount()))
                 .contactInfoEmbeddable(new ContactInfoEmbeddable(voucherIssuer.getContactInfo()))
                 .description(voucherIssuer.getDescription())
                 .publisher(voucherIssuer.getPublisher())
@@ -106,7 +96,6 @@ public class VoucherIssuerEntity {
         return VoucherIssuer.create(
                 this.name,
                 this.code,
-                this.discountEmbeddable.toDomain(),
                 this.contactInfoEmbeddable.toDomain(),
                 this.description,
                 this.publisher,
