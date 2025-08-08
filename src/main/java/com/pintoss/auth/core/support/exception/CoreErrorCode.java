@@ -31,7 +31,9 @@ public enum CoreErrorCode {
     // Voucher Errors
     VOUCHER_ISSUER_ALREADY_EXISTS("40013", "이미 존재하는 상품권 발급자입니다.", HttpErrorType.BAD_REQUEST),
 
-    ;
+    // Discount Errors
+    ALREADY_REGISTERED_PAYMENT_METHOD("40022", "이미 등록된 결제 수단입니다.", HttpErrorType.BAD_REQUEST);
+
     private final String code;
     private final String message;
     private final HttpErrorType httpErrorType;
